@@ -1,5 +1,6 @@
 // tailwind.config.js
 import { heroui } from '@heroui/react';
+import { gridAreas } from 'tailwindcss-grid-areas';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -13,7 +14,7 @@ const config = {
 		extend: {},
 	},
 	darkMode: 'class',
-	plugins: [heroui()],
+	plugins: [heroui(), gridAreas({})],
 };
 
 export default config;

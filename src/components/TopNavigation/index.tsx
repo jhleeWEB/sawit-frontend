@@ -1,20 +1,30 @@
 'use client';
-import { Button, Link, Navbar, NavbarContent, NavbarItem } from '@heroui/react';
-import Icon from '../Icon';
+import {
+	Button,
+	Input,
+	Navbar,
+	NavbarBrand,
+	NavbarContent,
+	NavbarItem,
+} from '@heroui/react';
 
-export function TopNavigation() {
+export function Navigation() {
 	return (
-		<Navbar position='static'>
-			<NavbarContent>hello</NavbarContent>
-			<NavbarContent>
-				<NavbarItem>
-					<Button as={Link}>
-						<Icon icon='Calendar' />
-					</Button>
-				</NavbarItem>
+		<Navbar>
+			<NavbarBrand>
+				<p>SAWIT</p>
+			</NavbarBrand>
+			<NavbarContent justify='center'>
+				<Input type='search' placeholder='Type to search' radius='lg' />
+			</NavbarContent>
+			<NavbarContent justify='end'>
+				<NavbarItem>adds</NavbarItem>
+				<NavbarItem>post</NavbarItem>
+				<NavbarItem>notice</NavbarItem>
+				<NavbarItem>user</NavbarItem>
 			</NavbarContent>
 		</Navbar>
 	);
 }
 
-export default TopNavigation;
+export default Navigation;
