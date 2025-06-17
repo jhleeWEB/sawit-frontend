@@ -1,34 +1,24 @@
-import {
-	Badge,
-	Card,
-	CardBody,
-	CardFooter,
-	CardHeader,
-	Chip,
-	Divider,
-	Image,
-} from '@heroui/react';
+import { Card, CardHeader, Divider } from '@heroui/react';
 import Header from './Header';
+import Body from './Body';
+import Footer from './Footer';
+import { ReactRef } from '@heroui/react-utils';
 
-export default function Post() {
+interface Props {
+	ref?: ReactRef<HTMLDivElement | null>;
+	id?: number | string;
+}
+export default function Post({ id, ref }: Props) {
 	return (
-		<Card className='mb-2'>
+		<Card ref={ref} className='mb-2'>
 			<CardHeader className='flex'>
+				{id}
 				<Header />
 			</CardHeader>
 			<Divider />
-			<CardBody>
-				<Image
-					src='/sample2.png'
-					classNames={{ wrapper: '!max-w-full' }}
-					loading='lazy'
-				/>
-			</CardBody>
-			<CardFooter className='gap-2'>
-				<Chip>likes</Chip>
-				<Chip>comments</Chip>
-				<Chip>share</Chip>
-			</CardFooter>
+			<Body />
+			<Divider />
+			<Footer />
 		</Card>
 	);
 }

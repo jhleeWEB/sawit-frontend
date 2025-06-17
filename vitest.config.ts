@@ -11,4 +11,7 @@ const dirname =
 // More info at: https://storybook.js.org/docs/writing-tests/test-addon
 export default defineConfig({
 	plugins: [],
+	server: {
+		port: 8080,
+	},
 });

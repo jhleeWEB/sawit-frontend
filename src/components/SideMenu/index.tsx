@@ -1,11 +1,5 @@
 'use client';
-import {
-	Accordion,
-	AccordionItem,
-	Divider,
-	Listbox,
-	ListboxItem,
-} from '@heroui/react';
+import { Accordion, AccordionItem, Listbox, ListboxItem } from '@heroui/react';
 
 const menus = ['home', 'popular', 'explore', 'all'];
 const accordionMenus = ['recent', 'communities', 'resources'];
