@@ -1,7 +1,7 @@
 'use client';
 import Post from '@/components/Post';
 import { Spinner } from '@heroui/react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const data = Array(100)
 	.fill(false)
@@ -10,7 +10,10 @@ const pageCount = 10;
 
 export default function P() {
 	const observer = useRef<null | IntersectionObserver>(null);
-	const [post, setPost] = useState<[] | { index: number }[]>([]);
+	const [posts, setPosts] = useState<[] | { index: number }[]>([]);
+	const memoizedPosts = useMemo(() => {
+		return [...posts];
+	}, [posts]);
 	const [page, setPage] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(true);
@@ -41,7 +44,7 @@ export default function P() {
 		setTimeout(() => {
 			const res = data.slice(page * pageCount, page * pageCount + pageCount);
 			if (res.length < pageCount) setHasMore(false);
-			setPost((prev) => [...prev, ...res]);
+			setPosts((prev) => [...prev, ...res]);
 			setIsLoading(false);
 		}, 3000);
 	};
@@ -51,8 +54,8 @@ export default function P() {
 			<div className='bg-slate-400 min-h-40'>title header</div>
 			<div className='grid grid-cols-3'>
 				<div className='col-span-2 bg-slate-300 p-4'>
-					{post.map((n, i) =>
-						i + 1 === post.length ? (
+					{posts.map((n, i) =>
+						i + 1 === memoizedPosts.length ? (
 							<Post ref={lastPostRef} key={i} id={n.index} />
 						) : (
 							<Post key={i} id={n.index} />
