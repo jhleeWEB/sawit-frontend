@@ -1,20 +1,23 @@
 'use client';
-import { Button, Card, CardBody, Chip, Image } from '@heroui/react';
+import { Button, Card, CardBody, Chip, Image, Spinner } from '@heroui/react';
 import Icon from '../../../../components/Icon';
+import useProfileSamples from '@/hooks/useProfileSamples';
 
-type Author = {
+interface Props {
 	author: string;
-	avatar: string;
-	background_img: string;
-	published_books: string[];
-	description: string;
-	achievements: string[];
-};
-interface Profile {
-	profile: Author;
 }
 
-export default function ProfileCard({ profile }: Profile) {
+export default function ProfileCard({ author }: Props) {
+	const { isLoading, profileInfo } = useProfileSamples(author);
+
+	if (!profileInfo) {
+		return (
+			<div>
+				<Spinner />
+			</div>
+		);
+	}
+
 	return (
 		<Card className='p-2'>
 			<CardBody>
@@ -31,9 +34,9 @@ export default function ProfileCard({ profile }: Profile) {
 					<div className='flex flex-col justify-between col-span-4'>
 						<div className='flex justify-between'>
 							<div>
-								<h4 className='font-bold text-large'>{profile.author}</h4>
+								<h4 className='font-bold text-large'>{profileInfo.author}</h4>
 								<small className='text-default-500 text-ellipsis'>
-									{profile.description}
+									{profileInfo.description}
 								</small>
 							</div>
 							<Button isIconOnly color='danger' variant='solid'>
@@ -41,11 +44,11 @@ export default function ProfileCard({ profile }: Profile) {
 							</Button>
 						</div>
 						<div className='flex gap-2'>
-							<Chip>hell</Chip>
-							<Chip>hell</Chip>
-							<Chip>hell</Chip>
-							<Chip>hell</Chip>
-							<Chip>hell</Chip>
+							{profileInfo.achievements.map((achievement) => (
+								<Chip key={profileInfo.author + achievement}>
+									{achievement}
+								</Chip>
+							))}
 						</div>
 					</div>
 				</div>

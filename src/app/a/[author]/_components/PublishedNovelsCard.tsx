@@ -13,7 +13,7 @@ export default function PublishedNovelsCard({ author }: Props) {
 		<Card className='p-2'>
 			<CardHeader>작품</CardHeader>
 			<CardBody>
-				<div className='flex flex-wrap justify-between'>
+				<div className='flex flex-wrap'>
 					{isLoading && <Spinner />}
 					{publishedNovels.map((novel) => (
 						<NovelCard key={novel.about.description} novel={novel} />

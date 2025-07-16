@@ -1,7 +1,7 @@
 import Icon from '@/components/Icon';
 
 import { NovelSample } from '@/hooks/useNovelSamples';
-import { Chip, Image } from '@heroui/react';
+import { Chip, Image, Skeleton } from '@heroui/react';
 
 interface Props {
 	novel: NovelSample;
@@ -10,7 +10,7 @@ interface Props {
 export default function NovelCard({ novel }: Props) {
 	const { stats, pricing, about, content } = novel;
 	return (
-		<div className='relative min-w-30 max-w-48 mr-4 mb-4'>
+		<div className='relative flex flex-wrap w-40 mr-4 mb-4'>
 			<Chip
 				className='absolute z-50 right-2 top-2 font-bold'
 				color='success'
@@ -20,14 +20,16 @@ export default function NovelCard({ novel }: Props) {
 			</Chip>
 			<Image
 				alt='book cover image'
-				radius='sm'
 				height={240}
+				radius='sm'
 				src='/sample2.png'
 			/>
 			{about.category.map((n) => (
-				<small key={novel.id + n}>{n}</small>
+				<small key={novel.id + n} className='mr-1'>
+					{n}
+				</small>
 			))}
-			<h4 className='w-full whitespace-nowrap text-ellipsis'>{novel.title}</h4>
+			<h4 className='w-full truncate font-bold'>{novel.title}</h4>
 			<small>{novel.author}</small>
 			<div className='flex w-full justify-between'>
 				<div className='flex items-center'>

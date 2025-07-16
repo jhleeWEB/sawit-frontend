@@ -10,7 +10,7 @@ export default async function Author({
 	author = decodeURIComponent(author);
 	return (
 		<section className='grid gap-4 p-8'>
-			{/* <ProfileCard profile={} /> */}
+			<ProfileCard author={author} />
 			<PublishedNovelsCard author={author} />
 		</section>
 	);
