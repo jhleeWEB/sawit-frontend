@@ -1,0 +1,16 @@
+{
+	"React Functional Component(server component)": {
+		"prefix": "rsc-p",
+		"body": [
+			"export default async function ${1:name}({",
+			"params,",
+			"}: {",
+			"params: Promise<{ ${2:param}: string }>;",
+			"}) {",
+			"const { ${2:param} } = await params;",
+			"return <div>param: {${2:param}}</div>;",
+			"}"
+		],
+		"description": "React Functional Component"
+	}
+}

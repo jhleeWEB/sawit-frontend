@@ -19,23 +19,6 @@ export default function SideMenu() {
 						<ListboxItem key={menu}>{menu.toUpperCase()}</ListboxItem>
 					))}
 				</Listbox>
-				<Accordion
-					selectedKeys={accordionMenus}
-					variant='shadow'
-					itemClasses={{ base: 'text-xs', title: 'text-sm' }}
-				>
-					{accordionMenus.map((menu) => (
-						<AccordionItem key={menu} title={menu.toUpperCase()}>
-							<Listbox>
-								<ListboxItem>menu 1</ListboxItem>
-								<ListboxItem>menu 2</ListboxItem>
-								<ListboxItem>menu 3</ListboxItem>
-								<ListboxItem>menu 4</ListboxItem>
-								<ListboxItem>menu 5</ListboxItem>
-							</Listbox>
-						</AccordionItem>
-					))}
-				</Accordion>
 			</div>
 		</aside>
 	);

@@ -1,0 +1,4102 @@
+[
+  {
+    "id": "1",
+    "author": "이준서",
+    "title": "완벽히 설정된 요약 소프트웨어",
+    "created_at": "2021-04-26T04:54:44",
+    "latest_update": "2025-06-13T15:21:46",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/970x815",
+      "tags": [
+        "게이트",
+        "헌터",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 970034,
+      "recommends": 41186,
+      "bookmarks": 115,
+      "word_count": 15468825,
+      "series_count": 44
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 166,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Deleniti aut molestiae tenetur assumenda qui quas. Qui laborum earum expedita quidem.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 44,
+      "pages": []
+    }
+  },
+  {
+    "id": "2",
+    "author": "신영일",
+    "title": "비전 있는 결정 그룹웨어",
+    "created_at": "2022-04-11T21:11:33",
+    "latest_update": "2025-01-26T14:25:53",
+    "page_info": {
+      "cover_img": "https://placeimg.com/80/759/any",
+      "tags": [
+        "판타지",
+        "회귀",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.2,
+      "views": 2812091,
+      "recommends": 40144,
+      "bookmarks": 17865,
+      "word_count": 8771707,
+      "series_count": 31
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 156,
+      "total_price": 4836
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Quo molestias et iste. A voluptate occaecati. Adipisci perspiciatis libero dignissimos. Quam necessitatibus eveniet maxime perferendis.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 31,
+      "pages": []
+    }
+  },
+  {
+    "id": "3",
+    "author": "강은지",
+    "title": "융합력있는 클라이언트-서버 아카이브",
+    "created_at": "2020-05-14T05:43:46",
+    "latest_update": "2025-05-26T03:52:16",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/586/692",
+      "tags": [
+        "사이다",
+        "판타지",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 4.7,
+      "views": 4779557,
+      "recommends": 33979,
+      "bookmarks": 21310,
+      "word_count": 131447,
+      "series_count": 21
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 154,
+      "total_price": 3234
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Delectus quos dolore asperiores quibusdam repellendus voluptatem. Placeat ea quibusdam possimus sequi nobis ratione.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 21,
+      "pages": []
+    }
+  },
+  {
+    "id": "4",
+    "author": "윤민수",
+    "title": "크로스 그룹 고도 기반 프로토콜",
+    "created_at": "2022-05-24T16:56:15",
+    "latest_update": "2025-05-17T12:58:44",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/333x968",
+      "tags": [
+        "게이트",
+        "사이다",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.2,
+      "views": 618474,
+      "recommends": 5607,
+      "bookmarks": 26507,
+      "word_count": 14531953,
+      "series_count": 48
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 144,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Laborum neque illum ab. Quos nihil eos quia incidunt ad.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 48,
+      "pages": []
+    }
+  },
+  {
+    "id": "5",
+    "author": "임영희",
+    "title": "리버스 엔지니어링된 고도 기반 인코딩",
+    "created_at": "2020-12-12T03:02:50",
+    "latest_update": "2025-04-15T16:07:36",
+    "page_info": {
+      "cover_img": "https://placeimg.com/155/277/any",
+      "tags": [
+        "판타지",
+        "성장",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.8,
+      "views": 2641128,
+      "recommends": 35838,
+      "bookmarks": 31085,
+      "word_count": 2929576,
+      "series_count": 33
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 188,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Facere aliquid nihil quaerat odit. Totam omnis impedit ipsam magnam. Quam beatae libero illum tempora sunt.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 33,
+      "pages": []
+    }
+  },
+  {
+    "id": "6",
+    "author": "안민수",
+    "title": "반동적인 6세대 전략",
+    "created_at": "2024-10-08T19:15:26",
+    "latest_update": "2025-05-22T04:36:13",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/963/89",
+      "tags": [
+        "던전",
+        "헌터",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 4860546,
+      "recommends": 14225,
+      "bookmarks": 16487,
+      "word_count": 16885481,
+      "series_count": 22
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 136,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Aliquam eius ratione porro. Maiores veritatis quaerat delectus unde. Sapiente unde natus deserunt voluptates itaque.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 22,
+      "pages": []
+    }
+  },
+  {
+    "id": "7",
+    "author": "박지후",
+    "title": "크로스 플랫폼 객체 지향적 회로",
+    "created_at": "2022-10-15T13:01:13",
+    "latest_update": "2025-02-19T15:40:54",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/746/649",
+      "tags": [
+        "게이트",
+        "사이다",
+        "이세계"
+      ]
+    },
+    "stats": {
+      "stars": 4.3,
+      "views": 1045291,
+      "recommends": 23310,
+      "bookmarks": 13533,
+      "word_count": 12936456,
+      "series_count": 48
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 126,
+      "total_price": 6048
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Beatae esse rem incidunt dolore repellat molestias. Esse in maiores cumque nulla. Error eveniet aliquid impedit dolorem.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 48,
+      "pages": []
+    }
+  },
+  {
+    "id": "8",
+    "author": "김민준",
+    "title": "중심이 최대화 알고리즘",
+    "created_at": "2023-01-02T06:12:23",
+    "latest_update": "2025-01-27T03:11:55",
+    "page_info": {
+      "cover_img": "https://placeimg.com/175/171/any",
+      "tags": [
+        "헌터",
+        "이세계",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.5,
+      "views": 2016282,
+      "recommends": 27276,
+      "bookmarks": 19092,
+      "word_count": 3174466,
+      "series_count": 29
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 138,
+      "total_price": 4002
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Dolore nemo id repellendus. Reiciendis reprehenderit esse in.\nRerum culpa ipsum suscipit. Temporibus sed ad qui.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 29,
+      "pages": []
+    }
+  },
+  {
+    "id": "9",
+    "author": "김성훈",
+    "title": "크로스 플랫폼 24/7 모니터링",
+    "created_at": "2023-11-13T22:56:21",
+    "latest_update": "2025-03-06T01:21:36",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/936x917",
+      "tags": [
+        "성장",
+        "던전",
+        "사이다"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 3076929,
+      "recommends": 42857,
+      "bookmarks": 16314,
+      "word_count": 12731828,
+      "series_count": 49
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 165,
+      "total_price": 8085
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Odio numquam quo similique consectetur.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 49,
+      "pages": []
+    }
+  },
+  {
+    "id": "10",
+    "author": "이승현",
+    "title": "강력한 무관리 아카이브",
+    "created_at": "2024-12-14T22:36:51",
+    "latest_update": "2025-01-13T20:11:26",
+    "page_info": {
+      "cover_img": "https://placekitten.com/31/855",
+      "tags": [
+        "판타지",
+        "게이트",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 3246639,
+      "recommends": 5557,
+      "bookmarks": 44650,
+      "word_count": 10503696,
+      "series_count": 43
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 141,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Corporis cumque ipsa incidunt odit. Unde soluta aperiam ipsum.\nUllam voluptates aut. Tenetur autem sed necessitatibus amet blanditiis quas excepturi.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 43,
+      "pages": []
+    }
+  },
+  {
+    "id": "11",
+    "author": "안민수",
+    "title": "낮은 실시간 모니터링",
+    "created_at": "2024-04-10T11:02:40",
+    "latest_update": "2025-02-27T10:09:57",
+    "page_info": {
+      "cover_img": "https://placekitten.com/171/215",
+      "tags": [
+        "먼치킨",
+        "게이트",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.8,
+      "views": 2880220,
+      "recommends": 26227,
+      "bookmarks": 5615,
+      "word_count": 1283791,
+      "series_count": 28
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 142,
+      "total_price": 3976
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Accusantium dolorem nihil voluptatum.\nPossimus provident laudantium quidem. Corrupti enim cumque labore libero accusantium asperiores.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 28,
+      "pages": []
+    }
+  },
+  {
+    "id": "12",
+    "author": "김서영",
+    "title": "공유 가능한 컨텐츠 기반 엔진",
+    "created_at": "2021-09-16T14:13:51",
+    "latest_update": "2025-07-13T11:14:34",
+    "page_info": {
+      "cover_img": "https://placeimg.com/682/258/any",
+      "tags": [
+        "로맨스",
+        "사이다",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.1,
+      "views": 55470,
+      "recommends": 3332,
+      "bookmarks": 12591,
+      "word_count": 8503468,
+      "series_count": 17
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 138,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Repellat ut quam quo facere minus. Officiis deleniti reprehenderit eius. At vitae ad maxime minima ex aperiam.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 17,
+      "pages": []
+    }
+  },
+  {
+    "id": "13",
+    "author": "김서영",
+    "title": "공유 가능한 객체 지향적 유연성",
+    "created_at": "2021-03-14T11:52:05",
+    "latest_update": "2025-01-31T18:38:39",
+    "page_info": {
+      "cover_img": "https://placekitten.com/849/649",
+      "tags": [
+        "던전",
+        "이세계",
+        "로맨스"
+      ]
+    },
+    "stats": {
+      "stars": 4.7,
+      "views": 610230,
+      "recommends": 1149,
+      "bookmarks": 44741,
+      "word_count": 5283785,
+      "series_count": 34
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 107,
+      "total_price": 3638
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Cumque illum odio cupiditate. Amet saepe dolores facere veritatis beatae consequatur. Quia similique cumque officiis neque culpa nam.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 34,
+      "pages": []
+    }
+  },
+  {
+    "id": "14",
+    "author": "우성민",
+    "title": "확장된 하이브리드 시간화",
+    "created_at": "2021-06-26T04:51:29",
+    "latest_update": "2025-07-15T02:46:13",
+    "page_info": {
+      "cover_img": "https://placeimg.com/375/667/any",
+      "tags": [
+        "이세계",
+        "사이다",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 4.1,
+      "views": 3893872,
+      "recommends": 13070,
+      "bookmarks": 4562,
+      "word_count": 17732612,
+      "series_count": 45
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 130,
+      "total_price": 5850
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "At eveniet explicabo. Quis nisi labore ad rem architecto eius.\nMollitia fugit vel deserunt. Deleniti iste quam dolorem. Ipsam voluptatum nam.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 45,
+      "pages": []
+    }
+  },
+  {
+    "id": "15",
+    "author": "강은지",
+    "title": "멀티 레이어 장거리 계층",
+    "created_at": "2022-12-18T17:41:19",
+    "latest_update": "2025-01-31T01:37:42",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/0/863",
+      "tags": [
+        "로맨스",
+        "던전",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 559735,
+      "recommends": 27696,
+      "bookmarks": 36464,
+      "word_count": 14224652,
+      "series_count": 33
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 161,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Quo ut veritatis quas. Iste nostrum sit eligendi omnis consequatur aut excepturi. Corrupti dolores quas optio quas. Expedita modi quas soluta.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 33,
+      "pages": []
+    }
+  },
+  {
+    "id": "16",
+    "author": "김서영",
+    "title": "모니터링되는 확장 고객 만족",
+    "created_at": "2021-06-17T10:14:19",
+    "latest_update": "2025-01-07T23:53:04",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/431x478",
+      "tags": [
+        "헌터",
+        "이세계",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.3,
+      "views": 3024717,
+      "recommends": 26629,
+      "bookmarks": 31162,
+      "word_count": 17167111,
+      "series_count": 33
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 140,
+      "total_price": 4620
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Quos nihil laudantium velit dolorum. Dolorem sequi assumenda aliquid accusantium et odio.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 33,
+      "pages": []
+    }
+  },
+  {
+    "id": "17",
+    "author": "민진호",
+    "title": "효율적인 클라이언트 단 모니터링",
+    "created_at": "2020-08-27T13:33:26",
+    "latest_update": "2025-05-12T15:32:13",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/780x349",
+      "tags": [
+        "먼치킨",
+        "회귀",
+        "로맨스"
+      ]
+    },
+    "stats": {
+      "stars": 3.1,
+      "views": 165342,
+      "recommends": 19166,
+      "bookmarks": 12710,
+      "word_count": 3170314,
+      "series_count": 41
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 161,
+      "total_price": 6601
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Sint qui in autem. Accusantium velit doloremque consequatur.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 41,
+      "pages": []
+    }
+  },
+  {
+    "id": "18",
+    "author": "홍서현",
+    "title": "모니터링되는 고도 기반 하드웨어",
+    "created_at": "2024-08-02T01:45:08",
+    "latest_update": "2025-05-09T01:33:59",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/176/293",
+      "tags": [
+        "회귀",
+        "판타지",
+        "로맨스"
+      ]
+    },
+    "stats": {
+      "stars": 4.0,
+      "views": 2893958,
+      "recommends": 42941,
+      "bookmarks": 9355,
+      "word_count": 3683252,
+      "series_count": 10
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 169,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Quisquam deleniti aut inventore eius sequi. Veritatis architecto fuga iure totam vel dolorum ipsam. Dolores sit sapiente.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 10,
+      "pages": []
+    }
+  },
+  {
+    "id": "19",
+    "author": "우성민",
+    "title": "유저 친화적 스며든 고객 만족",
+    "created_at": "2023-12-21T02:43:43",
+    "latest_update": "2025-03-22T18:42:32",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/773x521",
+      "tags": [
+        "성장",
+        "회귀",
+        "던전"
+      ]
+    },
+    "stats": {
+      "stars": 4.9,
+      "views": 1865218,
+      "recommends": 7882,
+      "bookmarks": 2545,
+      "word_count": 8583306,
+      "series_count": 11
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 130,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Ex veritatis soluta repellendus deleniti harum nobis praesentium. Laboriosam facere odio temporibus id sed. Doloribus debitis autem ipsam eos.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 11,
+      "pages": []
+    }
+  },
+  {
+    "id": "20",
+    "author": "오예준",
+    "title": "조절 가능한 백그라운드 암호화",
+    "created_at": "2025-03-24T10:25:13",
+    "latest_update": "2025-06-12T05:55:02",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/293x606",
+      "tags": [
+        "헌터",
+        "이세계",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 4.9,
+      "views": 2207183,
+      "recommends": 13466,
+      "bookmarks": 39389,
+      "word_count": 2056894,
+      "series_count": 48
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 122,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Exercitationem unde asperiores laboriosam corporis velit quisquam sint. In dolore ipsa vitae aliquam architecto assumenda.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 48,
+      "pages": []
+    }
+  },
+  {
+    "id": "21",
+    "author": "최영식",
+    "title": "효율적인 장거리 시간화",
+    "created_at": "2022-12-17T05:31:55",
+    "latest_update": "2025-03-24T21:56:49",
+    "page_info": {
+      "cover_img": "https://placeimg.com/478/89/any",
+      "tags": [
+        "판타지",
+        "로맨스",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 611191,
+      "recommends": 13878,
+      "bookmarks": 28380,
+      "word_count": 3205982,
+      "series_count": 27
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 199,
+      "total_price": 5373
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Numquam at repellat pariatur accusamus vel sit. Corrupti itaque molestiae consequuntur quos.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 27,
+      "pages": []
+    }
+  },
+  {
+    "id": "22",
+    "author": "민진호",
+    "title": "숙련된 하이브리드 성공",
+    "created_at": "2021-07-29T19:02:18",
+    "latest_update": "2025-02-20T08:57:25",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/945x100",
+      "tags": [
+        "로맨스",
+        "성장",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.3,
+      "views": 317507,
+      "recommends": 28036,
+      "bookmarks": 25844,
+      "word_count": 12509249,
+      "series_count": 42
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 109,
+      "total_price": 4578
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Corporis rem ipsum porro officia. Aut ipsa accusamus. Non veniam modi eius.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 42,
+      "pages": []
+    }
+  },
+  {
+    "id": "23",
+    "author": "최영식",
+    "title": "올바른 사이즈의 취약점 고객 만족",
+    "created_at": "2020-07-14T20:38:10",
+    "latest_update": "2025-02-06T00:52:37",
+    "page_info": {
+      "cover_img": "https://placekitten.com/23/20",
+      "tags": [
+        "성장",
+        "게이트",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.1,
+      "views": 1254114,
+      "recommends": 34944,
+      "bookmarks": 38077,
+      "word_count": 12279045,
+      "series_count": 27
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 127,
+      "total_price": 3429
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Consequuntur iure enim dolore nisi alias est quia. Laborum odit animi ipsum praesentium placeat.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 27,
+      "pages": []
+    }
+  },
+  {
+    "id": "24",
+    "author": "김성현",
+    "title": "오픈소스 비대칭 도전",
+    "created_at": "2020-09-09T08:04:54",
+    "latest_update": "2025-03-15T00:45:27",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/723x343",
+      "tags": [
+        "사이다",
+        "이세계",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.1,
+      "views": 3032857,
+      "recommends": 2884,
+      "bookmarks": 19785,
+      "word_count": 18377476,
+      "series_count": 43
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 200,
+      "total_price": 8600
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Architecto illum nam voluptatum architecto labore. Illum architecto facilis veritatis maxime.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 43,
+      "pages": []
+    }
+  },
+  {
+    "id": "25",
+    "author": "임영희",
+    "title": "함수 기반의 취약점 안내 창구",
+    "created_at": "2020-04-08T02:51:06",
+    "latest_update": "2025-02-27T16:02:01",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/92/462",
+      "tags": [
+        "성장",
+        "로맨스",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 4.7,
+      "views": 1211929,
+      "recommends": 33715,
+      "bookmarks": 43946,
+      "word_count": 13311592,
+      "series_count": 29
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 195,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Illo voluptatibus enim. Amet nemo reprehenderit quia doloremque impedit. Atque a eum nisi blanditiis hic illum.\nMaxime maiores itaque reprehenderit.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 29,
+      "pages": []
+    }
+  },
+  {
+    "id": "26",
+    "author": "이준서",
+    "title": "객체 기반의 로컬 환경",
+    "created_at": "2024-11-02T03:30:39",
+    "latest_update": "2025-02-22T14:40:30",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/945x213",
+      "tags": [
+        "판타지",
+        "로맨스",
+        "사이다"
+      ]
+    },
+    "stats": {
+      "stars": 4.7,
+      "views": 3766654,
+      "recommends": 23598,
+      "bookmarks": 3715,
+      "word_count": 10072720,
+      "series_count": 20
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 121,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Molestias perspiciatis distinctio fugiat molestiae quo nisi. Necessitatibus expedita tempora debitis architecto omnis laborum corporis.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 20,
+      "pages": []
+    }
+  },
+  {
+    "id": "27",
+    "author": "강은지",
+    "title": "트리플 버퍼 작동 웹 사이트",
+    "created_at": "2020-09-07T06:03:27",
+    "latest_update": "2025-01-18T08:29:52",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/852/532",
+      "tags": [
+        "사이다",
+        "성장",
+        "이세계"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 994457,
+      "recommends": 38365,
+      "bookmarks": 19665,
+      "word_count": 3465121,
+      "series_count": 23
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 105,
+      "total_price": 2415
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Blanditiis repudiandae enim voluptatem voluptas quod et temporibus. A vitae iusto nostrum.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 23,
+      "pages": []
+    }
+  },
+  {
+    "id": "28",
+    "author": "박수진",
+    "title": "리버스 엔지니어링된 잘 모듈화된 컨셉",
+    "created_at": "2021-09-21T09:40:09",
+    "latest_update": "2025-04-21T10:30:59",
+    "page_info": {
+      "cover_img": "https://placekitten.com/770/953",
+      "tags": [
+        "먼치킨",
+        "이세계",
+        "던전"
+      ]
+    },
+    "stats": {
+      "stars": 3.7,
+      "views": 2395932,
+      "recommends": 24970,
+      "bookmarks": 24537,
+      "word_count": 9407324,
+      "series_count": 13
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 127,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Ad esse ut iusto iure maiores porro. Quos quibusdam aut.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 13,
+      "pages": []
+    }
+  },
+  {
+    "id": "29",
+    "author": "신영일",
+    "title": "공개 키 분석중인 시너지",
+    "created_at": "2025-04-17T19:14:19",
+    "latest_update": "2025-07-04T08:19:00",
+    "page_info": {
+      "cover_img": "https://placekitten.com/520/229",
+      "tags": [
+        "사이다",
+        "회귀",
+        "던전"
+      ]
+    },
+    "stats": {
+      "stars": 3.0,
+      "views": 2344642,
+      "recommends": 40810,
+      "bookmarks": 27938,
+      "word_count": 8833271,
+      "series_count": 22
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 107,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Animi quod reiciendis incidunt nobis accusamus.\nAut odit consequuntur cupiditate illo delectus.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 22,
+      "pages": []
+    }
+  },
+  {
+    "id": "30",
+    "author": "최영식",
+    "title": "크로스 플랫폼 무해한 허브",
+    "created_at": "2024-02-02T13:21:09",
+    "latest_update": "2025-02-17T03:49:58",
+    "page_info": {
+      "cover_img": "https://placekitten.com/939/217",
+      "tags": [
+        "던전",
+        "성장",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.0,
+      "views": 2305321,
+      "recommends": 17025,
+      "bookmarks": 49541,
+      "word_count": 8376440,
+      "series_count": 25
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 105,
+      "total_price": 2625
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Eaque eum incidunt fuga.\nPlaceat impedit cupiditate. Quas officiis eos animi incidunt numquam. Neque quidem cupiditate incidunt.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 25,
+      "pages": []
+    }
+  },
+  {
+    "id": "31",
+    "author": "김서영",
+    "title": "동기화 지역적 인코딩",
+    "created_at": "2023-09-08T00:21:38",
+    "latest_update": "2025-06-21T06:28:19",
+    "page_info": {
+      "cover_img": "https://placekitten.com/584/383",
+      "tags": [
+        "로맨스",
+        "헌터",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.5,
+      "views": 459552,
+      "recommends": 34476,
+      "bookmarks": 47389,
+      "word_count": 12874116,
+      "series_count": 32
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 175,
+      "total_price": 5600
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Tempore reiciendis ratione facilis autem rem. Quod totam soluta iure. Impedit eius explicabo nulla ipsam ullam.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 32,
+      "pages": []
+    }
+  },
+  {
+    "id": "32",
+    "author": "우성민",
+    "title": "공개 키 국가적 미들웨어",
+    "created_at": "2021-01-11T07:39:45",
+    "latest_update": "2025-04-26T18:01:07",
+    "page_info": {
+      "cover_img": "https://placeimg.com/672/588/any",
+      "tags": [
+        "판타지",
+        "헌터",
+        "이세계"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 4353748,
+      "recommends": 17207,
+      "bookmarks": 34416,
+      "word_count": 6498972,
+      "series_count": 30
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 112,
+      "total_price": 3360
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Optio quos dignissimos. Deleniti odit possimus itaque vero unde. Possimus vero est facere rem.\nIure ullam hic debitis.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 30,
+      "pages": []
+    }
+  },
+  {
+    "id": "33",
+    "author": "홍서현",
+    "title": "무결점의 5세대 그룹웨어",
+    "created_at": "2024-03-28T18:00:47",
+    "latest_update": "2025-04-12T08:09:16",
+    "page_info": {
+      "cover_img": "https://placeimg.com/138/894/any",
+      "tags": [
+        "성장",
+        "던전",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.8,
+      "views": 3374625,
+      "recommends": 49818,
+      "bookmarks": 41749,
+      "word_count": 15373845,
+      "series_count": 48
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 198,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Velit harum autem neque. Voluptatem dicta asperiores eaque possimus sint sunt.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 48,
+      "pages": []
+    }
+  },
+  {
+    "id": "34",
+    "author": "진승민",
+    "title": "완벽히 설정된 고도 기반 마이그레이션",
+    "created_at": "2024-06-05T21:27:44",
+    "latest_update": "2025-07-12T10:17:08",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/675/670",
+      "tags": [
+        "판타지",
+        "게이트",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 2284343,
+      "recommends": 7370,
+      "bookmarks": 11948,
+      "word_count": 5300201,
+      "series_count": 40
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 100,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "A non neque cum nostrum vitae. Provident aut autem fugit. Mollitia veritatis iure laboriosam laborum aliquam perferendis tempore.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 40,
+      "pages": []
+    }
+  },
+  {
+    "id": "35",
+    "author": "강은지",
+    "title": "확대된 헌신적 계층",
+    "created_at": "2022-08-01T01:27:43",
+    "latest_update": "2025-07-07T18:21:53",
+    "page_info": {
+      "cover_img": "https://placeimg.com/852/275/any",
+      "tags": [
+        "로맨스",
+        "사이다",
+        "던전"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 2803742,
+      "recommends": 26228,
+      "bookmarks": 38051,
+      "word_count": 7910761,
+      "series_count": 19
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 154,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Modi sapiente molestiae consequatur perspiciatis debitis reiciendis odio.\nDolor temporibus ab molestias. Consequatur alias a labore nemo atque esse.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 19,
+      "pages": []
+    }
+  },
+  {
+    "id": "36",
+    "author": "백현정",
+    "title": "리버스 엔지니어링된 인간자원 엔진",
+    "created_at": "2022-12-27T00:39:16",
+    "latest_update": "2025-04-24T17:35:18",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/622x735",
+      "tags": [
+        "회귀",
+        "성장",
+        "판타지"
+      ]
+    },
+    "stats": {
+      "stars": 3.7,
+      "views": 4073316,
+      "recommends": 7470,
+      "bookmarks": 46387,
+      "word_count": 18796819,
+      "series_count": 28
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 120,
+      "total_price": 3360
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Rerum dolorum et molestiae dignissimos quisquam. Excepturi molestiae reprehenderit dolore fugiat.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 28,
+      "pages": []
+    }
+  },
+  {
+    "id": "37",
+    "author": "김옥순",
+    "title": "설정 가능한 상황에 맞는 융합",
+    "created_at": "2021-08-02T20:37:49",
+    "latest_update": "2025-02-25T07:49:17",
+    "page_info": {
+      "cover_img": "https://placeimg.com/395/159/any",
+      "tags": [
+        "먼치킨",
+        "헌터",
+        "이세계"
+      ]
+    },
+    "stats": {
+      "stars": 4.9,
+      "views": 4812994,
+      "recommends": 42883,
+      "bookmarks": 36480,
+      "word_count": 18767627,
+      "series_count": 14
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 121,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Nobis incidunt labore vel provident asperiores nam.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 14,
+      "pages": []
+    }
+  },
+  {
+    "id": "38",
+    "author": "김옥순",
+    "title": "더 작아진 합성물 능력",
+    "created_at": "2023-06-20T00:51:53",
+    "latest_update": "2025-01-05T14:24:43",
+    "page_info": {
+      "cover_img": "https://placekitten.com/161/826",
+      "tags": [
+        "회귀",
+        "헌터",
+        "판타지"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 924113,
+      "recommends": 36581,
+      "bookmarks": 14425,
+      "word_count": 17058686,
+      "series_count": 33
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 146,
+      "total_price": 4818
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Pariatur fugit accusantium eligendi ullam. Ea odit nobis saepe.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 33,
+      "pages": []
+    }
+  },
+  {
+    "id": "39",
+    "author": "하진우",
+    "title": "공개 아키텍쳐 실행 능력",
+    "created_at": "2021-10-31T13:31:37",
+    "latest_update": "2025-02-03T06:56:00",
+    "page_info": {
+      "cover_img": "https://placekitten.com/299/383",
+      "tags": [
+        "이세계",
+        "사이다",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.1,
+      "views": 4002802,
+      "recommends": 850,
+      "bookmarks": 28541,
+      "word_count": 14566727,
+      "series_count": 35
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 174,
+      "total_price": 6090
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Facere a non impedit. Autem excepturi in laboriosam exercitationem mollitia quibusdam nemo.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 35,
+      "pages": []
+    }
+  },
+  {
+    "id": "40",
+    "author": "박지은",
+    "title": "디지털화된 분석중인 분석",
+    "created_at": "2023-05-02T21:03:55",
+    "latest_update": "2025-01-15T23:42:17",
+    "page_info": {
+      "cover_img": "https://placeimg.com/781/73/any",
+      "tags": [
+        "회귀",
+        "사이다",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.8,
+      "views": 1748923,
+      "recommends": 47938,
+      "bookmarks": 16372,
+      "word_count": 4141341,
+      "series_count": 27
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 162,
+      "total_price": 4374
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Iste nobis atque. Quas error eveniet placeat autem cum.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 27,
+      "pages": []
+    }
+  },
+  {
+    "id": "41",
+    "author": "민진호",
+    "title": "자동화된 문맥 기반 코어",
+    "created_at": "2022-12-29T00:48:51",
+    "latest_update": "2025-03-03T04:07:31",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/348x14",
+      "tags": [
+        "이세계",
+        "로맨스",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 4.7,
+      "views": 4453597,
+      "recommends": 48928,
+      "bookmarks": 40878,
+      "word_count": 9710041,
+      "series_count": 44
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 116,
+      "total_price": 5104
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Beatae soluta unde illo libero. Amet qui quae minima beatae. Amet perferendis pariatur provident.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 44,
+      "pages": []
+    }
+  },
+  {
+    "id": "42",
+    "author": "민진호",
+    "title": "가상 클라이언트-서버 제품",
+    "created_at": "2024-07-01T03:34:09",
+    "latest_update": "2025-04-09T07:40:54",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/390/135",
+      "tags": [
+        "이세계",
+        "먼치킨",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.1,
+      "views": 1357344,
+      "recommends": 26521,
+      "bookmarks": 5760,
+      "word_count": 18531205,
+      "series_count": 43
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 133,
+      "total_price": 5719
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Veniam illo tempore enim incidunt molestiae asperiores. Dolorem voluptate recusandae nesciunt.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 43,
+      "pages": []
+    }
+  },
+  {
+    "id": "43",
+    "author": "박지은",
+    "title": "미래가 보장된 분리형 엑스트라넷",
+    "created_at": "2020-10-24T15:24:13",
+    "latest_update": "2025-05-04T02:44:34",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/616/485",
+      "tags": [
+        "헌터",
+        "이세계",
+        "사이다"
+      ]
+    },
+    "stats": {
+      "stars": 4.9,
+      "views": 3306369,
+      "recommends": 28629,
+      "bookmarks": 43277,
+      "word_count": 1409208,
+      "series_count": 36
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 159,
+      "total_price": 5724
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Temporibus commodi repellat ullam veritatis animi.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 36,
+      "pages": []
+    }
+  },
+  {
+    "id": "44",
+    "author": "김성훈",
+    "title": "융합된 근본적 지원",
+    "created_at": "2022-03-22T15:18:35",
+    "latest_update": "2025-07-02T13:53:46",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/602x582",
+      "tags": [
+        "사이다",
+        "이세계",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 3012798,
+      "recommends": 7373,
+      "bookmarks": 36026,
+      "word_count": 194161,
+      "series_count": 20
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 124,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Id id accusantium reiciendis. Nisi iste eaque ipsum sint est. Nostrum temporibus maxime optio.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 20,
+      "pages": []
+    }
+  },
+  {
+    "id": "45",
+    "author": "손서준",
+    "title": "안전한 합성물 성공",
+    "created_at": "2020-07-09T18:10:56",
+    "latest_update": "2025-03-04T13:37:05",
+    "page_info": {
+      "cover_img": "https://placekitten.com/513/908",
+      "tags": [
+        "헌터",
+        "게이트",
+        "이세계"
+      ]
+    },
+    "stats": {
+      "stars": 4.2,
+      "views": 3655617,
+      "recommends": 9478,
+      "bookmarks": 33518,
+      "word_count": 5938291,
+      "series_count": 17
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 130,
+      "total_price": 2210
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Ratione porro esse. Quia minima quidem culpa omnis. Itaque officiis pariatur aperiam.\nNulla reiciendis libero dignissimos repellendus soluta.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 17,
+      "pages": []
+    }
+  },
+  {
+    "id": "46",
+    "author": "이준서",
+    "title": "더 작아진 하이브리드 예보",
+    "created_at": "2024-09-05T18:12:46",
+    "latest_update": "2025-02-10T20:34:18",
+    "page_info": {
+      "cover_img": "https://placekitten.com/441/1012",
+      "tags": [
+        "회귀",
+        "판타지",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.7,
+      "views": 396114,
+      "recommends": 2614,
+      "bookmarks": 41480,
+      "word_count": 8725227,
+      "series_count": 18
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 138,
+      "total_price": 2484
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Incidunt fugiat magni pariatur suscipit perspiciatis. Deserunt voluptatum facilis rerum blanditiis accusamus debitis. Quaerat labore vero.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 18,
+      "pages": []
+    }
+  },
+  {
+    "id": "47",
+    "author": "김성현",
+    "title": "공개 키 글로벌 데이터베이스",
+    "created_at": "2020-04-02T09:09:50",
+    "latest_update": "2025-05-23T11:34:28",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/834x688",
+      "tags": [
+        "게이트",
+        "먼치킨",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.2,
+      "views": 3556447,
+      "recommends": 47559,
+      "bookmarks": 18875,
+      "word_count": 8599239,
+      "series_count": 10
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 170,
+      "total_price": 1700
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Consequatur ipsum iste facilis. Iure optio alias.\nNesciunt distinctio ratione vitae perferendis tempora.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 10,
+      "pages": []
+    }
+  },
+  {
+    "id": "48",
+    "author": "우성민",
+    "title": "최전방 멀티미디어 예보",
+    "created_at": "2021-07-15T00:34:49",
+    "latest_update": "2025-04-26T11:01:54",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/756x588",
+      "tags": [
+        "사이다",
+        "먼치킨",
+        "판타지"
+      ]
+    },
+    "stats": {
+      "stars": 4.1,
+      "views": 4102283,
+      "recommends": 16457,
+      "bookmarks": 14696,
+      "word_count": 18110290,
+      "series_count": 32
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 181,
+      "total_price": 5792
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Facere aspernatur tenetur doloribus id iure voluptates labore.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 32,
+      "pages": []
+    }
+  },
+  {
+    "id": "49",
+    "author": "손서준",
+    "title": "최적화된 환경 친화적 우연성",
+    "created_at": "2020-03-13T02:52:00",
+    "latest_update": "2025-05-25T01:02:07",
+    "page_info": {
+      "cover_img": "https://placekitten.com/390/886",
+      "tags": [
+        "판타지",
+        "헌터",
+        "사이다"
+      ]
+    },
+    "stats": {
+      "stars": 3.6,
+      "views": 4095951,
+      "recommends": 44050,
+      "bookmarks": 14276,
+      "word_count": 17577706,
+      "series_count": 40
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 158,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Neque minima corporis dolorum ab. Nam minima doloremque.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 40,
+      "pages": []
+    }
+  },
+  {
+    "id": "50",
+    "author": "오예준",
+    "title": "올바른 사이즈의 멀티 태스킹 벤치마크",
+    "created_at": "2021-09-19T21:03:36",
+    "latest_update": "2025-06-24T13:10:20",
+    "page_info": {
+      "cover_img": "https://placeimg.com/837/240/any",
+      "tags": [
+        "성장",
+        "판타지",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.8,
+      "views": 4858067,
+      "recommends": 3533,
+      "bookmarks": 16198,
+      "word_count": 14236329,
+      "series_count": 17
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 131,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Nulla nemo nulla quibusdam pariatur similique cumque. Ad maiores totam eligendi. Pariatur accusantium cum saepe commodi vel dolor.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 17,
+      "pages": []
+    }
+  },
+  {
+    "id": "51",
+    "author": "김성현",
+    "title": "낮은 상황에 맞는 능력",
+    "created_at": "2023-07-24T13:35:35",
+    "latest_update": "2025-04-18T13:10:13",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/312/904",
+      "tags": [
+        "로맨스",
+        "던전",
+        "이세계"
+      ]
+    },
+    "stats": {
+      "stars": 4.3,
+      "views": 1742234,
+      "recommends": 33775,
+      "bookmarks": 8482,
+      "word_count": 18202578,
+      "series_count": 29
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 116,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Cumque quasi recusandae.\nVeniam possimus corporis quia autem amet.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 29,
+      "pages": []
+    }
+  },
+  {
+    "id": "52",
+    "author": "오예준",
+    "title": "디지털화된 객체 지향적 아카이브",
+    "created_at": "2022-03-28T08:59:04",
+    "latest_update": "2025-01-24T19:30:00",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/37x136",
+      "tags": [
+        "사이다",
+        "던전",
+        "로맨스"
+      ]
+    },
+    "stats": {
+      "stars": 3.3,
+      "views": 3518125,
+      "recommends": 1404,
+      "bookmarks": 41572,
+      "word_count": 6128507,
+      "series_count": 41
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 106,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Aliquid quibusdam officia quos. Ut magnam autem earum quisquam eaque.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 41,
+      "pages": []
+    }
+  },
+  {
+    "id": "53",
+    "author": "박지후",
+    "title": "융합력있는 가치추가 미디어 정보",
+    "created_at": "2025-01-25T04:15:34",
+    "latest_update": "2025-01-07T08:19:27",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/200/306",
+      "tags": [
+        "판타지",
+        "먼치킨",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 2671350,
+      "recommends": 44428,
+      "bookmarks": 5534,
+      "word_count": 12066404,
+      "series_count": 27
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 110,
+      "total_price": 2970
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Accusamus culpa iusto nobis placeat autem repellat.\nAt nemo quisquam.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 27,
+      "pages": []
+    }
+  },
+  {
+    "id": "54",
+    "author": "강은지",
+    "title": "중심이 휴대형 지식 기반",
+    "created_at": "2020-07-03T01:30:49",
+    "latest_update": "2025-02-21T20:11:05",
+    "page_info": {
+      "cover_img": "https://placeimg.com/256/741/any",
+      "tags": [
+        "헌터",
+        "판타지",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 4.4,
+      "views": 198962,
+      "recommends": 1891,
+      "bookmarks": 31582,
+      "word_count": 18581861,
+      "series_count": 50
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 154,
+      "total_price": 7700
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Consequatur tempora totam mollitia officiis deserunt. Quasi non dolorem et consequatur minus. Voluptatem eum at minima.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 50,
+      "pages": []
+    }
+  },
+  {
+    "id": "55",
+    "author": "우성민",
+    "title": "모니터링되는 고단계 시간화",
+    "created_at": "2025-05-08T16:34:27",
+    "latest_update": "2025-06-02T12:31:10",
+    "page_info": {
+      "cover_img": "https://placeimg.com/926/194/any",
+      "tags": [
+        "사이다",
+        "로맨스",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.6,
+      "views": 1771079,
+      "recommends": 20488,
+      "bookmarks": 39107,
+      "word_count": 15063483,
+      "series_count": 39
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 130,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Nemo ab recusandae aperiam veniam ad. Aut pariatur asperiores repellat. Porro quia laudantium velit iure voluptate delectus. At ad debitis accusamus.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 39,
+      "pages": []
+    }
+  },
+  {
+    "id": "56",
+    "author": "박지후",
+    "title": "융합력있는 밀착 지원",
+    "created_at": "2025-03-23T01:11:08",
+    "latest_update": "2025-04-21T17:06:23",
+    "page_info": {
+      "cover_img": "https://placekitten.com/390/654",
+      "tags": [
+        "게이트",
+        "회귀",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.5,
+      "views": 2457822,
+      "recommends": 25254,
+      "bookmarks": 26054,
+      "word_count": 19627950,
+      "series_count": 14
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 177,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Odit assumenda perferendis ratione in possimus. Consequatur accusamus quia.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 14,
+      "pages": []
+    }
+  },
+  {
+    "id": "57",
+    "author": "신영일",
+    "title": "트리플 버퍼 모듈형 성공",
+    "created_at": "2022-01-09T08:11:39",
+    "latest_update": "2025-02-05T01:06:22",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/420/423",
+      "tags": [
+        "회귀",
+        "판타지",
+        "이세계"
+      ]
+    },
+    "stats": {
+      "stars": 3.5,
+      "views": 4750031,
+      "recommends": 26245,
+      "bookmarks": 16019,
+      "word_count": 4791755,
+      "series_count": 44
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 190,
+      "total_price": 8360
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Consequatur sapiente veritatis sint. Vero quo magnam non odio nesciunt quod.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 44,
+      "pages": []
+    }
+  },
+  {
+    "id": "58",
+    "author": "이건우",
+    "title": "효율적인 비동기 GUI",
+    "created_at": "2025-05-22T12:16:11",
+    "latest_update": "2025-02-28T20:35:41",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/508x992",
+      "tags": [
+        "먼치킨",
+        "회귀",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 3.5,
+      "views": 4695707,
+      "recommends": 35311,
+      "bookmarks": 25600,
+      "word_count": 12636706,
+      "series_count": 49
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 165,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "At corrupti iste reiciendis tenetur. Ad qui sit ab.\nDolor illum vel veritatis fugit praesentium earum.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 49,
+      "pages": []
+    }
+  },
+  {
+    "id": "59",
+    "author": "홍서현",
+    "title": "융합된 클라이언트 단 정의",
+    "created_at": "2024-03-03T18:52:05",
+    "latest_update": "2025-02-04T10:19:43",
+    "page_info": {
+      "cover_img": "https://placekitten.com/118/485",
+      "tags": [
+        "헌터",
+        "게이트",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.8,
+      "views": 2324909,
+      "recommends": 14155,
+      "bookmarks": 34755,
+      "word_count": 9930176,
+      "series_count": 23
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 163,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Qui sunt dolore fugiat. Dicta deleniti nam exercitationem labore officia rerum cum.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 23,
+      "pages": []
+    }
+  },
+  {
+    "id": "60",
+    "author": "임영희",
+    "title": "프로그래밍 가능한 하이브리드 환경",
+    "created_at": "2024-05-12T19:50:23",
+    "latest_update": "2025-06-19T13:06:24",
+    "page_info": {
+      "cover_img": "https://placeimg.com/492/138/any",
+      "tags": [
+        "로맨스",
+        "던전",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 2674848,
+      "recommends": 9019,
+      "bookmarks": 13792,
+      "word_count": 17469127,
+      "series_count": 21
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 107,
+      "total_price": 2247
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Temporibus minus laboriosam provident dolor placeat earum. Saepe aspernatur odit quo quaerat.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 21,
+      "pages": []
+    }
+  },
+  {
+    "id": "61",
+    "author": "최영식",
+    "title": "복제된 수요 중심 데이터베이스",
+    "created_at": "2025-06-29T15:03:33",
+    "latest_update": "2025-04-22T13:58:56",
+    "page_info": {
+      "cover_img": "https://placeimg.com/871/277/any",
+      "tags": [
+        "이세계",
+        "사이다",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 4973798,
+      "recommends": 45770,
+      "bookmarks": 2597,
+      "word_count": 10937237,
+      "series_count": 33
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 174,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Odit necessitatibus neque quam est corporis commodi. Maxime facere corrupti numquam ab facilis. Velit non unde iusto animi.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 33,
+      "pages": []
+    }
+  },
+  {
+    "id": "62",
+    "author": "김종수",
+    "title": "멀티 채널 잘 모듈화된 태도",
+    "created_at": "2022-01-02T03:14:48",
+    "latest_update": "2025-04-27T13:27:44",
+    "page_info": {
+      "cover_img": "https://placeimg.com/404/999/any",
+      "tags": [
+        "로맨스",
+        "판타지",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 2919770,
+      "recommends": 17984,
+      "bookmarks": 44519,
+      "word_count": 2853765,
+      "series_count": 12
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 141,
+      "total_price": 1692
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Voluptatibus totam quod saepe et ullam sed. Culpa exercitationem qui.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 12,
+      "pages": []
+    }
+  },
+  {
+    "id": "63",
+    "author": "김옥순",
+    "title": "공유 가능한 합성물 구조체",
+    "created_at": "2023-06-06T05:15:33",
+    "latest_update": "2025-03-07T23:14:44",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/954/325",
+      "tags": [
+        "성장",
+        "로맨스",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.3,
+      "views": 4977965,
+      "recommends": 32331,
+      "bookmarks": 15014,
+      "word_count": 7286752,
+      "series_count": 26
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 162,
+      "total_price": 4212
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Quaerat alias veritatis est. Cupiditate ea at minima dolorum voluptatem iste.\nDolores consectetur officiis illo natus autem.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 26,
+      "pages": []
+    }
+  },
+  {
+    "id": "64",
+    "author": "안민수",
+    "title": "복제된 백그라운드 프로토콜",
+    "created_at": "2021-05-05T21:32:23",
+    "latest_update": "2025-05-05T13:26:30",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/279x139",
+      "tags": [
+        "판타지",
+        "사이다",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 3.1,
+      "views": 135435,
+      "recommends": 46931,
+      "bookmarks": 146,
+      "word_count": 971555,
+      "series_count": 24
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 119,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Aspernatur pariatur sit. Ad incidunt numquam quam repudiandae ducimus fugit. Quas veniam sit at pariatur quas.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 24,
+      "pages": []
+    }
+  },
+  {
+    "id": "65",
+    "author": "백현정",
+    "title": "총 안정적 공구",
+    "created_at": "2024-09-22T16:05:21",
+    "latest_update": "2025-04-25T02:06:38",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/35x978",
+      "tags": [
+        "던전",
+        "사이다",
+        "로맨스"
+      ]
+    },
+    "stats": {
+      "stars": 4.8,
+      "views": 1220922,
+      "recommends": 25849,
+      "bookmarks": 48115,
+      "word_count": 18213954,
+      "series_count": 30
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 130,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Adipisci quaerat maxime eum. Magnam eaque cumque sapiente esse voluptatum quibusdam ducimus.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 30,
+      "pages": []
+    }
+  },
+  {
+    "id": "66",
+    "author": "임영희",
+    "title": "총 4세대 시너지",
+    "created_at": "2021-06-08T10:47:26",
+    "latest_update": "2025-04-22T00:23:20",
+    "page_info": {
+      "cover_img": "https://placekitten.com/170/853",
+      "tags": [
+        "성장",
+        "던전",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 3.2,
+      "views": 3439205,
+      "recommends": 37845,
+      "bookmarks": 30405,
+      "word_count": 8030447,
+      "series_count": 48
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 130,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Magni labore rerum libero nihil id. Ut doloremque aliquid accusantium sed commodi.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 48,
+      "pages": []
+    }
+  },
+  {
+    "id": "67",
+    "author": "이승현",
+    "title": "안전한 지역적 엑스트라넷",
+    "created_at": "2024-07-10T19:49:32",
+    "latest_update": "2025-01-19T23:40:03",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/305x381",
+      "tags": [
+        "이세계",
+        "사이다",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 4196965,
+      "recommends": 25586,
+      "bookmarks": 49947,
+      "word_count": 11502131,
+      "series_count": 50
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 188,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Natus aliquam in officiis.\nRepellendus nemo vitae voluptatibus ad. Itaque nesciunt suscipit magni aspernatur quis.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 50,
+      "pages": []
+    }
+  },
+  {
+    "id": "68",
+    "author": "이동현",
+    "title": "공유 가능한 인간자원 접근",
+    "created_at": "2024-10-03T16:16:53",
+    "latest_update": "2025-05-12T21:33:35",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/482x167",
+      "tags": [
+        "로맨스",
+        "사이다",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 4.4,
+      "views": 2035027,
+      "recommends": 21750,
+      "bookmarks": 12592,
+      "word_count": 19109803,
+      "series_count": 29
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 188,
+      "total_price": 5452
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Quisquam nobis fuga odio voluptas deleniti asperiores dicta. Distinctio eius quod odio quaerat culpa.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 29,
+      "pages": []
+    }
+  },
+  {
+    "id": "69",
+    "author": "손서준",
+    "title": "재정렬 환경 친화적 펌웨어",
+    "created_at": "2023-08-03T08:26:55",
+    "latest_update": "2025-04-25T10:30:47",
+    "page_info": {
+      "cover_img": "https://placeimg.com/544/391/any",
+      "tags": [
+        "헌터",
+        "이세계",
+        "판타지"
+      ]
+    },
+    "stats": {
+      "stars": 3.7,
+      "views": 4344662,
+      "recommends": 19873,
+      "bookmarks": 15707,
+      "word_count": 1311285,
+      "series_count": 16
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 156,
+      "total_price": 2496
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Sed esse laudantium alias. Error earum illum repellendus sapiente.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 16,
+      "pages": []
+    }
+  },
+  {
+    "id": "70",
+    "author": "김성현",
+    "title": "공유 가능한 환경 친화적 태도",
+    "created_at": "2022-05-10T09:28:59",
+    "latest_update": "2025-03-30T12:56:43",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/561/706",
+      "tags": [
+        "이세계",
+        "헌터",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 2632598,
+      "recommends": 10186,
+      "bookmarks": 44668,
+      "word_count": 17795697,
+      "series_count": 41
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 164,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Tempore ratione a in.\nNostrum blanditiis cumque praesentium. Laboriosam dolores qui magnam quidem.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 41,
+      "pages": []
+    }
+  },
+  {
+    "id": "71",
+    "author": "이건우",
+    "title": "안정적인 환경 친화적 능력",
+    "created_at": "2023-05-04T08:01:18",
+    "latest_update": "2025-06-01T00:43:49",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/110/882",
+      "tags": [
+        "던전",
+        "성장",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 215157,
+      "recommends": 43387,
+      "bookmarks": 10808,
+      "word_count": 12055587,
+      "series_count": 35
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 198,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Aperiam exercitationem blanditiis ut hic. Libero neque quibusdam temporibus esse.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 35,
+      "pages": []
+    }
+  },
+  {
+    "id": "72",
+    "author": "박수진",
+    "title": "멀티 레이어 다이나믹 어플리케이션",
+    "created_at": "2024-01-23T04:11:19",
+    "latest_update": "2025-05-14T17:43:38",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/81x504",
+      "tags": [
+        "회귀",
+        "사이다",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 3622410,
+      "recommends": 40570,
+      "bookmarks": 40856,
+      "word_count": 7660064,
+      "series_count": 17
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 186,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Porro doloribus ab magnam itaque neque esse blanditiis. Magni culpa deleniti quasi.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 17,
+      "pages": []
+    }
+  },
+  {
+    "id": "73",
+    "author": "이동현",
+    "title": "유기농 역수 환경",
+    "created_at": "2021-09-21T13:05:42",
+    "latest_update": "2025-02-13T22:42:23",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/84/1023",
+      "tags": [
+        "로맨스",
+        "게이트",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 3941288,
+      "recommends": 41578,
+      "bookmarks": 31734,
+      "word_count": 2104220,
+      "series_count": 15
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 112,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "게임",
+        "학원"
+      ],
+      "description": "Ab sequi quos dolorem labore vitae cupiditate. Itaque corrupti quas laboriosam eveniet.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 15,
+      "pages": []
+    }
+  },
+  {
+    "id": "74",
+    "author": "이준서",
+    "title": "공유 가능한 4세대 축적",
+    "created_at": "2021-04-19T18:33:45",
+    "latest_update": "2025-05-10T08:09:57",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/636x1002",
+      "tags": [
+        "로맨스",
+        "먼치킨",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 4133289,
+      "recommends": 30639,
+      "bookmarks": 36060,
+      "word_count": 6259335,
+      "series_count": 43
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 157,
+      "total_price": 6751
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Neque libero voluptate officia nam dolor adipisci optio. Odio earum pariatur necessitatibus.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 43,
+      "pages": []
+    }
+  },
+  {
+    "id": "75",
+    "author": "박지은",
+    "title": "자동화된 결합된 능력",
+    "created_at": "2020-11-05T20:25:36",
+    "latest_update": "2025-05-29T17:10:14",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/563/970",
+      "tags": [
+        "성장",
+        "던전",
+        "로맨스"
+      ]
+    },
+    "stats": {
+      "stars": 4.8,
+      "views": 3718387,
+      "recommends": 29909,
+      "bookmarks": 49240,
+      "word_count": 8454734,
+      "series_count": 35
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 114,
+      "total_price": 3990
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Ex culpa eos doloremque minima quaerat. Cupiditate facere provident ex accusantium ipsam dolorem.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 35,
+      "pages": []
+    }
+  },
+  {
+    "id": "76",
+    "author": "김종수",
+    "title": "자동화된 지역적 환경",
+    "created_at": "2021-09-11T21:26:31",
+    "latest_update": "2025-04-08T17:15:55",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/298/174",
+      "tags": [
+        "판타지",
+        "게이트",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 4.4,
+      "views": 1221107,
+      "recommends": 37215,
+      "bookmarks": 26132,
+      "word_count": 13410312,
+      "series_count": 31
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 102,
+      "total_price": 3162
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "At blanditiis architecto at. Dolores non soluta accusantium eos.\nIllo saepe similique dolorem. Officia ipsa blanditiis quae.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 31,
+      "pages": []
+    }
+  },
+  {
+    "id": "77",
+    "author": "최영식",
+    "title": "더 작아진 3세대 알고리즘",
+    "created_at": "2023-07-28T11:58:04",
+    "latest_update": "2025-07-08T04:06:55",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/712/68",
+      "tags": [
+        "던전",
+        "회귀",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 4.4,
+      "views": 2556379,
+      "recommends": 9318,
+      "bookmarks": 3593,
+      "word_count": 17639781,
+      "series_count": 35
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 120,
+      "total_price": 4200
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Perferendis animi labore corrupti accusantium. Facere eveniet repellendus eligendi quae ad. Vero cumque corporis.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 35,
+      "pages": []
+    }
+  },
+  {
+    "id": "78",
+    "author": "강은지",
+    "title": "완벽히 설정된 범국가적 펌웨어",
+    "created_at": "2021-09-08T22:08:35",
+    "latest_update": "2025-04-25T07:37:21",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/231x1021",
+      "tags": [
+        "사이다",
+        "헌터",
+        "로맨스"
+      ]
+    },
+    "stats": {
+      "stars": 4.5,
+      "views": 2054359,
+      "recommends": 13208,
+      "bookmarks": 39573,
+      "word_count": 11106695,
+      "series_count": 43
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 164,
+      "total_price": 7052
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Sed quas ipsam sunt. Quas iste assumenda perferendis nostrum nulla porro ducimus. Tenetur mollitia doloremque corrupti aperiam corrupti.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 43,
+      "pages": []
+    }
+  },
+  {
+    "id": "79",
+    "author": "이건우",
+    "title": "가상 가치추가 패러다임",
+    "created_at": "2020-05-18T14:53:07",
+    "latest_update": "2025-03-24T05:18:17",
+    "page_info": {
+      "cover_img": "https://placeimg.com/212/50/any",
+      "tags": [
+        "성장",
+        "판타지",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.2,
+      "views": 2358339,
+      "recommends": 45318,
+      "bookmarks": 43270,
+      "word_count": 7734891,
+      "series_count": 40
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 199,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Debitis laborum quo explicabo facere. Dignissimos cumque beatae porro. Assumenda odio quod impedit eaque omnis.\nVero illum minus eum est.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 40,
+      "pages": []
+    }
+  },
+  {
+    "id": "80",
+    "author": "이승현",
+    "title": "올바른 사이즈의 하이브리드 포탈",
+    "created_at": "2024-10-26T01:35:07",
+    "latest_update": "2025-02-08T16:51:38",
+    "page_info": {
+      "cover_img": "https://placeimg.com/594/192/any",
+      "tags": [
+        "던전",
+        "성장",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.7,
+      "views": 2146847,
+      "recommends": 10621,
+      "bookmarks": 7844,
+      "word_count": 524997,
+      "series_count": 12
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 153,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Facilis modi sunt veritatis quam voluptate. Autem mollitia quaerat veniam deserunt provident.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 12,
+      "pages": []
+    }
+  },
+  {
+    "id": "81",
+    "author": "박예은",
+    "title": "줄어든 분석중인 그룹웨어",
+    "created_at": "2024-10-02T10:59:35",
+    "latest_update": "2025-04-18T19:14:17",
+    "page_info": {
+      "cover_img": "https://placekitten.com/511/132",
+      "tags": [
+        "먼치킨",
+        "던전",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 994755,
+      "recommends": 36952,
+      "bookmarks": 42176,
+      "word_count": 12508349,
+      "series_count": 34
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 173,
+      "total_price": 5882
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Repellat magnam officiis iste quas itaque maiores. Necessitatibus voluptatem asperiores ratione asperiores.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 34,
+      "pages": []
+    }
+  },
+  {
+    "id": "82",
+    "author": "박지은",
+    "title": "관리된 결정 공구",
+    "created_at": "2022-07-26T03:06:14",
+    "latest_update": "2025-06-25T21:40:34",
+    "page_info": {
+      "cover_img": "https://placekitten.com/75/1022",
+      "tags": [
+        "회귀",
+        "판타지",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.8,
+      "views": 3796265,
+      "recommends": 49970,
+      "bookmarks": 13039,
+      "word_count": 2136397,
+      "series_count": 20
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 170,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Quidem aliquam exercitationem magnam beatae consectetur. Non neque distinctio. Tempora asperiores repellendus quae non in expedita.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 20,
+      "pages": []
+    }
+  },
+  {
+    "id": "83",
+    "author": "이건우",
+    "title": "유저 친화적 선구적 도전",
+    "created_at": "2023-09-28T12:03:09",
+    "latest_update": "2025-01-26T10:45:40",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/56x421",
+      "tags": [
+        "사이다",
+        "게이트",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 4.8,
+      "views": 2633806,
+      "recommends": 14321,
+      "bookmarks": 37957,
+      "word_count": 3090234,
+      "series_count": 30
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 144,
+      "total_price": 4320
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Fugit alias corrupti quam doloremque. Quisquam fuga eveniet natus ullam quos neque. Accusantium odit deleniti ipsa officiis.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 30,
+      "pages": []
+    }
+  },
+  {
+    "id": "84",
+    "author": "오예준",
+    "title": "확대된 최적화된 마이그레이션",
+    "created_at": "2021-11-03T17:04:35",
+    "latest_update": "2025-04-28T11:36:45",
+    "page_info": {
+      "cover_img": "https://placekitten.com/932/359",
+      "tags": [
+        "게이트",
+        "던전",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 3351509,
+      "recommends": 20176,
+      "bookmarks": 25073,
+      "word_count": 19852643,
+      "series_count": 26
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 154,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Repellendus atque molestiae non ab ipsa. Recusandae adipisci est tenetur occaecati. Saepe iure ratione perspiciatis temporibus.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 26,
+      "pages": []
+    }
+  },
+  {
+    "id": "85",
+    "author": "박지은",
+    "title": "트리플 버퍼 실행 패러다임",
+    "created_at": "2023-05-30T09:49:41",
+    "latest_update": "2025-06-17T06:40:47",
+    "page_info": {
+      "cover_img": "https://placekitten.com/303/737",
+      "tags": [
+        "게이트",
+        "먼치킨",
+        "회귀"
+      ]
+    },
+    "stats": {
+      "stars": 3.5,
+      "views": 4700593,
+      "recommends": 22006,
+      "bookmarks": 20812,
+      "word_count": 19380300,
+      "series_count": 22
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 139,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Dolore eius hic quibusdam hic. Eius tempore dolores totam quia architecto ipsa.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 22,
+      "pages": []
+    }
+  },
+  {
+    "id": "86",
+    "author": "박예은",
+    "title": "크로스 그룹 4세대 모니터링",
+    "created_at": "2020-07-21T14:14:08",
+    "latest_update": "2025-01-22T07:45:59",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/670x43",
+      "tags": [
+        "로맨스",
+        "이세계",
+        "게이트"
+      ]
+    },
+    "stats": {
+      "stars": 3.6,
+      "views": 4308224,
+      "recommends": 34435,
+      "bookmarks": 24690,
+      "word_count": 19426582,
+      "series_count": 30
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 184,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Doloribus doloribus quisquam ea velit quos qui. Nam earum quaerat esse sint ea magni cumque. Laborum blanditiis porro quidem fugiat.",
+      "status": "complete",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 30,
+      "pages": []
+    }
+  },
+  {
+    "id": "87",
+    "author": "김성훈",
+    "title": "프로그래밍 가능한 최적화된 GUI",
+    "created_at": "2021-09-08T01:55:22",
+    "latest_update": "2025-02-23T07:45:09",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/348x523",
+      "tags": [
+        "게이트",
+        "이세계",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.6,
+      "views": 4325745,
+      "recommends": 2748,
+      "bookmarks": 6450,
+      "word_count": 9901734,
+      "series_count": 21
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 164,
+      "total_price": 3444
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Praesentium iusto aspernatur animi numquam. Eos cumque magnam magnam accusantium expedita atque.",
+      "status": "ongoing",
+      "rating": "12"
+    },
+    "content": {
+      "total_page": 21,
+      "pages": []
+    }
+  },
+  {
+    "id": "88",
+    "author": "김옥순",
+    "title": "최적화된 결정 모델",
+    "created_at": "2024-09-18T21:19:53",
+    "latest_update": "2025-07-14T04:51:45",
+    "page_info": {
+      "cover_img": "https://placeimg.com/227/366/any",
+      "tags": [
+        "먼치킨",
+        "회귀",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.3,
+      "views": 4668195,
+      "recommends": 42539,
+      "bookmarks": 17038,
+      "word_count": 18664562,
+      "series_count": 23
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 151,
+      "total_price": 3473
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Dolorem nihil repellendus. Officiis voluptatibus labore.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 23,
+      "pages": []
+    }
+  },
+  {
+    "id": "89",
+    "author": "이승민",
+    "title": "모니터링되는 클라이언트-서버 예산 관리",
+    "created_at": "2023-10-26T08:00:02",
+    "latest_update": "2025-05-18T19:54:21",
+    "page_info": {
+      "cover_img": "https://placekitten.com/346/929",
+      "tags": [
+        "로맨스",
+        "게이트",
+        "사이다"
+      ]
+    },
+    "stats": {
+      "stars": 3.1,
+      "views": 3154242,
+      "recommends": 32297,
+      "bookmarks": 47592,
+      "word_count": 2418076,
+      "series_count": 25
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 177,
+      "total_price": 4425
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Ex eligendi vitae deleniti.\nTempora facilis vitae nihil molestiae.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 25,
+      "pages": []
+    }
+  },
+  {
+    "id": "90",
+    "author": "최영식",
+    "title": "무결점의 분리된 정의",
+    "created_at": "2024-12-12T06:45:49",
+    "latest_update": "2025-05-15T01:44:27",
+    "page_info": {
+      "cover_img": "https://placekitten.com/325/776",
+      "tags": [
+        "사이다",
+        "회귀",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 2914576,
+      "recommends": 47544,
+      "bookmarks": 1606,
+      "word_count": 11554278,
+      "series_count": 50
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 164,
+      "total_price": 8200
+    },
+    "about": {
+      "category": [
+        "SF",
+        "스릴러"
+      ],
+      "description": "Excepturi repudiandae quasi molestias laborum amet. Unde aperiam nisi ab.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 50,
+      "pages": []
+    }
+  },
+  {
+    "id": "91",
+    "author": "박예은",
+    "title": "동기화 무해한 컨셉",
+    "created_at": "2021-04-06T00:00:14",
+    "latest_update": "2025-01-21T14:06:30",
+    "page_info": {
+      "cover_img": "https://dummyimage.com/366x597",
+      "tags": [
+        "이세계",
+        "성장",
+        "판타지"
+      ]
+    },
+    "stats": {
+      "stars": 4.0,
+      "views": 149595,
+      "recommends": 10100,
+      "bookmarks": 29191,
+      "word_count": 6353152,
+      "series_count": 37
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 180,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Consectetur consequuntur aut autem. Aperiam qui odio at. Exercitationem voluptatum suscipit velit. At labore tenetur quia.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 37,
+      "pages": []
+    }
+  },
+  {
+    "id": "92",
+    "author": "황우진",
+    "title": "올바른 사이즈의 무관리 프레임워크",
+    "created_at": "2023-01-04T18:44:50",
+    "latest_update": "2025-02-07T03:12:59",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/404/547",
+      "tags": [
+        "헌터",
+        "사이다",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 4.1,
+      "views": 240685,
+      "recommends": 15325,
+      "bookmarks": 45050,
+      "word_count": 17532196,
+      "series_count": 29
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 188,
+      "total_price": 5452
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Illum cupiditate iste laborum similique ullam unde.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 29,
+      "pages": []
+    }
+  },
+  {
+    "id": "93",
+    "author": "강은지",
+    "title": "출판된 5세대 전략",
+    "created_at": "2023-02-09T08:53:00",
+    "latest_update": "2025-05-06T12:30:28",
+    "page_info": {
+      "cover_img": "https://placeimg.com/592/363/any",
+      "tags": [
+        "로맨스",
+        "성장",
+        "사이다"
+      ]
+    },
+    "stats": {
+      "stars": 3.4,
+      "views": 2447136,
+      "recommends": 729,
+      "bookmarks": 31835,
+      "word_count": 19672603,
+      "series_count": 26
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 125,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Tempore neque accusantium ab. Quasi similique possimus harum tempora.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 26,
+      "pages": []
+    }
+  },
+  {
+    "id": "94",
+    "author": "최영식",
+    "title": "반동적인 분리된 고객 만족",
+    "created_at": "2021-04-05T00:42:41",
+    "latest_update": "2025-07-06T12:27:00",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/112/410",
+      "tags": [
+        "사이다",
+        "판타지",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 4.0,
+      "views": 4504767,
+      "recommends": 14410,
+      "bookmarks": 39668,
+      "word_count": 2211082,
+      "series_count": 20
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 125,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Voluptates doloremque eaque esse. Qui laudantium quis temporibus provident minima cupiditate deserunt. Sint distinctio illo.",
+      "status": "ongoing",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 20,
+      "pages": []
+    }
+  },
+  {
+    "id": "95",
+    "author": "김옥순",
+    "title": "숙련된 24/7 프로젝트",
+    "created_at": "2025-06-20T23:11:24",
+    "latest_update": "2025-04-16T15:59:33",
+    "page_info": {
+      "cover_img": "https://placeimg.com/592/173/any",
+      "tags": [
+        "판타지",
+        "이세계",
+        "먼치킨"
+      ]
+    },
+    "stats": {
+      "stars": 4.6,
+      "views": 4459155,
+      "recommends": 12289,
+      "bookmarks": 890,
+      "word_count": 19664989,
+      "series_count": 18
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 133,
+      "total_price": 2394
+    },
+    "about": {
+      "category": [
+        "무협",
+        "현대"
+      ],
+      "description": "Doloremque dolorum ipsa error commodi. Mollitia earum beatae alias eligendi. Quo eaque excepturi. Saepe amet repellat et.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 18,
+      "pages": []
+    }
+  },
+  {
+    "id": "96",
+    "author": "황우진",
+    "title": "재정렬 작동 엑스트라넷",
+    "created_at": "2025-02-15T08:56:41",
+    "latest_update": "2025-02-24T22:19:57",
+    "page_info": {
+      "cover_img": "https://placekitten.com/875/555",
+      "tags": [
+        "사이다",
+        "헌터",
+        "던전"
+      ]
+    },
+    "stats": {
+      "stars": 3.3,
+      "views": 4283059,
+      "recommends": 10403,
+      "bookmarks": 47661,
+      "word_count": 14043667,
+      "series_count": 40
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 124,
+      "total_price": 4960
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Cumque deserunt nihil qui. Impedit quibusdam deleniti hic autem dolorum expedita.",
+      "status": "complete",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 40,
+      "pages": []
+    }
+  },
+  {
+    "id": "97",
+    "author": "김성훈",
+    "title": "오픈소스 클라이언트-서버 지식 기반",
+    "created_at": "2024-03-16T15:50:51",
+    "latest_update": "2025-05-11T11:30:28",
+    "page_info": {
+      "cover_img": "https://placeimg.com/213/456/any",
+      "tags": [
+        "성장",
+        "던전",
+        "헌터"
+      ]
+    },
+    "stats": {
+      "stars": 5.0,
+      "views": 1679980,
+      "recommends": 35317,
+      "bookmarks": 18865,
+      "word_count": 6953070,
+      "series_count": 11
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 108,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Itaque dolor iste cupiditate veritatis. Amet esse sapiente at dolorem. Exercitationem quam nam illo.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 11,
+      "pages": []
+    }
+  },
+  {
+    "id": "98",
+    "author": "박수진",
+    "title": "원활한 객체 지향적 융합",
+    "created_at": "2023-09-20T00:15:52",
+    "latest_update": "2025-03-27T01:13:15",
+    "page_info": {
+      "cover_img": "https://www.lorempixel.com/181/637",
+      "tags": [
+        "판타지",
+        "이세계",
+        "사이다"
+      ]
+    },
+    "stats": {
+      "stars": 3.9,
+      "views": 1668101,
+      "recommends": 33679,
+      "bookmarks": 20459,
+      "word_count": 13200781,
+      "series_count": 41
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 165,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Facere quisquam saepe totam. Provident repudiandae ipsum doloremque.",
+      "status": "complete",
+      "rating": "19"
+    },
+    "content": {
+      "total_page": 41,
+      "pages": []
+    }
+  },
+  {
+    "id": "99",
+    "author": "오예준",
+    "title": "특별한 분석중인 고객 만족",
+    "created_at": "2022-06-21T01:25:38",
+    "latest_update": "2025-03-16T13:21:54",
+    "page_info": {
+      "cover_img": "https://placeimg.com/885/472/any",
+      "tags": [
+        "먼치킨",
+        "판타지",
+        "던전"
+      ]
+    },
+    "stats": {
+      "stars": 4.0,
+      "views": 4549680,
+      "recommends": 43770,
+      "bookmarks": 6774,
+      "word_count": 13122556,
+      "series_count": 17
+    },
+    "pricing": {
+      "is_free": true,
+      "price_per_series": 200,
+      "total_price": 0
+    },
+    "about": {
+      "category": [
+        "판타지",
+        "퓨전"
+      ],
+      "description": "Illo iure fugit itaque nulla. Cum officia voluptatibus quibusdam quis corporis tempore.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 17,
+      "pages": []
+    }
+  },
+  {
+    "id": "100",
+    "author": "김옥순",
+    "title": "확장된 3세대 성공",
+    "created_at": "2022-11-23T15:16:30",
+    "latest_update": "2025-04-19T13:41:47",
+    "page_info": {
+      "cover_img": "https://placeimg.com/143/707/any",
+      "tags": [
+        "게이트",
+        "이세계",
+        "성장"
+      ]
+    },
+    "stats": {
+      "stars": 3.5,
+      "views": 336551,
+      "recommends": 965,
+      "bookmarks": 36555,
+      "word_count": 13068110,
+      "series_count": 26
+    },
+    "pricing": {
+      "is_free": false,
+      "price_per_series": 164,
+      "total_price": 4264
+    },
+    "about": {
+      "category": [
+        "로맨스",
+        "드라마"
+      ],
+      "description": "Facere sint inventore harum. Adipisci molestias earum numquam molestiae.",
+      "status": "ongoing",
+      "rating": "15"
+    },
+    "content": {
+      "total_page": 26,
+      "pages": []
+    }
+  }
+]

@@ -10,6 +10,8 @@ const ICON_MAP = {
 	Home: () => import('@/assets/icons/home.svg'),
 	Shop: () => import('@/assets/icons/shop.svg'),
 	File: () => import('@/assets/icons/file.svg'),
+	Star: () => import('@/assets/icons/star.svg'),
+	Eye: () => import('@/assets/icons/eye.svg'),
 };
 
 export default function Icon({ icon, ...props }: IconProps) {

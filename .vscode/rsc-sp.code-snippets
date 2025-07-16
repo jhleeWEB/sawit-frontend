@@ -1,0 +1,22 @@
+{
+	"React Functional Component(server component with search param)": {
+		"prefix": "rsc-sp",
+		"body": [
+			"export default async function ${1:name}({",
+			"params,",
+			"searchParams,",
+			"}: {",
+			"params: Promise<{ ${2:param}: string }>;",
+			"searchParams: { [key: string]: string| undefined }",
+			"}) {",
+			"const { ${2:param} } = await params;",
+			"return (",
+			"<div>",
+			"param: {${2:param}}",
+			"</div>",
+			")",
+			"}"
+		],
+		"description": "React Functional Component"
+	}
+}
