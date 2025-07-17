@@ -1,16 +1,16 @@
 import Icon from '@/components/Icon';
 
 import { NovelSample } from '@/hooks/useNovelSamples';
-import { Chip, Image, Skeleton } from '@heroui/react';
+import { Chip, Image } from '@heroui/react';
 
 interface Props {
 	novel: NovelSample;
 }
 
 export default function NovelCard({ novel }: Props) {
-	const { stats, pricing, about, content } = novel;
+	const { stats, about } = novel;
 	return (
-		<div className='relative flex flex-wrap w-40 mr-4 mb-4'>
+		<div className='relative flex flex-wrap w-40 mb-4'>
 			<Chip
 				className='absolute z-50 right-2 top-2 font-bold'
 				color='success'

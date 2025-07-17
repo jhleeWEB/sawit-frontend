@@ -1,10 +1,11 @@
 'use client';
-import { Accordion, AccordionItem, Listbox, ListboxItem } from '@heroui/react';
+import { Listbox, ListboxItem } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 
 const menus = ['home', 'popular', 'explore', 'all'];
-const accordionMenus = ['recent', 'communities', 'resources'];
 
 export default function SideMenu() {
+	const router = useRouter();
 	return (
 		<aside className='relative col-start-1 row-start-1'>
 			<div className='sticky h-full max-h-[calc(100dvh-64px)] overflow-y-auto'>
@@ -16,7 +17,9 @@ export default function SideMenu() {
 					}}
 				>
 					{menus.map((menu) => (
-						<ListboxItem key={menu}>{menu.toUpperCase()}</ListboxItem>
+						<ListboxItem key={menu} onClick={() => router.push('/')}>
+							{menu.toUpperCase()}
+						</ListboxItem>
 					))}
 				</Listbox>
 			</div>
