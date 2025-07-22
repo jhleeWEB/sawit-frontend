@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export interface NovelSample {
-	id: number;
+	id: string;
 	author: string;
 	title: string;
 	created_at: Date;
@@ -35,7 +35,7 @@ export interface NovelSample {
 	};
 }
 
-export default function useNovelSamples(author: string) {
+export default function useNovelSamples(author?: string) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [publishedNovels, setPublishedNovels] = useState<NovelSample[]>([]);
 	useEffect(() => {
@@ -43,8 +43,12 @@ export default function useNovelSamples(author: string) {
 		(async function fetchSample() {
 			const arr = await import('/public/samples/korean_sample_novels_100.json');
 			const list = Array.from(arr) as NovelSample[];
-			const novels = list.filter((n) => n.author === author);
-			setPublishedNovels(novels);
+			if (author) {
+				const novels = list.filter((n) => n.author === author);
+				setPublishedNovels(novels);
+			} else {
+				setPublishedNovels(list);
+			}
 			setIsLoading(false);
 		})();
 	}, [author]);

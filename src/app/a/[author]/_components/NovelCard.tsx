@@ -2,6 +2,7 @@ import Icon from '@/components/Icon';
 
 import { NovelSample } from '@/hooks/useNovelSamples';
 import { Chip, Image } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 
 interface Props {
 	novel: NovelSample;
@@ -9,6 +10,16 @@ interface Props {
 
 export default function NovelCard({ novel }: Props) {
 	const { stats, about } = novel;
+	const router = useRouter();
+
+	const onClickAuthor = () => {
+		router.push(`/a/${novel.author}`);
+	};
+
+	const onClickNovel = () => {
+		router.push(`/a/${novel.author}/${novel.id}`);
+	};
+
 	return (
 		<div className='relative flex flex-wrap w-40 mb-4'>
 			<Chip
@@ -19,18 +30,27 @@ export default function NovelCard({ novel }: Props) {
 				NEW
 			</Chip>
 			<Image
+				className='cursor-pointer'
 				alt='book cover image'
 				height={240}
 				radius='sm'
 				src='/sample2.png'
+				onClick={onClickNovel}
 			/>
 			{about.category.map((n) => (
 				<small key={novel.id + n} className='mr-1'>
 					{n}
 				</small>
 			))}
-			<h4 className='w-full truncate font-bold'>{novel.title}</h4>
-			<small>{novel.author}</small>
+			<h4
+				className='w-full truncate font-bold cursor-pointer'
+				onClick={onClickNovel}
+			>
+				{novel.title}
+			</h4>
+			<small className='cursor-pointer' onClick={onClickAuthor}>
+				{novel.author}
+			</small>
 			<div className='flex w-full justify-between'>
 				<div className='flex items-center'>
 					<Icon fill='none' icon='Star' size={14} />

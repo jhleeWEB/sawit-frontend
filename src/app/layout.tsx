@@ -22,7 +22,7 @@ export default function RootLayout({
 					<TopNavigation />
 					<div className='grid grid-cols-4'>
 						<SideMenu />
-						<main className='col-span-3 h-full max-h-[calc(100dvh-64px)] overflow-hidden'>
+						<main className='col-span-3 h-full max-h-[calc(100dvh-64px)]'>
 							{children}
 						</main>
 					</div>

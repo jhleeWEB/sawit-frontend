@@ -7,7 +7,7 @@ interface Props extends PropsWithChildren {
 
 export default function CardContainer({ title, children }: Props) {
 	return (
-		<Card className='p-2'>
+		<Card className='p-2 mb-4'>
 			{title && <CardHeader>{title}</CardHeader>}
 			<CardBody>{children}</CardBody>
 		</Card>
