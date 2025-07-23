@@ -13,6 +13,10 @@ const ICON_MAP = {
 	Star: () => import('@/assets/icons/star.svg'),
 	Eye: () => import('@/assets/icons/eye.svg'),
 	Bookmark: () => import('@/assets/icons/bookmark.svg'),
+	Back: () => import('@/assets/icons/back.svg'),
+	Forward: () => import('@/assets/icons/forward.svg'),
+	NumberList: () => import('@/assets/icons/numberList.svg'),
+	VerticalEllipsis: () => import('@/assets/icons/verticalEllipsis.svg'),
 };
 
 export default function Icon({ icon, ...props }: IconProps) {
