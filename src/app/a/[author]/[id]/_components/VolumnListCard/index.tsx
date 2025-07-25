@@ -17,7 +17,7 @@ export default async function VolumnListCard({ volumns, novelId }: Props) {
 				{volumns.map((volumn) => (
 					<Link
 						key={volumn.id + volumn.title}
-						href={`${novelId}/volumn/?No=${volumn.no}/page=${0}`}
+						href={`${novelId}/volumn/?volumnNo=${volumn.no}`}
 					>
 						<li className='cursor-pointer hover:bg-slate-100 border-b-1 py-2'>
 							{volumn.title}

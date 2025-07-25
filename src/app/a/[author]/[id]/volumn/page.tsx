@@ -2,14 +2,18 @@ import CardContainer from '@/components/CardContainer';
 import { NovelSample } from '@/hooks/useNovelSamples';
 import Pages from './_components/Pages';
 import PageController from './_components/PageController';
+import { VolumnTitleSample } from '../page';
 
 export default async function Volumn({
 	params,
+	searchParams,
 }: {
 	params: Promise<{ id: string }>;
+	searchParams: Promise<{ volumnNo: number }>;
 }) {
 	const { id } = await params;
-	const novelData = fetchNovelInfo(id);
+	const { volumnNo } = await searchParams;
+	const novelData = fetchVolumnTitles(id, volumnNo);
 	const novelPageData = fetchNovelPages();
 	const [novel, novelPages] = await Promise.all([novelData, novelPageData]);
 
@@ -21,9 +25,11 @@ export default async function Volumn({
 	);
 }
 
-async function fetchNovelInfo(novelId: string) {
-	const data = await import('/public/samples/korean_sample_novels_100.json');
-	return (Array.from(data) as NovelSample[]).find((n) => n.id == novelId);
+async function fetchVolumnTitles(novelId: string, volumnNo = 0) {
+	const data = await import('/public/samples/volumn_titles_info.json');
+	return (Array.from(data) as VolumnTitleSample[])
+		.filter((n) => n.novel_id == novelId)
+		.find((n) => n.no == volumnNo);
 }
 
 async function fetchNovelPages() {
