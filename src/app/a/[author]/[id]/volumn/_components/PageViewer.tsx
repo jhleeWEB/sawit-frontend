@@ -6,7 +6,7 @@ interface Props {
 	pages: string[];
 }
 
-export default function Pages({ pages }: Props) {
+export default function PageViewer({ pages }: Props) {
 	return (
 		<div>
 			{pages.map((page, index) => (

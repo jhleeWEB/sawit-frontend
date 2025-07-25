@@ -1,8 +1,7 @@
 import CardContainer from '@/components/CardContainer';
-import { NovelSample } from '@/hooks/useNovelSamples';
-import Pages from './_components/Pages';
 import PageController from './_components/PageController';
 import { VolumnTitleSample } from '../page';
+import PageViewer from './_components/PageViewer';
 
 export default async function Volumn({
 	params,
@@ -19,7 +18,7 @@ export default async function Volumn({
 
 	return (
 		<CardContainer title={novel?.title}>
-			<Pages pages={novelPages.pages} />
+			<PageViewer pages={novelPages.pages} />
 			<PageController />
 		</CardContainer>
 	);
