@@ -11,6 +11,7 @@ interface Props {
 export default function NovelCard({ novel }: Props) {
 	const { stats, about } = novel;
 	const router = useRouter();
+	const randomNumber = Math.floor(Math.random() * (25 - 1) + 1);
 
 	const onClickAuthor = () => {
 		router.push(`/a/${novel.author}`);
@@ -34,7 +35,7 @@ export default function NovelCard({ novel }: Props) {
 				alt='book cover image'
 				height={240}
 				radius='sm'
-				src='/sample2.png'
+				src={`/cover_thumbnails/novel_cover_thumbnail_${randomNumber}.png`}
 				onClick={onClickNovel}
 			/>
 			{about.category.map((n) => (

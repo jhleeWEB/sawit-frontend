@@ -35,6 +35,9 @@ export default function PageController() {
 			);
 		}
 	};
+	const onClickGoToList = () => {
+		router.push(pathname.replace('volumn', ''));
+	};
 
 	if (!volumnNumber) {
 		return;
@@ -68,6 +71,7 @@ export default function PageController() {
 				aria-label='forward'
 				variant='solid'
 				className='rounded-full bg-white shadow-md shadow-slate-300'
+				onPress={onClickGoToList}
 			>
 				<Icon icon='NumberList' fill='none' />
 			</Button>
