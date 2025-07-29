@@ -11,6 +11,7 @@ const ICON_MAP = {
 	Shop: () => import('@/assets/icons/shop.svg'),
 	File: () => import('@/assets/icons/file.svg'),
 	Star: () => import('@/assets/icons/star.svg'),
+	StarSolid: () => import('@/assets/icons/star-solid.svg'),
 	Eye: () => import('@/assets/icons/eye.svg'),
 	Bookmark: () => import('@/assets/icons/bookmark.svg'),
 	Back: () => import('@/assets/icons/back.svg'),
@@ -20,7 +21,7 @@ const ICON_MAP = {
 };
 
 export default function Icon({ icon, ...props }: IconProps) {
-	const { size = 36, height, width, fill = 'currentColor' } = props;
+	const { size = 12, height, width, fill = 'currentColor' } = props;
 	const IconComponent = dynamic<React.SVGAttributes<SVGAElement>>(
 		ICON_MAP[icon],
 		{
@@ -31,8 +32,8 @@ export default function Icon({ icon, ...props }: IconProps) {
 		<IconComponent
 			height={size || height}
 			width={size || width}
-			fill={fill}
 			{...props}
+			fill={fill}
 		/>
 	);
 }
