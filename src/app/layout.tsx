@@ -3,7 +3,6 @@ import { Metadata } from 'next';
 import './globals.css';
 import Providers from './providers';
 import TopNavigation from '@/components/TopNavigation';
-import SideMenu from '@/app/_components/SideMenu';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -20,11 +19,8 @@ export default function RootLayout({
 			<body>
 				<Providers>
 					<TopNavigation />
-					<div className='grid grid-cols-4'>
-						<SideMenu />
-						<main className='col-span-3 h-full max-h-[calc(100dvh-64px)]'>
-							{children}
-						</main>
+					<div className='flex justify-center'>
+						<main className='max-w-screen-md'>{children}</main>
 					</div>
 				</Providers>
 			</body>
