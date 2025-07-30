@@ -1,4 +1,3 @@
-import Icon from '@/components/Icon';
 import StarRating from '@/app/a/[author]/_components/star-rating';
 
 import { NovelSample } from '@/hooks/useNovelSamples';
