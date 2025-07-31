@@ -1,245 +1,189 @@
-import { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-// replace icons with your own if needed
+import { Button } from '@heroui/react';
 import {
-	FiCircle,
-	FiCode,
-	FiFileText,
-	FiLayers,
-	FiLayout,
-} from 'react-icons/fi';
+	Children,
+	PropsWithChildren,
+	TouchEvent,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 
-const DEFAULT_ITEMS = [
-	{
-		title: 'Text Animations',
-		description: 'Cool text animations for your projects.',
-		id: 1,
-		icon: <FiFileText className='h-[16px] w-[16px] text-white' />,
-	},
-	{
-		title: 'Animations',
-		description: 'Smooth animations for your projects.',
-		id: 2,
-		icon: <FiCircle className='h-[16px] w-[16px] text-white' />,
-	},
-	{
-		title: 'Components',
-		description: 'Reusable components for your projects.',
-		id: 3,
-		icon: <FiLayers className='h-[16px] w-[16px] text-white' />,
-	},
-	{
-		title: 'Backgrounds',
-		description: 'Beautiful backgrounds and patterns for your projects.',
-		id: 4,
-		icon: <FiLayout className='h-[16px] w-[16px] text-white' />,
-	},
-	{
-		title: 'Common UI',
-		description: 'Common UI components are coming soon!',
-		id: 5,
-		icon: <FiCode className='h-[16px] w-[16px] text-white' />,
-	},
-];
-
-const DRAG_BUFFER = 0;
-const VELOCITY_THRESHOLD = 500;
-const GAP = 16;
-const SPRING_OPTIONS = { type: 'spring', stiffness: 300, damping: 30 };
+interface Props extends PropsWithChildren {
+	visibleItemsCount?: number;
+	isInfinite?: boolean;
+	withIndicator?: boolean;
+}
 
 export default function Carousel({
-	items = DEFAULT_ITEMS,
-	baseWidth = 300,
-	autoplay = false,
-	autoplayDelay = 3000,
-	pauseOnHover = false,
-	loop = false,
-	round = false,
-}) {
-	const containerPadding = 16;
-	const itemWidth = baseWidth - containerPadding * 2;
-	const trackItemOffset = itemWidth + GAP;
+	children,
+	visibleItemsCount = 1,
+	isInfinite,
+	withIndicator = false,
+}: Props) {
+	const [timeoutInProgress, setTimeoutInProgress] = useState(false);
+	const [isTransitionEnabled, setTransitionEnabled] = useState(true);
 
-	const carouselItems = loop ? [...items, items[0]] : items;
-	const [currentIndex, setCurrentIndex] = useState(0);
-	const x = useMotionValue(0);
-	const [isHovered, setIsHovered] = useState(false);
-	const [isResetting, setIsResetting] = useState(false);
+	const itemsLength = useMemo(() => Children.count(children), [children]);
+	const isRepeating = useMemo(
+		() => isInfinite && Children.count(children) > visibleItemsCount,
+		[children, isInfinite, visibleItemsCount]
+	);
 
-	const containerRef = useRef(null);
-	useEffect(() => {
-		if (pauseOnHover && containerRef.current) {
-			const container = containerRef.current;
-			const handleMouseEnter = () => setIsHovered(true);
-			const handleMouseLeave = () => setIsHovered(false);
-			container.addEventListener('mouseenter', handleMouseEnter);
-			container.addEventListener('mouseleave', handleMouseLeave);
-			return () => {
-				container.removeEventListener('mouseenter', handleMouseEnter);
-				container.removeEventListener('mouseleave', handleMouseLeave);
-			};
-		}
-	}, [pauseOnHover]);
+	const [currentIndex, setCurrentIndex] = useState(
+		isRepeating ? visibleItemsCount : 0
+	);
+	const [touchPosition, setTouchPosition] = useState<number | null>(null);
 
 	useEffect(() => {
-		if (autoplay && (!pauseOnHover || !isHovered)) {
-			const timer = setInterval(() => {
-				setCurrentIndex((prev) => {
-					if (prev === items.length - 1 && loop) {
-						return prev + 1;
-					}
-					if (prev === carouselItems.length - 1) {
-						return loop ? 0 : prev;
-					}
-					return prev + 1;
-				});
-			}, autoplayDelay);
-			return () => clearInterval(timer);
+		if (isRepeating) {
+			if (currentIndex === visibleItemsCount || currentIndex === itemsLength) {
+				setTransitionEnabled(true);
+			}
 		}
-	}, [
-		autoplay,
-		autoplayDelay,
-		isHovered,
-		loop,
-		items.length,
-		carouselItems.length,
-		pauseOnHover,
-	]);
+	}, [currentIndex, isRepeating, visibleItemsCount, itemsLength]);
 
-	const effectiveTransition = isResetting ? { duration: 0 } : SPRING_OPTIONS;
+	/**
+	 * Move forward to the next item
+	 */
+	const nextItem = () => {
+		const isOnEdgeForward = currentIndex > itemsLength;
+		if (isOnEdgeForward) {
+			setTimeoutInProgress(true);
+		}
 
-	const handleAnimationComplete = () => {
-		if (loop && currentIndex === carouselItems.length - 1) {
-			setIsResetting(true);
-			x.set(0);
-			setCurrentIndex(0);
-			setTimeout(() => setIsResetting(false), 50);
+		if (isRepeating || currentIndex < itemsLength - visibleItemsCount) {
+			setCurrentIndex((prevState) => prevState + 1);
 		}
 	};
 
-	const handleDragEnd = (_, info) => {
-		const offset = info.offset.x;
-		const velocity = info.velocity.x;
-		if (offset < -DRAG_BUFFER || velocity < -VELOCITY_THRESHOLD) {
-			if (loop && currentIndex === items.length - 1) {
-				setCurrentIndex(currentIndex + 1);
-			} else {
-				setCurrentIndex((prev) => Math.min(prev + 1, carouselItems.length - 1));
-			}
-		} else if (offset > DRAG_BUFFER || velocity > VELOCITY_THRESHOLD) {
-			if (loop && currentIndex === 0) {
-				setCurrentIndex(items.length - 1);
-			} else {
-				setCurrentIndex((prev) => Math.max(prev - 1, 0));
-			}
+	/**
+	 * Move backward to the previous item
+	 */
+	const previousItem = () => {
+		const isOnEdgeBack = isRepeating
+			? currentIndex <= visibleItemsCount
+			: currentIndex === 0;
+
+		if (isOnEdgeBack) {
+			setTimeoutInProgress(true);
+		}
+
+		if (isRepeating || currentIndex > 0) {
+			setCurrentIndex((prevState) => prevState - 1);
 		}
 	};
 
-	const dragProps = loop
-		? {}
-		: {
-				dragConstraints: {
-					left: -trackItemOffset * (carouselItems.length - 1),
-					right: 0,
-				},
-		  };
+	/**
+	 * Handle when the user start the swipe gesture
+	 * @param e TouchEvent
+	 */
+	const handleTouchStart = (e: TouchEvent) => {
+		// Save the first position of the touch
+		const touchDown = e.touches[0].clientX;
+		setTouchPosition(touchDown);
+	};
 
+	/**
+	 * Handle when the user move the finger in swipe gesture
+	 * @param e TouchEvent
+	 */
+	const handleTouchMove = (e: TouchEvent) => {
+		// Get initial location
+		const touchDown = touchPosition;
+
+		// Proceed only if the initial position is not null
+		if (touchDown === null) {
+			return;
+		}
+
+		// Get current position
+		const currentTouch = e.touches[0].clientX;
+
+		// Get the difference between previous and current position
+		const diff = touchDown - currentTouch;
+
+		// Go to next item
+		if (diff > 5) {
+			nextItem();
+		}
+
+		// Go to previous item
+		if (diff < -5) {
+			previousItem();
+		}
+
+		// Reset initial touch position
+		setTouchPosition(null);
+	};
+
+	/**
+	 * Handle when carousel transition's ended
+	 */
+	const handleTransitionEnd = () => {
+		if (isRepeating) {
+			if (currentIndex === 0) {
+				setTransitionEnabled(false);
+				setCurrentIndex(itemsLength);
+			} else if (currentIndex === itemsLength + visibleItemsCount) {
+				setTransitionEnabled(false);
+				setCurrentIndex(visibleItemsCount);
+			}
+		}
+
+		setTimeoutInProgress(false);
+	};
+
+	/**
+	 * Render previous items before the first item
+	 */
+	const extraPreviousItems = useMemo(() => {
+		const output = [];
+		for (let index = 0; index < visibleItemsCount; index++) {
+			output.push(Children.toArray(children)[itemsLength - 1 - index]);
+		}
+		output.reverse();
+		return output;
+	}, [children, itemsLength, visibleItemsCount]);
+
+	/**
+	 * Render next items after the last item
+	 */
+	const extraNextItems = useMemo(() => {
+		const output = [];
+		for (let index = 0; index < visibleItemsCount; index++) {
+			output.push(Children.toArray(children)[index]);
+		}
+		return output;
+	}, [children, visibleItemsCount]);
+
+	const isNextButtonVisible = useMemo(() => {
+		return isRepeating || currentIndex < itemsLength - visibleItemsCount;
+	}, [isRepeating, currentIndex, itemsLength, visibleItemsCount]);
+
+	const isPrevButtonVisible = useMemo(
+		() => isRepeating || currentIndex > 0,
+		[isRepeating, currentIndex]
+	);
 	return (
-		<div
-			ref={containerRef}
-			className={`relative overflow-hidden p-4 ${
-				round
-					? 'rounded-full border border-white'
-					: 'rounded-[24px] border border-[#222]'
-			}`}
-			style={{
-				width: `${baseWidth}px`,
-				...(round && { height: `${baseWidth}px` }),
-			}}
-		>
-			<motion.div
-				className='flex'
-				drag='x'
-				{...dragProps}
-				style={{
-					width: itemWidth,
-					gap: `${GAP}px`,
-					perspective: 1000,
-					perspectiveOrigin: `${
-						currentIndex * trackItemOffset + itemWidth / 2
-					}px 50%`,
-					x,
-				}}
-				onDragEnd={handleDragEnd}
-				animate={{ x: -(currentIndex * trackItemOffset) }}
-				transition={effectiveTransition}
-				onAnimationComplete={handleAnimationComplete}
-			>
-				{carouselItems.map((item, index) => {
-					const range = [
-						-(index + 1) * trackItemOffset,
-						-index * trackItemOffset,
-						-(index - 1) * trackItemOffset,
-					];
-					const outputRange = [90, 0, -90];
-					// eslint-disable-next-line react-hooks/rules-of-hooks
-					const rotateY = useTransform(x, range, outputRange, { clamp: false });
-					return (
-						<motion.div
-							key={index}
-							className={`relative shrink-0 flex flex-col ${
-								round
-									? 'items-center justify-center text-center bg-[#060010] border-0'
-									: 'items-start justify-between bg-[#222] border border-[#222] rounded-[12px]'
-							} overflow-hidden cursor-grab active:cursor-grabbing`}
-							style={{
-								width: itemWidth,
-								height: round ? itemWidth : '100%',
-								rotateY: rotateY,
-								...(round && { borderRadius: '50%' }),
-							}}
-							transition={effectiveTransition}
-						>
-							<div className={`${round ? 'p-0 m-0' : 'mb-4 p-5'}`}>
-								<span className='flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#060010]'>
-									{item.icon}
-								</span>
-							</div>
-							<div className='p-5'>
-								<div className='mb-1 font-black text-lg text-white'>
-									{item.title}
-								</div>
-								<p className='text-sm text-white'>{item.description}</p>
-							</div>
-						</motion.div>
-					);
-				})}
-			</motion.div>
+		<div className='w-full flex flex-col relative'>
+			{isPrevButtonVisible && <Button onPress={previousItem}>prev</Button>}
+			{isNextButtonVisible && <Button onPress={nextItem}>next</Button>}
 			<div
-				className={`flex w-full justify-center ${
-					round ? 'absolute z-20 bottom-12 left-1/2 -translate-x-1/2' : ''
-				}`}
+				className='overflow-hidden w-full h-full'
+				onTouchStart={handleTouchStart}
+				onTouchMove={handleTouchMove}
 			>
-				<div className='mt-4 flex w-[150px] justify-between px-8'>
-					{items.map((_, index) => (
-						<motion.div
-							key={index}
-							className={`h-2 w-2 rounded-full cursor-pointer transition-colors duration-150 ${
-								currentIndex % items.length === index
-									? round
-										? 'bg-white'
-										: 'bg-[#333333]'
-									: round
-									? 'bg-[#555]'
-									: 'bg-[rgba(51,51,51,0.4)]'
-							}`}
-							animate={{
-								scale: currentIndex % items.length === index ? 1.2 : 1,
-							}}
-							onClick={() => setCurrentIndex(index)}
-							transition={{ duration: 0.15 }}
-						/>
-					))}
+				<div
+					className={`flex gap-2 transition-all scrollbar-hide [&>*]:w-[400px] [&>*]:flex-shrink-0 [&>*]:flex-grow`}
+					style={{
+						transform: `translateX(-${currentIndex * 400}px)`,
+						transition: !isTransitionEnabled ? 'none' : undefined,
+					}}
+					onTransitionEnd={() => handleTransitionEnd()}
+				>
+					{isRepeating && extraPreviousItems}
+					{children}
+					{isRepeating && extraNextItems}
 				</div>
 			</div>
 		</div>

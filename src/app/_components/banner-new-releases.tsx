@@ -1,14 +1,9 @@
 'use client';
 
+import Conveyor from '@/components/conveyor/conveyor';
 import useNovelSamples, { NovelSample } from '@/hooks/useNovelSamples';
-import NovelCard from '../a/[author]/_components/NovelCard';
-import { Card, CardBody } from '@heroui/react';
 
 type RankingType = 'topView' | 'topFree' | 'topStar';
-
-interface Props {
-	rankingType: RankingType;
-}
 
 const max = 10;
 
@@ -42,18 +37,8 @@ const titles = {
 	topStar: 'TOP 10 좋아요 랭킹',
 };
 
-export default function RankingCard({ rankingType }: Props) {
+export default function BannerNewReleases() {
 	const { publishedNovels } = useNovelSamples();
-	const top10 = algorithms[rankingType](publishedNovels);
-	return (
-		<Card title={titles[rankingType]}>
-			<CardBody>
-				<div className='flex gap-4'>
-					{top10.map((novel) => (
-						<NovelCard key={novel.author + novel.title} novel={novel} />
-					))}
-				</div>
-			</CardBody>
-		</Card>
-	);
+	const top10 = algorithms['topView'](publishedNovels);
+	return <Conveyor />;
 }

@@ -16,12 +16,12 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body>
+			<body className='mx-auto max-w-screen-md'>
 				<Providers>
 					<TopNavigation />
-					<div className='flex justify-center'>
-						<main className='max-w-screen-md'>{children}</main>
-					</div>
+					<main className=''>
+						<div className='w-full flex justify-center'>{children}</div>
+					</main>
 				</Providers>
 			</body>
 		</html>

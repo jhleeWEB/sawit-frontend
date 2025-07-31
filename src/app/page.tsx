@@ -1,11 +1,11 @@
-import RankingCard from './_components/RankingCard';
+import BannerNewReleases from './_components/banner-new-releases';
+import CarouselRankings from './_components/carousel-rankings';
 
 export default function Home() {
 	return (
-		<section className='p-4'>
-			<RankingCard rankingType='topView' />
-			<RankingCard rankingType='topFree' />
-			<RankingCard rankingType='topStar' />
+		<section className='w-full flex flex-col gap-2'>
+			<CarouselRankings />
+			<BannerNewReleases />
 		</section>
 	);
 }
