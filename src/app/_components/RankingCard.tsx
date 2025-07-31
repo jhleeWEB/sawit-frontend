@@ -1,8 +1,8 @@
 'use client';
 
-import CardContainer from '@/components/CardContainer';
 import useNovelSamples, { NovelSample } from '@/hooks/useNovelSamples';
 import NovelCard from '../a/[author]/_components/NovelCard';
+import { Card, CardBody } from '@heroui/react';
 
 type RankingType = 'topView' | 'topFree' | 'topStar';
 
@@ -10,24 +10,26 @@ interface Props {
 	rankingType: RankingType;
 }
 
+const max = 10;
+
 const getTopView = (publishedNovels: NovelSample[]) => {
-	const top5 = publishedNovels
+	const top10 = publishedNovels
 		.sort((a, b) => b.stats.views - a.stats.views)
-		.slice(0, 5);
-	return top5;
+		.slice(0, max);
+	return top10;
 };
 const getTopFree = (publishedNovels: NovelSample[]) => {
-	const top5 = publishedNovels
+	const top10 = publishedNovels
 		.sort((a, b) => b.stats.views - a.stats.views)
 		.filter((n) => n.pricing.is_free)
-		.slice(0, 5);
-	return top5;
+		.slice(0, max);
+	return top10;
 };
 const getTopStar = (publishedNovels: NovelSample[]) => {
-	const top5 = publishedNovels
+	const top10 = publishedNovels
 		.sort((a, b) => b.stats.stars - a.stats.stars)
-		.slice(0, 5);
-	return top5;
+		.slice(0, max);
+	return top10;
 };
 const algorithms = {
 	topView: getTopView,
@@ -35,21 +37,23 @@ const algorithms = {
 	topStar: getTopStar,
 };
 const titles = {
-	topView: 'TOP 5 랭킹',
-	topFree: 'TOP 5 무료 랭킹',
-	topStar: 'TOP 5 좋아요 랭킹',
+	topView: 'TOP 10 랭킹',
+	topFree: 'TOP 10 무료 랭킹',
+	topStar: 'TOP 10 좋아요 랭킹',
 };
 
 export default function RankingCard({ rankingType }: Props) {
 	const { publishedNovels } = useNovelSamples();
-	const top5 = algorithms[rankingType](publishedNovels);
+	const top10 = algorithms[rankingType](publishedNovels);
 	return (
-		<CardContainer title={titles[rankingType]}>
-			<div className='flex flex-wrap gap-4'>
-				{top5.map((novel) => (
-					<NovelCard key={novel.author + novel.title} novel={novel} />
-				))}
-			</div>
-		</CardContainer>
+		<Card title={titles[rankingType]}>
+			<CardBody>
+				<div className='flex gap-4'>
+					{top10.map((novel) => (
+						<NovelCard key={novel.author + novel.title} novel={novel} />
+					))}
+				</div>
+			</CardBody>
+		</Card>
 	);
 }
