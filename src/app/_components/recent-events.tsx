@@ -3,31 +3,22 @@ import { Button, Image, Link } from '@heroui/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
-const items = [1, 2, 3, 4, 5, 6, 7];
-const items_src = [
-	'/cover_thumbnails/novel_cover_thumbnail_3.png',
-	'/cover_thumbnails/novel_cover_thumbnail_13.png',
-	'/cover_thumbnails/novel_cover_thumbnail_9.png',
+const items = [
+	'/cover_thumbnails/novel_cover_thumbnail_1.png',
 	'/cover_thumbnails/novel_cover_thumbnail_2.png',
+	'/cover_thumbnails/novel_cover_thumbnail_3.png',
+	'/cover_thumbnails/novel_cover_thumbnail_4.png',
+	'/cover_thumbnails/novel_cover_thumbnail_5.png',
 	'/cover_thumbnails/novel_cover_thumbnail_6.png',
-	'/cover_thumbnails/novel_cover_thumbnail_22.png',
-	'/cover_thumbnails/novel_cover_thumbnail_13.png',
+	'/cover_thumbnails/novel_cover_thumbnail_7.png',
 ];
+
 const TRANSITION = 'transform 500ms ease-in-out';
 
 export default function RecentEvents() {
 	const timer = useRef<null | NodeJS.Timeout>(null);
 	const wrappeRef = useRef<HTMLDivElement>(null);
 	const [currentIndex, setCurrentIndex] = useState(2);
-	const [stitchedItemSrcs] = useState(() => {
-		return [
-			items_src[items_src.length - 2],
-			items_src[items_src.length - 1],
-			...items_src,
-			items_src[0],
-			items_src[1],
-		];
-	});
 	const [stitchedItems] = useState(() => {
 		return [
 			items[items.length - 2],
@@ -120,7 +111,7 @@ export default function RecentEvents() {
 							width={400}
 							height={400}
 							radius='sm'
-							src={stitchedItemSrcs[i]}
+							src={n}
 							isZoomed
 						/>
 					</Link>

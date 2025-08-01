@@ -2,12 +2,12 @@ import { Image } from '@heroui/react';
 import Link from 'next/link';
 
 const novels = [
-	'/cover_thumbnails/novel_cover_thumbnail_4.png',
 	'/cover_thumbnails/novel_cover_thumbnail_8.png',
-	'/cover_thumbnails/novel_cover_thumbnail_20.png',
+	'/cover_thumbnails/novel_cover_thumbnail_9.png',
+	'/cover_thumbnails/novel_cover_thumbnail_10.png',
 	'/cover_thumbnails/novel_cover_thumbnail_11.png',
 	'/cover_thumbnails/novel_cover_thumbnail_12.png',
-	'/cover_thumbnails/novel_cover_thumbnail_21.png',
+	'/cover_thumbnails/novel_cover_thumbnail_13.png',
 ];
 
 export default function RecentTop6Novels() {
