@@ -9,7 +9,7 @@ export default function CarouselRankings() {
 	const timer = useRef<null | NodeJS.Timeout>(null);
 	const wrappeRef = useRef<HTMLDivElement>(null);
 	const [currentIndex, setCurrentIndex] = useState(2);
-	const [stitchedItems, setStitchedItems] = useState(() => {
+	const [stitchedItems] = useState(() => {
 		return [
 			items[items.length - 2],
 			items[items.length - 1],
