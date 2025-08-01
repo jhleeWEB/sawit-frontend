@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 const items = [1, 2, 3, 4, 5, 6, 7];
 const TRANSITION = 'transform 1s ease-in-out';
 
-export default function CarouselRankings() {
+export default function CarouselEvents() {
 	const timer = useRef<null | NodeJS.Timeout>(null);
 	const wrappeRef = useRef<HTMLDivElement>(null);
 	const [currentIndex, setCurrentIndex] = useState(2);
