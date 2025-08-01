@@ -1,7 +1,7 @@
 export default function MillionPagesNovels() {
 	return (
-		<div className='overflow-hidden mt-8'>
-			<h1 className='text-lg font-bold mb-4'>밀리언 페이지</h1>
+		<div className='overflow-hidden mt-4'>
+			<h1 className='text-lg font-bold mb-2'>밀리언 페이지</h1>
 			<div className='flex gap-2 group'>
 				<section className='flex gap-2 animate-slide group-hover:pause'>
 					{[1, 2, 3, 4, 5, 6, 7, 8].map((n, i) => (

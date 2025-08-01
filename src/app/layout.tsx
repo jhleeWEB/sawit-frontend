@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import './globals.css';
 import Providers from './providers';
 import TopNavigation from '@/components/TopNavigation';
+import Footer from './_components/footer';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -22,6 +23,7 @@ export default function RootLayout({
 					<main className=''>
 						<div className='w-full flex justify-center'>{children}</div>
 					</main>
+					<Footer />
 				</Providers>
 			</body>
 		</html>
