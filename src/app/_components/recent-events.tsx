@@ -1,11 +1,12 @@
 'use client';
 import { Button, Link } from '@heroui/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
 const items = [1, 2, 3, 4, 5, 6, 7];
-const TRANSITION = 'transform 1s ease-in-out';
+const TRANSITION = 'transform 500ms ease-in-out';
 
-export default function CarouselEvents() {
+export default function RecentEvents() {
 	const timer = useRef<null | NodeJS.Timeout>(null);
 	const wrappeRef = useRef<HTMLDivElement>(null);
 	const [currentIndex, setCurrentIndex] = useState(2);
@@ -44,7 +45,7 @@ export default function CarouselEvents() {
 		timer.current = setTimeout(() => {
 			setTransition('');
 			setCurrentIndex(index);
-		}, 1000);
+		}, 500);
 	};
 
 	useEffect(() => {
@@ -56,34 +57,48 @@ export default function CarouselEvents() {
 	}, []);
 
 	return (
-		<div>
-			<Button onPress={prev}>prev</Button>
-			<Button onPress={next}>next</Button>
-			<div
-				ref={wrappeRef}
-				className='w-full overflow-hidden scrollbar-hide flex'
+		<div
+			ref={wrappeRef}
+			className='relative flex w-full overflow-hidden scrollbar-hide rounded-lg'
+		>
+			<Button
+				isIconOnly
+				variant='flat'
+				className='absolute z-10 top-[calc(200px-24px)] left-[38px] rounded-full opacity-70 bg-slate-950'
+				size='lg'
+				onPress={prev}
 			>
-				{stitchedItems.map((n, i) => {
-					return (
-						<Link
-							key={n + '_' + i}
-							className={` left-[180px] p-1`}
-							style={{
-								transform: `translateX(-${currentIndex * 100}%)`,
-								transition: `${transition}`,
-							}}
+				<FaChevronLeft size={24} color='white' />
+			</Button>
+			<Button
+				isIconOnly
+				variant='flat'
+				className='absolute z-10 top-[calc(200px-24px)] right-[38px] rounded-full opacity-70 bg-slate-950'
+				size='lg'
+				onPress={next}
+			>
+				<FaChevronRight size={24} color='white' />
+			</Button>
+			{stitchedItems.map((n, i) => {
+				return (
+					<Link
+						key={n + '_' + i}
+						className={` left-[180px] p-1`}
+						style={{
+							transform: `translateX(-${currentIndex * 100}%)`,
+							transition: `${transition}`,
+						}}
+					>
+						<div
+							className={`flex justify-center items-center rounded-lg h-[400px] min-w-[400px] bg-slate-${
+								i + 1
+							}00`}
 						>
-							<div
-								className={`flex justify-center items-center h-[400px] min-w-[400px] bg-slate-${
-									i + 1
-								}00`}
-							>
-								<h1 className='text-[200px]'>{n}</h1>
-							</div>
-						</Link>
-					);
-				})}
-			</div>
+							<h1 className='text-[200px]'>{n}</h1>
+						</div>
+					</Link>
+				);
+			})}
 		</div>
 	);
 }
