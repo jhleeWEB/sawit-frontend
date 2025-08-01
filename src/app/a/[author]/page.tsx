@@ -31,8 +31,8 @@ export default async function Author({
 
 	return (
 		<section className='grid grid-cols-3 gap-2 mt-8 h-full'>
-			<div className='rounded-xl bg-slate-100 col-span-1 bg-[url(https://heroui.com/images/hero-card-complete.jpeg)] bg-no-repeat '>
-				<div className='flex flex-col items-center p-4 rounded-xl w-full h-full bg-white/70 backdrop-blur-lg'>
+			<div className='rounded-xl bg-slate-100 col-span-1 bg-top bg-[url(https://heroui.com/images/hero-card-complete.jpeg)] bg-no-repeat '>
+				<div className='flex flex-col items-center p-4 rounded-xl w-full h-full bg-white/70 backdrop-blur-md'>
 					<Image
 						alt='Card background'
 						className='object-cover rounded-xl mt-4'
@@ -116,7 +116,7 @@ export default async function Author({
 										<div className='flex items-center'>
 											<IoEyeOutline />
 											<small className='align-middle ml-1'>
-												{novel.stats.views.toLocaleString()}
+												{formatToKoreanUnits(novel.stats.views)}
 											</small>
 										</div>
 									</div>
