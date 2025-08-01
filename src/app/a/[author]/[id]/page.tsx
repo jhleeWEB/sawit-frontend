@@ -1,7 +1,8 @@
 import { NovelSample } from '@/hooks/useNovelSamples';
 import { Image } from '@heroui/react';
-import { IoEyeOutline, IoStarOutline } from 'react-icons/io5';
+import { IoEyeOutline, IoStarOutline, IoHeartOutline } from 'react-icons/io5';
 import Link from 'next/link';
+import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
 
 export default async function Book({
 	params,
@@ -33,6 +34,10 @@ export default async function Book({
 						/>
 					</div>
 					<div className='flex flex-col justify-between'>
+						<IoHeartOutline
+							size={32}
+							className='absolute right-4 cursor-pointer'
+						/>
 						<div>
 							<small>{new Date(novel.created_at).toDateString()}</small>
 							<div className='flex gap-x-1'>
@@ -53,7 +58,7 @@ export default async function Book({
 							</div>
 							<div className='bg-white shadow-sm bg-opacity-10 px-2 rounded-lg'>
 								<label className='text-xs'>뷰: </label>
-								<small>{novel.stats.views.toLocaleString()}</small>
+								<small>{formatToKoreanUnits(novel.stats.views)}</small>
 							</div>
 							<div className='bg-white shadow-sm bg-opacity-10 px-2 rounded-lg'>
 								<label className='text-xs'>추천: </label>
