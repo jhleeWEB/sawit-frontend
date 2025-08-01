@@ -56,6 +56,13 @@ export default function RecentEvents() {
 		};
 	}, []);
 
+	useEffect(() => {
+		const interval = setInterval(() => {
+			next();
+		}, 5000);
+		return () => clearInterval(interval);
+	}, [next]);
+
 	return (
 		<div
 			ref={wrappeRef}
