@@ -1,4 +1,4 @@
-export default function Conveyor() {
+export default function MillionPagesNovels() {
 	return (
 		<div className='overflow-hidden'>
 			<div className='flex gap-2 group'>
