@@ -1,29 +1,44 @@
 export default function MillionPagesNovels() {
 	return (
-		<div className='overflow-hidden'>
+		<div className='overflow-hidden mt-8'>
+			<h1 className='text-lg font-bold mb-4'>밀리언 페이지</h1>
 			<div className='flex gap-2 group'>
 				<section className='flex gap-2 animate-slide group-hover:pause'>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-100'>1</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-200'>2</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-300'>3</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-400'>4</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-500'>5</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-600'>6</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-700'>7</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-800'>8</div>
+					{[1, 2, 3, 4, 5, 6, 7, 8].map((n, i) => (
+						<div key={n + '-' + i} className='flex flex-col gap-2'>
+							<div
+								className={`p-4 rounded-lg items-end min-h-[120px] min-w-[90px] bg-slate-${
+									i + 1
+								}00 `}
+							>
+								{n}
+							</div>
+							<small className='text-xs'>제목 여기에 넣기</small>
+							<small className='text-[10px] text-slate-600'>
+								장르는 여기에
+							</small>
+						</div>
+					))}
 				</section>
 				<section
 					aria-hidden
 					className='flex gap-2 animate-slide group-hover:pause'
 				>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-100'>1</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-200'>2</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-300'>3</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-400'>4</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-500'>5</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-600'>6</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-700'>7</div>
-					<div className='min-h-[180px] min-w-[120px] bg-slate-800'>8</div>
+					{[1, 2, 3, 4, 5, 6, 7, 8].map((n, i) => (
+						<div key={n + '-' + i}>
+							<div
+								className={`p-4 rounded-lg items-end min-h-[120px] min-w-[90px] bg-slate-${
+									i + 1
+								}00 `}
+							>
+								{n}
+							</div>
+							<small className='text-xs'>제목 여기에 넣기</small>
+							<small className='text-[10px] text-slate-600'>
+								장르는 여기에
+							</small>
+						</div>
+					))}
 				</section>
 			</div>
 		</div>
