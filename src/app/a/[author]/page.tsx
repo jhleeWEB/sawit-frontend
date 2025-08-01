@@ -2,6 +2,7 @@ import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
 import { Chip, Image } from '@heroui/react';
 import { IoEyeOutline, IoStarOutline } from 'react-icons/io5';
 import { achevementStyles } from './_const/achievement-styles';
+import Link from 'next/link';
 
 export default async function Author({
 	params,
@@ -84,43 +85,45 @@ export default async function Author({
 					{publishedNovels.map((novel, i) => {
 						const randomNumber = Math.floor(Math.random() * (25 - 1) + 1);
 						return (
-							<li
-								key={novel.title + i}
-								className='flex w-full gap-2 hover:cursor-pointer hover:bg-slate-200'
-							>
-								<Image
-									className='object-cover'
-									alt='book cover image'
-									width={56}
-									height={86}
-									radius='sm'
-									src={`/cover_thumbnails/novel_cover_thumbnail_${randomNumber}.png`}
-									isZoomed
-								/>
-								<div>
-									<h4 className='w-full truncate font-bold'>{novel.title}</h4>
-									<div className='flex'>
-										{novel.about.category.map((n) => (
-											<small key={novel.id + n} className='mr-1'>
-												{n}
-											</small>
-										))}
-									</div>
-									<div className='flex w-full gap-2'>
-										<div className='flex items-center'>
-											<IoStarOutline />
-											<small className='ml-1 font-bold align-middle text-red-400'>
-												{novel.stats.stars}
-											</small>
+							<li key={novel.title + i}>
+								<Link
+									href={`author/${novel.id}`}
+									className='flex w-full gap-2 hover:cursor-pointer hover:bg-slate-200'
+								>
+									<Image
+										className='object-cover'
+										alt='book cover image'
+										width={56}
+										height={86}
+										radius='sm'
+										src={`/cover_thumbnails/novel_cover_thumbnail_${randomNumber}.png`}
+										isZoomed
+									/>
+									<div>
+										<h4 className='w-full truncate font-bold'>{novel.title}</h4>
+										<div className='flex'>
+											{novel.about.category.map((n) => (
+												<small key={novel.id + n} className='mr-1'>
+													{n}
+												</small>
+											))}
 										</div>
-										<div className='flex items-center'>
-											<IoEyeOutline />
-											<small className='align-middle ml-1'>
-												{formatToKoreanUnits(novel.stats.views)}
-											</small>
+										<div className='flex w-full gap-2'>
+											<div className='flex items-center'>
+												<IoStarOutline />
+												<small className='ml-1 font-bold align-middle text-red-400'>
+													{novel.stats.stars}
+												</small>
+											</div>
+											<div className='flex items-center'>
+												<IoEyeOutline />
+												<small className='align-middle ml-1'>
+													{formatToKoreanUnits(novel.stats.views)}
+												</small>
+											</div>
 										</div>
 									</div>
-								</div>
+								</Link>
 							</li>
 						);
 					})}
