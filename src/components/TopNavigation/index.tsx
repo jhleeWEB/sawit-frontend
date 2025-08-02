@@ -1,4 +1,3 @@
-'use client';
 import {
 	Image,
 	Input,
@@ -7,10 +6,11 @@ import {
 	NavbarContent,
 	NavbarItem,
 } from '@heroui/react';
+import Link from 'next/link';
 
-import { IoDocumentTextOutline, IoAddOutline } from 'react-icons/io5';
+import { IoAddOutline } from 'react-icons/io5';
 
-export function Navigation() {
+export default async function Navigation() {
 	return (
 		<Navbar isBlurred>
 			<NavbarBrand>
@@ -20,9 +20,14 @@ export function Navigation() {
 				<Input type='search' placeholder='Type to search' radius='lg' />
 			</NavbarContent>
 			<NavbarContent justify='end'>
-				<NavbarItem className='flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400'>
-					<IoAddOutline />
-					<small className='text-[12px]'>글쓰기</small>
+				<NavbarItem>
+					<Link
+						href={'/a/강은지/publish'}
+						className='flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400'
+					>
+						<IoAddOutline />
+						<small className='text-[12px]'>글쓰기</small>
+					</Link>
 				</NavbarItem>
 				<NavbarItem>
 					<Image
@@ -37,5 +42,3 @@ export function Navigation() {
 		</Navbar>
 	);
 }
-
-export default Navigation;

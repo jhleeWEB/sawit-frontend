@@ -1,5 +1,4 @@
-import CardContainer from '@/components/CardContainer';
-import { NovelSample } from '@/hooks/useNovelSamples';
+import Editor from './_components/editor';
 
 export default async function Publish({
 	params,
@@ -7,17 +6,10 @@ export default async function Publish({
 	params: Promise<{ id: string }>;
 }) {
 	const { id } = await params;
-	const novelData = fetchNovelInfo(id);
-	const [novel] = await Promise.all([novelData]);
 
 	return (
-		<CardContainer title={novel?.title}>
-			param: {novel?.title} publish editor page
-		</CardContainer>
+		<section>
+			<Editor />
+		</section>
 	);
-}
-
-async function fetchNovelInfo(novelId: string) {
-	const data = await import('/public/samples/korean_sample_novels_100.json');
-	return (Array.from(data) as NovelSample[]).find((n) => n.id == novelId);
 }
