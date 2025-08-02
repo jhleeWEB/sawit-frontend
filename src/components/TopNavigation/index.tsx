@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { IoAddOutline } from 'react-icons/io5';
 
 export default async function Navigation() {
+	const isLogin = false;
 	return (
 		<Navbar isBlurred>
 			<NavbarBrand>
@@ -30,13 +31,21 @@ export default async function Navigation() {
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Image
-						alt='user profile avatar'
-						className='object-cover rounded-full cursor-pointer border-1 border-transparent hover:border-teal-400'
-						src='https://heroui.com/images/hero-card-complete.jpeg'
-						height={32}
-						width={32}
-					/>
+					{isLogin ? (
+						<Image
+							alt='user profile avatar'
+							className='object-cover rounded-full cursor-pointer border-1 border-transparent hover:border-teal-400'
+							src='https://heroui.com/images/hero-card-complete.jpeg'
+							height={32}
+							width={32}
+						/>
+					) : (
+						<Link href='/login'>
+							<small className='cursor-pointer hover:text-primary-400'>
+								로그인
+							</small>
+						</Link>
+					)}
 				</NavbarItem>
 			</NavbarContent>
 		</Navbar>
