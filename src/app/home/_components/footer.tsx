@@ -1,6 +1,6 @@
 export default function Footer() {
 	return (
-		<div className='my-24'>
+		<footer className='max-w-screen-md mx-auto my-24'>
 			<div className='flex gap-2 mb-8 [&>a]:text-sm'>
 				<a>회사소개</a>
 				<a>이용약관</a>
@@ -20,6 +20,6 @@ export default function Footer() {
 				</p>
 				<p className='mt-8'>© Jhlee Entertainment Corp.</p>
 			</div>
-		</div>
+		</footer>
 	);
 }
