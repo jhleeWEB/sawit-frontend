@@ -80,7 +80,7 @@ export default function RecentEvents() {
 			<Button
 				isIconOnly
 				variant='flat'
-				className='absolute z-10 top-[calc(200px-24px)] left-[38px] rounded-full opacity-70 bg-slate-950'
+				className='absolute z-10 top-[calc(50%)] left-[38px] rounded-full opacity-70 bg-slate-950'
 				size='lg'
 				onPress={prev}
 			>
