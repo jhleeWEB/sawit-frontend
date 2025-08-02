@@ -17,13 +17,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className='mx-auto max-w-screen-md'>
+			<body className=''>
 				<Providers>
 					<TopNavigation />
-					<main className=''>
+					<main className='mx-auto max-w-screen-md'>
 						<div className='w-full flex justify-center'>{children}</div>
+						<Footer />
 					</main>
-					<Footer />
 				</Providers>
 			</body>
 		</html>

@@ -69,7 +69,7 @@ export default async function Author({
 							{authorProfile.achievements.map((achievement, i) => (
 								<Chip
 									size='sm'
-									className={`${achevementStyles[i]} shadow-md`}
+									className={`${achevementStyles[i]} shadow-md select-none`}
 									key={authorProfile.author + achievement}
 								>
 									<small className='text-white font-bold'>{achievement}</small>
@@ -117,7 +117,7 @@ export default async function Author({
 											</div>
 											<div className='flex items-center'>
 												<IoEyeOutline />
-												<small className='align-middle ml-1'>
+												<small className='align-middle ml-1 '>
 													{formatToKoreanUnits(novel.stats.views)}
 												</small>
 											</div>
