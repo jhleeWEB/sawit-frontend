@@ -6,12 +6,14 @@ import {
 	NavbarContent,
 	NavbarItem,
 } from '@heroui/react';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 
 import { IoAddOutline } from 'react-icons/io5';
 
 export default async function Navigation() {
-	const isLogin = false;
+	const session = await getServerSession();
+
 	return (
 		<Navbar isBlurred>
 			<NavbarBrand>
@@ -31,11 +33,14 @@ export default async function Navigation() {
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					{isLogin ? (
+					{session ? (
 						<Image
-							alt='user profile avatar'
+							alt={session.user?.name ?? 'Avatar'}
 							className='object-cover rounded-full cursor-pointer border-1 border-transparent hover:border-teal-400'
-							src='https://heroui.com/images/hero-card-complete.jpeg'
+							src={
+								session.user?.image ??
+								'https://heroui.com/images/hero-card-complete.jpeg'
+							}
 							height={32}
 							width={32}
 						/>
