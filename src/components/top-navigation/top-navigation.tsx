@@ -1,5 +1,4 @@
 import {
-	Image,
 	Input,
 	Navbar,
 	NavbarBrand,
@@ -10,6 +9,7 @@ import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 
 import { IoAddOutline } from 'react-icons/io5';
+import AvatarDropdown from './_components/avatar-dropdown';
 
 export default async function Navigation() {
 	const session = await getServerSession();
@@ -34,15 +34,11 @@ export default async function Navigation() {
 				</NavbarItem>
 				<NavbarItem>
 					{session ? (
-						<Image
-							alt={session.user?.name ?? 'Avatar'}
-							className='object-cover rounded-full cursor-pointer border-1 border-transparent hover:border-teal-400'
-							src={
-								session.user?.image ??
-								'https://heroui.com/images/hero-card-complete.jpeg'
+						<AvatarDropdown
+							image={
+								session.user?.image || 'https://images.unsplash.com/broken'
 							}
-							height={32}
-							width={32}
+							name={session.user?.name || '이름없음'}
 						/>
 					) : (
 						<Link href='/login'>

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Footer from './_components/footer';
-import TopNavigation from '@/components/top-navigation';
+import TopNavigation from '@/components/top-navigation/top-navigation';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
