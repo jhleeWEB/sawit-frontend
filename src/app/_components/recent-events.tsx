@@ -75,7 +75,7 @@ export default function RecentEvents() {
 	return (
 		<div
 			ref={wrappeRef}
-			className='relative flex w-full overflow-hidden scrollbar-hide rounded-lg gap-2'
+			className='relative flex w-full overflow-hidden scrollbar-hide rounded-lg'
 		>
 			<Button
 				isIconOnly
@@ -99,7 +99,7 @@ export default function RecentEvents() {
 				return (
 					<Link
 						key={n + '_' + i}
-						className={` left-[calc(160px)]`}
+						className={` left-[calc(180px)] px-1`}
 						style={{
 							transform: `translateX(-${currentIndex * 100}%)`,
 							transition: `${transition}`,

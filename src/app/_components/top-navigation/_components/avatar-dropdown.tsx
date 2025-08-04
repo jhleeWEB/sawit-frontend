@@ -27,7 +27,9 @@ export default function AvatarDropdown({ image, name }: Props) {
 			</DropdownTrigger>
 			<DropdownMenu variant='light'>
 				<DropdownItem key='name'>{name}</DropdownItem>
-				<DropdownItem key='go-to-profile'>프로필</DropdownItem>
+				<DropdownItem href={`/a/${name}`} key='go-to-profile'>
+					프로필
+				</DropdownItem>
 				<DropdownItem key='signout'>로그아웃</DropdownItem>
 			</DropdownMenu>
 		</Dropdown>

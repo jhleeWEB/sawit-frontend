@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { IoAddOutline } from 'react-icons/io5';
 import AvatarDropdown from './_components/avatar-dropdown';
 
-export default async function Navigation() {
+export default async function TopNavigation() {
 	const session = await getServerSession();
 
 	return (

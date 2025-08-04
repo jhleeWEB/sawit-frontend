@@ -1,8 +1,9 @@
 import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
-import { Chip, Image } from '@heroui/react';
-import { IoEyeOutline, IoStarOutline } from 'react-icons/io5';
+import { Button, Chip, Image, LinkIcon } from '@heroui/react';
+import { IoAddOutline, IoEyeOutline, IoStarOutline } from 'react-icons/io5';
 import { achevementStyles } from './_const/achievement-styles';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
 
 export default async function Author({
 	params,
@@ -11,6 +12,7 @@ export default async function Author({
 }) {
 	let { author } = await params;
 	author = decodeURIComponent(author);
+	const session = await getServerSession();
 	const authorProfileData = fetchAuthorProfileSamples(author);
 	const novelData = fetchNovelSample(author);
 	const [authorProfile, publishedNovels] = await Promise.all([
@@ -32,12 +34,15 @@ export default async function Author({
 
 	return (
 		<section className='grid grid-cols-3 gap-2 mt-8 h-full'>
-			<div className='rounded-xl bg-slate-100 col-span-1 bg-top bg-[url(https://heroui.com/images/hero-card-complete.jpeg)] bg-no-repeat'>
+			<div className='h-full rounded-xl bg-slate-100 col-span-1 bg-top bg-[url(https://heroui.com/images/hero-card-complete.jpeg)] bg-no-repeat'>
 				<div className='flex flex-col items-center p-4 rounded-xl w-full h-full bg-white/70 backdrop-blur-md'>
 					<Image
 						alt='Card background'
 						className='object-cover rounded-xl mt-4'
-						src='https://heroui.com/images/hero-card-complete.jpeg'
+						src={
+							session?.user?.image ||
+							'https://heroui.com/images/hero-card-complete.jpeg'
+						}
 						width={160}
 						height={240}
 						isZoomed
@@ -54,13 +59,13 @@ export default async function Author({
 								<div className='flex items-center'>
 									<IoEyeOutline stroke='#6b7280' />
 									<small className='text-gray-500 text-xs text-ellipsis text-center ml-1'>
-										{formatToKoreanUnits(totalViews)}
+										{formatToKoreanUnits(totalViews) || 0}
 									</small>
 								</div>
 								<div className='flex items-center'>
 									<IoStarOutline stroke='#6b7280' />
 									<small className='text-gray-500 text-xs text-ellipsis text-center ml-1'>
-										{avgStar}
+										{avgStar || 0}
 									</small>
 								</div>
 							</div>
@@ -81,52 +86,71 @@ export default async function Author({
 			</div>
 
 			<div className='col-span-2 rounded-xl bg-slate-100 p-8'>
-				<ul className='flex flex-col gap-2'>
-					{publishedNovels.map((novel, i) => {
-						const randomNumber = Math.floor(Math.random() * (25 - 1) + 1);
-						return (
-							<li key={novel.title + i}>
-								<Link
-									href={`author/${novel.id}`}
-									className='flex w-full gap-2 hover:cursor-pointer hover:bg-slate-200'
-								>
-									<Image
-										className='object-cover'
-										alt='book cover image'
-										width={56}
-										height={86}
-										radius='sm'
-										src={`/cover_thumbnails/novel_cover_thumbnail_${randomNumber}.png`}
-										isZoomed
-									/>
-									<div>
-										<h4 className='w-full truncate font-bold'>{novel.title}</h4>
-										<div className='flex'>
-											{novel.about.category.map((n) => (
-												<small key={novel.id + n} className='mr-1'>
-													{n}
-												</small>
-											))}
-										</div>
-										<div className='flex w-full gap-2'>
-											<div className='flex items-center'>
-												<IoStarOutline />
-												<small className='ml-1 font-bold align-middle text-red-400'>
-													{novel.stats.stars}
-												</small>
+				<ul className='h-full flex flex-col gap-2'>
+					{publishedNovels.length > 0 &&
+						publishedNovels.map((novel, i) => {
+							const randomNumber = Math.floor(Math.random() * (25 - 1) + 1);
+							return (
+								<li key={novel.title + i}>
+									<Link
+										href={`author/${novel.id}`}
+										className='flex w-full gap-2 hover:cursor-pointer hover:bg-slate-200'
+									>
+										<Image
+											className='object-cover'
+											alt='book cover image'
+											width={56}
+											height={86}
+											radius='sm'
+											src={`/cover_thumbnails/novel_cover_thumbnail_${randomNumber}.png`}
+											isZoomed
+										/>
+										<div>
+											<h4 className='w-full truncate font-bold'>
+												{novel.title}
+											</h4>
+											<div className='flex'>
+												{novel.about.category.map((n) => (
+													<small key={novel.id + n} className='mr-1'>
+														{n}
+													</small>
+												))}
 											</div>
-											<div className='flex items-center'>
-												<IoEyeOutline />
-												<small className='align-middle ml-1 '>
-													{formatToKoreanUnits(novel.stats.views)}
-												</small>
+											<div className='flex w-full gap-2'>
+												<div className='flex items-center'>
+													<IoStarOutline />
+													<small className='ml-1 font-bold align-middle text-red-400'>
+														{novel.stats.stars}
+													</small>
+												</div>
+												<div className='flex items-center'>
+													<IoEyeOutline />
+													<small className='align-middle ml-1 '>
+														{formatToKoreanUnits(novel.stats.views)}
+													</small>
+												</div>
 											</div>
 										</div>
-									</div>
-								</Link>
-							</li>
-						);
-					})}
+									</Link>
+								</li>
+							);
+						})}
+					{publishedNovels.length === 0 && session?.user?.name === author && (
+						<div className='w-full h-full flex flex-col justify-center items-center'>
+							<h1 className='text-lg text-gray-400 mb-8'>
+								연재 중 인 소설이 없습니다...
+							</h1>
+							<Button
+								as={Link}
+								href={`/a/${author}/publish`}
+								variant='bordered'
+								startContent={<IoAddOutline size={24} />}
+								className='border border-teal-400 hover:text-teal-400'
+							>
+								지금 글쓰기
+							</Button>
+						</div>
+					)}
 				</ul>
 			</div>
 		</section>

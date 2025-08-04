@@ -230,5 +230,13 @@
 		"published_novels": ["4", "78"],
 		"description": "저만의 판타지를 담은 작은 책장입니다.",
 		"achievements": ["1000만뷰", "5000만뷰", "3완결"]
+	},
+	{
+		"author": "재외국민",
+		"avatar": "",
+		"background_img": "",
+		"published_novels": [],
+		"description": "",
+		"achievements": ["1000만뷰", "5000만뷰", "3완결"]
 	}
 ]
