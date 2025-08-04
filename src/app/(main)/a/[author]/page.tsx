@@ -13,7 +13,7 @@ export default async function Author({
 	let { author } = await params;
 	author = decodeURIComponent(author);
 	const session = await getServerSession();
-	const { name, image } = session?.user;
+	const { name, image } = session?.user || {};
 	const authorProfileData = fetchAuthorProfileSamples(author);
 	const novelData = fetchNovelSample(author);
 	const [authorProfile, publishedNovels] = await Promise.all([
@@ -35,7 +35,7 @@ export default async function Author({
 
 	const isOwner = name === author;
 	const profileImage = isOwner
-		? image
+		? image || 'https://heroui.com/images/hero-card-complete.jpeg'
 		: 'https://heroui.com/images/hero-card-complete.jpeg';
 
 	return (
