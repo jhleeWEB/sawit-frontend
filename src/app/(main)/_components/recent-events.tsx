@@ -1,5 +1,5 @@
 'use client';
-import { Button, Image, Link } from '@heroui/react';
+import { Button, Image, Link, Skeleton } from '@heroui/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
@@ -29,6 +29,7 @@ export default function RecentEvents() {
 		];
 	});
 	const [transition, setTransition] = useState('');
+	const [isImageLoaded, setIsImageLoaded] = useState(false);
 
 	const next = useCallback(() => {
 		const itemLength = items.length;
@@ -105,15 +106,21 @@ export default function RecentEvents() {
 							transition: `${transition}`,
 						}}
 					>
-						<Image
-							className='object-cover min-w-[400px]'
-							alt={'event-images' + i}
-							width={400}
-							height={400}
-							radius='sm'
-							src={n}
-							isZoomed
-						/>
+						<Skeleton
+							className='rounded-lg min-w-[400px]'
+							isLoaded={isImageLoaded}
+						>
+							<Image
+								className='object-cover min-w-[400px]'
+								alt={'event-images' + i}
+								width={400}
+								height={400}
+								radius='sm'
+								src={n}
+								isZoomed
+								onLoad={() => setIsImageLoaded(true)}
+							/>
+						</Skeleton>
 					</Link>
 				);
 			})}

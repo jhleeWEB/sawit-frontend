@@ -17,7 +17,7 @@ export default async function TopNavigation() {
 	return (
 		<Navbar isBlurred>
 			<NavbarBrand>
-				<p>SAWIT</p>
+				<Link href='/'>SAWIT</Link>
 			</NavbarBrand>
 			<NavbarContent justify='center'>
 				<Input type='search' placeholder='Type to search' radius='lg' />
@@ -25,7 +25,9 @@ export default async function TopNavigation() {
 			<NavbarContent justify='end'>
 				<NavbarItem>
 					<Link
-						href={'/a/강은지/publish'}
+						href={
+							session?.user?.name ? `/a/${session.user.name}/publish` : '/login'
+						}
 						className='flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400'
 					>
 						<IoAddOutline />

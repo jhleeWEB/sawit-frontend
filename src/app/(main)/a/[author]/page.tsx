@@ -1,5 +1,5 @@
 import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
-import { Button, Chip, Image, LinkIcon } from '@heroui/react';
+import { Button, Chip, Image } from '@heroui/react';
 import { IoAddOutline, IoEyeOutline, IoStarOutline } from 'react-icons/io5';
 import { achevementStyles } from './_const/achievement-styles';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ export default async function Author({
 	let { author } = await params;
 	author = decodeURIComponent(author);
 	const session = await getServerSession();
+	const { name, image } = session?.user;
 	const authorProfileData = fetchAuthorProfileSamples(author);
 	const novelData = fetchNovelSample(author);
 	const [authorProfile, publishedNovels] = await Promise.all([
@@ -32,6 +33,11 @@ export default async function Author({
 				10
 		) / 10;
 
+	const isOwner = name === author;
+	const profileImage = isOwner
+		? image
+		: 'https://heroui.com/images/hero-card-complete.jpeg';
+
 	return (
 		<section className='grid grid-cols-3 gap-2 mt-8 h-full'>
 			<div className='h-full rounded-xl bg-slate-100 col-span-1 bg-top bg-[url(https://heroui.com/images/hero-card-complete.jpeg)] bg-no-repeat'>
@@ -39,10 +45,7 @@ export default async function Author({
 					<Image
 						alt='Card background'
 						className='object-cover rounded-xl mt-4'
-						src={
-							session?.user?.image ||
-							'https://heroui.com/images/hero-card-complete.jpeg'
-						}
+						src={profileImage}
 						width={160}
 						height={240}
 						isZoomed
@@ -135,7 +138,7 @@ export default async function Author({
 								</li>
 							);
 						})}
-					{publishedNovels.length === 0 && session?.user?.name === author && (
+					{publishedNovels.length === 0 && isOwner && (
 						<div className='w-full h-full flex flex-col justify-center items-center'>
 							<h1 className='text-lg text-gray-400 mb-8'>
 								연재 중 인 소설이 없습니다...

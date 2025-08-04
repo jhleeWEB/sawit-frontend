@@ -7,6 +7,7 @@ import {
 	DropdownMenu,
 	DropdownTrigger,
 } from '@heroui/react';
+import { signOut } from 'next-auth/react';
 
 interface Props {
 	image: string;
@@ -30,7 +31,12 @@ export default function AvatarDropdown({ image, name }: Props) {
 				<DropdownItem href={`/a/${name}`} key='go-to-profile'>
 					프로필
 				</DropdownItem>
-				<DropdownItem key='signout'>로그아웃</DropdownItem>
+				<DropdownItem
+					key='signout'
+					onClick={() => signOut({ callbackUrl: '/' })}
+				>
+					로그아웃
+				</DropdownItem>
 			</DropdownMenu>
 		</Dropdown>
 	);
