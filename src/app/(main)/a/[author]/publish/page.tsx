@@ -6,9 +6,8 @@ export default async function Publish({
 	params: Promise<{ id: string }>;
 }) {
 	const { id } = await params;
-
 	return (
-		<section>
+		<section className={id}>
 			<Editor />
 		</section>
 	);

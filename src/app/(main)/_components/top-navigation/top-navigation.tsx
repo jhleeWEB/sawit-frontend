@@ -18,14 +18,14 @@ export default async function TopNavigation() {
 	return (
 		<Navbar isBlurred>
 			<NavbarBrand>
-				<a href='/'>
+				<Link href='/'>
 					<Image
 						radius='none'
 						alt='sawit-logo'
 						src='/sawit-logo.png'
 						height={36}
 					/>
-				</a>
+				</Link>
 			</NavbarBrand>
 			<NavbarContent justify='center'>
 				<Input type='search' placeholder='Type to search' radius='lg' />
