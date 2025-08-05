@@ -1,4 +1,5 @@
 import {
+	Image,
 	Input,
 	Navbar,
 	NavbarBrand,
@@ -17,7 +18,14 @@ export default async function TopNavigation() {
 	return (
 		<Navbar isBlurred>
 			<NavbarBrand>
-				<Link href='/'>SAWIT</Link>
+				<a href='/'>
+					<Image
+						radius='none'
+						alt='sawit-logo'
+						src='/sawit-logo.png'
+						height={36}
+					/>
+				</a>
 			</NavbarBrand>
 			<NavbarContent justify='center'>
 				<Input type='search' placeholder='Type to search' radius='lg' />
