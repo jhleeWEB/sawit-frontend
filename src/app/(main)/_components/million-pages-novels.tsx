@@ -1,6 +1,8 @@
 import { Image, Tooltip } from '@heroui/react';
 import { NovelSample } from '../a/[author]/page';
 import Link from 'next/link';
+import { IoEyeOutline, IoStarOutline } from 'react-icons/io5';
+import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
 
 const uris = [
 	'/cover_thumbnails/novel_cover_thumbnail_14.png',
@@ -28,14 +30,48 @@ export default async function MillionPagesNovels() {
 								href={`/a/${novel.author}/${novel.id}`}
 								className='flex flex-col gap-2'
 							>
-								<Image
-									className='object-cover min-w-[90px]'
-									alt='book cover image'
-									height={120}
-									radius='sm'
-									src={uris[i]}
-									isZoomed
-								/>
+								<Tooltip
+									classNames={{
+										content: ['bg-transparent backdrop-blur-xl', 'border'],
+									}}
+									content={
+										<div className='p-2'>
+											<Image
+												className='object-cover min-w-[90px] mt-1'
+												alt='book cover image'
+												width={280}
+												radius='sm'
+												src={uris[i]}
+												isZoomed
+											/>
+											<div>
+												<h4 className='font-bold text-lg'>{novel.title}</h4>
+												<small>{novel.author}</small>
+												<div className='flex gap-1'>
+													<div className='flex items-center gap-1'>
+														<IoStarOutline />
+														<small>{novel.stats.stars}</small>
+													</div>
+													<div className='flex items-center gap-1'>
+														<IoEyeOutline />
+														<small>
+															{formatToKoreanUnits(novel.stats.views)}
+														</small>
+													</div>
+												</div>
+											</div>
+										</div>
+									}
+								>
+									<Image
+										className='object-cover min-w-[90px]'
+										alt='book cover image'
+										height={120}
+										radius='sm'
+										src={uris[i]}
+										isZoomed
+									/>
+								</Tooltip>
 								<Tooltip showArrow content={<p>{novel.title}</p>}>
 									<small className='w-[90px] text-xs text-nowrap overflow-hidden text-ellipsis'>
 										{novel.title}
@@ -58,17 +94,54 @@ export default async function MillionPagesNovels() {
 								href={`/a/${novel.author}/${novel.id}`}
 								className='flex flex-col gap-2'
 							>
-								<Image
-									className='object-cover min-w-[90px]'
-									alt='book cover image'
-									height={120}
-									radius='sm'
-									src={uris[i]}
-									isZoomed
-								/>
-								<small className='w-[90px] text-xs text-nowrap overflow-hidden text-ellipsis'>
-									{novel.title}
-								</small>
+								<Tooltip
+									classNames={{
+										content: ['bg-transparent backdrop-blur-xl', 'border'],
+									}}
+									delay={1000}
+									content={
+										<div className='p-2'>
+											<Image
+												className='object-cover min-w-[90px] mt-1'
+												alt='book cover image'
+												width={280}
+												radius='sm'
+												src={uris[i]}
+												isZoomed
+											/>
+											<div>
+												<h4 className='font-bold text-lg'>{novel.title}</h4>
+												<small>{novel.author}</small>
+												<div className='flex gap-1'>
+													<div className='flex items-center gap-1'>
+														<IoStarOutline />
+														<small>{novel.stats.stars}</small>
+													</div>
+													<div className='flex items-center gap-1'>
+														<IoEyeOutline />
+														<small>
+															{formatToKoreanUnits(novel.stats.views)}
+														</small>
+													</div>
+												</div>
+											</div>
+										</div>
+									}
+								>
+									<Image
+										className='object-cover min-w-[90px]'
+										alt='book cover image'
+										height={120}
+										radius='sm'
+										src={uris[i]}
+										isZoomed
+									/>
+								</Tooltip>
+								<Tooltip showArrow content={<p>{novel.title}</p>}>
+									<small className='w-[90px] text-xs text-nowrap overflow-hidden text-ellipsis'>
+										{novel.title}
+									</small>
+								</Tooltip>
 								<div className='flex gap-1'>
 									{novel.about.category.map((n) => (
 										<small key={n} className='text-[10px] text-slate-600'>
