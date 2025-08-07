@@ -1,6 +1,6 @@
-import PageController from './_components/PageController';
+import PageController from './_components/page-controller';
 import { VolumnTitleSample } from '../page';
-import PageViewer from './_components/PageViewer';
+import PageViewer from './_components/page-viewer';
 import { Card } from '@heroui/react';
 
 export default async function Volumn({
