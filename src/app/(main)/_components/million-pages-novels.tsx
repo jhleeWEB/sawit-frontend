@@ -32,7 +32,7 @@ export default async function MillionPagesNovels() {
 							>
 								<Tooltip
 									classNames={{
-										content: ['bg-transparent backdrop-blur-xl', 'border'],
+										content: ['bg-transparent backdrop-blur-3xl', 'border'],
 									}}
 									content={
 										<div className='p-2'>
@@ -96,7 +96,7 @@ export default async function MillionPagesNovels() {
 							>
 								<Tooltip
 									classNames={{
-										content: ['bg-transparent backdrop-blur-xl', 'border'],
+										content: ['bg-transparent backdrop-blur-3xl', 'border'],
 									}}
 									delay={1000}
 									content={
