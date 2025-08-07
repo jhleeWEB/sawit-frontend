@@ -1,9 +1,14 @@
 'use client';
 
-import Icon from '@/components/Icon';
 import { Button } from '@heroui/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
+import {
+	IoChevronBack,
+	IoChevronForward,
+	IoEllipsisVertical,
+	IoList,
+} from 'react-icons/io5';
 
 export default function PageController() {
 	const router = useRouter();
@@ -53,7 +58,7 @@ export default function PageController() {
 				className='rounded-full bg-white shadow-md shadow-slate-300'
 				onPress={onClickPrevVolumn}
 			>
-				<Icon icon='Back' fill='none' />
+				<IoChevronBack />
 			</Button>
 
 			<Button
@@ -63,7 +68,7 @@ export default function PageController() {
 				className='rounded-full bg-white shadow-md shadow-slate-300'
 				onPress={onClickNextVolumn}
 			>
-				<Icon icon='Forward' fill='none' />
+				<IoChevronForward />
 			</Button>
 
 			<Button
@@ -73,7 +78,7 @@ export default function PageController() {
 				className='rounded-full bg-white shadow-md shadow-slate-300'
 				onPress={onClickGoToList}
 			>
-				<Icon icon='NumberList' fill='none' />
+				<IoList />
 			</Button>
 
 			<Button
@@ -82,7 +87,7 @@ export default function PageController() {
 				variant='solid'
 				className='rounded-full bg-white shadow-md shadow-slate-300'
 			>
-				<Icon icon='VerticalEllipsis' fill='none' />
+				<IoEllipsisVertical />
 			</Button>
 		</div>
 	);

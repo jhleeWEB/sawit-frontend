@@ -1,7 +1,7 @@
-import CardContainer from '@/components/CardContainer';
 import PageController from './_components/PageController';
 import { VolumnTitleSample } from '../page';
 import PageViewer from './_components/PageViewer';
+import { Card } from '@heroui/react';
 
 export default async function Volumn({
 	params,
@@ -17,10 +17,10 @@ export default async function Volumn({
 	const [novel, novelPages] = await Promise.all([novelData, novelPageData]);
 
 	return (
-		<CardContainer title={novel?.title}>
+		<Card title={novel?.title}>
 			<PageViewer pages={novelPages.pages} />
 			<PageController />
-		</CardContainer>
+		</Card>
 	);
 }
 
