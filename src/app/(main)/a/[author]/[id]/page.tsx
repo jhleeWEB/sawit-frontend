@@ -1,8 +1,8 @@
-import { NovelSample } from '@/hooks/useNovelSamples';
 import { Image } from '@heroui/react';
 import { IoEyeOutline, IoStarOutline, IoHeartOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
+import { NovelSample } from '../page';
 
 export default async function Book({
 	params,
