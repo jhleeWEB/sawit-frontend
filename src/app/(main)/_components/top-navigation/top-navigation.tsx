@@ -6,14 +6,15 @@ import {
 	NavbarContent,
 	NavbarItem,
 } from '@heroui/react';
-import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 
 import { IoAddOutline } from 'react-icons/io5';
 import AvatarDropdown from './_components/avatar-dropdown';
+import { createClient } from '@/utils/supabase/server';
 
 export default async function TopNavigation() {
-	const session = await getServerSession();
+	const supabase = await createClient();
+	const session = await supabase.auth.getUser();
 
 	return (
 		<Navbar isBlurred>
@@ -34,7 +35,9 @@ export default async function TopNavigation() {
 				<NavbarItem>
 					<Link
 						href={
-							session?.user?.name ? `/a/${session.user.name}/publish` : '/login'
+							session.data.user?.user_metadata.name
+								? `/a/${session.data.user?.user_metadata.name}/publish`
+								: '/login'
 						}
 						className='flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400'
 					>
@@ -43,12 +46,13 @@ export default async function TopNavigation() {
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					{session ? (
+					{session.data.user ? (
 						<AvatarDropdown
 							image={
-								session.user?.image || 'https://images.unsplash.com/broken'
+								session.data.user?.user_metadata.avatar_url ||
+								'https://images.unsplash.com/broken'
 							}
-							name={session.user?.name || '이름없음'}
+							name={session.data.user?.user_metadata.name || '이름없음'}
 						/>
 					) : (
 						<Link href='/login'>

@@ -2,7 +2,7 @@ import { Image, Tooltip } from '@heroui/react';
 import { NovelSample } from '../a/[author]/page';
 import Link from 'next/link';
 import { IoEyeOutline, IoStarOutline } from 'react-icons/io5';
-import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
+import { formatToKoreanUnits } from '@/lib/format-to-korean-unit';
 
 const uris = [
 	'/cover_thumbnails/novel_cover_thumbnail_14.png',

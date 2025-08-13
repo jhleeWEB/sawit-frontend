@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 
 import '../../globals.css';
 import Providers from '@/app/providers';
+import { UserProvider } from '@/components/auth/user-provider';
+import { createClient } from '@/utils/supabase/server';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -13,14 +15,22 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
 	return (
 		<html lang='en'>
 			<body>
-				<Providers>
-					<main className='h-dvh mx-auto max-w-screen-md '>
-						<div className='h-full w-full flex justify-center'>{children}</div>
-					</main>
-				</Providers>
+				<UserProvider initialUser={user}>
+					<Providers>
+						<main className='h-dvh mx-auto max-w-screen-md '>
+							<div className='h-full w-full flex justify-center'>
+								{children}
+							</div>
+						</main>
+					</Providers>
+				</UserProvider>
 			</body>
 		</html>
 	);

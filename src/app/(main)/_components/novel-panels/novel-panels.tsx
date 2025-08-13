@@ -2,7 +2,7 @@ import { Image } from '@heroui/react';
 import Link from 'next/link';
 import { NovelSample } from '../../a/[author]/page';
 import { IoEyeOutline } from 'react-icons/io5';
-import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
+import { formatToKoreanUnits } from '@/lib/format-to-korean-unit';
 
 interface Props {
 	images: string[]; //temporary image src

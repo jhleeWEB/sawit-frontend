@@ -1,45 +1,43 @@
 'use client';
 
 import { Button } from '@heroui/react';
-import { SiKakao, SiNaver } from 'react-icons/si';
+import { SiKakao } from 'react-icons/si';
 import {
 	AiOutlineInstagram,
 	AiOutlineGoogle,
 	AiOutlineGithub,
 } from 'react-icons/ai';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { Provider } from '@supabase/supabase-js';
+import { login } from '@/lib/auth';
 
-const authTypes = ['naver', 'kakao', 'instagram', 'google', 'github'];
+const authProvider: Provider[] = ['kakao', 'facebook', 'google', 'github'];
 
 export default function LoginPage() {
 	return (
 		<section className='h-full w-full flex justify-center items-center'>
 			<div className='flex flex-col w-[60%] rounded-lg pt-16 px-16 pb-8 border-1 gap-2'>
-				{authTypes.map((type) => (
+				{authProvider.map((provider) => (
 					<Button
-						key={type}
+						key={provider}
 						variant='bordered'
 						fullWidth
 						className='relative flex items-center border-1 border-teal justify-center rounded-md mb-2 text-gray-400 font-bold'
-						onPress={() => signIn(type, { callbackUrl: '/' })}
+						onPress={() => login(provider)}
 					>
-						{type === 'naver' && (
-							<SiNaver className='absolute left-4' size={12} />
-						)}
-						{type === 'kakao' && (
+						{provider === 'kakao' && (
 							<SiKakao className='absolute left-4' size={32} />
 						)}
-						{type === 'instagram' && (
+						{provider === 'facebook' && (
 							<AiOutlineInstagram className='absolute left-4' size={18} />
 						)}
-						{type === 'google' && (
+						{provider === 'google' && (
 							<AiOutlineGoogle className='absolute left-4' size={18} />
 						)}
-						{type === 'github' && (
+						{provider === 'github' && (
 							<AiOutlineGithub className='absolute left-4' size={18} />
 						)}
-						{type}로 계속하기
+						{provider}로 계속하기
 					</Button>
 				))}
 				<Link

@@ -1,19 +1,20 @@
-import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
+import { formatToKoreanUnits } from '@/lib/format-to-korean-unit';
 import { Button, Chip, Image } from '@heroui/react';
 import { IoAddOutline, IoEyeOutline, IoStarOutline } from 'react-icons/io5';
 import { achevementStyles } from './_const/achievement-styles';
 import Link from 'next/link';
-import { getServerSession } from 'next-auth';
+import { createClient } from '@/utils/supabase/server';
 
 export default async function Author({
 	params,
 }: {
 	params: Promise<{ author: string }>;
 }) {
+	const supabase = await createClient();
 	let { author } = await params;
 	author = decodeURIComponent(author);
-	const session = await getServerSession();
-	const { name, image } = session?.user || {};
+	const session = await supabase.auth.getUser();
+
 	const authorProfileData = fetchAuthorProfileSamples(author);
 	const novelData = fetchNovelSample(author);
 	const [authorProfile, publishedNovels] = await Promise.all([
@@ -33,9 +34,10 @@ export default async function Author({
 				10
 		) / 10;
 
-	const isOwner = name === author;
+	const isOwner = session.data.user?.user_metadata.name === author;
 	const profileImage = isOwner
-		? image || 'https://heroui.com/images/hero-card-complete.jpeg'
+		? session.data.user?.user_metadata.avatar_url ||
+		  'https://heroui.com/images/hero-card-complete.jpeg'
 		: 'https://heroui.com/images/hero-card-complete.jpeg';
 
 	return (
