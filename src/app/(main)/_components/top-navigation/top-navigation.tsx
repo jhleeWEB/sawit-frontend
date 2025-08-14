@@ -15,6 +15,7 @@ import AvatarDropdown from './_components/avatar-dropdown';
 export default async function TopNavigation() {
 	const session = await getServerSession();
 
+	console.log(session);
 	return (
 		<Navbar isBlurred>
 			<NavbarBrand>
