@@ -3,18 +3,18 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
-		const id = req.nextUrl.searchParams.get('id');
+		const id = req.nextUrl.searchParams.get('novel_id');
 		const supabase = createSupabaseClient();
 		const { data, error } = await supabase
-			.from('novels')
+			.from('novel_views')
 			.select('*')
-			.eq('author_id', id);
+			.eq('novel_id', id);
 
 		if (error) {
 			console.error('Supabase Error: ', error);
 			return NextResponse.json({ error: error.message }, { status: 500 });
 		}
-		return NextResponse.json({ novels: data });
+		return NextResponse.json({ likes: data.length });
 	} catch (e) {
 		console.error(e);
 		return NextResponse.json(

@@ -20,7 +20,6 @@ export default function PageController() {
 		(name: string, value: number) => {
 			const params = new URLSearchParams(searchParams.toString());
 			params.set(name, value.toString());
-			console.log(params);
 			return params.toString();
 		},
 		[searchParams]
