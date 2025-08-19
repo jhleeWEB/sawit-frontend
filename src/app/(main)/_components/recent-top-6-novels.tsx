@@ -1,6 +1,6 @@
 import { Image } from '@heroui/react';
 import Link from 'next/link';
-import { NovelSample } from '../a/[author]/page';
+import { NovelSample } from '../p/[post_name]/page';
 
 const novelImages = [
 	'/cover_thumbnails/novel_cover_thumbnail_8.png',

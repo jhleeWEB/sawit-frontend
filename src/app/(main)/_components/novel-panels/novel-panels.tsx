@@ -1,6 +1,6 @@
 import { Image } from '@heroui/react';
 import Link from 'next/link';
-import { NovelSample } from '../../a/[author]/page';
+import { NovelSample } from '../../p/[post_name]/page';
 import { IoEyeOutline } from 'react-icons/io5';
 import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
 

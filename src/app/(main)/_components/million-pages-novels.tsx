@@ -1,5 +1,5 @@
 import { Image, Tooltip } from '@heroui/react';
-import { NovelSample } from '../a/[author]/page';
+import { NovelSample } from '../p/[post_name]/page';
 import Link from 'next/link';
 import { IoEyeOutline, IoStarOutline } from 'react-icons/io5';
 import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';

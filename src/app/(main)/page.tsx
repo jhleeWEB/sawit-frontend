@@ -3,7 +3,7 @@ import RecentTop6Novels from './_components/recent-top-6-novels';
 import MillionPagesNovels from './_components/million-pages-novels';
 import RecentEvents from './_components/recent-events';
 import NovelPanels from './_components/novel-panels/novel-panels';
-import { NovelSample } from './a/[author]/page';
+import { NovelSample } from './p/[post_name]/page';
 
 const sample1 = [
 	'/cover_thumbnails/novel_cover_thumbnail_22.png',
