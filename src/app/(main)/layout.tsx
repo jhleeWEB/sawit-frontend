@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 
 import '../globals.css';
 import Providers from '../providers';
-import Footer from './_components/footer';
 import TopNavigation from './_components/top-navigation/top-navigation';
 
 export const metadata: Metadata = {
@@ -17,13 +16,17 @@ export default async function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body>
+			<body className='mx-auto max-h-vdh max-w-dvw'>
 				<Providers>
 					<TopNavigation />
-					<main className='mx-auto max-w-screen-md'>
-						<div className='w-full flex justify-center'>{children}</div>
+					<main className='grid grid-cols-4 bg-slate-50'>
+						<aside className='col-start-1 col-span-1 bg-slate-100'>
+							side menu
+						</aside>
+						<section className='col-span-3 h-full max-h-[calc(100dvh-64px)] overflow-hidden'>
+							{children}
+						</section>
 					</main>
-					<Footer />
 				</Providers>
 			</body>
 		</html>

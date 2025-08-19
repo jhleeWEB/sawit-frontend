@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import http from '@/lib/axios/http';
 import { authOptions } from '@/lib/auth/auth-options';
+import InfiniteScroll from '@/features/infinite-scroll';
 
 export default async function Author({
 	params,
@@ -16,12 +17,10 @@ export default async function Author({
 	const postName = decodeURIComponent(post_name);
 
 	return (
-		<section className='grid grid-cols-3 gap-2 mt-8 h-full'>
-			<div className='h-full rounded-xl bg-slate-100 col-span-1'>
-				{postName}
+		<section className='grid grid-cols-3 gap-2 mt-8 h-full w-full'>
+			<div className='w-full h-full rounded-xl bg-slate-100 col-span-1'>
+				<InfiniteScroll threadName='hello' />
 			</div>
-
-			<div className='col-span-2 rounded-xl bg-slate-100 p-8'></div>
 		</section>
 	);
 }

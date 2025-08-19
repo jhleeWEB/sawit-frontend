@@ -4,6 +4,7 @@ import MillionPagesNovels from './_components/million-pages-novels';
 import RecentEvents from './_components/recent-events';
 import NovelPanels from './_components/novel-panels/novel-panels';
 import { NovelSample } from './p/[post_name]/page';
+import ContentContainer from './_components/content-container';
 
 const sample1 = [
 	'/cover_thumbnails/novel_cover_thumbnail_22.png',
@@ -51,24 +52,31 @@ export default async function Home() {
 			adultNovelData,
 		]);
 	return (
-		<section className='w-full flex flex-col gap-2'>
-			<ChipShortcuts />
-			<RecentEvents />
-			<RecentTop6Novels />
-			<MillionPagesNovels />
-			<NovelPanels title='무료 웹소설' novels={freeNovels} images={sample1} />
-			<NovelPanels
-				title='스포츠 웹소설'
-				novels={sportsNovels}
-				images={sample2}
-			/>
-			<NovelPanels
-				title='로맨스 웹소설'
-				novels={romanceNovels}
-				images={sample3}
-			/>
-			<NovelPanels title='성인 웹소설' novels={adultNovels} images={sample4} />
-		</section>
+		<div className='h-full grid grid-cols-3 overflow-y-auto'>
+			<div className=' col-span-2'>
+				<ChipShortcuts />
+				<RecentEvents />
+				<RecentTop6Novels />
+				<MillionPagesNovels />
+				<NovelPanels title='무료 웹소설' novels={freeNovels} images={sample1} />
+				<NovelPanels
+					title='스포츠 웹소설'
+					novels={sportsNovels}
+					images={sample2}
+				/>
+				<NovelPanels
+					title='로맨스 웹소설'
+					novels={romanceNovels}
+					images={sample3}
+				/>
+				<NovelPanels
+					title='성인 웹소설'
+					novels={adultNovels}
+					images={sample4}
+				/>
+			</div>
+			<div className='col-span-1'></div>
+		</div>
 	);
 }
 

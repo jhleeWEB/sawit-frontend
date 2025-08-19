@@ -2,12 +2,14 @@
 
 import { Spinner } from '@heroui/react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Post from './post';
 
+const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 type Props = {
 	threadName: string;
 };
 
-export default function PostInfiniteScroll({ threadName }: Props) {
+export default function InfiniteScroll({ threadName }: Props) {
 	const observer = useRef<null | IntersectionObserver>(null);
 
 	const [posts, setPosts] = useState<[] | { index: number }[]>([]);
@@ -17,9 +19,10 @@ export default function PostInfiniteScroll({ threadName }: Props) {
 	const [page, setPage] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 
+	useEffect(() => {}, [page]);
+
 	const lastPostRef = useCallback(
 		(node: HTMLDivElement) => {
-			if (isLoading) return;
 			if (observer.current) observer.current.disconnect();
 			observer.current = new IntersectionObserver(
 				(entries) => {
@@ -31,20 +34,15 @@ export default function PostInfiniteScroll({ threadName }: Props) {
 			);
 			if (node) observer.current.observe(node);
 		},
-		[isLoading, hasMore]
+		[, hasMore]
 	);
 
-	if (!data || isLoading) return;
+	if (!data) return;
 	return (
-		<div className='col-span-2 bg-slate-300 p-4'>
-			{[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14].map((n, i) =>
-				i + 1 === [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14].length ? (
-					<div key={`${n}_${i}`}>sdfsdfdsf</div>
-				) : (
-					<div key={`${n}_${i}`}>asdfasdf</div>
-				)
+		<div className='w-full bg-slate-300 p-4'>
+			{data.map((n, i) =>
+				i + 1 === data.length ? <Post key={i} /> : <Post key={i} />
 			)}
-			{isLoading && <Spinner />}
 		</div>
 	);
 }
