@@ -19,11 +19,11 @@ export default async function RootLayout({
 			<body className='mx-auto max-h-vdh max-w-dvw'>
 				<Providers>
 					<TopNavigation />
-					<main className='grid grid-cols-4 bg-slate-50'>
+					<main className='h-full w-full grid grid-cols-4 bg-slate-50'>
 						<aside className='col-start-1 col-span-1 bg-slate-100'>
 							side menu
 						</aside>
-						<section className='col-span-3 h-full max-h-[calc(100dvh-64px)] overflow-hidden'>
+						<section className='col-span-3 h-full w-full max-h-[calc(100dvh-64px)] overflow-hidden'>
 							{children}
 						</section>
 					</main>

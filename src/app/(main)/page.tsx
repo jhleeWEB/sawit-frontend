@@ -52,8 +52,11 @@ export default async function Home() {
 			adultNovelData,
 		]);
 	return (
-		<div className='h-full grid grid-cols-3 overflow-y-auto'>
-			<div className=' col-span-2'>
+		<div className='w-full h-full grid grid-cols-3 overflow-y-auto scrollbar-hide'>
+			<div className='col-span-3'>
+				<div className='bg-red-200 min-h-[64px] w-full'>header</div>
+			</div>
+			<div className='col-start-1 col-span-2'>
 				<ChipShortcuts />
 				<RecentEvents />
 				<RecentTop6Novels />
@@ -75,7 +78,9 @@ export default async function Home() {
 					images={sample4}
 				/>
 			</div>
-			<div className='col-span-1'></div>
+			<div className='col-start-3 col-span-1 bg-teal-100 flex flex-col'>
+				<div className='sticky top-0 bg-red-300 min-h-[450px]'>info</div>
+			</div>
 		</div>
 	);
 }
