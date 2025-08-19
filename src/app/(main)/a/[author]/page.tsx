@@ -4,6 +4,8 @@ import { IoAddOutline, IoEyeOutline, IoStarOutline } from 'react-icons/io5';
 import { achevementStyles } from './_const/achievement-styles';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
+import http from '@/lib/axios/http';
+import { authOptions } from '@/lib/auth/auth-options';
 
 export default async function Author({
 	params,
@@ -12,28 +14,21 @@ export default async function Author({
 }) {
 	let { author } = await params;
 	author = decodeURIComponent(author);
-	const session = await getServerSession();
-	const { name, image } = session?.user || {};
-	const authorProfileData = fetchAuthorProfileSamples(author);
-	const novelData = fetchNovelSample(author);
-	const [authorProfile, publishedNovels] = await Promise.all([
-		authorProfileData,
-		novelData,
-	]);
+	const session = await getServerSession(authOptions);
 
-	if (!authorProfile || !publishedNovels) {
+	const { name, image } = session?.user || {};
+
+	const profileRequest = fetchAuthorProfileSamples(author);
+	const novelRequest = fetchMyNovels(session?.user.id);
+	const [authorData, novelData] = await Promise.all([
+		profileRequest,
+		novelRequest,
+	]);
+	if (!authorData || !novelData) {
 		return;
 	}
-
-	const totalViews = publishedNovels.reduce((a, b) => (a += b.stats.views), 0);
-	const avgStar =
-		Math.round(
-			(publishedNovels.reduce((a, b) => (a += b.stats.stars), 0) /
-				publishedNovels.length) *
-				10
-		) / 10;
-
 	const isOwner = name === author;
+
 	const profileImage = isOwner
 		? image || 'https://heroui.com/images/hero-card-complete.jpeg'
 		: 'https://heroui.com/images/hero-card-complete.jpeg';
@@ -53,32 +48,32 @@ export default async function Author({
 					<div className='flex flex-col items-center mt-16 gap-2'>
 						<div>
 							<h4 className='font-bold text-2xl text-center'>
-								{authorProfile.author}
+								{authorData.author}
 							</h4>
 							<small className='text-default-500 text-ellipsis text-center'>
-								{authorProfile.description}
+								{authorData.description}
 							</small>
 							<div className='flex justify-center gap-2'>
-								<div className='flex items-center'>
+								{/* <div className='flex items-center'>
 									<IoEyeOutline stroke='#6b7280' />
 									<small className='text-gray-500 text-xs text-ellipsis text-center ml-1'>
 										{formatToKoreanUnits(totalViews) || 0}
 									</small>
-								</div>
-								<div className='flex items-center'>
+								</div> */}
+								{/* <div className='flex items-center'>
 									<IoStarOutline stroke='#6b7280' />
 									<small className='text-gray-500 text-xs text-ellipsis text-center ml-1'>
 										{avgStar || 0}
 									</small>
-								</div>
+								</div> */}
 							</div>
 						</div>
 						<div className='flex gap-2 mt-8'>
-							{authorProfile.achievements.map((achievement, i) => (
+							{authorData.achievements.map((achievement, i) => (
 								<Chip
 									size='sm'
 									className={`${achevementStyles[i]} shadow-md select-none`}
-									key={authorProfile.author + achievement}
+									key={authorData.author + achievement}
 								>
 									<small className='text-white font-bold'>{achievement}</small>
 								</Chip>
@@ -90,9 +85,8 @@ export default async function Author({
 
 			<div className='col-span-2 rounded-xl bg-slate-100 p-8'>
 				<ul className='h-full flex flex-col gap-2'>
-					{publishedNovels.length > 0 &&
-						publishedNovels.map((novel, i) => {
-							const randomNumber = Math.floor(Math.random() * (25 - 1) + 1);
+					{novelData.length > 0 &&
+						novelData.map((novel, i) => {
 							return (
 								<li key={novel.title + i}>
 									<Link
@@ -105,7 +99,7 @@ export default async function Author({
 											width={56}
 											height={86}
 											radius='sm'
-											src={`/cover_thumbnails/novel_cover_thumbnail_${randomNumber}.png`}
+											src={novel.cover_image}
 											isZoomed
 										/>
 										<div>
@@ -113,32 +107,32 @@ export default async function Author({
 												{novel.title}
 											</h4>
 											<div className='flex'>
-												{novel.about.category.map((n) => (
+												{novel.genre.map((n) => (
 													<small key={novel.id + n} className='mr-1'>
 														{n}
 													</small>
 												))}
 											</div>
 											<div className='flex w-full gap-2'>
-												<div className='flex items-center'>
+												{/* <div className='flex items-center'>
 													<IoStarOutline />
 													<small className='ml-1 font-bold align-middle text-red-400'>
 														{novel.stats.stars}
 													</small>
-												</div>
-												<div className='flex items-center'>
+												</div> */}
+												{/* <div className='flex items-center'>
 													<IoEyeOutline />
 													<small className='align-middle ml-1 '>
 														{formatToKoreanUnits(novel.stats.views)}
 													</small>
-												</div>
+												</div> */}
 											</div>
 										</div>
 									</Link>
 								</li>
 							);
 						})}
-					{publishedNovels.length === 0 && isOwner && (
+					{novelData.length === 0 && isOwner && (
 						<div className='w-full h-full flex flex-col justify-center items-center'>
 							<h1 className='text-lg text-gray-400 mb-8'>
 								연재 중 인 소설이 없습니다...
@@ -178,6 +172,32 @@ export interface AuthorProfileSamples {
 	achievements: string[];
 }
 
+export interface Novel {
+	id: string;
+	title: string;
+	created_at: Date;
+	is_published: boolean | null;
+	genre: string[];
+	cover_image: string;
+	description: string;
+	is_free: boolean;
+	tags: string[];
+	status: string;
+	restrictions: string[];
+	author: string;
+	author_id: string;
+}
+
+async function fetchMyNovels(id: string | undefined) {
+	try {
+		if (id) {
+			const res = await http.get<{ novels: Novel[] }>(`/novels?id=${id}`);
+			return res.data.novels;
+		}
+	} catch (e) {
+		console.error(e.message);
+	}
+}
 async function fetchNovelSample(author: string) {
 	const arr = await import('/public/samples/korean_sample_novels_100.json');
 	const list = Array.from(arr) as NovelSample[];

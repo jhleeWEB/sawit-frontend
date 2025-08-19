@@ -1,8 +1,15 @@
 import { Image } from '@heroui/react';
-import { IoEyeOutline, IoStarOutline, IoHeartOutline } from 'react-icons/io5';
+import {
+	IoEyeOutline,
+	IoStarOutline,
+	IoHeartOutline,
+	IoAddOutline,
+} from 'react-icons/io5';
 import Link from 'next/link';
 import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
 import { NovelSample } from '../page';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth/auth-options';
 
 export default async function Book({
 	params,
@@ -10,12 +17,12 @@ export default async function Book({
 	params: Promise<{ author: string; id: string }>;
 }) {
 	const { id } = await params;
-
+	const session = await getServerSession(authOptions);
 	const volumnTitleData = fetchVolumnTitles(id);
 	const novelData = fetchNovelInfo(id);
 
 	const [volumnTitles, novel] = await Promise.all([volumnTitleData, novelData]);
-
+	const isOwner = novel?.author === session?.user.name;
 	if (!novel || !volumnTitles) {
 		return;
 	}
@@ -34,10 +41,10 @@ export default async function Book({
 						/>
 					</div>
 					<div className='flex flex-col justify-between'>
-						<IoHeartOutline
-							size={32}
-							className='absolute right-4 cursor-pointer'
-						/>
+						<div className='absolute flex right-4'>
+							<IoHeartOutline size={32} className=' cursor-pointer' />
+							<IoAddOutline size={32} className=' cursor-pointer' />
+						</div>
 						<div>
 							<small>{new Date(novel.created_at).toDateString()}</small>
 							<div className='flex gap-x-1'>

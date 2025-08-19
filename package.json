@@ -9,15 +9,20 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@auth/supabase-adapter": "^1.10.0",
 		"@expo/cli": "^0.24.13",
 		"@floating-ui/react": "^0.27.12",
 		"@heroui/react": "^2.7.0",
+		"@next-auth/supabase-adapter": "^0.2.1",
+		"@supabase/supabase-js": "^2.55.0",
 		"@svgr/webpack": "^8.1.0",
 		"@tanstack/react-query": "^5.80.7",
 		"@toast-ui/react-editor": "^3.2.3",
+		"@types/": "supabase/supabase-js",
 		"@types/next-auth": "^3.15.0",
 		"axios": "^1.10.0",
 		"framer-motion": "^12.12.2",
+		"jsonwebtoken": "^9.0.2",
 		"next": "15.3.2",
 		"next-auth": "^4.24.11",
 		"react": "^19.0.0",
@@ -28,6 +33,7 @@
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3",
+		"@types/jsonwebtoken": "^9.0.10",
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
