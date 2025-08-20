@@ -18,7 +18,7 @@ export default async function Author({
 
 	return (
 		<section className='grid grid-cols-3 gap-2 mt-8 h-full w-full'>
-			<div className='w-full h-full rounded-xl bg-slate-100 col-span-1'>
+			<div className='w-full h-full rounded-xl bg-slate-100 col-span-1 gap-2'>
 				<InfiniteScroll threadName='hello' />
 			</div>
 		</section>
