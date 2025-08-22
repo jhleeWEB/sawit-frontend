@@ -8,8 +8,6 @@ import {
   Divider,
   Form,
   Input,
-  Modal,
-  ModalContent,
   Textarea,
   useDisclosure,
 } from "@heroui/react";
@@ -104,7 +102,12 @@ export default function CreateCommunity() {
             </div>
           </div>
           <div className="w-full">
-            <Input radius="full" placeholder="주제 필터" />
+            <Input
+              radius="full"
+              placeholder="주제 필터"
+              value={topicFilter}
+              onValueChange={setTopicFilter}
+            />
             <div>
               <h2>{`주제 ${selectedTopics.length}/3`}</h2>
               <div className="flex min-h-[32px] gap-2">
@@ -127,6 +130,7 @@ export default function CreateCommunity() {
                 title="애니 & 코스플레이"
                 topics={topics.anime}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -134,6 +138,7 @@ export default function CreateCommunity() {
                 title="예술"
                 topics={topics.art}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -141,6 +146,7 @@ export default function CreateCommunity() {
                 title="사업 & 경제"
                 topics={topics.business}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -148,6 +154,7 @@ export default function CreateCommunity() {
                 title="수집품 & 기타 취미"
                 topics={topics.collectible}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -155,6 +162,7 @@ export default function CreateCommunity() {
                 title="교육 & 커리어"
                 topics={topics.education}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -162,6 +170,7 @@ export default function CreateCommunity() {
                 title="패션 & 뷰티"
                 topics={topics.fashion}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -169,6 +178,7 @@ export default function CreateCommunity() {
                 title="음식 & 음료"
                 topics={topics.food}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -176,6 +186,7 @@ export default function CreateCommunity() {
                 title="게임"
                 topics={topics.game}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -183,6 +194,7 @@ export default function CreateCommunity() {
                 title="건강 & 웰빙"
                 topics={topics.health}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -190,6 +202,7 @@ export default function CreateCommunity() {
                 title="집 & 조경"
                 topics={topics.home}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -197,6 +210,7 @@ export default function CreateCommunity() {
                 title="영화 & 드라마"
                 topics={topics.movie}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
@@ -204,6 +218,7 @@ export default function CreateCommunity() {
                 title="연애 & 가족"
                 topics={topics.relationship}
                 selectedTopics={selectedTopics}
+                filter={topicFilter}
                 onClick={handleOnClick}
                 onClose={handleOnClose}
               />
