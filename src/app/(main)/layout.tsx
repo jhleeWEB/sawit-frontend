@@ -26,15 +26,7 @@ export default async function RootLayout({
 						</aside>
 						<section className='col-span-3 h-full w-full max-h-[calc(100dvh-128px)] overflow-hidden'>
 							<div className='w-full h-full grid grid-cols-3 overflow-y-auto scrollbar-hide'>
-								<div className='col-span-3'>
-									<div className='bg-red-200 min-h-[128px] w-full'>header</div>
-								</div>
 								{children}
-								<div className='col-start-3 col-span-1 bg-teal-100 flex flex-col'>
-									<div className='sticky top-0 bg-red-300 min-h-[450px]'>
-										info
-									</div>
-								</div>
 							</div>
 						</section>
 					</main>
