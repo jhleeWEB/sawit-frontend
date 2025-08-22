@@ -4,6 +4,7 @@ import ImageCropModal from "@/features/image-crop";
 
 import {
   Avatar,
+  Button,
   Chip,
   Divider,
   Form,
@@ -125,7 +126,7 @@ export default function CreateCommunity() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-2 max-h-[400px] overflow-auto">
+            <div className="flex flex-col gap-2 max-h-[300px] overflow-auto">
               <TopicChips
                 title="애니 & 코스플레이"
                 topics={topics.anime}
@@ -223,6 +224,9 @@ export default function CreateCommunity() {
                 onClose={handleOnClose}
               />
             </div>
+          </div>
+          <div>
+            <Button type="submit">커뮤니티 만들기</Button>
           </div>
         </Form>
       </div>
