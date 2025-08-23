@@ -1,6 +1,6 @@
 "use client";
 
-import ImageCropModal from "@/features/image-crop";
+import ImageCropModal from "@/features/image-crop-modal";
 
 import {
   Avatar,
@@ -12,20 +12,30 @@ import {
   Textarea,
   useDisclosure,
 } from "@heroui/react";
-import { useState } from "react";
-import { PiImageSquareThin } from "react-icons/pi";
+import { FormEvent, useState } from "react";
+import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
 import TopicChips from "./_components/topic-chips";
+import FormTitle from "./_components/form-title";
 
 export default function CreateCommunity() {
   const [communityName, setCommunityName] = useState("");
   const [communityDescription, setCommunityDescription] = useState("");
-  const [banner, setBanner] = useState("");
+  const [bannerBlob, setBannerBlob] = useState<Blob>();
+  const [bannerPreview, setBannerPreview] = useState("");
   const [tempBanner, setTempBanner] = useState("");
-  const [icon, setIcon] = useState("");
+  const [iconPreview, setIconPreview] = useState("");
+  const [iconBlob, setIconBlob] = useState<Blob>();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [topicFilter, setTopicFilter] = useState<string>("");
+  const [errors, setErrors] = useState<{
+    name: string | undefined;
+    description: string | undefined;
+  }>({
+    name: undefined,
+    description: undefined,
+  });
 
   const handleOnClose = (topicToRemove: string) => {
     setSelectedTopics(
@@ -42,39 +52,80 @@ export default function CreateCommunity() {
     }
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("topics", JSON.stringify(selectedTopics));
+    if (bannerBlob) {
+      formData.append("bannerBlob", bannerBlob);
+    }
+    if (iconBlob) {
+      formData.append("iconBlob", iconBlob);
+    }
+    formData.append("name", communityName);
+    formData.append("description", communityDescription);
+    const data = Object.fromEntries(formData);
+    if (!data.name) {
+      setErrors({ ...errors, name: "커뮤니티 이름이 필요합니다." });
+    }
+    if (!data.description) {
+      setErrors({ ...errors, name: "커뮤니티 설명이 필요합니다." });
+    }
+    console.log(data);
+  };
+
   return (
     <>
-      <div className="col-start-1 col-span-2">
-        <Form>
+      <div className="col-start-1 col-span-2 p-16">
+        <Form id="community-form" onSubmit={handleSubmit}>
+          <FormTitle
+            title="커뮤니티에 대해서 알려주세요"
+            description="이름과 설명은 다른분들이 당신의 커뮤니티가 어떤 곳인지 이해하는 데 도움이 됩니다."
+          />
           <Input
             fullWidth
             required
+            name="name"
             label="커뮤니티 이름을 작성해주세요."
             value={communityName}
             onValueChange={setCommunityName}
           />
-          <small>{communityName.length}</small>
+          <small className="text-gray-400 w-full flex justify-end">
+            {communityName.length}
+          </small>
           <Textarea
             fullWidth
+            required
+            name="description"
             label="커뮤니티의 대해서 말해주세요."
             value={communityDescription}
             onValueChange={setCommunityDescription}
           />
-          <small>{communityDescription.length}</small>
-          <div className="w-full">
-            <div>
-              <h3>배너를 넣어보세요</h3>
+          <small className="text-gray-400 w-full flex justify-end">
+            {communityDescription.length}
+          </small>
+          <div className="w-full mt-16">
+            <FormTitle
+              title="커뮤니티를 꾸며보세요"
+              description="시각적인 요소를 더하면 새로운 분들의 관심을 끌고 커뮤니티의 문화를 확립하는 데 도움이 됩니다! 언제든지 이 내용을 업데이트할 수 있습니다."
+            />
+            <div className="flex items-center justify-between mb-4 px-8">
+              <h3>배너</h3>
               <Input
                 type="file"
                 radius="full"
-                startContent={<PiImageSquareThin size={26} />}
-                src={banner}
+                size="sm"
+                className="w-[140px] cursor-pointer"
+                startContent={
+                  <PiImageSquareThin className="cursor-pointer" size={26} />
+                }
                 onChange={(event) => {
                   if (event.target.files) {
                     const [file] = event.target.files;
-                    const url = URL.createObjectURL(file);
-                    setTempBanner(url);
+                    setTempBanner(URL.createObjectURL(file));
                     onOpen();
+                    event.target.type = "number";
+                    event.target.type = "file";
                   }
                 }}
               />
@@ -82,35 +133,46 @@ export default function CreateCommunity() {
                 src={tempBanner}
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
-                setImage={setBanner}
+                setBannerBlob={setBannerBlob}
+                setBannerPreview={setBannerPreview}
               />
             </div>
-            <div>
-              <h3>아이콘 넣어보세요~</h3>
+            <div className="flex items-center justify-between px-8">
+              <h3>아이콘</h3>
               <Input
                 type="file"
                 radius="full"
-                startContent={<PiImageSquareThin size={26} />}
-                src={icon}
+                size="sm"
+                name="icon"
+                className="w-[140px] cursor-pointer"
+                startContent={
+                  <PiImageSquareThin className="cursor-pointer" size={26} />
+                }
                 onChange={(event) => {
                   if (event.target.files) {
                     const [file] = event.target.files;
                     const url = URL.createObjectURL(file);
-                    setIcon(url);
+                    setIconPreview(url);
+                    setIconBlob(file);
                   }
                 }}
               />
             </div>
           </div>
-          <div className="w-full">
+          <div className="w-full mt-16">
+            <FormTitle
+              title="주제 추가"
+              description="관심 있는분들이 당신의 커뮤니티를 찾을 수 있도록 최대 3개의 주제를 추가하세요."
+            />
             <Input
               radius="full"
               placeholder="주제 필터"
               value={topicFilter}
               onValueChange={setTopicFilter}
+              startContent={<PiMagnifyingGlassLight size={18} />}
             />
             <div>
-              <h2>{`주제 ${selectedTopics.length}/3`}</h2>
+              <h2 className="text-sm font-bold mt-2">{`주제 ${selectedTopics.length}/3`}</h2>
               <div className="flex min-h-[32px] gap-2">
                 {selectedTopics.map((topic) => (
                   <Chip
@@ -126,7 +188,7 @@ export default function CreateCommunity() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-2 max-h-[300px] overflow-auto">
+            <div className="flex flex-col gap-2">
               <TopicChips
                 title="애니 & 코스플레이"
                 topics={topics.anime}
@@ -225,39 +287,67 @@ export default function CreateCommunity() {
               />
             </div>
           </div>
-          <div>
-            <Button type="submit">커뮤니티 만들기</Button>
-          </div>
         </Form>
       </div>
-      <div className="col-start-3 col-span-1 bg-teal-100 flex flex-col p-4 pt-16">
-        <div className="w-full bg-blue-400 rounded-lg shadow-lg">
-          {banner ? (
-            <div
-              style={{
-                /* @ts-expect-error custom style property added*/
-                "--image-url": `url(${banner})`,
-              }}
-              className={`h-[60px] rounded-t-lg bg-no-repeat bg-cover bg-top bg-[image:var(--image-url)]`}
-            />
-          ) : (
-            <div className={`h-[60px] bg-red-300 rounded-t-lg`} />
-          )}
-          <Divider />
-          <div className="flex items-center gap-4 m-4">
-            <Avatar isBordered src={icon} />
-            <div>
-              <h1 className="w-full text-2xl font-bold break-words">
-                p/{communityName}
-              </h1>
-              <span>
-                <small>1 member</small>
-                <span>•</span>
-                <small>1 online</small>
-              </span>
+      <div className="col-start-3 col-span-1 bg-slate-50 overflow-x-hidden">
+        <div className="sticky top-1/4 p-4">
+          <div className="border-1 rounded-lg shadow-lg">
+            {bannerPreview ? (
+              <div
+                style={{
+                  /* @ts-expect-error custom style property added*/
+                  "--image-url": `url(${bannerPreview})`,
+                }}
+                className={`h-[60px] rounded-t-lg bg-no-repeat bg-cover bg-top bg-[image:var(--image-url)]`}
+              />
+            ) : (
+              <div className={`h-[60px] bg-red-300 rounded-t-lg`} />
+            )}
+            <Divider />
+            <div className="max-w-full flex items-center gap-4 p-4 pb-0">
+              <Avatar
+                isBordered
+                size="md"
+                className="shrink-0"
+                src={iconPreview}
+              />
+
+              <div className="max-w-[calc(100%-64px)]">
+                <h1 className="text-2xl font-bold break-words">
+                  p/{communityName}
+                </h1>
+                <div>
+                  <small>1 member</small>
+                  <span>•</span>
+                  <small>1 online</small>
+                </div>
+              </div>
             </div>
+            <div className="flex flex-wrap px-4 pt-2 gap-2">
+              {selectedTopics.map((topic) => (
+                <Chip
+                  size="sm"
+                  variant="bordered"
+                  className="border-1"
+                  key={`preview-topics-${topic}`}
+                >
+                  {topic}
+                </Chip>
+              ))}
+            </div>
+            <p className="p-4 break-words">{communityDescription}</p>
           </div>
-          <p className="break-words">{communityDescription}</p>
+          <div className="mt-4">
+            <Button
+              fullWidth
+              radius="full"
+              color="success"
+              form="community-form"
+              type="submit"
+            >
+              커뮤니티 만들기
+            </Button>
+          </div>
         </div>
       </div>
     </>

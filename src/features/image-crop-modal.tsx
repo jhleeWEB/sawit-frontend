@@ -1,6 +1,6 @@
 "use client";
 
-import { getCroppedImg } from "@/utils/create-image";
+import { getCroppedImageBlob, getCroppedImg } from "@/utils/create-image";
 import {
   Button,
   Modal,
@@ -16,20 +16,25 @@ interface Props {
   src: string;
   isOpen: boolean;
   onOpenChange: () => void;
-  setImage: (blob: string) => void;
+  setBannerBlob: (blob: Blob) => void;
+  setBannerPreview: (url: string) => void;
 }
 
 export default function ImageCropModal({
   src = "",
   isOpen,
   onOpenChange,
-  setImage,
+  setBannerBlob,
+  setBannerPreview,
 }: Props) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [imageUrl, setImageUrl] = useState("");
+  const [imageBlob, setImageBlob] = useState<Blob>();
 
   const onCropComplete = async (croppedArea, croppedAreaPixels) => {
     const url = await getCroppedImg(src, croppedAreaPixels);
+    const blob = await getCroppedImageBlob(src, croppedAreaPixels);
+    setImageBlob(blob as Blob);
     setImageUrl(url as string);
   };
 
@@ -57,10 +62,21 @@ export default function ImageCropModal({
               </div>
             </ModalBody>
             <ModalFooter>
-              <Button onClick={onClose}>취소</Button>
+              <Button
+                variant="flat"
+                onClick={() => {
+                  setImageUrl("");
+                  onClose();
+                }}
+              >
+                취소
+              </Button>
               <Button
                 onClick={() => {
-                  setImage(imageUrl);
+                  if (imageBlob) {
+                    setBannerBlob(imageBlob);
+                    setBannerPreview(imageUrl);
+                  }
                   onClose();
                 }}
               >

@@ -26,8 +26,8 @@ export default function TopicChips({
     return;
   }
   return (
-    <div className="flex flex-col">
-      <h2 className="text-[18px] font-bold">{title}</h2>
+    <div className="flex flex-col mb-4">
+      <h2 className="text-[18px] font-bold mb-2">{title}</h2>
       <div className="flex flex-wrap gap-2">
         {filtered.map((topic) =>
           selectedTopics.find((n) => n === topic) ? (
@@ -38,7 +38,7 @@ export default function TopicChips({
                 closeButton: "text-teal-400",
               }}
               onClose={() => onClose(topic)}
-              size="sm"
+              size="md"
               key={`anime-topic-${topic}`}
             >
               {topic}
@@ -48,7 +48,7 @@ export default function TopicChips({
               variant="bordered"
               className="border-1 cursor-pointer"
               onClick={() => onClick(topic)}
-              size="sm"
+              size="md"
               key={`anime-topic-${topic}`}
             >
               {topic}
