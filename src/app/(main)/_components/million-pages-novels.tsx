@@ -1,164 +1,164 @@
-import { Image, Tooltip } from '@heroui/react';
-import { NovelSample } from '../p/[post_name]/page';
-import Link from 'next/link';
-import { IoEyeOutline, IoStarOutline } from 'react-icons/io5';
-import { formatToKoreanUnits } from '@/utils/format-to-korean-unit';
+import { Image, Tooltip } from "@heroui/react";
+import { NovelSample } from "../p/[community_id]/page";
+import Link from "next/link";
+import { IoEyeOutline, IoStarOutline } from "react-icons/io5";
+import { formatToKoreanUnits } from "@/utils/format-to-korean-unit";
 
 const uris = [
-	'/cover_thumbnails/novel_cover_thumbnail_14.png',
-	'/cover_thumbnails/novel_cover_thumbnail_15.png',
-	'/cover_thumbnails/novel_cover_thumbnail_16.png',
-	'/cover_thumbnails/novel_cover_thumbnail_17.png',
-	'/cover_thumbnails/novel_cover_thumbnail_18.png',
-	'/cover_thumbnails/novel_cover_thumbnail_19.png',
-	'/cover_thumbnails/novel_cover_thumbnail_20.png',
-	'/cover_thumbnails/novel_cover_thumbnail_21.png',
+  "/cover_thumbnails/novel_cover_thumbnail_14.png",
+  "/cover_thumbnails/novel_cover_thumbnail_15.png",
+  "/cover_thumbnails/novel_cover_thumbnail_16.png",
+  "/cover_thumbnails/novel_cover_thumbnail_17.png",
+  "/cover_thumbnails/novel_cover_thumbnail_18.png",
+  "/cover_thumbnails/novel_cover_thumbnail_19.png",
+  "/cover_thumbnails/novel_cover_thumbnail_20.png",
+  "/cover_thumbnails/novel_cover_thumbnail_21.png",
 ];
 
 export default async function MillionPagesNovels() {
-	const novelDatas = await fetchNovelDatas();
+  const novelDatas = await fetchNovelDatas();
 
-	return (
-		<div>
-			<h1 className='font-bold text-lg mt-4 mb-2'>밀리언 페이지</h1>
-			<div className='overflow-hidden rounded-lg'>
-				<div className='flex gap-2 group'>
-					<section className='flex gap-2 animate-slide group-hover:pause'>
-						{novelDatas.map((novel, i) => (
-							<Link
-								key={novel.title + '-' + i}
-								href={`/a/${novel.author}/${novel.id}`}
-								className='flex flex-col gap-2'
-							>
-								<Tooltip
-									classNames={{
-										content: ['bg-transparent backdrop-blur-3xl', 'border'],
-									}}
-									content={
-										<div className='p-2'>
-											<Image
-												className='object-cover min-w-[90px] mt-1'
-												alt='book cover image'
-												width={280}
-												radius='sm'
-												src={uris[i]}
-												isZoomed
-											/>
-											<div>
-												<h4 className='font-bold text-lg'>{novel.title}</h4>
-												<small>{novel.author}</small>
-												<div className='flex gap-1'>
-													<div className='flex items-center gap-1'>
-														<IoStarOutline />
-														<small>{novel.stats.stars}</small>
-													</div>
-													<div className='flex items-center gap-1'>
-														<IoEyeOutline />
-														<small>
-															{formatToKoreanUnits(novel.stats.views)}
-														</small>
-													</div>
-												</div>
-											</div>
-										</div>
-									}
-								>
-									<Image
-										className='object-cover min-w-[90px]'
-										alt='book cover image'
-										height={120}
-										radius='sm'
-										src={uris[i]}
-										isZoomed
-									/>
-								</Tooltip>
-								<Tooltip showArrow content={<p>{novel.title}</p>}>
-									<small className='w-[90px] text-xs text-nowrap overflow-hidden text-ellipsis'>
-										{novel.title}
-									</small>
-								</Tooltip>
-								<div className='flex gap-1'>
-									{novel.about.category.map((n) => (
-										<small key={n} className='text-[10px] text-slate-600'>
-											{n}
-										</small>
-									))}
-								</div>
-							</Link>
-						))}
-					</section>
-					<section className='flex gap-2 animate-slide group-hover:pause'>
-						{novelDatas.map((novel, i) => (
-							<Link
-								key={novel.title + '-' + i}
-								href={`/a/${novel.author}/${novel.id}`}
-								className='flex flex-col gap-2'
-							>
-								<Tooltip
-									classNames={{
-										content: ['bg-transparent backdrop-blur-3xl', 'border'],
-									}}
-									delay={1000}
-									content={
-										<div className='p-2'>
-											<Image
-												className='object-cover min-w-[90px] mt-1'
-												alt='book cover image'
-												width={280}
-												radius='sm'
-												src={uris[i]}
-												isZoomed
-											/>
-											<div>
-												<h4 className='font-bold text-lg'>{novel.title}</h4>
-												<small>{novel.author}</small>
-												<div className='flex gap-1'>
-													<div className='flex items-center gap-1'>
-														<IoStarOutline />
-														<small>{novel.stats.stars}</small>
-													</div>
-													<div className='flex items-center gap-1'>
-														<IoEyeOutline />
-														<small>
-															{formatToKoreanUnits(novel.stats.views)}
-														</small>
-													</div>
-												</div>
-											</div>
-										</div>
-									}
-								>
-									<Image
-										className='object-cover min-w-[90px]'
-										alt='book cover image'
-										height={120}
-										radius='sm'
-										src={uris[i]}
-										isZoomed
-									/>
-								</Tooltip>
-								<Tooltip showArrow content={<p>{novel.title}</p>}>
-									<small className='w-[90px] text-xs text-nowrap overflow-hidden text-ellipsis'>
-										{novel.title}
-									</small>
-								</Tooltip>
-								<div className='flex gap-1'>
-									{novel.about.category.map((n) => (
-										<small key={n} className='text-[10px] text-slate-600'>
-											{n}
-										</small>
-									))}
-								</div>
-							</Link>
-						))}
-					</section>
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div>
+      <h1 className="font-bold text-lg mt-4 mb-2">밀리언 페이지</h1>
+      <div className="overflow-hidden rounded-lg">
+        <div className="flex gap-2 group">
+          <section className="flex gap-2 animate-slide group-hover:pause">
+            {novelDatas.map((novel, i) => (
+              <Link
+                key={novel.title + "-" + i}
+                href={`/a/${novel.author}/${novel.id}`}
+                className="flex flex-col gap-2"
+              >
+                <Tooltip
+                  classNames={{
+                    content: ["bg-transparent backdrop-blur-3xl", "border"],
+                  }}
+                  content={
+                    <div className="p-2">
+                      <Image
+                        className="object-cover min-w-[90px] mt-1"
+                        alt="book cover image"
+                        width={280}
+                        radius="sm"
+                        src={uris[i]}
+                        isZoomed
+                      />
+                      <div>
+                        <h4 className="font-bold text-lg">{novel.title}</h4>
+                        <small>{novel.author}</small>
+                        <div className="flex gap-1">
+                          <div className="flex items-center gap-1">
+                            <IoStarOutline />
+                            <small>{novel.stats.stars}</small>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <IoEyeOutline />
+                            <small>
+                              {formatToKoreanUnits(novel.stats.views)}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                >
+                  <Image
+                    className="object-cover min-w-[90px]"
+                    alt="book cover image"
+                    height={120}
+                    radius="sm"
+                    src={uris[i]}
+                    isZoomed
+                  />
+                </Tooltip>
+                <Tooltip showArrow content={<p>{novel.title}</p>}>
+                  <small className="w-[90px] text-xs text-nowrap overflow-hidden text-ellipsis">
+                    {novel.title}
+                  </small>
+                </Tooltip>
+                <div className="flex gap-1">
+                  {novel.about.category.map((n) => (
+                    <small key={n} className="text-[10px] text-slate-600">
+                      {n}
+                    </small>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </section>
+          <section className="flex gap-2 animate-slide group-hover:pause">
+            {novelDatas.map((novel, i) => (
+              <Link
+                key={novel.title + "-" + i}
+                href={`/a/${novel.author}/${novel.id}`}
+                className="flex flex-col gap-2"
+              >
+                <Tooltip
+                  classNames={{
+                    content: ["bg-transparent backdrop-blur-3xl", "border"],
+                  }}
+                  delay={1000}
+                  content={
+                    <div className="p-2">
+                      <Image
+                        className="object-cover min-w-[90px] mt-1"
+                        alt="book cover image"
+                        width={280}
+                        radius="sm"
+                        src={uris[i]}
+                        isZoomed
+                      />
+                      <div>
+                        <h4 className="font-bold text-lg">{novel.title}</h4>
+                        <small>{novel.author}</small>
+                        <div className="flex gap-1">
+                          <div className="flex items-center gap-1">
+                            <IoStarOutline />
+                            <small>{novel.stats.stars}</small>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <IoEyeOutline />
+                            <small>
+                              {formatToKoreanUnits(novel.stats.views)}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                >
+                  <Image
+                    className="object-cover min-w-[90px]"
+                    alt="book cover image"
+                    height={120}
+                    radius="sm"
+                    src={uris[i]}
+                    isZoomed
+                  />
+                </Tooltip>
+                <Tooltip showArrow content={<p>{novel.title}</p>}>
+                  <small className="w-[90px] text-xs text-nowrap overflow-hidden text-ellipsis">
+                    {novel.title}
+                  </small>
+                </Tooltip>
+                <div className="flex gap-1">
+                  {novel.about.category.map((n) => (
+                    <small key={n} className="text-[10px] text-slate-600">
+                      {n}
+                    </small>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </section>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 async function fetchNovelDatas(): Promise<NovelSample[]> {
-	const data = await import('/public/samples/korean_sample_novels_100.json');
-	return (Array.from(data) as NovelSample[]).slice(0, 8);
+  const data = await import("/public/samples/korean_sample_novels_100.json");
+  return (Array.from(data) as NovelSample[]).slice(0, 8);
 }

@@ -9,6 +9,7 @@ import {
   Divider,
   Form,
   Input,
+  Spinner,
   Textarea,
   useDisclosure,
 } from "@heroui/react";
@@ -16,8 +17,12 @@ import { FormEvent, useState } from "react";
 import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
 import TopicChips from "./_components/topic-chips";
 import FormTitle from "./_components/form-title";
+import http from "@/lib/axios/http";
+import { useRouter } from "next/navigation";
 
 export default function CreateCommunity() {
+  const route = useRouter();
+
   const [communityName, setCommunityName] = useState("");
   const [communityDescription, setCommunityDescription] = useState("");
   const [bannerBlob, setBannerBlob] = useState<Blob>();
@@ -37,6 +42,8 @@ export default function CreateCommunity() {
     description: undefined,
   });
 
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+
   const handleOnClose = (topicToRemove: string) => {
     setSelectedTopics(
       selectedTopics.filter((topic) => topic !== topicToRemove)
@@ -52,8 +59,9 @@ export default function CreateCommunity() {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitLoading(true);
     const formData = new FormData();
     formData.append("topics", JSON.stringify(selectedTopics));
     if (bannerBlob) {
@@ -71,7 +79,22 @@ export default function CreateCommunity() {
     if (!data.description) {
       setErrors({ ...errors, name: "커뮤니티 설명이 필요합니다." });
     }
-    console.log(data);
+    const res = await http.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/communities`,
+      formData,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data;",
+          "cache-control": "no-cache",
+        },
+      }
+    );
+    setIsSubmitLoading(false);
+
+    if (res.status === 201) {
+      route.push(`/p/${res.data.id}`);
+    }
   };
 
   return (
@@ -289,7 +312,7 @@ export default function CreateCommunity() {
           </div>
         </Form>
       </div>
-      <div className="col-start-3 col-span-1 bg-slate-50 overflow-x-hidden">
+      <div className="col-start-3 col-span-1 bg-slate-50">
         <div className="sticky top-1/4 p-4">
           <div className="border-1 rounded-lg shadow-lg">
             {bannerPreview ? (
@@ -345,7 +368,7 @@ export default function CreateCommunity() {
               form="community-form"
               type="submit"
             >
-              커뮤니티 만들기
+              {isSubmitLoading ? <Spinner /> : "커뮤니티 만들기"}
             </Button>
           </div>
         </div>
