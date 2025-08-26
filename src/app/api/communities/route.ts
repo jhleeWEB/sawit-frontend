@@ -1,6 +1,6 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 import { randomUUID } from "crypto";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -35,10 +35,10 @@ export async function POST(req: NextRequest) {
     }
     const bannerUrl = supabase.storage
       .from("community_banners")
-      .getPublicUrl(bannerRes.data.fullPath);
+      .getPublicUrl(bannerRes.data.path).data.publicUrl;
     const iconUrl = supabase.storage
       .from("community_icons")
-      .getPublicUrl(iconRes.data.fullPath);
+      .getPublicUrl(iconRes.data.path).data.publicUrl;
 
     const communityCreateRes = await supabase
       .from("communities")
@@ -59,6 +59,21 @@ export async function POST(req: NextRequest) {
     });
   } catch (e) {
     console.error(e);
+    /*@ts-expect-error e as unknown type*/
     return new Response(e.message, { status: 500 });
+  }
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    const id = req.nextUrl.searchParams.get("id");
+    const supabase = createSupabaseClient();
+    const res = await supabase.from("communities").select().eq("id", id);
+    if (res.data && res.data.length > 0) {
+      return new Response(JSON.stringify(res.data[0]), { status: res.status });
+    }
+  } catch (e) {
+    /**@ts-expect-error e as unknown */
+    return new Response(e.message, { status: e.status });
   }
 }

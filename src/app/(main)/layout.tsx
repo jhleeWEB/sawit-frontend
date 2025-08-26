@@ -25,7 +25,7 @@ export default async function RootLayout({
               <SideMenu />
             </aside>
             <section className="col-span-3 w-full h-[calc(100dvh-64px)] overflow-hidden">
-              <div className="w-full h-full grid grid-cols-3 overflow-y-auto scrollbar-hide">
+              <div className="w-full flex justify-center overflow-y-auto scrollbar-hide">
                 {children}
               </div>
             </section>

@@ -1,26 +1,38 @@
-import { formatToKoreanUnits } from "@/utils/format-to-korean-unit";
-import { Button, Chip, Image } from "@heroui/react";
-import { IoAddOutline, IoEyeOutline, IoStarOutline } from "react-icons/io5";
-import { achevementStyles } from "./_const/achievement-styles";
-import Link from "next/link";
-import { getServerSession } from "next-auth";
 import http from "@/lib/axios/http";
-import { authOptions } from "@/lib/auth/auth-options";
-import InfiniteScroll from "@/features/infinite-scroll";
+import CommunityHeader from "./_components/community-header";
+import CommunityInfo from "./_components/community-info";
+import EmptyPost from "./_components/empty-post";
 
-export default async function Author({
+export default async function CommunityPage({
   params,
 }: {
   params: Promise<{ community_id: string }>;
 }) {
   const { community_id } = await params;
   const id = decodeURIComponent(community_id);
-
+  const { data } = await http.get<CommunityModel>(`/communities?id=${id}`);
+  const { name, description, banner_url, icon_url, created_at } = data;
   return (
-    <section className="grid grid-cols-3 gap-2 mt-8 h-full w-full">
-      <div className="w-full h-full rounded-xl bg-slate-100 col-span-1 gap-2">
-        <InfiniteScroll threadName="hello" />
+    <div className="w-full max-w-5xl flex flex-col justify-center">
+      <CommunityHeader iconUrl={icon_url} bannerUrl={banner_url} name={name} />
+      <div className="flex">
+        <div className="flex flex-col w-[70%] gap-4 px-4">
+          <EmptyPost />
+        </div>
+        <div className="flex flex-col w-[30%] bg-teal-100 text-gray-400">
+          <CommunityInfo created_at={created_at} description={description} />
+        </div>
       </div>
-    </section>
+    </div>
   );
+}
+
+export interface CommunityModel {
+  id: number;
+  banner_url: string;
+  icon_url: string;
+  name: string;
+  description: string;
+  topics: string;
+  created_at: Date;
 }

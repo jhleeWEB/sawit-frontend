@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 @layer utilities {
-	.scrollbar-hide {
-		.no-scrollbar::-webkit-scrollbar {
-			display: none; /* For Chrome, Safari, Edge, Opera */
-		}
-		.no-scrollbar {
-			-ms-overflow-style: none; /* For IE and Edge */
-			scrollbar-width: none; /* For Firefox */
-		}
-	}
-	.pause {
-		animation-play-state: paused;
-	}
+  .scrollbar-hide {
+    .no-scrollbar::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, Edge, Opera */
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none; /* For IE and Edge */
+      scrollbar-width: none; /* For Firefox */
+    }
+  }
+  .pause {
+    animation-play-state: paused;
+  }
 }
