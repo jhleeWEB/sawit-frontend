@@ -2,14 +2,16 @@
 import { Button, Image, Link } from "@heroui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { PiTrashSimpleThin } from "react-icons/pi";
 
 const TRANSITION = "transform 200ms ease-in-out";
 
 interface Props {
   files: { preview: string }[];
+  onRemove: (index: number) => void;
 }
 
-export default function PreviewCarousel({ files }: Props) {
+export default function PreviewCarousel({ files, onRemove }: Props) {
   const wrappeRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -65,24 +67,25 @@ export default function PreviewCarousel({ files }: Props) {
         <Button
           isIconOnly
           variant="flat"
-          className="absolute z-10 top-[calc(50%-24px)] left-[38px] rounded-full opacity-70 bg-slate-950"
-          size="lg"
+          className="absolute z-10 top-[calc(50%-24px)] left-[18px] rounded-full opacity-70 bg-black/50"
+          size="sm"
           onPress={prev}
         >
-          <FaChevronLeft size={24} color="white" />
+          <FaChevronLeft size={18} color="white" />
         </Button>
       )}
       {hasNext && (
         <Button
           isIconOnly
           variant="flat"
-          className="absolute z-10 top-[calc(50%-24px)] right-[38px] rounded-full opacity-70 bg-slate-950"
-          size="lg"
+          className="absolute z-10 top-[calc(50%-24px)] right-[18px] rounded-full bg-black/50"
+          size="sm"
           onPress={next}
         >
-          <FaChevronRight size={24} color="white" />
+          <FaChevronRight size={18} color="white" />
         </Button>
       )}
+
       {files.map((n, i) => {
         return (
           <Link
@@ -96,6 +99,15 @@ export default function PreviewCarousel({ files }: Props) {
             className={`rounded-xl min-w-full border bg-[image:var(--image-url)] bg-cover bg-center`}
           >
             <div className="absolute top-0 left-0 flex justify-center min-w-full bg-white/60 backdrop-blur-3xl">
+              <Button
+                isIconOnly
+                variant="light"
+                className="absolute z-10 top-[18px] right-[18px] rounded-full bg-black/50"
+                size="sm"
+                onPress={() => onRemove(i)}
+              >
+                <PiTrashSimpleThin size={18} color="white" />
+              </Button>
               <Image
                 alt={"event-images" + i}
                 height={300}
