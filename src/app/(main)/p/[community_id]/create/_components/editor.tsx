@@ -1,12 +1,26 @@
 "use client";
 
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
+import { ActionDispatch, useState } from "react";
+import Editor, { ContentEditableEvent } from "react-simple-wysiwyg";
 
-export default function EditorWrapper() {
-  return (
-    <div className="relative w-full">
-      <Editor height="300px" initialEditType="wysiwyg" />
-    </div>
-  );
+interface Props {
+  formDispatch: ActionDispatch<
+    [
+      action: {
+        type: string;
+        payload: unknown;
+      }
+    ]
+  >;
+}
+
+export default function SimpleEditor({ formDispatch }: Props) {
+  const [html, setHtml] = useState("my <b>HTML</b>");
+
+  function onChange(e: ContentEditableEvent) {
+    setHtml(e.target.value);
+    formDispatch({ type: "update_text", payload: e.target.value });
+  }
+
+  return <Editor value={html} onChange={onChange} className="h-[300px]" />;
 }

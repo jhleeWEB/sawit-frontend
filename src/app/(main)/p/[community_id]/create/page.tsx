@@ -1,8 +1,7 @@
-import { Avatar, Form, Input } from "@heroui/react";
-import DragNDropMediaInput from "./_components/d-n-d-media";
-import EditorWrapper from "./_components/editor";
+import { Avatar } from "@heroui/react";
 import { CommunityModel } from "../page";
 import http from "@/lib/axios/http";
+import PostForm from "./_components/post-form";
 
 export default async function CreatePostPage({
   params,
@@ -24,11 +23,7 @@ export default async function CreatePostPage({
               <p className="text-lg">p/{data.name}</p>
             </div>
           </div>
-          <Form id="community-post-form" className="flex flex-col gap-16">
-            <Input isRequired variant="bordered" placeholder="제목" />
-            <DragNDropMediaInput />
-            <EditorWrapper />
-          </Form>
+          <PostForm />
         </div>
         <div className="flex flex-col w-[30%] bg-teal-100 text-gray-400">d</div>
       </div>

@@ -2,10 +2,21 @@
 
 import { useDropzone } from "react-dropzone";
 import { SlCloudUpload } from "react-icons/sl";
-import { useState } from "react";
+import { ActionDispatch, useEffect, useState } from "react";
 import PreviewCarousel from "@/features/preview-carousel";
 
-export default function DragNDropMediaInput() {
+interface Props {
+  formDispatch: ActionDispatch<
+    [
+      action: {
+        type: string;
+        payload: unknown;
+      }
+    ]
+  >;
+}
+
+export default function DragNDropMediaInput({ formDispatch }: Props) {
   const [files, setFiles] = useState<[] | { preview: string }[]>([]);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -28,6 +39,10 @@ export default function DragNDropMediaInput() {
     setFiles(removed);
   };
 
+  useEffect(() => {
+    formDispatch({ type: "update_files", payload: files });
+  }, [files, formDispatch]);
+
   return (
     <>
       {files.length === 0 ? (
@@ -37,7 +52,7 @@ export default function DragNDropMediaInput() {
               "w-full flex justify-center items-center gap-2 h-[200px] border border-dashed rounded-xl text-gray-500",
           })}
         >
-          <input {...getInputProps()} />
+          <input {...getInputProps()} name="files" />
 
           <>
             <p>여기에 콘텐츠를 넣거나, 클릭하여 올려보세요.</p>
@@ -51,6 +66,7 @@ export default function DragNDropMediaInput() {
         >
           추가하기
           <input
+            name="files"
             {...getInputProps()}
             id="upload"
             type="file"
