@@ -1,7 +1,21 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { randomUUID } from "crypto";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+
+export async function GET(req: NextRequest) {
+  try {
+    const id = req.nextUrl.searchParams.get("id");
+    const supabase = createSupabaseClient();
+    const res = await supabase.from("posts").select().eq("id", id);
+    if (res.data && res.data.length > 0) {
+      return new Response(JSON.stringify(res.data[0]), { status: res.status });
+    }
+  } catch (e) {
+    /**@ts-expect-error e as unknown */
+    return new Response(e.message, { status: e.status });
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -58,8 +72,6 @@ export async function POST(req: NextRequest) {
     console.error(e);
     return new Response(e.message, { status: e.status });
   }
-
-  return new Response("testing");
 }
 
 const uploadMultipleFiles = async (
