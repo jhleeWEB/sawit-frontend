@@ -17,7 +17,9 @@ interface Props {
 }
 
 export default function DragNDropMediaInput({ formDispatch }: Props) {
-  const [files, setFiles] = useState<[] | { preview: string }[]>([]);
+  const [files, setFiles] = useState<[] | { preview: string; file: File }[]>(
+    []
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -27,6 +29,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
       const urls = acceptedFiles.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
+          file: file,
         })
       );
       setFiles((prev) => [...prev, ...urls]);
@@ -40,7 +43,10 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
   };
 
   useEffect(() => {
-    formDispatch({ type: "update_files", payload: files });
+    formDispatch({
+      type: "update_files",
+      payload: files.map((file) => file.file),
+    });
   }, [files, formDispatch]);
 
   return (

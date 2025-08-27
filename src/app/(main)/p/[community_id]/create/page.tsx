@@ -23,7 +23,7 @@ export default async function CreatePostPage({
               <p className="text-lg">p/{data.name}</p>
             </div>
           </div>
-          <PostForm />
+          <PostForm communityId={id} />
         </div>
         <div className="flex flex-col w-[30%] bg-teal-100 text-gray-400">d</div>
       </div>

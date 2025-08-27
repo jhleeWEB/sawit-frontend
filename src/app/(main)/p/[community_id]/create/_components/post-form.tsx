@@ -3,8 +3,10 @@ import { Button, Form, Input } from "@heroui/react";
 import DragNDropMediaInput from "./d-n-d-media";
 import EditorWrapper from "./editor";
 import { FormEvent, useReducer } from "react";
+import http from "@/lib/axios/http";
+import { useRouter } from "next/navigation";
 
-function reducer(state: FormState, action: { type: string; payload: never }) {
+function reducer(state: FormState, action: { type: string; payload: any }) {
   switch (action.type) {
     case "update_files":
       state.files = [...action.payload];
@@ -31,12 +33,34 @@ const initialState = {
   text: "",
 };
 
-export default function PostForm() {
+interface Props {
+  communityId: string;
+}
+
+export default function PostForm({ communityId }: Props) {
+  const route = useRouter();
   const [formState, formDispatch] = useReducer(reducer, initialState);
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    console.log(formData.get("files"));
+    const formData = new FormData();
+    formData.append("community_id", communityId);
+    formData.append("title", formState.title);
+    formData.append("text", formState.text);
+    formState.files.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    const res = await http.post("/communities/posts", formData, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data;",
+        "cache-control": "no-cache",
+      },
+    });
+
+    if (res.status === 201) {
+      route.push(`/p/${communityId}/${res.data.id}`);
+    }
   };
   return (
     <Form
