@@ -1,11 +1,8 @@
-import { DefaultSession, DefaultUser } from 'next-auth';
+import { DefaultSession } from "next-auth";
 
-declare module 'next-auth' {
-	interface User extends DefaultUser {
-		id?: string;
-	}
-	interface Session extends DefaultSession {
-		accessToken: string;
-		user: User;
-	}
+declare module "next-auth" {
+  interface Session extends DefaultSession {
+    supabaseAccessToken: string;
+    user: User;
+  }
 }

@@ -8,6 +8,8 @@ import {
   PiChatCircleDotsThin,
   PiShareFatThin,
 } from "react-icons/pi";
+import http from "@/lib/axios/http";
+import { useParams } from "next/navigation";
 
 interface Props {
   text: string;
@@ -15,6 +17,7 @@ interface Props {
 }
 
 export default function PostContentBody({ text, urls }: Props) {
+  const { community_id, post_id } = useParams();
   return (
     <div className="flex flex-col gap-8">
       <MediaCarousel urls={urls} />
@@ -30,6 +33,22 @@ export default function PostContentBody({ text, urls }: Props) {
             radius="full"
             size="sm"
             className="hover:bg-default-200"
+            onPress={() => {
+              http.post(
+                "/communities/posts/likes",
+                {
+                  community_id,
+                  post_id,
+                },
+                {
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "cache-control": "no-cache",
+                  },
+                }
+              );
+            }}
           >
             <PiArrowFatLineUpThin size={20} className="hover:text-red-500" />
           </Button>
