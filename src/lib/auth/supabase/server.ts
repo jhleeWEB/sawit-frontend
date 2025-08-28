@@ -1,8 +1,18 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { createClient } from "@supabase/supabase-js";
+import { getServerSession } from "next-auth";
 
-export function createSupabaseClient() {
+export async function createSupabaseClient() {
+  const session = await getServerSession(authOptions);
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      global: {
+        headers: {
+          Authorization: `Bearer ${session?.supabaseAccessToken}`,
+        },
+      },
+    }
   );
 }

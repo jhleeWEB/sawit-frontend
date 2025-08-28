@@ -1,14 +1,12 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+
 import { getServerSession } from "next-auth";
-import { getToken } from "next-auth/jwt";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   console.log(body);
   const session = await getServerSession(authOptions);
-  console.log(session?.user.id);
   if (!session) {
     throw "no user session";
   }
