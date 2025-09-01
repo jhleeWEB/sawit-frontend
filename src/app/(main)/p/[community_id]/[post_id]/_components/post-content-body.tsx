@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default function PostContentBody({ text, urls }: Props) {
-  const { community_id, post_id } = useParams();
+  const { post_id } = useParams();
   const session = useSession();
   if (!session) {
     return;
@@ -55,11 +55,7 @@ export default function PostContentBody({ text, urls }: Props) {
             size="sm"
             className="hover:bg-default-200"
             onPress={async () => {
-              const res = await postDislikes(
-                post_id as string,
-                community_id as string,
-                session.data?.user.email
-              );
+              const res = await postDislikes(post_id as string);
               console.log(res);
             }}
           >

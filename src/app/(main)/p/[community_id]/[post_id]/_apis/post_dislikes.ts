@@ -1,39 +1,35 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSession } from "next-auth/react";
 
-export default async function postDislikes(
-  postId: string,
-  communityId: string,
-  email: string
-) {
+export default async function postLikes(postId: string) {
   try {
-    const supabase = await createSupabaseClient();
-
-    const { error } = await supabase
-      .from("post_dislikes")
-      .insert({
-        post_id: postId,
-        community_id: communityId,
-        email: email,
-      })
-      .select();
-    if (error) {
-      if (error.code === "23505") {
-        /** already pressed disliked
-         *  cancel it
-         */
-        await supabase.from("post_dislikes").delete().match({
-          post_id: postId,
-          community_id: communityId,
-          email: email,
-        });
-        return "cancelled";
-      } else {
-        throw error;
-      }
+    const session = await getSession();
+    if (!session) {
+      throw "no user session";
     }
-    return "success";
+    const supabase = await createSupabaseClient(session.supabaseAccessToken);
+    const { data: existing } = await supabase
+      .from("post_dislikes")
+      .select("id")
+      .eq("post_id", postId)
+      .maybeSingle();
+
+    if (existing) {
+      const { data: cancelled } = await supabase
+        .from("post_dislikes")
+        .delete()
+        .eq("id", existing.id);
+      return cancelled;
+    } else {
+      const { data: liked } = await supabase
+        .from("post_dislikes")
+        .insert({ post_id: postId })
+        .select()
+        .single();
+      return liked;
+    }
   } catch (e) {
     console.error(e);
-    return "failed";
+    return;
   }
 }
