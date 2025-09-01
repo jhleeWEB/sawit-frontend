@@ -1,7 +1,10 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { randomUUID } from "crypto";
+import { getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import { getSession } from "next-auth/react";
 
 export async function GET(req: NextRequest) {
   try {
@@ -10,6 +13,8 @@ export async function GET(req: NextRequest) {
     const res = await supabase.from("posts").select().eq("id", id);
     if (res.data && res.data.length > 0) {
       return new Response(JSON.stringify(res.data[0]), { status: res.status });
+    } else {
+      return new Response("h");
     }
   } catch (e) {
     /**@ts-expect-error e as unknown */

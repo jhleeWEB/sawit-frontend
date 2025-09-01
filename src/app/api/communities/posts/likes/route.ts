@@ -1,24 +1,16 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { createSupabaseClient } from "@/lib/auth/supabase/server";
 
-import { getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  console.log(body);
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    throw "no user session";
-  }
+  const supabase = await createSupabaseClient();
 
-  // const {name, email} = session?.user
-  // const supabase = createSupabaseClient();
-  // const userData = await supabase.from('users').select('*').eq('name', name).eq('email', email)
-  // if(userData.error){
-  //   throw 'no user data'
-  // }
-  // const id =userData.data[0].id
+  const { post_id, community_id, user_id } = await req.json();
+  const res = await supabase.from("post_likes").insert({
+    post_id,
+    community_id,
+    user_id,
+  });
 
-  //supabase.schema("interactions").from("post_likes").insert();
-  return new Response("testing");
+  return new Response(res.data);
 }

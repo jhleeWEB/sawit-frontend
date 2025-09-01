@@ -1,6 +1,6 @@
 "use client";
 import { Button, Image, Link } from "@heroui/react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const TRANSITION = "transform 200ms ease-in-out";

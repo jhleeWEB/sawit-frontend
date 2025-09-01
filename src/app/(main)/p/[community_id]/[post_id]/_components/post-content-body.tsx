@@ -8,8 +8,11 @@ import {
   PiChatCircleDotsThin,
   PiShareFatThin,
 } from "react-icons/pi";
-import http from "@/lib/axios/http";
+
 import { useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
+import postLikes from "../_apis/post_likes";
+import postDislikes from "../_apis/post_dislikes";
 
 interface Props {
   text: string;
@@ -18,6 +21,11 @@ interface Props {
 
 export default function PostContentBody({ text, urls }: Props) {
   const { community_id, post_id } = useParams();
+  const session = useSession();
+  if (!session) {
+    return;
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <MediaCarousel urls={urls} />
@@ -33,21 +41,9 @@ export default function PostContentBody({ text, urls }: Props) {
             radius="full"
             size="sm"
             className="hover:bg-default-200"
-            onPress={() => {
-              http.post(
-                "/communities/posts/likes",
-                {
-                  community_id,
-                  post_id,
-                },
-                {
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    "cache-control": "no-cache",
-                  },
-                }
-              );
+            onPress={async () => {
+              const res = await postLikes(post_id as string);
+              console.log(res);
             }}
           >
             <PiArrowFatLineUpThin size={20} className="hover:text-red-500" />
@@ -58,6 +54,14 @@ export default function PostContentBody({ text, urls }: Props) {
             radius="full"
             size="sm"
             className="hover:bg-default-200"
+            onPress={async () => {
+              const res = await postDislikes(
+                post_id as string,
+                community_id as string,
+                session.data?.user.email
+              );
+              console.log(res);
+            }}
           >
             <PiArrowFatLineDownThin size={20} className="hover:text-blue-500" />
           </Button>
