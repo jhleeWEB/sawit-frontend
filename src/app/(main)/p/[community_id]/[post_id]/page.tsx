@@ -17,7 +17,7 @@ export default async function PostPage({
       <div className="flex">
         <div className="flex flex-col w-[70%] gap-4 px-4">
           <PostTitleHeader title={post.title} />
-          <PostContentBody urls={post.file_uris} text={post.text} />
+          <PostContentBody post={post} />
         </div>
         <div className="flex flex-col w-[30%] bg-teal-100 text-gray-400">d</div>
       </div>

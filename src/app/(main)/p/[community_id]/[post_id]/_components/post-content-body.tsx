@@ -13,24 +13,27 @@ import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import postLikes from "../_apis/post_likes";
 import postDislikes from "../_apis/post_dislikes";
+import { Post } from "../_apis/fetch_post";
+import { useState } from "react";
 
 interface Props {
-  text: string;
-  urls: string[];
+  post: Post;
 }
 
-export default function PostContentBody({ text, urls }: Props) {
+export default function PostContentBody({ post }: Props) {
   const { post_id } = useParams();
   const session = useSession();
+  const [likes, setLikes] = useState(() => post.likes - post.dislikes);
+
   if (!session) {
     return;
   }
 
   return (
     <div className="flex flex-col gap-8">
-      <MediaCarousel urls={urls} />
+      <MediaCarousel urls={post.file_uris} />
       <div>
-        <p>{text}</p>
+        <p>{post.text}</p>
       </div>
       {/* 하단 버튼 그룹 */}
       <div className="flex gap-2">
@@ -42,21 +45,29 @@ export default function PostContentBody({ text, urls }: Props) {
             size="sm"
             className="hover:bg-default-200"
             onPress={async () => {
-              const res = await postLikes(post_id as string);
-              console.log(res);
+              const result = await postLikes(post_id as string);
+              if (result === "cancelled") {
+                setLikes((prev) => prev - 1);
+              } else if (result === "liked") {
+                setLikes((prev) => prev + 1);
+              }
             }}
           >
             <PiArrowFatLineUpThin size={20} className="hover:text-red-500" />
           </Button>
-          <small>32</small>
+          <small>{likes}</small>
           <Button
             isIconOnly
             radius="full"
             size="sm"
             className="hover:bg-default-200"
             onPress={async () => {
-              const res = await postDislikes(post_id as string);
-              console.log(res);
+              const result = await postDislikes(post_id as string);
+              if (result === "cancelled") {
+                setLikes((prev) => prev + 1);
+              } else if (result === "disliked") {
+                setLikes((prev) => prev - 1);
+              }
             }}
           >
             <PiArrowFatLineDownThin size={20} className="hover:text-blue-500" />

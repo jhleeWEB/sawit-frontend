@@ -7,29 +7,27 @@ export default async function postLikes(postId: string) {
     if (!session) {
       throw "no user session";
     }
+
     const supabase = await createSupabaseClient(session.supabaseAccessToken);
+    /**좋아요를 눌렀는지 확인 */
     const { data: existing } = await supabase
       .from("post_likes")
       .select("id")
       .eq("post_id", postId)
       .maybeSingle();
 
+    /** 이미 눌렀으면 삭제하기 */
     if (existing) {
-      const { data: cancelled } = await supabase
-        .from("post_likes")
-        .delete()
-        .eq("id", existing.id);
-      return cancelled;
+      await supabase.from("post_likes").delete().eq("id", existing.id);
+      return "cancelled";
     } else {
-      const { data: liked } = await supabase
-        .from("post_likes")
-        .insert({ post_id: postId })
-        .select()
-        .single();
-      return liked;
+      /** 안눌렀으니 추가히기*/
+      await supabase.from("post_likes").insert({ post_id: postId });
+
+      return "liked";
     }
   } catch (e) {
     console.error(e);
-    return;
+    return "error";
   }
 }

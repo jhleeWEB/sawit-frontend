@@ -15,21 +15,15 @@ export default async function postLikes(postId: string) {
       .maybeSingle();
 
     if (existing) {
-      const { data: cancelled } = await supabase
-        .from("post_dislikes")
-        .delete()
-        .eq("id", existing.id);
-      return cancelled;
+      await supabase.from("post_dislikes").delete().eq("id", existing.id);
+      return "cancelled";
     } else {
-      const { data: liked } = await supabase
-        .from("post_dislikes")
-        .insert({ post_id: postId })
-        .select()
-        .single();
-      return liked;
+      await supabase.from("post_dislikes").insert({ post_id: postId });
+
+      return "disliked";
     }
   } catch (e) {
     console.error(e);
-    return;
+    return "error";
   }
 }
