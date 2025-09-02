@@ -20,11 +20,11 @@ export default async function RootLayout({
       <body className="mx-auto">
         <Providers>
           <TopNavigation />
-          <main className="h-full w-full grid grid-cols-4 max-h-vdh max-w-dvw">
+          <main className="h-full w-full grid grid-cols-4 max-h-vdh max-w-dvw overflow-hidden">
             <aside className="col-start-1 col-span-1 border-r-1">
               <SideMenu />
             </aside>
-            <section className="col-span-3 w-full h-[calc(100dvh-64px)] overflow-hidden">
+            <section className="col-span-3 w-full h-[calc(100dvh-64px)] overflow-auto">
               <div className="w-full flex justify-center overflow-y-auto scrollbar-hide">
                 {children}
               </div>

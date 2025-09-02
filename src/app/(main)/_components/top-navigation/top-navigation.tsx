@@ -34,13 +34,11 @@ export default async function TopNavigation() {
       <NavbarContent justify="end">
         <NavbarItem>
           <Link
-            href={
-              session?.user?.name ? `/a/${session.user.name}/publish` : "/login"
-            }
+            href={session?.user?.name ? `/create` : "/login"}
             className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
           >
             <IoAddOutline />
-            <small className="text-[12px]">글쓰기</small>
+            <small className="text-[12px]">나도 올려볼까?</small>
           </Link>
         </NavbarItem>
         <NavbarItem>

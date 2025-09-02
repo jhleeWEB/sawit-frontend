@@ -19,7 +19,6 @@ export default async function postLikes(postId: string) {
       return "cancelled";
     } else {
       await supabase.from("post_dislikes").insert({ post_id: postId });
-
       return "disliked";
     }
   } catch (e) {
