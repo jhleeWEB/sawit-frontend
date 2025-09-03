@@ -6,6 +6,7 @@ import { ActionDispatch, useEffect, useState } from "react";
 import fetchCommunitySearchList, {
   CommunityAutocompleteList,
 } from "../_apis/fetch-community-search-list";
+import { useParams } from "next/navigation";
 
 interface Props {
   formDispatch: ActionDispatch<
@@ -19,6 +20,8 @@ interface Props {
 }
 
 export default function CommunitySearchBar({ formDispatch }: Props) {
+  const { community_id } = useParams<{ community_id: string }>();
+
   const [searchTerm, setSearchTerm] = useState("");
   const debounceValue = useDebounce(searchTerm, 800);
   const [autocompleteItems, setAutocompleteItems] = useState<
@@ -27,6 +30,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
   const [selectedItem, setSelectedItem] = useState<
     CommunityAutocompleteList | undefined
   >();
+
   useEffect(() => {
     const fetch = async () => {
       const result = await fetchCommunitySearchList(debounceValue);
@@ -36,7 +40,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
   }, [debounceValue]);
 
   return (
-    <div>
+    <div className="flex w-full">
       <Autocomplete
         aria-label="커뮤니티 선택"
         value={searchTerm}
@@ -44,14 +48,13 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
         items={autocompleteItems}
         placeholder="커뮤니티 검색하기"
         classNames={{
-          base: "max-w-xs",
           listboxWrapper: "max-h-[320px]",
           selectorButton: "text-default-500",
         }}
         inputProps={{
           classNames: {
             input: "ml-1",
-            inputWrapper: "h-[48px]",
+            inputWrapper: "w-full h-[34px]",
           },
         }}
         listboxProps={{
@@ -59,6 +62,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
           hideSelectedIcon: true,
           itemClasses: {
             base: [
+              "text-[10px]",
               "rounded-medium",
               "text-default-500",
               "transition-opacity",
@@ -90,20 +94,18 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
               setSelectedItem(item);
               formDispatch({ type: "update_community_id", payload: item.id });
             }}
+            startContent={<Avatar size="sm" src={item.icon_url} />}
           >
-            <ul className="flex gap-2 items-center">
-              <Avatar size="sm" src={item.icon_url} />
-              <p className="text-md">p/ {item.name}</p>
-            </ul>
+            p/ {item.name}
           </AutocompleteItem>
         )}
       </Autocomplete>
-      {selectedItem && (
+      {/* {selectedItem && (
         <div className="flex border rounded-lg items-center gap-2 p-4 mt-4">
           <Avatar src={selectedItem.icon_url} />
           <p className="text-lg">p/{selectedItem.name}</p>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

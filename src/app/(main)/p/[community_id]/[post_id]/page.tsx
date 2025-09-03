@@ -14,14 +14,12 @@ export default async function PostPage({
   }
 
   return (
-    <div className="w-full max-w-5xl flex flex-col justify-center">
-      <div className="flex">
-        <div className="flex flex-col w-[70%] gap-4 px-4">
-          <PostTitleHeader post={post} />
-          <PostContentBody post={post} />
-        </div>
-        <div className="flex flex-col w-[30%] bg-teal-100 text-gray-400">d</div>
-      </div>
+    <div className="main-container">
+      <main className="w-full">
+        <PostTitleHeader post={post} />
+        <PostContentBody post={post} />
+      </main>
+      <div className="right-menu-container">d</div>
     </div>
   );
 }

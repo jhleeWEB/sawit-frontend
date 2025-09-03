@@ -17,7 +17,6 @@ import { FormEvent, useState } from "react";
 import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
 import TopicChips from "./_components/topic-chips";
 import FormTitle from "./_components/form-title";
-import http from "@/lib/axios/http";
 import { useRouter } from "next/navigation";
 import createNewCommunity from "./_apis/create-new-community";
 

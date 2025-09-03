@@ -44,6 +44,7 @@ export default function PostForm() {
   const route = useRouter();
   const [formState, formDispatch] = useReducer(reducer, initialState);
   const [isPosting, setIsPosting] = useState(false);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPosting(true);
@@ -59,7 +60,7 @@ export default function PostForm() {
     <Form
       onSubmit={handleSubmit}
       id="community-post-form"
-      className="flex flex-col gap-16"
+      className="flex flex-col"
     >
       <CommunitySearchBar formDispatch={formDispatch} />
       <Input

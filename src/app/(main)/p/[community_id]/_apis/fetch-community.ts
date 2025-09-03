@@ -6,9 +6,7 @@ export default async function fetchCommunity(
   const supabase = await createSupabaseClient();
   const { data: community, error } = await supabase
     .from("communities")
-    .select(
-      "created_at, name, description, banner_url, icon_url, topics, member_count, post_count"
-    )
+    .select()
     .eq("id", id)
     .single();
 
@@ -28,5 +26,6 @@ export interface Community {
   icon_url: string;
   topics: string[];
   member_count: number;
+  owner_id: string;
   post_count: number;
 }
