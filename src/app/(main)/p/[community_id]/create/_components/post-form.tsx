@@ -1,12 +1,14 @@
 "use client";
-import { Button, Form, Input } from "@heroui/react";
+import { Button, Form, Input, Spinner } from "@heroui/react";
 import DragNDropMediaInput from "./d-n-d-media";
 import EditorWrapper from "./editor";
-import { FormEvent, useReducer } from "react";
-import http from "@/lib/axios/http";
+import { FormEvent, useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
+import CommunitySearchBar from "@/app/(main)/create-post/_components/community-search-bar";
+import createNewPost from "../_apis/create-new-post";
 
-function reducer(state: FormState, action: { type: string; payload: any }) {
+//@ts-expect-error payload any type
+function reducer(state: FormState, action: { type: string; payload }) {
   switch (action.type) {
     case "update_files":
       state.files = [...action.payload];
@@ -17,57 +19,49 @@ function reducer(state: FormState, action: { type: string; payload: any }) {
     case "update_title":
       state.title = action.payload;
       return state;
+    case "update_community_id":
+      state.communityId = action.payload;
+      return state;
   }
   return state;
 }
 
 interface FormState {
+  communityId: number;
   title: string;
   files: File[] | [];
   text: string;
 }
 
 const initialState = {
+  communityId: 0,
   title: "",
   files: [],
   text: "",
 };
 
-interface Props {
-  communityId: string;
-}
-
-export default function PostForm({ communityId }: Props) {
+export default function PostForm() {
   const route = useRouter();
   const [formState, formDispatch] = useReducer(reducer, initialState);
+  const [isPosting, setIsPosting] = useState(false);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("community_id", communityId);
-    formData.append("title", formState.title);
-    formData.append("text", formState.text);
-    formState.files.forEach((file) => {
-      formData.append("files", file);
-    });
+    setIsPosting(true);
+    const res = await createNewPost({ ...formState });
 
-    const res = await http.post("/communities/posts", formData, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "multipart/form-data;",
-        "cache-control": "no-cache",
-      },
-    });
-
-    if (res.status === 201) {
-      route.push(`/p/${communityId}/${res.data.id}`);
+    if (res) {
+      route.push(`/p/${res.community_id}/${res.id}`);
+      setIsPosting(false);
     }
   };
+
   return (
     <Form
       onSubmit={handleSubmit}
       id="community-post-form"
       className="flex flex-col gap-16"
     >
+      <CommunitySearchBar formDispatch={formDispatch} />
       <Input
         isRequired
         name="title"
@@ -87,6 +81,12 @@ export default function PostForm({ communityId }: Props) {
           게시하기
         </Button>
       </div>
+      {isPosting && (
+        <div className="absolute top-0 left-0 z-50 min-w-full min-h-dvh flex flex-col items-center justify-center backdrop-blur-sm">
+          <Spinner />
+          게시물 올리는 중 입니다! 조금만 기다려주세요~
+        </div>
+      )}
     </Form>
   );
 }

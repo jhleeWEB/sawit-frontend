@@ -34,7 +34,7 @@ export default async function TopNavigation() {
       <NavbarContent justify="end">
         <NavbarItem>
           <Link
-            href={session?.user?.name ? `/create` : "/login"}
+            href={session?.user?.name ? `/create-post` : "/login"}
             className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
           >
             <IoAddOutline />

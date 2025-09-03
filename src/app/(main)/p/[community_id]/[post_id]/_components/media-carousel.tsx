@@ -1,6 +1,6 @@
 "use client";
 import { Button, Image, Link } from "@heroui/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const TRANSITION = "transform 200ms ease-in-out";
@@ -9,8 +9,6 @@ interface Props {
 }
 
 export default function MediaCarousel({ urls }: Props) {
-  const wrappeRef = useRef<HTMLDivElement>(null);
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transition, setTransition] = useState("");
 
@@ -53,8 +51,7 @@ export default function MediaCarousel({ urls }: Props) {
 
   return (
     <div
-      ref={wrappeRef}
-      className={`relative h-[700px] max-h-[900px] w-full flex overflow-hidden scrollbar-hide rounded-lg`}
+      className={`relative w-full h-auto max-h-[900px] flex overflow-x-hidden scrollbar-hide rounded-lg`}
     >
       {hasPrev && (
         <Button
@@ -78,7 +75,6 @@ export default function MediaCarousel({ urls }: Props) {
           <FaChevronRight size={18} color="white" />
         </Button>
       )}
-
       {urls.map((url, i) => {
         return (
           <Link
@@ -89,11 +85,16 @@ export default function MediaCarousel({ urls }: Props) {
               /**@ts-expect-error custom property */
               "--image-url": `url(${url})`,
             }}
-            className={`rounded-xl min-w-full border bg-[image:var(--image-url)] bg-cover bg-center`}
+            className={`relative rounded-xl min-w-full h-full border bg-[image:var(--image-url)] bg-no-repeat bg-cover bg-center`}
           >
-            <div className="absolute top-0 left-0 flex justify-center min-w-full min-h-full bg-white/60 backdrop-blur-3xl">
+            <div className="top-0 left-0 flex justify-center min-w-full min-h-auto bg-white/60 backdrop-blur-3xl rounded-xl">
               <Image
                 alt={"event-images" + i}
+                sizes="100vw"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
                 height={700}
                 src={url}
                 radius="none"

@@ -10,6 +10,7 @@ import { SupabaseAdapter } from "@next-auth/supabase-adapter";
 import jwt from "jsonwebtoken";
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: SupabaseAdapter({
     url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
     secret: process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
@@ -38,7 +39,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session, user }) {
-      const signingSecret = process.env.SUBABASE_JWT_SECRET!;
+      const signingSecret = process.env.SUPABASE_JWT_SECRET!;
       const payload = {
         aud: "authenticated",
         exp: Math.floor(new Date(session.expires).getTime() / 1000),

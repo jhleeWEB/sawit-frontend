@@ -13,8 +13,9 @@ import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import postLikes from "../_apis/post_likes";
 import postDislikes from "../_apis/post_dislikes";
-import { Post } from "../_apis/fetch_post";
+
 import { useState } from "react";
+import { Post } from "../../create/_apis/create-new-post";
 
 interface Props {
   post: Post;
@@ -31,9 +32,9 @@ export default function PostContentBody({ post }: Props) {
 
   return (
     <div className="flex flex-col gap-8">
-      <MediaCarousel urls={post.file_uris} />
+      <MediaCarousel urls={post.media} />
       <div>
-        <p>{post.text}</p>
+        <p dangerouslySetInnerHTML={{ __html: post.text || "" }}></p>
       </div>
       {/* 하단 버튼 그룹 */}
       <div className="flex gap-2">
