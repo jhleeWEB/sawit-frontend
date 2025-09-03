@@ -7,10 +7,11 @@ import { v4 as uuidv4 } from "uuid";
 export interface Post {
   id: string;
   title: string;
-  created_at: Date;
+  created_at: string;
   text?: string;
   media: string[];
   community_id: number;
+  owner_id: string;
   likes: number;
   dislikes: number;
 }
