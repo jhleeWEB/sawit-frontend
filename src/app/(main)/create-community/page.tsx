@@ -98,281 +98,277 @@ export default function CreateCommunity() {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center">
-      <div className="flex max-w-4xl h-full mx-auto">
-        <div className="flex flex-col w-[70%] max-w-screen-sm gap-4 px-4 overflow-auto">
-          <Form id="community-form" onSubmit={handleSubmit}>
+    <div className="main-container">
+      <div className="w-full">
+        <Form id="community-form" onSubmit={handleSubmit}>
+          <FormTitle
+            title="커뮤니티에 대해서 알려주세요"
+            description="이름과 설명은 다른분들이 당신의 커뮤니티가 어떤 곳인지 이해하는 데 도움이 됩니다."
+          />
+          <Input
+            fullWidth
+            required
+            name="name"
+            label="커뮤니티 이름을 작성해주세요."
+            value={communityName}
+            onValueChange={setCommunityName}
+          />
+          <small className="text-gray-400 w-full flex justify-end">
+            {communityName.length}
+          </small>
+          <Textarea
+            fullWidth
+            required
+            name="description"
+            label="커뮤니티의 대해서 말해주세요."
+            value={communityDescription}
+            onValueChange={setCommunityDescription}
+          />
+          <small className="text-gray-400 w-full flex justify-end">
+            {communityDescription.length}
+          </small>
+          <div className="w-full mt-16">
             <FormTitle
-              title="커뮤니티에 대해서 알려주세요"
-              description="이름과 설명은 다른분들이 당신의 커뮤니티가 어떤 곳인지 이해하는 데 도움이 됩니다."
+              title="커뮤니티를 꾸며보세요"
+              description="시각적인 요소를 더하면 새로운 분들의 관심을 끌고 커뮤니티의 문화를 확립하는 데 도움이 됩니다! 언제든지 이 내용을 업데이트할 수 있습니다."
+            />
+            <div className="flex items-center justify-between mb-4 px-8">
+              <h3>배너</h3>
+              <Input
+                type="file"
+                radius="full"
+                size="sm"
+                className="w-[140px] cursor-pointer"
+                startContent={
+                  <PiImageSquareThin className="cursor-pointer" size={26} />
+                }
+                onChange={(event) => {
+                  if (event.target.files) {
+                    const [file] = event.target.files;
+                    setTempBanner(URL.createObjectURL(file));
+                    onOpen();
+                    event.target.type = "number";
+                    event.target.type = "file";
+                  }
+                }}
+              />
+              <ImageCropModal
+                src={tempBanner}
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                setBannerBlob={setBannerBlob}
+                setBannerPreview={setBannerPreview}
+              />
+            </div>
+            <div className="flex items-center justify-between px-8">
+              <h3>아이콘</h3>
+              <Input
+                type="file"
+                radius="full"
+                size="sm"
+                name="icon"
+                className="w-[140px] cursor-pointer"
+                startContent={
+                  <PiImageSquareThin className="cursor-pointer" size={26} />
+                }
+                onChange={(event) => {
+                  if (event.target.files) {
+                    const [file] = event.target.files;
+                    const url = URL.createObjectURL(file);
+                    setIconPreview(url);
+                    setIconBlob(file);
+                  }
+                }}
+              />
+            </div>
+          </div>
+          <div className="w-full mt-16">
+            <FormTitle
+              title="주제 추가"
+              description="관심 있는분들이 당신의 커뮤니티를 찾을 수 있도록 최대 3개의 주제를 추가하세요."
             />
             <Input
-              fullWidth
-              required
-              name="name"
-              label="커뮤니티 이름을 작성해주세요."
-              value={communityName}
-              onValueChange={setCommunityName}
+              radius="full"
+              placeholder="주제 필터"
+              value={topicFilter}
+              onValueChange={setTopicFilter}
+              startContent={<PiMagnifyingGlassLight size={18} />}
             />
-            <small className="text-gray-400 w-full flex justify-end">
-              {communityName.length}
-            </small>
-            <Textarea
-              fullWidth
-              required
-              name="description"
-              label="커뮤니티의 대해서 말해주세요."
-              value={communityDescription}
-              onValueChange={setCommunityDescription}
-            />
-            <small className="text-gray-400 w-full flex justify-end">
-              {communityDescription.length}
-            </small>
-            <div className="w-full mt-16">
-              <FormTitle
-                title="커뮤니티를 꾸며보세요"
-                description="시각적인 요소를 더하면 새로운 분들의 관심을 끌고 커뮤니티의 문화를 확립하는 데 도움이 됩니다! 언제든지 이 내용을 업데이트할 수 있습니다."
-              />
-              <div className="flex items-center justify-between mb-4 px-8">
-                <h3>배너</h3>
-                <Input
-                  type="file"
-                  radius="full"
-                  size="sm"
-                  className="w-[140px] cursor-pointer"
-                  startContent={
-                    <PiImageSquareThin className="cursor-pointer" size={26} />
-                  }
-                  onChange={(event) => {
-                    if (event.target.files) {
-                      const [file] = event.target.files;
-                      setTempBanner(URL.createObjectURL(file));
-                      onOpen();
-                      event.target.type = "number";
-                      event.target.type = "file";
-                    }
-                  }}
-                />
-                <ImageCropModal
-                  src={tempBanner}
-                  isOpen={isOpen}
-                  onOpenChange={onOpenChange}
-                  setBannerBlob={setBannerBlob}
-                  setBannerPreview={setBannerPreview}
-                />
-              </div>
-              <div className="flex items-center justify-between px-8">
-                <h3>아이콘</h3>
-                <Input
-                  type="file"
-                  radius="full"
-                  size="sm"
-                  name="icon"
-                  className="w-[140px] cursor-pointer"
-                  startContent={
-                    <PiImageSquareThin className="cursor-pointer" size={26} />
-                  }
-                  onChange={(event) => {
-                    if (event.target.files) {
-                      const [file] = event.target.files;
-                      const url = URL.createObjectURL(file);
-                      setIconPreview(url);
-                      setIconBlob(file);
-                    }
-                  }}
-                />
-              </div>
-            </div>
-            <div className="w-full mt-16">
-              <FormTitle
-                title="주제 추가"
-                description="관심 있는분들이 당신의 커뮤니티를 찾을 수 있도록 최대 3개의 주제를 추가하세요."
-              />
-              <Input
-                radius="full"
-                placeholder="주제 필터"
-                value={topicFilter}
-                onValueChange={setTopicFilter}
-                startContent={<PiMagnifyingGlassLight size={18} />}
-              />
-              <div>
-                <h2 className="text-sm font-bold mt-2">{`주제 ${selectedTopics.length}/3`}</h2>
-                <div className="flex min-h-[32px] gap-2">
-                  {selectedTopics.map((topic) => (
-                    <Chip
-                      radius="none"
-                      variant="bordered"
-                      className="border-1"
-                      size="sm"
-                      key={`selected-topics-${topic}`}
-                      onClose={() => handleOnClose(topic)}
-                    >
-                      {topic}
-                    </Chip>
-                  ))}
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <TopicChips
-                  title="애니 & 코스플레이"
-                  topics={topics.anime}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="예술"
-                  topics={topics.art}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="사업 & 경제"
-                  topics={topics.business}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="수집품 & 기타 취미"
-                  topics={topics.collectible}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="교육 & 커리어"
-                  topics={topics.education}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="패션 & 뷰티"
-                  topics={topics.fashion}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="음식 & 음료"
-                  topics={topics.food}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="게임"
-                  topics={topics.game}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="건강 & 웰빙"
-                  topics={topics.health}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="집 & 조경"
-                  topics={topics.home}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="영화 & 드라마"
-                  topics={topics.movie}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-                <TopicChips
-                  title="연애 & 가족"
-                  topics={topics.relationship}
-                  selectedTopics={selectedTopics}
-                  filter={topicFilter}
-                  onClick={handleOnClick}
-                  onClose={handleOnClose}
-                />
-              </div>
-            </div>
-          </Form>
-        </div>
-        <div className="flex flex-col w-[30%] max-h-dvh text-gray-400">
-          <div className="sticky w-full top-[1/4] p-4">
-            <div className="border-1 rounded-lg shadow-lg">
-              {bannerPreview ? (
-                <div
-                  style={{
-                    /* @ts-expect-error custom style property added*/
-                    "--image-url": `url(${bannerPreview})`,
-                  }}
-                  className={`h-[60px] rounded-t-lg bg-no-repeat bg-cover bg-top bg-[image:var(--image-url)]`}
-                />
-              ) : (
-                <div className={`h-[60px] bg-red-300 rounded-t-lg`} />
-              )}
-              <Divider />
-              <div className="max-w-full flex items-center gap-4 p-4 pb-0">
-                <Avatar
-                  isBordered
-                  size="md"
-                  className="shrink-0"
-                  src={iconPreview}
-                />
-
-                <div className="max-w-[calc(100%-64px)]">
-                  <h1 className="text-2xl font-bold break-words">
-                    p/{communityName}
-                  </h1>
-                  <div>
-                    <small>1 member</small>
-                    <span>•</span>
-                    <small>1 online</small>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-wrap px-4 pt-2 gap-2">
+            <div>
+              <h2 className="text-sm font-bold mt-2">{`주제 ${selectedTopics.length}/3`}</h2>
+              <div className="flex min-h-[32px] gap-2">
                 {selectedTopics.map((topic) => (
                   <Chip
-                    size="sm"
+                    radius="none"
                     variant="bordered"
                     className="border-1"
-                    key={`preview-topics-${topic}`}
+                    size="sm"
+                    key={`selected-topics-${topic}`}
+                    onClose={() => handleOnClose(topic)}
                   >
                     {topic}
                   </Chip>
                 ))}
               </div>
-              <p className="p-4 break-words">{communityDescription}</p>
             </div>
-            <div className="mt-4">
-              <Button
-                fullWidth
-                radius="full"
-                color="success"
-                form="community-form"
-                type="submit"
-              >
-                {isSubmitLoading ? <Spinner /> : "커뮤니티 만들기"}
-              </Button>
+            <div className="flex flex-col gap-2">
+              <TopicChips
+                title="애니 & 코스플레이"
+                topics={topics.anime}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="예술"
+                topics={topics.art}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="사업 & 경제"
+                topics={topics.business}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="수집품 & 기타 취미"
+                topics={topics.collectible}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="교육 & 커리어"
+                topics={topics.education}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="패션 & 뷰티"
+                topics={topics.fashion}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="음식 & 음료"
+                topics={topics.food}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="게임"
+                topics={topics.game}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="건강 & 웰빙"
+                topics={topics.health}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="집 & 조경"
+                topics={topics.home}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="영화 & 드라마"
+                topics={topics.movie}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
+              <TopicChips
+                title="연애 & 가족"
+                topics={topics.relationship}
+                selectedTopics={selectedTopics}
+                filter={topicFilter}
+                onClick={handleOnClick}
+                onClose={handleOnClose}
+              />
             </div>
           </div>
+        </Form>
+      </div>
+      <div className="right-menu-container">
+        <div className="border-1 rounded-lg shadow-lg">
+          {bannerPreview ? (
+            <div
+              style={{
+                /* @ts-expect-error custom style property added*/
+                "--image-url": `url(${bannerPreview})`,
+              }}
+              className={`h-[60px] rounded-t-lg bg-no-repeat bg-cover bg-top bg-[image:var(--image-url)]`}
+            />
+          ) : (
+            <div className={`h-[60px] bg-red-300 rounded-t-lg`} />
+          )}
+          <Divider />
+          <div className="max-w-full flex items-center gap-4 p-4 pb-0">
+            <Avatar
+              isBordered
+              size="md"
+              className="shrink-0"
+              src={iconPreview}
+            />
+
+            <div className="max-w-[calc(100%-64px)]">
+              <h1 className="text-2xl font-bold break-words">
+                p/{communityName}
+              </h1>
+              <div>
+                <small>1 member</small>
+                <span>•</span>
+                <small>1 online</small>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap px-4 pt-2 gap-2">
+            {selectedTopics.map((topic) => (
+              <Chip
+                size="sm"
+                variant="bordered"
+                className="border-1"
+                key={`preview-topics-${topic}`}
+              >
+                {topic}
+              </Chip>
+            ))}
+          </div>
+          <p className="p-4 break-words">{communityDescription}</p>
+        </div>
+        <div className="mt-4">
+          <Button
+            fullWidth
+            radius="full"
+            color="success"
+            form="community-form"
+            type="submit"
+          >
+            {isSubmitLoading ? <Spinner /> : "커뮤니티 만들기"}
+          </Button>
         </div>
       </div>
     </div>
