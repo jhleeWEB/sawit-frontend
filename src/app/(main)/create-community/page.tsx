@@ -19,6 +19,7 @@ import TopicChips from "./_components/topic-chips";
 import FormTitle from "./_components/form-title";
 import http from "@/lib/axios/http";
 import { useRouter } from "next/navigation";
+import createNewCommunity from "./_apis/create-new-community";
 
 export default function CreateCommunity() {
   const route = useRouter();
@@ -62,44 +63,26 @@ export default function CreateCommunity() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitLoading(true);
-    const formData = new FormData();
-    formData.append("topics", JSON.stringify(selectedTopics));
-    if (bannerBlob) {
-      formData.append("bannerBlob", bannerBlob);
-    }
-    if (iconBlob) {
-      formData.append("iconBlob", iconBlob);
-    }
-    formData.append("name", communityName);
-    formData.append("description", communityDescription);
-    const data = Object.fromEntries(formData);
-    if (!data.name) {
-      setErrors({ ...errors, name: "커뮤니티 이름이 필요합니다." });
-    }
-    if (!data.description) {
-      setErrors({ ...errors, name: "커뮤니티 설명이 필요합니다." });
-    }
-    const res = await http.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/communities`,
-      formData,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data;",
-          "cache-control": "no-cache",
-        },
-      }
-    );
+    const data = await createNewCommunity({
+      name: communityName,
+      description: communityDescription,
+      banner: bannerBlob,
+      icon: iconBlob,
+      topics: selectedTopics,
+    });
+    route.push(`/p/${data.id}`);
     setIsSubmitLoading(false);
-
-    if (res.status === 201) {
-      route.push(`/p/${res.data.id}`);
-    }
   };
 
   return (
     <div className="main-container">
-      <div className="w-full">
+      {isSubmitLoading && (
+        <div className="absolute top-0 left-0 z-50 min-w-full min-h-dvh flex flex-col items-center justify-center backdrop-blur-sm">
+          <Spinner />
+          커뮤니티 생성 중 입니다! 조금만 기다려주세요~
+        </div>
+      )}
+      <div className="w-full mt-12">
         <Form id="community-form" onSubmit={handleSubmit}>
           <FormTitle
             title="커뮤니티에 대해서 알려주세요"
@@ -312,7 +295,12 @@ export default function CreateCommunity() {
           </div>
         </Form>
       </div>
-      <div className="right-menu-container">
+      <div
+        className="right-menu-container"
+        style={{
+          top: "20%",
+        }}
+      >
         <div className="border-1 rounded-lg shadow-lg">
           {bannerPreview ? (
             <div

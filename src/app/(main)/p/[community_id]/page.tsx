@@ -1,7 +1,7 @@
-import http from "@/lib/axios/http";
 import CommunityHeader from "./_components/community-header";
 import CommunityInfo from "./_components/community-info";
 import EmptyPost from "./_components/empty-post";
+import fetchCommunity from "./_apis/fetch-community";
 
 export default async function CommunityPage({
   params,
@@ -10,22 +10,23 @@ export default async function CommunityPage({
 }) {
   const { community_id } = await params;
   const id = decodeURIComponent(community_id);
-  const { data } = await http.get<CommunityModel>(`/communities?id=${id}`);
-  const { name, description, banner_url, icon_url, created_at } = data;
+  const community = await fetchCommunity(id);
+  if (!community) {
+    return;
+  }
+  const { name, description, banner_url, icon_url, created_at } = community;
   return (
     <div className="main-container">
+      <CommunityHeader
+        iconUrl={icon_url}
+        bannerUrl={banner_url}
+        name={name}
+        id={id}
+      />
       <main className="w-full">
-        <CommunityHeader
-          iconUrl={icon_url}
-          bannerUrl={banner_url}
-          name={name}
-        />
-
-        <div className="flex flex-col w-[70%] gap-4 px-4">
-          <EmptyPost />
-        </div>
+        <EmptyPost />
       </main>
-      <div className="right-menu-container">
+      <div className="right-menu-container" style={{ top: "128px" }}>
         <CommunityInfo created_at={created_at} description={description} />
       </div>
     </div>
