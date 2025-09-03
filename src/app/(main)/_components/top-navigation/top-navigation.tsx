@@ -17,7 +17,7 @@ export default async function TopNavigation() {
   const session = await getServerSession(authOptions);
 
   return (
-    <Navbar isBlurred>
+    <Navbar isBlurred maxWidth="full" isBordered>
       <NavbarBrand>
         <Link href="/">
           <Image
@@ -29,7 +29,12 @@ export default async function TopNavigation() {
         </Link>
       </NavbarBrand>
       <NavbarContent justify="center">
-        <Input type="search" placeholder="Type to search" radius="lg" />
+        <Input
+          type="search"
+          placeholder="Type to search"
+          radius="lg"
+          width={500}
+        />
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>

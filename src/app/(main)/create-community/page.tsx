@@ -98,9 +98,9 @@ export default function CreateCommunity() {
   };
 
   return (
-    <div className="w-full max-w-5xl flex flex-col justify-center overflow-auto">
-      <div className="flex">
-        <div className="flex flex-col w-[70%] gap-4 px-4">
+    <div className="w-full flex flex-col justify-center">
+      <div className="flex max-w-4xl h-full mx-auto">
+        <div className="flex flex-col w-[70%] max-w-screen-sm gap-4 px-4 overflow-auto">
           <Form id="community-form" onSubmit={handleSubmit}>
             <FormTitle
               title="커뮤니티에 대해서 알려주세요"
@@ -313,8 +313,8 @@ export default function CreateCommunity() {
             </div>
           </Form>
         </div>
-        <div className="flex flex-col w-[30%] bg-teal-100 text-gray-400">
-          <div className="sticky top-1/4 p-4">
+        <div className="flex flex-col w-[30%] max-h-dvh text-gray-400">
+          <div className="sticky w-full top-[1/4] p-4">
             <div className="border-1 rounded-lg shadow-lg">
               {bannerPreview ? (
                 <div

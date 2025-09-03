@@ -4,7 +4,7 @@ import { PiHouseSimpleThin } from "react-icons/pi";
 
 export default function SideMenu() {
   return (
-    <div className="flex flex-col sticky top-[64px] justify-center p-8">
+    <div className="flex flex-col w-full justify-center p-8">
       <div className="mb-4">
         <Link className="text-default-900 gap-4">
           <PiHouseSimpleThin size={22} />

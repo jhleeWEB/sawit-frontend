@@ -7,6 +7,7 @@ export default async function fetchCommunity(
   const { data: commInfo, error } = await supabase
     .from("communities")
     .select("name, icon_url")
+    .eq("id", community_id)
     .single();
 
   if (error) {

@@ -13,9 +13,9 @@ export default async function CreatePostPage({
   const { data } = await http.get<CommunityModel>(`/communities?id=${id}`);
 
   return (
-    <div className="w-full max-w-5xl flex flex-col justify-center">
-      <div className="flex">
-        <div className="flex flex-col w-[70%] gap-4 px-4">
+    <div className="w-full flex flex-col justify-center">
+      <div className="flex max-w-4xl h-full mx-auto">
+        <div className="flex flex-col w-[70%] max-w-screen-sm gap-4 px-4 overflow-auto">
           <div>
             <h1 className="text-2xl font-bold mb-4">무엇을 올려볼까요?</h1>
             <div className="flex items-center gap-2 ">
@@ -23,9 +23,9 @@ export default async function CreatePostPage({
               <p className="text-lg">p/{data.name}</p>
             </div>
           </div>
-          <PostForm communityId={id} />
+          <PostForm />
         </div>
-        <div className="flex flex-col w-[30%] bg-teal-100 text-gray-400">d</div>
+        <div className="flex flex-col w-[30%] max-h-dvh text-gray-400">d</div>
       </div>
     </div>
   );
