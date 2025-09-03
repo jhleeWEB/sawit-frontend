@@ -16,7 +16,7 @@ export default async function Home() {
     Post,
   ];
   return (
-    <div className="w-full flex-1 grid grid-cols-[minmax(0,760px)_minmax(0,320px)] place-content-between">
+    <div className="w-full flex-1 grid grid-cols-[minmax(0,760px)_minmax(0,320px)] place-content-between gap-6">
       <main className="w-full">
         {posts.map((Post, i) => (
           <Post key={i} />

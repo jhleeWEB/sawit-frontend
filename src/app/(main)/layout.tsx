@@ -17,16 +17,14 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="mx-auto">
+      <body>
         <Providers>
           <TopNavigation />
-          <div className="grid grid-cols-[270px_1fr]">
-            <aside className="col-start-1 contain-layout fixed w-[270px] min-h-[calc(100dvh-64px)] border-r-1">
+          <div className="grid-container">
+            <aside className="left-menu-container">
               <SideMenu />
             </aside>
-            <div className="col-start-2 flex flex-col mx-auto justify-stretch max-w-[calc(100vw-270px)] min-h-[calc(100dvh-64px)]">
-              {children}
-            </div>
+            <div className="main-container">{children}</div>
           </div>
         </Providers>
       </body>
