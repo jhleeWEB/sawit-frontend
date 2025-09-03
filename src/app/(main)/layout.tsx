@@ -24,7 +24,7 @@ export default async function RootLayout({
             <aside className="left-menu-container">
               <SideMenu />
             </aside>
-            <div className="main-container">{children}</div>
+            <div className="subgrid-container">{children}</div>
           </div>
         </Providers>
       </body>
