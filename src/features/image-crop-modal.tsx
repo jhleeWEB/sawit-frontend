@@ -10,7 +10,7 @@ import {
   ModalHeader,
 } from "@heroui/react";
 import { useState } from "react";
-import Cropper from "react-easy-crop";
+import Cropper, { Area } from "react-easy-crop";
 
 interface Props {
   src: string;
@@ -31,7 +31,7 @@ export default function ImageCropModal({
   const [imageUrl, setImageUrl] = useState("");
   const [imageBlob, setImageBlob] = useState<Blob>();
 
-  const onCropComplete = async (croppedArea, croppedAreaPixels) => {
+  const onCropComplete = async (croppedAreaPixels: Area) => {
     const url = await getCroppedImg(src, croppedAreaPixels);
     const blob = await getCroppedImageBlob(src, croppedAreaPixels);
     setImageBlob(blob as Blob);
