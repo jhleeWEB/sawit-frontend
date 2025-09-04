@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Community } from "../_apis/fetch-community";
+import createdAt from "@/lib/dayjs/created-at";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -23,7 +24,7 @@ export default function CommunityInfo({ showTitle, community }: Props) {
       <div className="flex">
         <LiaSignSolid />
         <small>개설일자</small>
-        <small>{dayjs(community.created_at).fromNow()}</small>
+        <small>{createdAt(community.created_at)}</small>
       </div>
       <div className="flex gap-4">
         <div>

@@ -47,6 +47,7 @@ export const authOptions: NextAuthOptions = {
         email: user.email,
         role: "authenticated",
       };
+      session.user = { ...user };
       session.supabaseAccessToken = jwt.sign(payload, signingSecret);
       return session;
     },

@@ -12,9 +12,11 @@ import Link from "next/link";
 import { IoAddOutline } from "react-icons/io5";
 import AvatarDropdown from "./_components/avatar-dropdown";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import fetchUser from "@/service/fetch-user";
 
 export default async function TopNavigation() {
   const session = await getServerSession(authOptions);
+  const userInfo = await fetchUser({ id: session?.user.id });
 
   return (
     <Navbar isBlurred maxWidth="full" isBordered>
@@ -37,31 +39,41 @@ export default async function TopNavigation() {
         />
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
-          <Link
-            href={session?.user?.name ? `/create-post` : "/login"}
-            className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
-          >
-            <IoAddOutline />
-            <small className="text-[12px]">나도 올려볼까?</small>
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          {session ? (
-            <AvatarDropdown
-              image={
-                session.user?.image || "https://images.unsplash.com/broken"
-              }
-              name={session.user?.name || "이름없음"}
-            />
-          ) : (
-            <Link href="/login">
-              <small className="cursor-pointer hover:text-primary-400">
-                로그인
-              </small>
-            </Link>
-          )}
-        </NavbarItem>
+        {userInfo ? (
+          <>
+            <NavbarItem>
+              <Link
+                href={`/create-post`}
+                className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
+              >
+                <IoAddOutline />
+                <small className="text-[12px]">나도 올려볼까?</small>
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <AvatarDropdown image={userInfo.image} name={userInfo.username} />
+            </NavbarItem>
+          </>
+        ) : (
+          <>
+            <NavbarItem>
+              <Link
+                href={"/login"}
+                className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
+              >
+                <IoAddOutline />
+                <small className="text-[12px]">나도 올려볼까?</small>
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link href="/login">
+                <small className="cursor-pointer hover:text-primary-400">
+                  로그인
+                </small>
+              </Link>
+            </NavbarItem>
+          </>
+        )}
       </NavbarContent>
     </Navbar>
   );
