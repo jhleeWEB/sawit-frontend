@@ -11,8 +11,9 @@ import Link from "next/link";
 
 import { IoAddOutline } from "react-icons/io5";
 import AvatarDropdown from "./_components/avatar-dropdown";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 import fetchUser from "@/service/fetch-user";
+import { authOptions } from "@/lib/auth/supabase/auth-options";
 
 export default async function TopNavigation() {
   const session = await getServerSession(authOptions);
