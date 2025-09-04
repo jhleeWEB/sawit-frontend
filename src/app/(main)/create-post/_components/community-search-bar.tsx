@@ -35,7 +35,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
   }, [debounceValue]);
 
   return (
-    <div className="flex w-full">
+    <div className="flex">
       <Autocomplete
         aria-label="커뮤니티 선택"
         value={searchTerm}
@@ -49,7 +49,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
         inputProps={{
           classNames: {
             input: "ml-1",
-            inputWrapper: "w-full h-[34px]",
+            inputWrapper: "w-full h-[34px] border",
           },
         }}
         listboxProps={{

@@ -24,6 +24,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
+      "video/*": [],
     },
     onDrop: (acceptedFiles) => {
       const urls = acceptedFiles.map((file) =>
