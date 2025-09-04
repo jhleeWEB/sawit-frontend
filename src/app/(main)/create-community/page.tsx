@@ -34,13 +34,13 @@ export default function CreateCommunity() {
 
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [topicFilter, setTopicFilter] = useState<string>("");
-  const [errors, setErrors] = useState<{
-    name: string | undefined;
-    description: string | undefined;
-  }>({
-    name: undefined,
-    description: undefined,
-  });
+  // const [errors, setErrors] = useState<{
+  //   name: string | undefined;
+  //   description: string | undefined;
+  // }>({
+  //   name: undefined,
+  //   description: undefined,
+  // });
 
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 

@@ -1,5 +1,4 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { SupabaseClient } from "@supabase/supabase-js";
 import { getSession } from "next-auth/react";
 
 interface Params {

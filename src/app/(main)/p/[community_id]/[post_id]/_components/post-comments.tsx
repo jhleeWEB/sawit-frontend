@@ -7,5 +7,5 @@ interface Props {
 }
 
 export default function PostComments({ post }: Props) {
-  return <div>comment</div>;
+  return <div>{post.id}</div>;
 }
