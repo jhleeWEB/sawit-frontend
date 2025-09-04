@@ -2,7 +2,7 @@ import { createSupabaseClient } from "@/lib/auth/supabase/server";
 
 export default async function fetchCommunity(
   id: string
-): Promise<Omit<Community, "id"> | null> {
+): Promise<Community | null> {
   const supabase = await createSupabaseClient();
   const { data: community, error } = await supabase
     .from("communities")

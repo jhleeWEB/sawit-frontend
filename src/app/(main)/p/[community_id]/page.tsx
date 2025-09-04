@@ -14,7 +14,7 @@ export default async function CommunityPage({
   if (!community) {
     return;
   }
-  const { name, description, banner_url, icon_url, created_at } = community;
+  const { name, banner_url, icon_url } = community;
   return (
     <div className="main-container">
       <CommunityHeader
@@ -27,7 +27,7 @@ export default async function CommunityPage({
         <EmptyPost />
       </main>
       <div className="right-menu-container" style={{ top: "128px" }}>
-        <CommunityInfo created_at={created_at} description={description} />
+        <CommunityInfo community={community} />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import PostTitleHeader from "./_components/post-title-header";
 import PostContentBody from "./_components/post-content-body";
 import fetchPost from "./_apis/fetch_post";
+import fetchCommunity from "../_apis/fetch-community";
+import CommunityInfo from "../_components/community-info";
 
 export default async function PostPage({
   params,
@@ -9,6 +11,7 @@ export default async function PostPage({
 }) {
   const { post_id, community_id } = await params;
   const post = await fetchPost(post_id, community_id);
+  const community = await fetchCommunity(community_id);
   if (!post) {
     return;
   }
@@ -19,7 +22,9 @@ export default async function PostPage({
         <PostTitleHeader post={post} />
         <PostContentBody post={post} />
       </main>
-      <div className="right-menu-container">d</div>
+      <div className="right-menu-container">
+        {community && <CommunityInfo showTitle community={community} />}
+      </div>
     </div>
   );
 }
