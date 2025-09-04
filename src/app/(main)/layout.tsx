@@ -1,31 +1,33 @@
-import { Metadata } from 'next';
+import { Metadata } from "next";
 
-import '../globals.css';
-import Providers from '../providers';
-import Footer from './_components/footer';
-import TopNavigation from './_components/top-navigation/top-navigation';
+import "../globals.css";
+import Providers from "../providers";
+import TopNavigation from "./_components/top-navigation/top-navigation";
+import SideMenu from "./_components/side-menu/side-menu";
 
 export const metadata: Metadata = {
-	title: 'Sawit',
-	description: 'Have You seen it? Yes I Sawit!',
+  title: "Sawit",
+  description: "Have You seen it? Yes I Sawit!",
 };
 
 export default async function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang='en'>
-			<body>
-				<Providers>
-					<TopNavigation />
-					<main className='mx-auto max-w-screen-md'>
-						<div className='w-full flex justify-center'>{children}</div>
-					</main>
-					<Footer />
-				</Providers>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body>
+        <Providers>
+          <TopNavigation />
+          <div className="grid-container">
+            <aside className="left-menu-container">
+              <SideMenu />
+            </aside>
+            <div className="subgrid-container">{children}</div>
+          </div>
+        </Providers>
+      </body>
+    </html>
+  );
 }

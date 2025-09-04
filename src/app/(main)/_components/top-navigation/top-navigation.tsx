@@ -1,64 +1,80 @@
 import {
-	Image,
-	Input,
-	Navbar,
-	NavbarBrand,
-	NavbarContent,
-	NavbarItem,
-} from '@heroui/react';
-import { getServerSession } from 'next-auth';
-import Link from 'next/link';
+  Image,
+  Input,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from "@heroui/react";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
 
-import { IoAddOutline } from 'react-icons/io5';
-import AvatarDropdown from './_components/avatar-dropdown';
+import { IoAddOutline } from "react-icons/io5";
+import AvatarDropdown from "./_components/avatar-dropdown";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import fetchUser from "@/service/fetch-user";
 
 export default async function TopNavigation() {
-	const session = await getServerSession();
+  const session = await getServerSession(authOptions);
+  const userInfo = await fetchUser({ id: session?.user.id });
 
-	return (
-		<Navbar isBlurred>
-			<NavbarBrand>
-				<Link href='/'>
-					<Image
-						radius='none'
-						alt='sawit-logo'
-						src='/sawit-logo.png'
-						height={36}
-					/>
-				</Link>
-			</NavbarBrand>
-			<NavbarContent justify='center'>
-				<Input type='search' placeholder='Type to search' radius='lg' />
-			</NavbarContent>
-			<NavbarContent justify='end'>
-				<NavbarItem>
-					<Link
-						href={
-							session?.user?.name ? `/a/${session.user.name}/publish` : '/login'
-						}
-						className='flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400'
-					>
-						<IoAddOutline />
-						<small className='text-[12px]'>글쓰기</small>
-					</Link>
-				</NavbarItem>
-				<NavbarItem>
-					{session ? (
-						<AvatarDropdown
-							image={
-								session.user?.image || 'https://images.unsplash.com/broken'
-							}
-							name={session.user?.name || '이름없음'}
-						/>
-					) : (
-						<Link href='/login'>
-							<small className='cursor-pointer hover:text-primary-400'>
-								로그인
-							</small>
-						</Link>
-					)}
-				</NavbarItem>
-			</NavbarContent>
-		</Navbar>
-	);
+  return (
+    <Navbar isBlurred maxWidth="full" isBordered>
+      <NavbarBrand>
+        <Link href="/">
+          <Image
+            radius="none"
+            alt="sawit-logo"
+            src="/sawit-logo.png"
+            height={36}
+          />
+        </Link>
+      </NavbarBrand>
+      <NavbarContent justify="center">
+        <Input
+          type="search"
+          placeholder="Type to search"
+          radius="lg"
+          width={500}
+        />
+      </NavbarContent>
+      <NavbarContent justify="end">
+        {userInfo ? (
+          <>
+            <NavbarItem>
+              <Link
+                href={`/create-post`}
+                className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
+              >
+                <IoAddOutline />
+                <small className="text-[12px]">나도 올려볼까?</small>
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <AvatarDropdown image={userInfo.image} name={userInfo.username} />
+            </NavbarItem>
+          </>
+        ) : (
+          <>
+            <NavbarItem>
+              <Link
+                href={"/login"}
+                className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
+              >
+                <IoAddOutline />
+                <small className="text-[12px]">나도 올려볼까?</small>
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link href="/login">
+                <small className="cursor-pointer hover:text-primary-400">
+                  로그인
+                </small>
+              </Link>
+            </NavbarItem>
+          </>
+        )}
+      </NavbarContent>
+    </Navbar>
+  );
 }
