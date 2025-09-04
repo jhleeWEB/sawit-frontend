@@ -6,7 +6,6 @@ import { ActionDispatch, useEffect, useState } from "react";
 import fetchCommunitySearchList, {
   CommunityAutocompleteList,
 } from "../_apis/fetch-community-search-list";
-import { useParams } from "next/navigation";
 
 interface Props {
   formDispatch: ActionDispatch<
@@ -20,16 +19,12 @@ interface Props {
 }
 
 export default function CommunitySearchBar({ formDispatch }: Props) {
-  const { community_id } = useParams<{ community_id: string }>();
-
   const [searchTerm, setSearchTerm] = useState("");
   const debounceValue = useDebounce(searchTerm, 800);
   const [autocompleteItems, setAutocompleteItems] = useState<
     [] | CommunityAutocompleteList[]
   >([]);
-  const [selectedItem, setSelectedItem] = useState<
-    CommunityAutocompleteList | undefined
-  >();
+  const [, setSelectedItem] = useState<CommunityAutocompleteList | undefined>();
 
   useEffect(() => {
     const fetch = async () => {
