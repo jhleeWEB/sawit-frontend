@@ -115,6 +115,7 @@ export default function PostForm() {
           </Tab>
           <Tab
             key="link"
+            disabled
             title={
               <div className="flex items-center space-x-2">
                 <span>링크</span>
@@ -124,7 +125,7 @@ export default function PostForm() {
         </Tabs>
       </div>
 
-      <div className="w-full flex justify-end gap-2 ">
+      <div className="w-full flex justify-end gap-2">
         <Button
           radius="full"
           variant="light"

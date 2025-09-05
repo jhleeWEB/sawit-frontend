@@ -82,24 +82,26 @@ export default function MediaCarousel({ urls }: Props) {
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              /**@ts-expect-error custom property */
-              "--image-url": `url(${url})`,
+              // /** @ts-expect-error custom property */
+              // "--image-url": `url(${url})`,
+              backgroundImage: `url("${url}")`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
-            className={`relative rounded-xl min-w-full h-full border bg-[image:var(--image-url)] bg-no-repeat bg-cover bg-center`}
+            className={`relative flex justify-center rounded-xl min-w-full h-full border-2`}
           >
-            <div className="top-0 left-0 flex justify-center min-w-full min-h-auto bg-white/60 backdrop-blur-3xl rounded-xl">
-              <Image
-                alt={"event-images" + i}
-                sizes="100vw"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                }}
-                height={700}
-                src={url}
-                radius="none"
-              />
-            </div>
+            <div className="absolute top-0 left-0 w-full h-full bg-white/50 backdrop-blur-xl rounded-lg" />
+            <Image
+              alt={"event-images" + i}
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              src={url}
+              radius="none"
+            />
           </Link>
         );
       })}
