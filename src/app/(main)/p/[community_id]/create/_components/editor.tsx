@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function SimpleEditor({ formDispatch }: Props) {
-  const [html, setHtml] = useState("my <b>HTML</b>");
+  const [html, setHtml] = useState("");
 
   function onChange(e: ContentEditableEvent) {
     setHtml(e.target.value);
@@ -23,6 +23,11 @@ export default function SimpleEditor({ formDispatch }: Props) {
   }
 
   return (
-    <Editor value={html} onChange={onChange} className="h-auto min-h-[200px]" />
+    <Editor
+      placeholder="글쓰기(선택)"
+      value={html}
+      onChange={onChange}
+      className="h-auto min-h-[200px]"
+    />
   );
 }

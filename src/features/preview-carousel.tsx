@@ -1,6 +1,7 @@
 "use client";
 import { Button, Image, Link } from "@heroui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { DropzoneInputProps } from "react-dropzone";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { PiTrashSimpleThin } from "react-icons/pi";
 
@@ -9,9 +10,14 @@ const TRANSITION = "transform 200ms ease-in-out";
 interface Props {
   files: { preview: string; file: File }[];
   onRemove: (index: number) => void;
+  getInputProps: <T extends DropzoneInputProps>(any?: T) => T;
 }
 
-export default function PreviewCarousel({ files, onRemove }: Props) {
+export default function PreviewCarousel({
+  files,
+  onRemove,
+  getInputProps,
+}: Props) {
   const wrappeRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -84,6 +90,21 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
         >
           <FaChevronRight size={18} color="white" />
         </Button>
+      )}
+      {files && (
+        <label
+          htmlFor="upload"
+          className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
+        >
+          추가
+          <input
+            {...getInputProps()}
+            name="files"
+            id="upload"
+            type="file"
+            style={{ display: "none" }}
+          />
+        </label>
       )}
 
       {files.map((file, i) => {
