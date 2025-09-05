@@ -1,4 +1,4 @@
-import Post from "@/features/post";
+import Post from "@/features/user-post";
 
 export default async function Home() {
   const posts = [
@@ -17,11 +17,7 @@ export default async function Home() {
   ];
   return (
     <div className="main-container">
-      <main className="w-full">
-        {posts.map((Post, i) => (
-          <Post key={i} />
-        ))}
-      </main>
+      <main className="w-full"></main>
       <div className="right-menu-container">
         <aside className="w-full">info</aside>
       </div>
