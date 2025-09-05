@@ -1,7 +1,4 @@
 "use client";
-
-import ImageCropModal from "@/features/image-crop-modal";
-
 import {
   Avatar,
   Button,
@@ -9,7 +6,6 @@ import {
   Divider,
   Form,
   Input,
-  Spinner,
   Textarea,
   useDisclosure,
 } from "@heroui/react";
@@ -44,13 +40,6 @@ export default function CreateCommunity() {
 
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [topicFilter, setTopicFilter] = useState<string>("");
-  // const [errors, setErrors] = useState<{
-  //   name: string | undefined;
-  //   description: string | undefined;
-  // }>({
-  //   name: undefined,
-  //   description: undefined,
-  // });
 
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
@@ -85,12 +74,6 @@ export default function CreateCommunity() {
 
   return (
     <div className="main-container">
-      {isSubmitLoading && (
-        <div className="absolute top-0 left-0 z-50 min-w-full min-h-dvh flex flex-col items-center justify-center backdrop-blur-sm">
-          <Spinner />
-          커뮤니티 생성 중 입니다! 조금만 기다려주세요~
-        </div>
-      )}
       <main className="w-full py-8 px-36">
         <h1 className="text-2xl font-bold mb-8">커뮤니티 만들기</h1>
         <Form id="community-form" onSubmit={handleSubmit}>
@@ -377,11 +360,13 @@ export default function CreateCommunity() {
           <Button
             fullWidth
             radius="full"
-            color="success"
+            color="primary"
             form="community-form"
             type="submit"
+            isLoading={isSubmitLoading}
+            isDisabled={isSubmitLoading}
           >
-            {isSubmitLoading ? <Spinner /> : "커뮤니티 만들기"}
+            커뮤니티 만들기
           </Button>
         </div>
       </div>
