@@ -37,6 +37,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
   return (
     <div className="flex">
       <Autocomplete
+        isRequired
         aria-label="커뮤니티 선택"
         value={searchTerm}
         onValueChange={setSearchTerm}
@@ -79,6 +80,11 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
         }}
         radius="full"
         variant="bordered"
+        validate={(value) => {
+          if (!value) {
+            return "커뮤니티를 선택해주세요";
+          }
+        }}
       >
         {(item) => (
           <AutocompleteItem

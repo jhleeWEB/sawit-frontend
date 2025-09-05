@@ -62,7 +62,10 @@ export default function PostForm() {
       id="community-post-form"
       className="flex flex-col"
     >
+      {/** 게시물을 올릴 커뮤니티 선택 검샘 창 */}
       <CommunitySearchBar formDispatch={formDispatch} />
+
+      {/** 게시물을 올릴 커뮤니티 선택 검샘 창 */}
       <Input
         isRequired
         name="title"
@@ -71,9 +74,25 @@ export default function PostForm() {
         onValueChange={(value: string) =>
           formDispatch({ type: "update_title", payload: value })
         }
+        validate={(value) => {
+          if (value.length > 200) {
+            return "제목은 최소 200글자 이하로 입력해주세요";
+          }
+          if (value.length < 1) {
+            return "제목은 최소 1글자 이상은 입력해주세요";
+          }
+        }}
       />
       <div className="flex w-full flex-col">
-        <Tabs aria-label="Options" fullWidth color="primary" variant="bordered">
+        <Tabs
+          aria-label="Options"
+          fullWidth
+          color="primary"
+          variant="bordered"
+          classNames={{
+            panel: "px-0",
+          }}
+        >
           <Tab
             key="media"
             title={
