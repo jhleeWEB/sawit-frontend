@@ -31,13 +31,15 @@ export default function PostContentBody({ post }: Props) {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col">
       <MediaCarousel urls={post.media} />
-      <div>
-        <p dangerouslySetInnerHTML={{ __html: post.text || "" }}></p>
-      </div>
+      {post.text && (
+        <div>
+          <p dangerouslySetInnerHTML={{ __html: post.text || "" }}></p>
+        </div>
+      )}
       {/* 하단 버튼 그룹 */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-4">
         {/* 올려/내려 버튼 그룹 */}
         <div className="flex items-center bg-default-300 rounded-full">
           <Button

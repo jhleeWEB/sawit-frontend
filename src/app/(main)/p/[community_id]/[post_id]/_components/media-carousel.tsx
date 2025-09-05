@@ -51,7 +51,7 @@ export default function MediaCarousel({ urls }: Props) {
 
   return (
     <div
-      className={`relative w-full h-auto max-h-[900px] flex overflow-x-hidden scrollbar-hide rounded-lg`}
+      className={`relative w-full h-auto max-h-[60vh] flex overflow-x-hidden scrollbar-hide rounded-lg`}
     >
       {hasPrev && (
         <Button

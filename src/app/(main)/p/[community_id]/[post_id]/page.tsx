@@ -18,7 +18,7 @@ export default async function PostPage({
 
   return (
     <div className="main-container">
-      <main className="w-full">
+      <main className="w-full py-8">
         <PostTitleHeader post={post} />
         <PostContentBody post={post} />
       </main>
