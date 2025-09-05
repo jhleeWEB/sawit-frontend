@@ -49,7 +49,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
         inputProps={{
           classNames: {
             input: "ml-1",
-            inputWrapper: "w-full h-[34px] border",
+            inputWrapper: "w-full h-[34px]",
           },
         }}
         listboxProps={{
@@ -95,12 +95,6 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
           </AutocompleteItem>
         )}
       </Autocomplete>
-      {/* {selectedItem && (
-        <div className="flex border rounded-lg items-center gap-2 p-4 mt-4">
-          <Avatar src={selectedItem.icon_url} />
-          <p className="text-lg">p/{selectedItem.name}</p>
-        </div>
-      )} */}
     </div>
   );
 }

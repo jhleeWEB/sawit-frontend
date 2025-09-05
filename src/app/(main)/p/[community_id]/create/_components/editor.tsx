@@ -22,5 +22,7 @@ export default function SimpleEditor({ formDispatch }: Props) {
     formDispatch({ type: "update_text", payload: e.target.value });
   }
 
-  return <Editor value={html} onChange={onChange} className="h-[300px]" />;
+  return (
+    <Editor value={html} onChange={onChange} className="h-auto min-h-[200px]" />
+  );
 }

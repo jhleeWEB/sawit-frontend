@@ -1,11 +1,11 @@
 "use client";
-import { Button, Form, Input, Spinner } from "@heroui/react";
+import { Button, Form, Input, Tab, Tabs } from "@heroui/react";
 import DragNDropMediaInput from "./d-n-d-media";
-import EditorWrapper from "./editor";
 import { FormEvent, useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
 import CommunitySearchBar from "@/app/(main)/create-post/_components/community-search-bar";
 import createNewPost from "../_apis/create-new-post";
+import SimpleEditor from "./editor";
 
 //@ts-expect-error payload any type
 function reducer(state: FormState, action: { type: string; payload }) {
@@ -72,22 +72,58 @@ export default function PostForm() {
           formDispatch({ type: "update_title", payload: value })
         }
       />
-      <DragNDropMediaInput formDispatch={formDispatch} />
-      <EditorWrapper formDispatch={formDispatch} />
+      <div className="flex w-full flex-col">
+        <Tabs aria-label="Options" fullWidth color="primary" variant="bordered">
+          <Tab
+            key="media"
+            title={
+              <div className="flex items-center space-x-2">
+                <span>미디어</span>
+              </div>
+            }
+          >
+            <DragNDropMediaInput formDispatch={formDispatch} />
+          </Tab>
+          <Tab
+            key="text"
+            title={
+              <div className="flex items-center space-x-2">
+                <span>글</span>
+              </div>
+            }
+          >
+            <SimpleEditor formDispatch={formDispatch} />
+          </Tab>
+          <Tab
+            key="link"
+            title={
+              <div className="flex items-center space-x-2">
+                <span>링크</span>
+              </div>
+            }
+          />
+        </Tabs>
+      </div>
+
       <div className="w-full flex justify-end gap-2 ">
-        <Button radius="full" variant="light" className="border">
+        <Button
+          radius="full"
+          variant="light"
+          isLoading={isPosting}
+          isDisabled={isPosting}
+        >
           임시저장
         </Button>
-        <Button radius="full" variant="flat" color="primary" type="submit">
+        <Button
+          radius="full"
+          color="primary"
+          type="submit"
+          isLoading={isPosting}
+          isDisabled={isPosting}
+        >
           게시하기
         </Button>
       </div>
-      {isPosting && (
-        <div className="absolute top-0 left-0 z-50 min-w-full min-h-dvh flex flex-col items-center justify-center backdrop-blur-sm">
-          <Spinner />
-          게시물 올리는 중 입니다! 조금만 기다려주세요~
-        </div>
-      )}
     </Form>
   );
 }
