@@ -42,7 +42,7 @@ export async function getCroppedImg(
     safeArea / 2 - image.height * 0.5
   );
   const data = ctx?.getImageData(0, 0, safeArea, safeArea);
-
+  console.log(data);
   // set canvas width to final desired crop size - this will clear existing context
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;

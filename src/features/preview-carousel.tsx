@@ -7,7 +7,7 @@ import { PiTrashSimpleThin } from "react-icons/pi";
 const TRANSITION = "transform 200ms ease-in-out";
 
 interface Props {
-  files: { preview: string }[];
+  files: { preview: string; file: File }[];
   onRemove: (index: number) => void;
 }
 
@@ -61,7 +61,7 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
   return (
     <div
       ref={wrappeRef}
-      className="relative h-[300px] flex w-full overflow-hidden scrollbar-hide rounded-lg"
+      className="relative h-[400px] flex w-full overflow-hidden scrollbar-hide rounded-lg"
     >
       {hasPrev && (
         <Button
@@ -86,15 +86,15 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
         </Button>
       )}
 
-      {files.map((n, i) => {
+      {files.map((file, i) => {
         return (
           <Link
-            key={n + "_" + i}
+            key={file.file.name + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
               /**@ts-expect-error custom property */
-              "--image-url": `url(${n.preview})`,
+              "--image-url": `url(${file.preview})`,
             }}
             className={`rounded-xl min-w-full border bg-[image:var(--image-url)] bg-cover bg-center`}
           >
@@ -108,12 +108,24 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
               >
                 <PiTrashSimpleThin size={18} color="white" />
               </Button>
-              <Image
-                alt={"event-images" + i}
-                height={300}
-                src={n.preview}
-                radius="none"
-              />
+              {file.file.type.includes("image") && (
+                <Image
+                  alt={"event-images" + i}
+                  height={400}
+                  src={file.preview}
+                  radius="none"
+                />
+              )}
+              {file.file.type.includes("video") && (
+                <video
+                  src={file.preview}
+                  controls
+                  playsInline
+                  muted
+                  preload="metadata"
+                  style={{ width: "100%", height: "400px" }}
+                />
+              )}
             </div>
           </Link>
         );

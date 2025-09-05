@@ -1,7 +1,4 @@
 "use client";
-
-import ImageCropModal from "@/features/image-crop-modal";
-
 import {
   Avatar,
   Button,
@@ -9,7 +6,6 @@ import {
   Divider,
   Form,
   Input,
-  Spinner,
   Textarea,
   useDisclosure,
 } from "@heroui/react";
@@ -19,6 +15,8 @@ import TopicChips from "./_components/topic-chips";
 import FormTitle from "./_components/form-title";
 import { useRouter } from "next/navigation";
 import createNewCommunity from "./_apis/create-new-community";
+import BannerCropperModal from "../p/[community_id]/create/_components/banner-crop-modal";
+import IconCropperModal from "../p/[community_id]/create/_components/icon-crop-modal";
 
 export default function CreateCommunity() {
   const route = useRouter();
@@ -27,20 +25,21 @@ export default function CreateCommunity() {
   const [communityDescription, setCommunityDescription] = useState("");
   const [bannerBlob, setBannerBlob] = useState<Blob>();
   const [bannerPreview, setBannerPreview] = useState("");
-  const [tempBanner, setTempBanner] = useState("");
   const [iconPreview, setIconPreview] = useState("");
   const [iconBlob, setIconBlob] = useState<Blob>();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isBannerModalOpen,
+    onOpen: onBannerModalOpen,
+    onOpenChange: onBannerOpenChange,
+  } = useDisclosure();
+  const {
+    isOpen: isIconModalOpen,
+    onOpen: onIconModalOpen,
+    onOpenChange: onIconOpenChange,
+  } = useDisclosure();
 
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [topicFilter, setTopicFilter] = useState<string>("");
-  // const [errors, setErrors] = useState<{
-  //   name: string | undefined;
-  //   description: string | undefined;
-  // }>({
-  //   name: undefined,
-  //   description: undefined,
-  // });
 
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
@@ -75,13 +74,8 @@ export default function CreateCommunity() {
 
   return (
     <div className="main-container">
-      {isSubmitLoading && (
-        <div className="absolute top-0 left-0 z-50 min-w-full min-h-dvh flex flex-col items-center justify-center backdrop-blur-sm">
-          <Spinner />
-          커뮤니티 생성 중 입니다! 조금만 기다려주세요~
-        </div>
-      )}
-      <div className="w-full mt-12">
+      <main className="w-full py-8 px-36">
+        <h1 className="text-2xl font-bold mb-8">커뮤니티 만들기</h1>
         <Form id="community-form" onSubmit={handleSubmit}>
           <FormTitle
             title="커뮤니티에 대해서 알려주세요"
@@ -90,10 +84,18 @@ export default function CreateCommunity() {
           <Input
             fullWidth
             required
+            radius="lg"
+            variant={"bordered"}
             name="name"
-            label="커뮤니티 이름을 작성해주세요."
+            label="커뮤니티 이름"
+            maxLength={50}
             value={communityName}
+            size="lg"
             onValueChange={setCommunityName}
+            classNames={{
+              inputWrapper: "border",
+              input: "text-xl",
+            }}
           />
           <small className="text-gray-400 w-full flex justify-end">
             {communityName.length}
@@ -101,70 +103,78 @@ export default function CreateCommunity() {
           <Textarea
             fullWidth
             required
+            size="lg"
+            maxLength={500}
             name="description"
-            label="커뮤니티의 대해서 말해주세요."
+            label="커뮤니티 설명"
+            variant="bordered"
             value={communityDescription}
             onValueChange={setCommunityDescription}
+            classNames={{
+              inputWrapper: "border",
+            }}
           />
           <small className="text-gray-400 w-full flex justify-end">
             {communityDescription.length}
           </small>
-          <div className="w-full mt-16">
+
+          <div className="w-full mb-8">
             <FormTitle
               title="커뮤니티를 꾸며보세요"
               description="시각적인 요소를 더하면 새로운 분들의 관심을 끌고 커뮤니티의 문화를 확립하는 데 도움이 됩니다! 언제든지 이 내용을 업데이트할 수 있습니다."
             />
             <div className="flex items-center justify-between mb-4 px-8">
               <h3>배너</h3>
-              <Input
-                type="file"
+              <Button
                 radius="full"
+                variant="bordered"
                 size="sm"
-                className="w-[140px] cursor-pointer"
+                className="w-[140px] cursor-pointer border"
                 startContent={
                   <PiImageSquareThin className="cursor-pointer" size={26} />
                 }
-                onChange={(event) => {
-                  if (event.target.files) {
-                    const [file] = event.target.files;
-                    setTempBanner(URL.createObjectURL(file));
-                    onOpen();
-                    event.target.type = "number";
-                    event.target.type = "file";
-                  }
+                onPress={onBannerModalOpen}
+              >
+                이미지 선택하기
+              </Button>
+              <BannerCropperModal
+                isOpen={isBannerModalOpen}
+                onOpenChange={onBannerOpenChange}
+                aspect={10}
+                outWidth={1028}
+                outHeight={128}
+                onConfirm={(blob, url) => {
+                  setBannerPreview(url);
+                  setBannerBlob(blob);
                 }}
-              />
-              <ImageCropModal
-                src={tempBanner}
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                setBannerBlob={setBannerBlob}
-                setBannerPreview={setBannerPreview}
               />
             </div>
             <div className="flex items-center justify-between px-8">
               <h3>아이콘</h3>
-              <Input
-                type="file"
+              <Button
+                variant="bordered"
                 radius="full"
                 size="sm"
                 name="icon"
-                className="w-[140px] cursor-pointer"
+                className="w-[140px] cursor-pointer border"
                 startContent={
                   <PiImageSquareThin className="cursor-pointer" size={26} />
                 }
-                onChange={(event) => {
-                  if (event.target.files) {
-                    const [file] = event.target.files;
-                    const url = URL.createObjectURL(file);
-                    setIconPreview(url);
-                    setIconBlob(file);
-                  }
+                onPress={onIconModalOpen}
+              >
+                아이콘 선택하기
+              </Button>
+              <IconCropperModal
+                isOpen={isIconModalOpen}
+                onOpenChange={onIconOpenChange}
+                onConfirm={(blob, url) => {
+                  setIconPreview(url);
+                  setIconBlob(blob);
                 }}
               />
             </div>
           </div>
-          <div className="w-full mt-16">
+          <div className="w-full mb-8">
             <FormTitle
               title="주제 추가"
               description="관심 있는분들이 당신의 커뮤니티를 찾을 수 있도록 최대 3개의 주제를 추가하세요."
@@ -293,7 +303,7 @@ export default function CreateCommunity() {
             </div>
           </div>
         </Form>
-      </div>
+      </main>
       <div
         className="right-menu-container"
         style={{
@@ -307,10 +317,10 @@ export default function CreateCommunity() {
                 /* @ts-expect-error custom style property added*/
                 "--image-url": `url(${bannerPreview})`,
               }}
-              className={`h-[60px] rounded-t-lg bg-no-repeat bg-cover bg-top bg-[image:var(--image-url)]`}
+              className={`h-[32px] rounded-t-lg bg-no-repeat bg-cover bg-center bg-[image:var(--image-url)]`}
             />
           ) : (
-            <div className={`h-[60px] bg-red-300 rounded-t-lg`} />
+            <div className={`h-[32px] bg-red-300 rounded-t-lg`} />
           )}
           <Divider />
           <div className="max-w-full flex items-center gap-4 p-4 pb-0">
@@ -350,11 +360,13 @@ export default function CreateCommunity() {
           <Button
             fullWidth
             radius="full"
-            color="success"
+            color="primary"
             form="community-form"
             type="submit"
+            isLoading={isSubmitLoading}
+            isDisabled={isSubmitLoading}
           >
-            {isSubmitLoading ? <Spinner /> : "커뮤니티 만들기"}
+            커뮤니티 만들기
           </Button>
         </div>
       </div>

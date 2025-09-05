@@ -12,6 +12,8 @@ export interface Post {
   media: string[];
   community_id: number;
   owner_id: string;
+  owner_username: string;
+  owner_icon: string;
   likes: number;
   dislikes: number;
 }
