@@ -1,7 +1,7 @@
 import { Avatar } from "@heroui/react";
-import { Post } from "../../create/_apis/create-new-post";
-import fetchOwnerInfo from "../_apis/fetch_user";
 import createdAt from "@/lib/dayjs/created-at";
+import fetchOwnerInfo from "@/service/fetch_user";
+import { Post } from "@/service/fetch_post";
 
 interface Props {
   post: Post;

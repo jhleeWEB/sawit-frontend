@@ -11,11 +11,11 @@ import {
 
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import postLikes from "../_apis/post_likes";
-import postDislikes from "../_apis/post_dislikes";
 
 import { useState } from "react";
-import { Post } from "../../create/_apis/create-new-post";
+import { Post } from "@/service/fetch_post";
+import postLikes from "@/service/post_likes";
+import postDislikes from "@/service/post_dislikes";
 
 interface Props {
   post: Post;

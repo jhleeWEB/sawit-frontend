@@ -4,20 +4,6 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { getSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
 
-export interface Post {
-  id: string;
-  title: string;
-  created_at: string;
-  text?: string;
-  media: string[];
-  community_id: number;
-  owner_id: string;
-  owner_username: string;
-  owner_icon: string;
-  likes: number;
-  dislikes: number;
-}
-
 interface Params {
   title: string;
   text?: string;

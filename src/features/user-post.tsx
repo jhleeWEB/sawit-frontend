@@ -1,6 +1,5 @@
-import MediaCarousel from "@/app/(main)/p/[community_id]/[post_id]/_components/media-carousel";
-import { Post } from "@/app/(main)/p/[community_id]/create/_apis/create-new-post";
 import createdAt from "@/lib/dayjs/created-at";
+import { Post } from "@/service/fetch_post";
 import { Avatar, Button } from "@heroui/react";
 import {
   PiArrowFatLineDownThin,
@@ -9,6 +8,7 @@ import {
   PiDotsThreeOutlineThin,
   PiShareFatThin,
 } from "react-icons/pi";
+import MediaCarousel from "./user-post-detail/_components/media-carousel";
 
 interface Props {
   post: Post;
