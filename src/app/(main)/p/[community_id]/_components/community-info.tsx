@@ -1,14 +1,10 @@
 "use client";
-import { LiaSignSolid } from "react-icons/lia";
-import dayjs from "dayjs";
-import "dayjs/locale/ko";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { Community } from "../_apis/fetch-community";
+
+import { BsPersonVcard, BsCalendar4Event } from "react-icons/bs";
+
 import createdAt from "@/lib/dayjs/created-at";
 import Link from "next/link";
-
-dayjs.extend(relativeTime);
-dayjs.locale("ko");
+import { Community } from "@/service/fetch-community";
 
 interface Props {
   showTitle?: boolean;
@@ -29,10 +25,15 @@ export default function CommunityInfo({ showTitle, community }: Props) {
         <small className="font-semibold">{community.name}</small>
         <small className="text-neutral-500">{community.description}</small>
       </div>
-      <div className="flex items-center gap-1 text-neutral-500 mb-2">
-        <LiaSignSolid size={24} />
+      <div className="flex items-center gap-1 text-neutral-500">
+        <BsCalendar4Event size={18} />
         <small>개설</small>
         <small>{createdAt(community.created_at)}</small>
+      </div>
+      <div className="flex items-center gap-1 text-neutral-500 mb-2">
+        <BsPersonVcard size={18} />
+        <small>주인</small>
+        <small>{community.owner_username}</small>
       </div>
       <div className="flex w-full justify-evenly">
         <div className="flex flex-col justify-center items-center">

@@ -1,19 +1,14 @@
+"use client";
 import { Avatar } from "@heroui/react";
 import createdAt from "@/lib/dayjs/created-at";
-import fetchOwnerInfo from "@/service/fetch_user";
+
 import { Post } from "@/service/fetch_post";
 
 interface Props {
   post: Post;
 }
 
-export default async function PostTitleHeader({ post }: Props) {
-  const owner = await fetchOwnerInfo(post.owner_id);
-
-  if (!owner) {
-    return;
-  }
-
+export default function PostTitleHeader({ post }: Props) {
   return (
     <div>
       <div className="flex items-center gap-2 ">

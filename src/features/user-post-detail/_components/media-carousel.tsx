@@ -82,8 +82,6 @@ export default function MediaCarousel({ urls }: Props) {
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              // /** @ts-expect-error custom property */
-              // "--image-url": `url(${url})`,
               backgroundImage: `url("${url}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",

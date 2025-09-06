@@ -27,5 +27,7 @@ export interface Community {
   topics: string[];
   member_count: number;
   owner_id: string;
+  owner_icon: string;
+  owner_username: string;
   post_count: number;
 }
