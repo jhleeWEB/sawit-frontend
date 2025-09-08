@@ -56,7 +56,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
         <div
           {...getRootProps({
             className:
-              "w-full flex justify-center items-center gap-2 h-[200px] cursor-pointer border-2 border-dashed rounded-xl text-neutral-500",
+              "w-full flex justify-center items-center gap-2 h-[200px] cursor-pointer border-2 border-dashed rounded-xl text-neutral-500 hover:bg-neutral-100",
           })}
         >
           <input {...getInputProps()} name="files" />
