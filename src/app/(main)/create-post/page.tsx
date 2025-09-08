@@ -7,7 +7,7 @@ export default async function CreatePostPage() {
         <h1 className="text-2xl font-bold mb-4">게시물 만들기</h1>
         <PostForm />
       </main>
-      <div className="right-menu-container">d</div>
+      <div className="right-menu-container"></div>
     </div>
   );
 }
