@@ -1,10 +1,9 @@
 "use client";
 
-import { BsPersonVcard, BsCalendar4Event } from "react-icons/bs";
-
-import createdAt from "@/lib/dayjs/created-at";
 import Link from "next/link";
+import { BsPersonVcard, BsCalendar4Event } from "react-icons/bs";
 import { Community } from "@/service/fetch-community";
+import createdAt from "@/lib/dayjs/created-at";
 
 interface Props {
   showTitle?: boolean;
@@ -13,7 +12,7 @@ interface Props {
 
 export default function CommunityInfo({ showTitle, community }: Props) {
   return (
-    <div className="rounded-xl bg-slate-100 text-neutral-800 p-4 mt-8">
+    <div className="rounded-xl bg-slate-100 text-neutral-800 p-4">
       {showTitle && (
         <div className="flex justify-between mb-4">
           <Link href={`/p/${community.id}`} className="text-lg font-semibold">

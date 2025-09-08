@@ -1,8 +1,7 @@
 import fetchPost from "@/service/fetch_post";
-
-import CommunityInfo from "../_components/community-info";
-import UserPostDetail from "@/features/user-post-detail/user-post-detail";
 import fetchCommunity from "@/service/fetch-community";
+import UserPostDetail from "@/features/user-post-detail/user-post-detail";
+import CommunityInfo from "@/features/community-info";
 
 export default async function PostPage({
   params,
