@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "../../create/_apis/create-new-post";
+import { Post } from "@/service/fetch_post";
 
 interface Props {
   post: Post;

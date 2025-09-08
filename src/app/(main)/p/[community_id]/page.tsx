@@ -1,9 +1,9 @@
 import CommunityHeader from "./_components/community-header";
-import CommunityInfo from "./_components/community-info";
 import EmptyPost from "./_components/empty-post";
-import fetchCommunity from "./_apis/fetch-community";
 import fetchCommunityFeeds from "@/service/fetch-community-feeds";
+import fetchCommunity from "@/service/fetch-community";
 import UserPost from "@/features/user-post";
+import CommunityInfo from "@/features/community-info";
 
 export default async function CommunityPage({
   params,

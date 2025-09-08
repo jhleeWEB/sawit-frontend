@@ -52,11 +52,11 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
   return (
     <>
-      {files.length === 0 ? (
+      {files.length === 0 && (
         <div
           {...getRootProps({
             className:
-              "w-full flex justify-center items-center gap-2 h-[200px] border border-dashed rounded-xl text-gray-500",
+              "w-full flex justify-center items-center gap-2 h-[200px] cursor-pointer border-2 border-dashed rounded-xl text-neutral-500",
           })}
         >
           <input {...getInputProps()} name="files" />
@@ -66,24 +66,14 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
             <SlCloudUpload size={24} />
           </>
         </div>
-      ) : (
-        <label
-          htmlFor="upload"
-          className="bg-default hover:-brightness-120 p-2 px-4 rounded-full cursor-pointer"
-        >
-          추가하기
-          <input
-            name="files"
-            {...getInputProps()}
-            id="upload"
-            type="file"
-            style={{ display: "none" }}
-          />
-        </label>
       )}
 
       {files.length > 0 && (
-        <PreviewCarousel files={files} onRemove={handleRemoveFile} />
+        <PreviewCarousel
+          files={files}
+          onRemove={handleRemoveFile}
+          getInputProps={getInputProps}
+        />
       )}
     </>
   );

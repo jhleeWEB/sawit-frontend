@@ -1,8 +1,7 @@
-import PostTitleHeader from "./_components/post-title-header";
-import PostContentBody from "./_components/post-content-body";
-import fetchPost from "./_apis/fetch_post";
-import fetchCommunity from "../_apis/fetch-community";
-import CommunityInfo from "../_components/community-info";
+import fetchPost from "@/service/fetch_post";
+import fetchCommunity from "@/service/fetch-community";
+import UserPostDetail from "@/features/user-post-detail/user-post-detail";
+import CommunityInfo from "@/features/community-info";
 
 export default async function PostPage({
   params,
@@ -18,9 +17,8 @@ export default async function PostPage({
 
   return (
     <div className="main-container">
-      <main className="w-full">
-        <PostTitleHeader post={post} />
-        <PostContentBody post={post} />
+      <main className="w-full py-8">
+        <UserPostDetail post={post} />
       </main>
       <div className="right-menu-container">
         {community && <CommunityInfo showTitle community={community} />}
