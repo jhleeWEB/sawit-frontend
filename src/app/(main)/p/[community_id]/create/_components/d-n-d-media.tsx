@@ -50,6 +50,8 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
             } catch {
               setUploadStatus("이미지 업로드 실패");
             }
+          } else if (f.type.startsWith("video/")) {
+            //to-do video 나중에 추가
           }
         })
       );
