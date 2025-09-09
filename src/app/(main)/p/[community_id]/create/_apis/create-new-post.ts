@@ -1,5 +1,6 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 import { DraftPreviewFile } from "@/service/upload-draft-files";
+import { sanitizeObjectKey } from "@/utils/senitize-object-key";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSession } from "next-auth/react";
@@ -70,9 +71,11 @@ const moveFilesFromDraftToPublic = async (
 ) => {
   const paths: string[] = [];
   const promises = files.map((file) => {
-    const { path } = file;
+    const { path, name } = file;
     const from = path;
-    const to = `public/${communityId}/${postId}/${uuidv4()}-${file.name}`;
+    const to = `public/${communityId}/${postId}/${uuidv4()}-${sanitizeObjectKey(
+      name
+    )}`;
     paths.push(to);
     return database.storage.from(bucketName).move(from, to);
   });
