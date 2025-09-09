@@ -77,7 +77,7 @@ export default function MediaCarousel({ urls }: Props) {
       )}
       {urls.map((url, i) => {
         return (
-          <Link
+          <div
             key={url + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
@@ -88,7 +88,7 @@ export default function MediaCarousel({ urls }: Props) {
               backgroundPosition: "center",
               height: "-webkit-fill-available",
             }}
-            className={`relative flex justify-center rounded-xl min-w-full h-full border-2`}
+            className={`relative flex justify-center items-center rounded-xl min-w-full h-full border-2 hover:none`}
           >
             <div className="absolute top-0 left-0 w-full h-full bg-white/50 backdrop-blur-xl rounded-lg" />
             <Image
@@ -97,11 +97,12 @@ export default function MediaCarousel({ urls }: Props) {
               style={{
                 width: "100%",
                 height: "auto",
+                maxHeight: "60vh",
               }}
               src={url}
               radius="none"
             />
-          </Link>
+          </div>
         );
       })}
     </div>

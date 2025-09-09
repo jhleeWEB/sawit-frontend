@@ -20,7 +20,7 @@ export default async function PostPage({
       <main className="w-full py-8">
         <UserPostDetail post={post} />
       </main>
-      <div className="right-menu-container">
+      <div className="right-menu-container py-8">
         {community && <CommunityInfo showTitle community={community} />}
       </div>
     </div>
