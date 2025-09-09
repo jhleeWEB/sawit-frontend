@@ -15,12 +15,19 @@ interface Props {
 }
 
 export default function SimpleEditor({ formDispatch }: Props) {
-  const [html, setHtml] = useState("my <b>HTML</b>");
+  const [html, setHtml] = useState("");
 
   function onChange(e: ContentEditableEvent) {
     setHtml(e.target.value);
     formDispatch({ type: "update_text", payload: e.target.value });
   }
 
-  return <Editor value={html} onChange={onChange} className="h-[300px]" />;
+  return (
+    <Editor
+      placeholder="글쓰기(선택)"
+      value={html}
+      onChange={onChange}
+      className="h-auto min-h-[200px]"
+    />
+  );
 }

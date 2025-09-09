@@ -6,7 +6,6 @@ import { ActionDispatch, useEffect, useState } from "react";
 import fetchCommunitySearchList, {
   CommunityAutocompleteList,
 } from "../_apis/fetch-community-search-list";
-import { useParams } from "next/navigation";
 
 interface Props {
   formDispatch: ActionDispatch<
@@ -20,16 +19,12 @@ interface Props {
 }
 
 export default function CommunitySearchBar({ formDispatch }: Props) {
-  const { community_id } = useParams<{ community_id: string }>();
-
   const [searchTerm, setSearchTerm] = useState("");
   const debounceValue = useDebounce(searchTerm, 800);
   const [autocompleteItems, setAutocompleteItems] = useState<
     [] | CommunityAutocompleteList[]
   >([]);
-  const [selectedItem, setSelectedItem] = useState<
-    CommunityAutocompleteList | undefined
-  >();
+  const [, setSelectedItem] = useState<CommunityAutocompleteList | undefined>();
 
   useEffect(() => {
     const fetch = async () => {
@@ -40,8 +35,9 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
   }, [debounceValue]);
 
   return (
-    <div className="flex w-full">
+    <div className="flex">
       <Autocomplete
+        isRequired
         aria-label="커뮤니티 선택"
         value={searchTerm}
         onValueChange={setSearchTerm}
@@ -84,6 +80,11 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
         }}
         radius="full"
         variant="bordered"
+        validate={(value) => {
+          if (!value) {
+            return "커뮤니티를 선택해주세요";
+          }
+        }}
       >
         {(item) => (
           <AutocompleteItem
@@ -100,12 +101,6 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
           </AutocompleteItem>
         )}
       </Autocomplete>
-      {/* {selectedItem && (
-        <div className="flex border rounded-lg items-center gap-2 p-4 mt-4">
-          <Avatar src={selectedItem.icon_url} />
-          <p className="text-lg">p/{selectedItem.name}</p>
-        </div>
-      )} */}
     </div>
   );
 }

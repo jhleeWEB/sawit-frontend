@@ -1,4 +1,6 @@
-const createImage = (url) =>
+import { Area } from "react-easy-crop";
+
+const createImage = (url: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image();
     image.addEventListener("load", () => resolve(image));
@@ -7,11 +9,15 @@ const createImage = (url) =>
     image.src = url;
   });
 
-function getRadianAngle(degreeValue) {
+function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180;
 }
 
-export async function getCroppedImg(imageSrc: string, pixelCrop, rotation = 0) {
+export async function getCroppedImg(
+  imageSrc: string,
+  pixelCrop: Area,
+  rotation = 0
+) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -36,7 +42,7 @@ export async function getCroppedImg(imageSrc: string, pixelCrop, rotation = 0) {
     safeArea / 2 - image.height * 0.5
   );
   const data = ctx?.getImageData(0, 0, safeArea, safeArea);
-
+  console.log(data);
   // set canvas width to final desired crop size - this will clear existing context
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
@@ -61,7 +67,7 @@ export async function getCroppedImg(imageSrc: string, pixelCrop, rotation = 0) {
 
 export async function getCroppedImageBlob(
   imageSrc: string,
-  pixelCrop,
+  pixelCrop: Area,
   rotation = 0
 ) {
   const image = await createImage(imageSrc);

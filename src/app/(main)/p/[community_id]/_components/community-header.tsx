@@ -19,13 +19,15 @@ export default function CommunityHeader({
 }: Props) {
   const route = useRouter();
   return (
-    <div className="col-start-1 col-span-2 w-full mb-[80px]">
+    <div className="col-start-1 col-span-2 w-full mb-[60px]">
       <div
-        /**@ts-expect-error custom style property*/
-        style={{ "--image-url": `url(${bannerUrl})` }}
-        className={
-          "relative min-h-[128px] rounded-xl w-full bg-[image:var(--image-url)] bg-cover"
-        }
+        style={{
+          backgroundImage: `url("${bannerUrl}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className={"relative min-h-[128px] rounded-xl w-full"}
       >
         <div className="absolute w-full px-8 bottom-[-50px] flex items-end">
           <div>

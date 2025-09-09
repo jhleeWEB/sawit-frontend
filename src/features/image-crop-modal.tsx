@@ -10,7 +10,7 @@ import {
   ModalHeader,
 } from "@heroui/react";
 import { useState } from "react";
-import Cropper from "react-easy-crop";
+import Cropper, { Area } from "react-easy-crop";
 
 interface Props {
   src: string;
@@ -30,10 +30,12 @@ export default function ImageCropModal({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [imageUrl, setImageUrl] = useState("");
   const [imageBlob, setImageBlob] = useState<Blob>();
+  const [zoom, setZoom] = useState(1);
 
-  const onCropComplete = async (croppedArea, croppedAreaPixels) => {
+  const onCropComplete = async (croppedArea: Area, croppedAreaPixels: Area) => {
     const url = await getCroppedImg(src, croppedAreaPixels);
     const blob = await getCroppedImageBlob(src, croppedAreaPixels);
+
     setImageBlob(blob as Blob);
     setImageUrl(url as string);
   };
@@ -50,14 +52,22 @@ export default function ImageCropModal({
           <>
             <ModalHeader>커뮤니티를 배너로 꾸며보세요~</ModalHeader>
             <ModalBody className="relative min-h-[500px] bg-black">
-              <div className="absolute top-0 right-0 left-0 bottom-0">
+              <div className="absolute top-0 right-0 left-0 bottom-0 flex items-end justify-center">
                 <Cropper
                   showGrid={false}
                   image={src}
                   crop={crop}
+                  zoom={zoom}
+                  onZoomChange={setZoom}
+                  // cropSize={{ width: 514, height: 64 }}
                   aspect={10 / 1}
                   onCropChange={setCrop}
                   onCropComplete={onCropComplete}
+                  objectFit="contain"
+                  onMediaLoaded={(mediaSize) => {
+                    // Adapt zoom based on media size to fit max height
+                    setZoom(500 / mediaSize.naturalHeight);
+                  }}
                 />
               </div>
             </ModalBody>

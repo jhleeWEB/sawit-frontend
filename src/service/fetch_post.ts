@@ -1,5 +1,4 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { Post } from "../../create/_apis/create-new-post";
 
 export default async function fetchPost(post_id: string, community_id: string) {
   try {
@@ -19,4 +18,18 @@ export default async function fetchPost(post_id: string, community_id: string) {
     console.error(e);
     return null;
   }
+}
+
+export interface Post {
+  id: string;
+  title: string;
+  created_at: string;
+  text?: string;
+  media: string[];
+  community_id: number;
+  owner_id: string;
+  owner_username: string;
+  owner_icon: string;
+  likes: number;
+  dislikes: number;
 }
