@@ -7,11 +7,13 @@ import CommunitySearchBar from "@/app/(main)/create-post/_components/community-s
 import createNewPost from "../_apis/create-new-post";
 import SimpleEditor from "./editor";
 
+import { DraftPreviewFile } from "@/service/upload-draft-files";
+
 //@ts-expect-error payload any type
 function reducer(state: FormState, action: { type: string; payload }) {
   switch (action.type) {
-    case "update_files":
-      state.files = [...action.payload];
+    case "update_draft_files":
+      state.draftFiles = [...action.payload];
       return state;
     case "update_text":
       state.text = action.payload;
@@ -29,14 +31,14 @@ function reducer(state: FormState, action: { type: string; payload }) {
 interface FormState {
   communityId: number;
   title: string;
-  files: File[] | [];
+  draftFiles: DraftPreviewFile[] | [];
   text: string;
 }
 
 const initialState = {
   communityId: 0,
   title: "",
-  files: [],
+  draftFiles: [],
   text: "",
 };
 
@@ -126,14 +128,16 @@ export default function PostForm() {
       </div>
 
       <div className="w-full flex justify-end gap-2">
-        <Button
+        {/* 임시저장 기능 임시보류 */}
+        {/* <Button
           radius="full"
           variant="light"
           isLoading={isPosting}
           isDisabled={isPosting}
+          onPress={() => savePostDraft(formState, draft?.id)}
         >
           임시저장
-        </Button>
+        </Button> */}
         <Button
           radius="full"
           color="primary"

@@ -1,4 +1,5 @@
 "use client";
+import { DraftPreviewFile } from "@/service/upload-draft-files";
 import { Button, Image, Link } from "@heroui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DropzoneInputProps } from "react-dropzone";
@@ -8,7 +9,7 @@ import { PiTrashSimpleThin } from "react-icons/pi";
 const TRANSITION = "transform 200ms ease-in-out";
 
 interface Props {
-  files: { preview: string; file: File }[];
+  files: DraftPreviewFile[];
   onRemove: (index: number) => void;
   getInputProps: <T extends DropzoneInputProps>(any?: T) => T;
 }
@@ -110,14 +111,16 @@ export default function PreviewCarousel({
       {files.map((file, i) => {
         return (
           <Link
-            key={file.file.name + "_" + i}
+            key={file.name + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              /**@ts-expect-error custom property */
-              "--image-url": `url(${file.preview})`,
+              backgroundImage: `url("${file.signedUrl}")`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
-            className={`rounded-xl min-w-full border bg-[image:var(--image-url)] bg-cover bg-center`}
+            className={`rounded-xl min-w-full border`}
           >
             <div className="absolute top-0 left-0 flex justify-center min-w-full bg-white/60 backdrop-blur-3xl">
               <Button
@@ -129,17 +132,17 @@ export default function PreviewCarousel({
               >
                 <PiTrashSimpleThin size={18} color="white" />
               </Button>
-              {file.file.type.includes("image") && (
+              {file.type.includes("image") && (
                 <Image
                   alt={"event-images" + i}
                   height={400}
-                  src={file.preview}
+                  src={file.signedUrl}
                   radius="none"
                 />
               )}
-              {file.file.type.includes("video") && (
+              {file.type.includes("video") && (
                 <video
-                  src={file.preview}
+                  src={file.signedUrl}
                   controls
                   playsInline
                   muted
