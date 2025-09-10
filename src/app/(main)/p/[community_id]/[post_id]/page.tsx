@@ -1,7 +1,7 @@
 import fetchPost from "@/service/fetch_post";
 import fetchCommunity from "@/service/fetch-community";
-import UserPostDetail from "@/features/user-post-detail/user-post-detail";
 import CommunityInfo from "@/features/community-info";
+import PostCard from "@/features/post-card/post-card";
 
 export default async function PostPage({
   params,
@@ -18,9 +18,9 @@ export default async function PostPage({
   return (
     <div className="main-container">
       <main className="w-full py-8">
-        <UserPostDetail post={post} />
+        <PostCard post={post} />
       </main>
-      <div className="right-menu-container">
+      <div className="right-menu-container py-8">
         {community && <CommunityInfo showTitle community={community} />}
       </div>
     </div>

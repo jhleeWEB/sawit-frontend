@@ -1,5 +1,5 @@
 "use client";
-import { Button, Image, Link } from "@heroui/react";
+import { Button, Image } from "@heroui/react";
 import { useCallback, useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
@@ -51,7 +51,7 @@ export default function MediaCarousel({ urls }: Props) {
 
   return (
     <div
-      className={`relative w-full h-auto max-h-[60vh] flex overflow-x-hidden scrollbar-hide rounded-lg`}
+      className={`relative w-full h-auto max-h-[60vh] flex items-center overflow-x-hidden scrollbar-hide rounded-lg`}
     >
       {hasPrev && (
         <Button
@@ -77,7 +77,7 @@ export default function MediaCarousel({ urls }: Props) {
       )}
       {urls.map((url, i) => {
         return (
-          <Link
+          <div
             key={url + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
@@ -86,8 +86,9 @@ export default function MediaCarousel({ urls }: Props) {
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
+              height: "-webkit-fill-available",
             }}
-            className={`relative flex justify-center rounded-xl min-w-full h-full border-2`}
+            className={`relative flex justify-center items-center rounded-xl min-w-full h-full border-2 hover:none`}
           >
             <div className="absolute top-0 left-0 w-full h-full bg-white/50 backdrop-blur-xl rounded-lg" />
             <Image
@@ -96,11 +97,12 @@ export default function MediaCarousel({ urls }: Props) {
               style={{
                 width: "100%",
                 height: "auto",
+                maxHeight: "60vh",
               }}
               src={url}
               radius="none"
             />
-          </Link>
+          </div>
         );
       })}
     </div>

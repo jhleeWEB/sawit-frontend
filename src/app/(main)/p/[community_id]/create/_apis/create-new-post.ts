@@ -1,5 +1,6 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 import { DraftPreviewFile } from "@/service/upload-draft-files";
+import { sanitizeObjectKey } from "@/utils/senitize-object-key";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSession } from "next-auth/react";
@@ -31,6 +32,7 @@ export default async function createNewPost({
       title,
       text,
       community_id: communityId,
+      status: "draft",
     })
     .select()
     .single();
@@ -53,7 +55,7 @@ export default async function createNewPost({
   //update post urls
   const { error: finalPostUpdateError } = await supabase
     .from("posts")
-    .update({ media: publishUrls })
+    .update({ media: publishUrls, status: "published" })
     .eq("id", post.id);
   if (finalPostUpdateError) {
     return null;
@@ -70,9 +72,11 @@ const moveFilesFromDraftToPublic = async (
 ) => {
   const paths: string[] = [];
   const promises = files.map((file) => {
-    const { path } = file;
+    const { path, name } = file;
     const from = path;
-    const to = `public/${communityId}/${postId}/${uuidv4()}-${file.name}`;
+    const to = `public/${communityId}/${postId}/${uuidv4()}-${sanitizeObjectKey(
+      name
+    )}`;
     paths.push(to);
     return database.storage.from(bucketName).move(from, to);
   });
