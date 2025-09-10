@@ -32,6 +32,7 @@ export default async function createNewPost({
       title,
       text,
       community_id: communityId,
+      status: "draft",
     })
     .select()
     .single();
@@ -54,7 +55,7 @@ export default async function createNewPost({
   //update post urls
   const { error: finalPostUpdateError } = await supabase
     .from("posts")
-    .update({ media: publishUrls })
+    .update({ media: publishUrls, status: "published" })
     .eq("id", post.id);
   if (finalPostUpdateError) {
     return null;

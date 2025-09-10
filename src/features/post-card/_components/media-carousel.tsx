@@ -1,5 +1,5 @@
 "use client";
-import { Button, Image, Link } from "@heroui/react";
+import { Button, Image } from "@heroui/react";
 import { useCallback, useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 

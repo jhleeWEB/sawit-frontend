@@ -6,12 +6,13 @@ import { Post } from "@/service/fetch_post";
 
 interface Props {
   post: Post;
+  headerInfo?: "user" | "community";
 }
-export default function UserPostDetail({ post }: Props) {
+export default function PostCard(props: Props) {
   return (
     <>
-      <PostTitleHeader post={post} />
-      <PostContentBody post={post} />
+      <PostTitleHeader {...props} />
+      <PostContentBody post={props.post} />
     </>
   );
 }

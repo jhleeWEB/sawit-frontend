@@ -27,6 +27,8 @@ export interface Post {
   text?: string;
   media: string[];
   community_id: number;
+  community_name: string;
+  community_icon: string;
   owner_id: string;
   owner_username: string;
   owner_icon: string;
