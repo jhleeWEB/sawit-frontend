@@ -10,17 +10,10 @@ export default async function fetchComments(
 
   const { data, error } = await supabase.rpc("post_comments_with_replies", {
     p_post_id: postId,
-    p_limit: 10,
+    p_limit: 1000,
     p_offset: 0,
   });
 
-  //   const { data, error } = await supabase
-  //     .from("post_comments")
-  //     .select()
-  //     .eq("post_id", postId)
-  //     .eq("depth", 0)
-  //     .limit(10);
-  console.log(data);
   if (error) {
     return null;
   }
