@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Header from "./header";
 import fetchComments, { Comment } from "@/service/fetch_comments";
 import CommentActionRow from "./comment-action-row";
-import { memo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { PiPlusCircle, PiMinusCircle } from "react-icons/pi";
 import { Button } from "@heroui/react";
 
@@ -12,15 +12,12 @@ interface Props {
   postId: number;
 }
 
-export default function PostComments({ postId }: Props) {
+export default function PostCommentSection({ postId }: Props) {
   const { data } = useQuery({
     queryKey: ["post", "comments"],
     queryFn: () => fetchComments(postId),
   });
-  if (!data) {
-    return;
-  }
-  const tree = buildTree(data);
+  const tree = useMemo(() => (data ? buildTree(data) : []), [data]);
 
   return (
     <section className="w-full mt-4">
@@ -32,10 +29,18 @@ export default function PostComments({ postId }: Props) {
 }
 
 function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
-  const [toggleReply, setToggleReply] = useState(false);
-  const hasChildren = commentNode.children.length > 0;
-  const { depth, post_id, owner_icon, owner_username, created_at, id } =
-    commentNode;
+  const [toggleReply, setToggleReply] = useState(true);
+  const {
+    depth,
+    post_id,
+    comment,
+    owner_icon,
+    owner_username,
+    created_at,
+    id,
+    children,
+  } = commentNode;
+  const hasChildren = children.length > 0;
   const indent = depth * 40;
   return (
     <>
@@ -64,17 +69,17 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
           )}
         </div>
         <div className="flex flex-col ml-10">
-          <p>{commentNode.comment}</p>
+          <p>{comment}</p>
           <CommentActionRow
             postId={post_id}
             commentId={id}
-            childrenCount={commentNode.children.length}
+            childrenCount={children.length}
           />
         </div>
       </article>
       {hasChildren &&
         toggleReply &&
-        commentNode.children.map((reply) => (
+        children.map((reply) => (
           <MemoComment key={reply.id} commentNode={reply} />
         ))}
     </>
