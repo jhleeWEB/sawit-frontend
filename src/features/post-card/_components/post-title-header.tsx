@@ -1,8 +1,6 @@
 "use client";
-import { Avatar } from "@heroui/react";
-import createdAt from "@/lib/dayjs/created-at";
-
 import { Post } from "@/service/fetch_post";
+import Header from "./header";
 
 interface Props {
   post: Post;
@@ -17,16 +15,7 @@ export default function PostTitleHeader({ post, headerInfo = "user" }: Props) {
       : "p/" + post.community_name;
   return (
     <div>
-      <div className="flex items-center gap-2 ">
-        <Avatar size="sm" src={icon} className="shrink-0" />
-        <div className="flex flex-col gap-0 text-gray-500">
-          <div className="flex items-center gap-1">
-            <small className="font-bold text-gray-700">{name}</small>
-            <span>·</span>
-            <small>{createdAt(post.created_at)}</small>
-          </div>
-        </div>
-      </div>
+      <Header icon={icon} name={name} created_at={post.created_at} />
       <h1 className="text-2xl font-bold">{post.title}</h1>
     </div>
   );
