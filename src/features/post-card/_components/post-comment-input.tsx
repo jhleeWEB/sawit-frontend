@@ -1,6 +1,6 @@
 "use client";
 
-import postComment from "@/service/post/post_comment";
+import publishComment from "@/service/post/publish_comment";
 import { Button, Form, Textarea } from "@heroui/react";
 import { FormEvent, useState } from "react";
 
@@ -27,7 +27,7 @@ export default function PostCommentInput({ postId }: Props) {
       comment,
     };
 
-    const res = await postComment(params);
+    const res = await publishComment(params);
     if (res) {
       reset();
     }

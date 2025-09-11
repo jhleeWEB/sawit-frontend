@@ -8,7 +8,7 @@ interface Params {
   parent_id?: number;
 }
 
-export default async function postComment(
+export default async function publishComment(
   params: Params
 ): Promise<null | Comment> {
   const session = await getSession();
