@@ -4,13 +4,16 @@ import { createSupabaseClient } from "@/lib/auth/supabase/server";
  * parameters: root_id: root post id
  * return:*/
 export default async function fetchComments(
-  postId: string
+  postId: number
 ): Promise<Comment[] | null> {
   const supabase = await createSupabaseClient();
-  const { data, error } = await supabase.rpc("post_comment_subtree", {
-    root_id: postId,
-  });
-  console.log(data);
+  const { data, error } = await supabase
+    .from("post_comments")
+    .select()
+    .eq("post_id", postId)
+    .eq("depth", 0)
+    .limit(10);
+
   if (error) {
     return null;
   }
