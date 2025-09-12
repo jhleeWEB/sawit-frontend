@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Post } from "@/service/fetch_post";
 import postLikes from "@/service/post_likes";
 import postDislikes from "@/service/post_dislikes";
+import Link from "next/link";
 
 interface Props {
   post: Post;
@@ -80,6 +81,8 @@ export default function PostContentBody({ post }: Props) {
           radius="full"
           size="sm"
           className="bg-neutral-200 hover:bg-neutral-100"
+          as={Link}
+          href={`/p/${post.community_id}/${post.id}`}
         >
           <PiChatCircleDotsThin size={20} />
           <small className="text-[13px]">{post.comments}</small>
