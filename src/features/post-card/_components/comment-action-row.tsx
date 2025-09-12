@@ -10,7 +10,8 @@ import {
   PiArrowFatUpThin,
   PiChatCircleDotsThin,
 } from "react-icons/pi";
-import { CommentNode } from "./post-comment-section";
+import { CommentNode, MemoComment } from "./memo-comment";
+import { Comment } from "@/service/fetch_comments";
 
 interface Props {
   comment: CommentNode;
@@ -21,6 +22,7 @@ export default function CommentActionRow({ comment }: Props) {
   const [reply, setReply] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [likes, setLikes] = useState(() => comment.likes - comment.dislikes);
+  const [myReplies, setMyReplies] = useState<Comment[] | []>([]);
 
   const { post_id, id, children } = comment;
   const childrenCount = useMemo(() => children.length, [children]);
@@ -41,6 +43,7 @@ export default function CommentActionRow({ comment }: Props) {
 
     const res = await publishComment(params);
     if (res) {
+      setMyReplies((prev) => [...prev, res]);
       reset();
     }
     setIsLoading(false);
@@ -105,6 +108,17 @@ export default function CommentActionRow({ comment }: Props) {
           </Button>
         </div>
       </div>
+      {myReplies.length > 0 && (
+        <section className="bg-yellow-50 rounded-xl">
+          {myReplies.map((myReply) => {
+            const myCommentNode = {
+              ...myReply,
+              children: [],
+            };
+            return <MemoComment key={myReply.id} commentNode={myCommentNode} />;
+          })}
+        </section>
+      )}
       {toggle && (
         <Form onSubmit={handleSubmit} className="w-full">
           <Textarea
@@ -115,7 +129,7 @@ export default function CommentActionRow({ comment }: Props) {
             value={reply}
             onValueChange={setReply}
           />
-          <div className="flex justify-end mt-2">
+          <div className="flex w-full justify-end mt-2">
             <Button
               isDisabled={isLoading}
               variant="light"
