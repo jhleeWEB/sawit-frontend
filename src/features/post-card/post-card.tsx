@@ -12,12 +12,17 @@ interface Props {
   showComments?: boolean;
 }
 export default function PostCard(props: Props) {
+  const { post, showComments = false } = props;
   return (
     <>
       <PostTitleHeader {...props} />
-      <PostContentBody post={props.post} />
-      <PostCommentInput postId={props.post.id} />
-      {props.showComments && <PostCommentSection postId={props.post.id} />}
+      <PostContentBody post={post} />
+      {showComments && (
+        <>
+          <PostCommentInput postId={post.id} />
+          <PostCommentSection postId={post.id} />
+        </>
+      )}
     </>
   );
 }

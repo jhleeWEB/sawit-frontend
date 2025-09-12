@@ -1,15 +1,16 @@
 "use client";
 
-import createdAt from "@/lib/dayjs/created-at";
+import { age, createdAt } from "@/lib/dayjs/date-utils";
 import { Avatar } from "@heroui/react";
 
 interface Props {
   icon: string;
   name: string;
   created_at: string;
+  expires_at?: string;
 }
 
-export default function Header({ icon, name, created_at }: Props) {
+export default function Header({ icon, name, created_at, expires_at }: Props) {
   return (
     <div className="flex items-center gap-2 ">
       <Avatar size="sm" src={icon} className="shrink-0" />
@@ -18,6 +19,13 @@ export default function Header({ icon, name, created_at }: Props) {
           <small className="font-bold text-gray-700">{name}</small>
           <span>·</span>
           <small>{createdAt(created_at)}</small>
+          {expires_at && (
+            <>
+              <span>·</span>
+              <small>{age(expires_at)}</small>
+              <small>삭제</small>
+            </>
+          )}
         </div>
       </div>
     </div>

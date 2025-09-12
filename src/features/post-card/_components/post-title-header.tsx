@@ -15,7 +15,12 @@ export default function PostTitleHeader({ post, headerInfo = "user" }: Props) {
       : "p/" + post.community_name;
   return (
     <div>
-      <Header icon={icon} name={name} created_at={post.created_at} />
+      <Header
+        icon={icon}
+        name={name}
+        created_at={post.created_at}
+        expires_at={post.expires_at}
+      />
       <h1 className="text-2xl font-bold">{post.title}</h1>
     </div>
   );

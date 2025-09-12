@@ -24,6 +24,7 @@ export interface Post {
   id: number;
   title: string;
   created_at: string;
+  expires_at: string;
   text?: string;
   media: string[];
   community_id: number;

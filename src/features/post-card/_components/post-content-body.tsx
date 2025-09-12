@@ -41,12 +41,12 @@ export default function PostContentBody({ post }: Props) {
       {/* 하단 버튼 그룹 */}
       <div className="flex gap-2 mt-4">
         {/* 올려/내려 버튼 그룹 */}
-        <div className="flex items-center bg-default-300 rounded-full">
+        <div className="flex items-center bg-neutral-200 rounded-full">
           <Button
             isIconOnly
             radius="full"
             size="sm"
-            className="hover:bg-default-200"
+            className="bg-neutral-200 hover:bg-neutral-100"
             onPress={async () => {
               const result = await postLikes(post_id as string);
               if (result === "cancelled") {
@@ -63,7 +63,7 @@ export default function PostContentBody({ post }: Props) {
             isIconOnly
             radius="full"
             size="sm"
-            className="hover:bg-default-200"
+            className="bg-neutral-200 hover:bg-neutral-100"
             onPress={async () => {
               const result = await postDislikes(post_id as string);
               if (result === "cancelled") {
@@ -77,12 +77,20 @@ export default function PostContentBody({ post }: Props) {
           </Button>
         </div>
         {/* 댓글 버튼 */}
-        <Button radius="full" size="sm" className="hover:bg-default-200">
+        <Button
+          radius="full"
+          size="sm"
+          className="bg-neutral-200 hover:bg-neutral-100"
+        >
           <PiChatCircleDotsThin size={20} />
           <small className="text-[13px]">{post.comments}</small>
         </Button>
         {/* 공유하기 버튼 */}
-        <Button radius="full" size="sm" className="hover:bg-default-200">
+        <Button
+          radius="full"
+          size="sm"
+          className="bg-neutral-200 hover:bg-neutral-100"
+        >
           <PiShareFatThin size={20} />
           <small className="text-[13px]">공유</small>
         </Button>
