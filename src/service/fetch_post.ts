@@ -34,4 +34,5 @@ export interface Post {
   owner_icon: string;
   likes: number;
   dislikes: number;
+  comments: number;
 }

@@ -79,7 +79,7 @@ export default function PostContentBody({ post }: Props) {
         {/* 댓글 버튼 */}
         <Button radius="full" size="sm" className="hover:bg-default-200">
           <PiChatCircleDotsThin size={20} />
-          <small className="text-[13px]">6</small>
+          <small className="text-[13px]">{post.comments}</small>
         </Button>
         {/* 공유하기 버튼 */}
         <Button radius="full" size="sm" className="hover:bg-default-200">

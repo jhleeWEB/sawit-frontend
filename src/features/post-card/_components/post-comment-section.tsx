@@ -32,12 +32,11 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
   const [toggleReply, setToggleReply] = useState(true);
   const {
     depth,
-    post_id,
+
     comment,
     owner_icon,
     owner_username,
     created_at,
-    id,
     children,
   } = commentNode;
   const hasChildren = children.length > 0;
@@ -70,11 +69,7 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
         </div>
         <div className="flex flex-col ml-10">
           <p>{comment}</p>
-          <CommentActionRow
-            postId={post_id}
-            commentId={id}
-            childrenCount={children.length}
-          />
+          <CommentActionRow comment={commentNode} />
         </div>
       </article>
       {hasChildren &&

@@ -1,29 +1,29 @@
 "use client";
 
 import publishComment from "@/service/post/publish_comment";
+import uploadCommentDislike from "@/service/post/upload-comment-dislike";
+import uploadCommentLike from "@/service/post/upload-comment-like";
 import { Button, Form, Textarea } from "@heroui/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import {
   PiArrowFatDownThin,
   PiArrowFatUpThin,
   PiChatCircleDotsThin,
 } from "react-icons/pi";
+import { CommentNode } from "./post-comment-section";
 
 interface Props {
-  postId: number;
-  commentId: number;
-  childrenCount: number;
+  comment: CommentNode;
 }
 
-export default function CommentActionRow({
-  postId,
-  commentId,
-  childrenCount,
-}: Props) {
+export default function CommentActionRow({ comment }: Props) {
   const [toggle, setToggle] = useState(false);
   const [reply, setReply] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [likes, setLikes] = useState(() => comment.likes - comment.dislikes);
 
+  const { post_id, id, children } = comment;
+  const childrenCount = useMemo(() => children.length, [children]);
   const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     if (!e.currentTarget.value || e.currentTarget.value === "") {
       setToggle(false);
@@ -34,9 +34,9 @@ export default function CommentActionRow({
     setIsLoading(true);
     e.preventDefault();
     const params = {
-      post_id: postId,
+      post_id,
       comment: reply,
-      parent_id: commentId,
+      parent_id: id,
     };
 
     const res = await publishComment(params);
@@ -63,8 +63,16 @@ export default function CommentActionRow({
             startContent={
               <PiArrowFatUpThin size={18} className="hover:text-red-500" />
             }
+            onPress={async () => {
+              const res = await uploadCommentLike({ commentId: id });
+              if (res === "cancelled") {
+                setLikes((prev) => prev - 1);
+              } else {
+                setLikes((prev) => prev + 1);
+              }
+            }}
           />
-          <small className="mx-1">0</small>
+          <small className="mx-1">{likes}</small>
           <Button
             variant="light"
             radius="full"
@@ -73,6 +81,14 @@ export default function CommentActionRow({
             startContent={
               <PiArrowFatDownThin size={18} className="hover:text-blue-500" />
             }
+            onPress={async () => {
+              const res = await uploadCommentDislike({ commentId: id });
+              if (res === "disliked") {
+                setLikes((prev) => prev - 1);
+              } else {
+                setLikes((prev) => prev + 1);
+              }
+            }}
           />
         </div>
         <div>
