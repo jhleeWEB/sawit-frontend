@@ -7,8 +7,15 @@ import { Comment } from "@/service/fetch_comments";
 
 function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
   const [toggleReply, setToggleReply] = useState(true);
-  const { depth, comment, owner_icon, owner_username, created_at, children } =
-    commentNode;
+  const {
+    depth,
+    comment,
+    owner_id,
+    owner_icon,
+    owner_username,
+    created_at,
+    children,
+  } = commentNode;
   const hasChildren = children.length > 0;
   const indent = depth * 40;
   return (
@@ -19,6 +26,7 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
             icon={owner_icon}
             name={owner_username}
             created_at={created_at}
+            href={`/u/${owner_id}`}
           />
           {hasChildren && (
             <Button

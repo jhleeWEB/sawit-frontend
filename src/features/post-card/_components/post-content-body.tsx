@@ -9,7 +9,6 @@ import {
   PiShareFatThin,
 } from "react-icons/pi";
 
-import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { useState } from "react";
@@ -22,17 +21,17 @@ interface Props {
 }
 
 export default function PostContentBody({ post }: Props) {
-  const { post_id } = useParams();
+  const { id: post_id } = post;
   const session = useSession();
   const [likes, setLikes] = useState(() => post.likes - post.dislikes);
-
+  const postHref = `/p/${post.community_id}/${post.id}`;
   if (!session) {
     return;
   }
 
   return (
     <div className="flex flex-col">
-      <MediaCarousel urls={post.media} />
+      <MediaCarousel href={postHref} urls={post.media} />
       {post.text && (
         <div>
           <p dangerouslySetInnerHTML={{ __html: post.text || "" }}></p>
@@ -48,7 +47,7 @@ export default function PostContentBody({ post }: Props) {
             size="sm"
             className="bg-neutral-200 hover:bg-neutral-100"
             onPress={async () => {
-              const result = await postLikes(post_id as string);
+              const result = await postLikes(post_id);
               if (result === "cancelled") {
                 setLikes((prev) => prev - 1);
               } else if (result === "liked") {
@@ -65,7 +64,7 @@ export default function PostContentBody({ post }: Props) {
             size="sm"
             className="bg-neutral-200 hover:bg-neutral-100"
             onPress={async () => {
-              const result = await postDislikes(post_id as string);
+              const result = await postDislikes(post_id);
               if (result === "cancelled") {
                 setLikes((prev) => prev + 1);
               } else if (result === "disliked") {

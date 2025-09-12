@@ -2,17 +2,25 @@
 
 import { age, createdAt } from "@/lib/dayjs/date-utils";
 import { Avatar } from "@heroui/react";
+import Link from "next/link";
 
 interface Props {
   icon: string;
   name: string;
+  href: string;
   created_at: string;
   expires_at?: string;
 }
 
-export default function Header({ icon, name, created_at, expires_at }: Props) {
+export default function Header({
+  icon,
+  name,
+  href,
+  created_at,
+  expires_at,
+}: Props) {
   return (
-    <div className="flex items-center gap-2 ">
+    <Link href={href} className="flex items-center gap-2 ">
       <Avatar size="sm" src={icon} className="shrink-0" />
       <div className="flex flex-col gap-0 text-gray-500">
         <div className="flex items-center gap-1">
@@ -28,6 +36,6 @@ export default function Header({ icon, name, created_at, expires_at }: Props) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
