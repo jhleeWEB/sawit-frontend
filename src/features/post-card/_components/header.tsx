@@ -30,9 +30,9 @@ export default function Header({
   expires_at,
 }: Props) {
   return (
-    <section className="flex w-full items-center gap-2">
-      <Link href={href}>
-        <Avatar size="sm" src={icon} className="shrink-0" />
+    <section className="flex w-full gap-2">
+      <Link href={href} className="flex items-center">
+        <Avatar size="sm" src={icon} className="shrink-0 mr-2" />
         <div className="flex flex-col gap-0 text-gray-500">
           <div className="flex items-center gap-1">
             <small className="font-bold text-gray-700">{name}</small>
