@@ -14,10 +14,12 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
     owner_icon,
     owner_username,
     created_at,
+    isOwner,
     children,
   } = commentNode;
   const hasChildren = children.length > 0;
   const indent = depth * 40;
+
   return (
     <>
       <article style={{ marginLeft: `${indent}px` }}>
@@ -27,6 +29,7 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
             name={owner_username}
             created_at={created_at}
             href={`/u/${owner_id}`}
+            isOwner={isOwner}
           />
           {hasChildren && (
             <Button

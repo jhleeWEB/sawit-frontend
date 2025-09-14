@@ -1,4 +1,5 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSession } from "next-auth/react";
 /**
  * function: post_comment_subtree
  * parameters: root_id: root post id
@@ -7,17 +8,28 @@ export default async function fetchComments(
   postId: number
 ): Promise<Comment[] | null> {
   const supabase = await createSupabaseClient();
-
+  const session = await getSession();
   const { data, error } = await supabase.rpc("post_comments_with_replies", {
     p_post_id: postId,
     p_limit: 1000,
     p_offset: 0,
   });
-
-  if (error) {
+  if (error || !session) {
     return null;
   }
-  return data;
+  //se isOwner property to comment object
+  const userId = session.user.id;
+  const dataWithIsOwner = (data as Comment[]).map((n) => {
+    if (n.owner_id === userId) {
+      return {
+        ...n,
+        isOwner: true,
+      };
+    } else {
+      return n;
+    }
+  });
+  return dataWithIsOwner;
 }
 
 export interface Comment {
@@ -35,4 +47,6 @@ export interface Comment {
   dislikes: number;
   path: string;
   depth: number;
+  //only in client
+  isOwner?: boolean;
 }

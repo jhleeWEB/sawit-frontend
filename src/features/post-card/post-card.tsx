@@ -13,6 +13,7 @@ interface Props {
 }
 export default function PostCard(props: Props) {
   const { post, showComments = false } = props;
+
   return (
     <>
       <PostTitleHeader {...props} />

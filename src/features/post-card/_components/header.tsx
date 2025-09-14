@@ -16,8 +16,8 @@ interface Props {
   icon: string;
   name: string;
   href: string;
-  isOwner: boolean;
   created_at: string;
+  isOwner?: boolean;
   expires_at?: string;
 }
 
