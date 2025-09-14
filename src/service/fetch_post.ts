@@ -21,9 +21,10 @@ export default async function fetchPost(post_id: string, community_id: string) {
 }
 
 export interface Post {
-  id: string;
+  id: number;
   title: string;
   created_at: string;
+  expires_at: string;
   text?: string;
   media: string[];
   community_id: number;
@@ -34,4 +35,5 @@ export interface Post {
   owner_icon: string;
   likes: number;
   dislikes: number;
+  comments: number;
 }

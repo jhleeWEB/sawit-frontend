@@ -1,4 +1,4 @@
-import createdAt from "@/lib/dayjs/created-at";
+import { createdAt } from "@/lib/dayjs/date-utils";
 import { User } from "@/service/fetch-user";
 
 interface Props {

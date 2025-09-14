@@ -1,14 +1,16 @@
 "use client";
 import { Button, Image } from "@heroui/react";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const TRANSITION = "transform 200ms ease-in-out";
 interface Props {
+  href: string;
   urls: string[];
 }
 
-export default function MediaCarousel({ urls }: Props) {
+export default function MediaCarousel({ urls, href }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transition, setTransition] = useState("");
 
@@ -77,7 +79,8 @@ export default function MediaCarousel({ urls }: Props) {
       )}
       {urls.map((url, i) => {
         return (
-          <div
+          <Link
+            href={href}
             key={url + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
@@ -102,7 +105,7 @@ export default function MediaCarousel({ urls }: Props) {
               src={url}
               radius="none"
             />
-          </div>
+          </Link>
         );
       })}
     </div>

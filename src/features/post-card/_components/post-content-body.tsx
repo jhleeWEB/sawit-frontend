@@ -9,30 +9,30 @@ import {
   PiShareFatThin,
 } from "react-icons/pi";
 
-import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { useState } from "react";
 import { Post } from "@/service/fetch_post";
 import postLikes from "@/service/post_likes";
 import postDislikes from "@/service/post_dislikes";
+import Link from "next/link";
 
 interface Props {
   post: Post;
 }
 
 export default function PostContentBody({ post }: Props) {
-  const { post_id } = useParams();
+  const { id: post_id } = post;
   const session = useSession();
   const [likes, setLikes] = useState(() => post.likes - post.dislikes);
-
+  const postHref = `/p/${post.community_id}/${post.id}`;
   if (!session) {
     return;
   }
 
   return (
     <div className="flex flex-col">
-      <MediaCarousel urls={post.media} />
+      <MediaCarousel href={postHref} urls={post.media} />
       {post.text && (
         <div>
           <p dangerouslySetInnerHTML={{ __html: post.text || "" }}></p>
@@ -41,14 +41,14 @@ export default function PostContentBody({ post }: Props) {
       {/* 하단 버튼 그룹 */}
       <div className="flex gap-2 mt-4">
         {/* 올려/내려 버튼 그룹 */}
-        <div className="flex items-center bg-default-300 rounded-full">
+        <div className="flex items-center bg-neutral-200 rounded-full">
           <Button
             isIconOnly
             radius="full"
             size="sm"
-            className="hover:bg-default-200"
+            className="bg-neutral-200 hover:bg-neutral-100"
             onPress={async () => {
-              const result = await postLikes(post_id as string);
+              const result = await postLikes(post_id);
               if (result === "cancelled") {
                 setLikes((prev) => prev - 1);
               } else if (result === "liked") {
@@ -63,9 +63,9 @@ export default function PostContentBody({ post }: Props) {
             isIconOnly
             radius="full"
             size="sm"
-            className="hover:bg-default-200"
+            className="bg-neutral-200 hover:bg-neutral-100"
             onPress={async () => {
-              const result = await postDislikes(post_id as string);
+              const result = await postDislikes(post_id);
               if (result === "cancelled") {
                 setLikes((prev) => prev + 1);
               } else if (result === "disliked") {
@@ -77,12 +77,22 @@ export default function PostContentBody({ post }: Props) {
           </Button>
         </div>
         {/* 댓글 버튼 */}
-        <Button radius="full" size="sm" className="hover:bg-default-200">
+        <Button
+          radius="full"
+          size="sm"
+          className="bg-neutral-200 hover:bg-neutral-100"
+          as={Link}
+          href={`/p/${post.community_id}/${post.id}`}
+        >
           <PiChatCircleDotsThin size={20} />
-          <small className="text-[13px]">6</small>
+          <small className="text-[13px]">{post.comments}</small>
         </Button>
         {/* 공유하기 버튼 */}
-        <Button radius="full" size="sm" className="hover:bg-default-200">
+        <Button
+          radius="full"
+          size="sm"
+          className="bg-neutral-200 hover:bg-neutral-100"
+        >
           <PiShareFatThin size={20} />
           <small className="text-[13px]">공유</small>
         </Button>

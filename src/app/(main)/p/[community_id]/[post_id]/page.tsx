@@ -18,7 +18,7 @@ export default async function PostPage({
   return (
     <div className="main-container">
       <main className="w-full py-8">
-        <PostCard post={post} />
+        <PostCard post={post} showComments />
       </main>
       <div className="right-menu-container py-8">
         {community && <CommunityInfo showTitle community={community} />}

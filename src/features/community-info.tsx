@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { BsPersonVcard, BsCalendar4Event } from "react-icons/bs";
 import { Community } from "@/service/fetch-community";
-import createdAt from "@/lib/dayjs/created-at";
+import { createdAt } from "@/lib/dayjs/date-utils";
 
 interface Props {
   showTitle?: boolean;

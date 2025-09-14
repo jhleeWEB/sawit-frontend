@@ -1,8 +1,8 @@
 "use client";
-import { Avatar } from "@heroui/react";
-import createdAt from "@/lib/dayjs/created-at";
-
 import { Post } from "@/service/fetch_post";
+import Header from "./header";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 interface Props {
   post: Post;
@@ -10,24 +10,31 @@ interface Props {
 }
 
 export default function PostTitleHeader({ post, headerInfo = "user" }: Props) {
+  const session = useSession();
   const icon = headerInfo === "user" ? post.owner_icon : post.community_icon;
   const name =
     headerInfo === "user"
       ? "u/" + post.owner_username
       : "p/" + post.community_name;
+  const headerHref =
+    headerInfo === "user" ? `/u/${post.owner_id}` : `/p/${post.community_id}`;
+  const isOwner = session.data?.user.id === post.owner_id;
   return (
     <div>
-      <div className="flex items-center gap-2 ">
-        <Avatar size="sm" src={icon} className="shrink-0" />
-        <div className="flex flex-col gap-0 text-gray-500">
-          <div className="flex items-center gap-1">
-            <small className="font-bold text-gray-700">{name}</small>
-            <span>·</span>
-            <small>{createdAt(post.created_at)}</small>
-          </div>
-        </div>
-      </div>
-      <h1 className="text-2xl font-bold">{post.title}</h1>
+      <Header
+        icon={icon}
+        name={name}
+        href={headerHref}
+        isOwner={isOwner}
+        created_at={post.created_at}
+        expires_at={post.expires_at}
+      />
+      <Link
+        href={`/p/${post.community_id}/${post.id}`}
+        className="text-2xl font-bold"
+      >
+        {post.title}
+      </Link>
     </div>
   );
 }

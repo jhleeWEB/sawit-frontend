@@ -2,8 +2,8 @@ import CommunityHeader from "./_components/community-header";
 import EmptyPost from "./_components/empty-post";
 import fetchCommunityFeeds from "@/service/fetch-community-feeds";
 import fetchCommunity from "@/service/fetch-community";
-import UserPost from "@/features/user-post";
 import CommunityInfo from "@/features/community-info";
+import PostCard from "@/features/post-card/post-card";
 
 export default async function CommunityPage({
   params,
@@ -31,7 +31,7 @@ export default async function CommunityPage({
         {feeds ? (
           <div>
             {feeds.map((post) => (
-              <UserPost key={`${post.username}_${post.id}`} post={post} />
+              <PostCard key={`${post.username}_${post.id}`} post={post} />
             ))}
           </div>
         ) : (
