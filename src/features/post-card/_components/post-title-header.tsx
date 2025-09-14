@@ -1,8 +1,8 @@
 "use client";
 import { Post } from "@/service/fetch_post";
-import Header from "./header";
+
+import PostHeader from "./post-header";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 interface Props {
   post: Post;
@@ -10,25 +10,9 @@ interface Props {
 }
 
 export default function PostTitleHeader({ post, headerInfo = "user" }: Props) {
-  const session = useSession();
-  const icon = headerInfo === "user" ? post.owner_icon : post.community_icon;
-  const name =
-    headerInfo === "user"
-      ? "u/" + post.owner_username
-      : "p/" + post.community_name;
-  const headerHref =
-    headerInfo === "user" ? `/u/${post.owner_id}` : `/p/${post.community_id}`;
-  const isOwner = session.data?.user.id === post.owner_id;
   return (
     <div>
-      <Header
-        icon={icon}
-        name={name}
-        href={headerHref}
-        isOwner={isOwner}
-        created_at={post.created_at}
-        expires_at={post.expires_at}
-      />
+      <PostHeader headerInfo={headerInfo} post={post} />
       <Link
         href={`/p/${post.community_id}/${post.id}`}
         className="text-2xl font-bold"
