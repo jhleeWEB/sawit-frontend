@@ -1,5 +1,5 @@
 "use client";
-import { DraftPreviewFile } from "@/service/upload-draft-files";
+
 import { Button, Image, Link } from "@heroui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DropzoneInputProps } from "react-dropzone";
@@ -9,13 +9,13 @@ import { PiTrashSimpleThin } from "react-icons/pi";
 const TRANSITION = "transform 200ms ease-in-out";
 
 interface Props {
-  files: DraftPreviewFile[];
+  urls: string[];
   onRemove: (index: number) => void;
   getInputProps: <T extends DropzoneInputProps>(any?: T) => T;
 }
 
 export default function PreviewCarousel({
-  files,
+  urls,
   onRemove,
   getInputProps,
 }: Props) {
@@ -28,13 +28,13 @@ export default function PreviewCarousel({
   const [hasPrev, setHasPrev] = useState(false);
 
   const next = useCallback(() => {
-    const length = files.length - 1;
+    const length = urls.length - 1;
     if (currentIndex < length) {
       const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
       setTransition(TRANSITION);
     }
-  }, [currentIndex, files]);
+  }, [currentIndex, urls]);
 
   const prev = useCallback(() => {
     if (currentIndex > 0) {
@@ -46,7 +46,7 @@ export default function PreviewCarousel({
 
   /** handle side effects of current index */
   useEffect(() => {
-    const length = files.length - 1;
+    const length = urls.length - 1;
 
     if (currentIndex >= length) {
       setHasNext(false);
@@ -59,11 +59,11 @@ export default function PreviewCarousel({
     } else {
       setHasPrev(true);
     }
-  }, [files, currentIndex]);
+  }, [urls, currentIndex]);
 
   useEffect(() => {
-    setCurrentIndex(files.length - 1);
-  }, [files]);
+    setCurrentIndex(urls.length - 1);
+  }, [urls]);
 
   return (
     <div
@@ -92,7 +92,7 @@ export default function PreviewCarousel({
           <FaChevronRight size={18} color="white" />
         </Button>
       )}
-      {files && (
+      {urls && (
         <label
           htmlFor="upload"
           className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
@@ -108,14 +108,14 @@ export default function PreviewCarousel({
         </label>
       )}
 
-      {files.map((file, i) => {
+      {urls.map((urls, i) => {
         return (
           <Link
-            key={file.name + "_" + i}
+            key={"image" + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              backgroundImage: `url("${file.signedUrl}")`,
+              backgroundImage: `url("${urls}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -132,24 +132,14 @@ export default function PreviewCarousel({
               >
                 <PiTrashSimpleThin size={18} color="white" />
               </Button>
-              {file.type.includes("image") && (
+              {
                 <Image
                   alt={"event-images" + i}
                   height={400}
-                  src={file.signedUrl}
+                  src={urls}
                   radius="none"
                 />
-              )}
-              {file.type.includes("video") && (
-                <video
-                  src={file.signedUrl}
-                  controls
-                  playsInline
-                  muted
-                  preload="metadata"
-                  style={{ width: "100%", height: "400px" }}
-                />
-              )}
+              }
             </div>
           </Link>
         );

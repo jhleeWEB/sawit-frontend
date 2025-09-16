@@ -106,7 +106,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
       {files.length > 0 && (
         <PreviewCarousel
-          files={files}
+          urls={files.map((n) => n.signedUrl)}
           onRemove={handleRemoveFile}
           getInputProps={getInputProps}
         />
