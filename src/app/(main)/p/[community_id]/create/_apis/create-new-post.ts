@@ -1,6 +1,4 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { DraftPreviewFile } from "@/service/upload-draft-files";
-import { sanitizeObjectKey } from "@/utils/senitize-object-key";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSession } from "next-auth/react";
@@ -9,14 +7,14 @@ import { v4 as uuidv4 } from "uuid";
 interface Params {
   title: string;
   text?: string;
-  draftFiles: DraftPreviewFile[] | [];
-  communityId: number;
+  files: File[] | [];
+  communityId: number | undefined;
 }
 
 export default async function createNewPost({
   title,
   text,
-  draftFiles,
+  files,
   communityId,
 }: Params) {
   const session = await getSession();
@@ -26,7 +24,7 @@ export default async function createNewPost({
   const supabase = await createSupabaseClient(session.supabaseAccessToken);
 
   //insert post
-  const { data: post, error: postError } = await supabase
+  const { data: post, error: pError } = await supabase
     .from("posts")
     .insert({
       title,
@@ -37,51 +35,68 @@ export default async function createNewPost({
     .select()
     .single();
 
-  if (postError) {
-    console.error(postError);
+  if (pError) {
+    console.error(pError);
     return null;
   }
 
   //upload files to bucket
-  const bucketName = "media";
-  const publishUrls = await moveFilesFromDraftToPublic(
-    supabase,
-    draftFiles,
-    bucketName,
-    communityId,
-    post.id
-  );
-
+  const postMediaIds = await uploadFiles(supabase, files, post.id);
+  if (!postMediaIds) {
+    return null;
+  }
   //update post urls
   const { error: finalPostUpdateError } = await supabase
     .from("posts")
-    .update({ media: publishUrls, status: "published" })
+    .update({
+      media_urls: postMediaIds.map((media) => media.url),
+      status: "published",
+    })
     .eq("id", post.id);
+
   if (finalPostUpdateError) {
     return null;
   }
   return post;
 }
 
-const moveFilesFromDraftToPublic = async (
+const uploadFiles = async (
   database: SupabaseClient,
-  files: DraftPreviewFile[],
-  bucketName: string,
-  communityId: number,
+  files: File[],
   postId: number
 ) => {
-  const paths: string[] = [];
-  const promises = files.map((file) => {
-    const { path, name } = file;
-    const from = path;
-    const to = `public/${communityId}/${postId}/${uuidv4()}-${sanitizeObjectKey(
-      name
-    )}`;
-    paths.push(to);
-    return database.storage.from(bucketName).move(from, to);
-  });
-  await Promise.all(promises);
-  return paths.map(
-    (path) => database.storage.from("media").getPublicUrl(path).data.publicUrl
-  );
+  const media = [];
+  for (const f of files) {
+    const ext = f.name.split(".").pop();
+    const key = `public/${postId}/${uuidv4()}.${ext}`;
+    //Storage에 업로드
+    const { data: upload, error: uError } = await database.storage
+      .from("media")
+      .upload(key, f, { upsert: true });
+    if (uError) {
+      console.error(uError);
+      continue;
+    }
+    const publicUrl = database.storage.from("media").getPublicUrl(upload.path)
+      .data.publicUrl;
+    //post media에 insert
+    const { data: pData, error: pError } = await database
+      .from("post_media")
+      .insert({
+        post_id: postId,
+        name: f.name,
+        mime: f.type,
+        ext: ext,
+        path: upload.path,
+        url: publicUrl,
+      })
+      .select("id, url")
+      .single();
+    if (pError) {
+      console.error(pError);
+      continue;
+    }
+    media.push(pData);
+  }
+  return media;
 };

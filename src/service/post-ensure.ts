@@ -1,22 +1,24 @@
-import { authOptions } from "@/lib/auth/supabase/auth-options";
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "next-auth/react";
 
+interface Params {
+  community_id: number;
+}
 /*post id를 반환하는 요청입니다. */
-export async function POST(req: NextRequest) {
+export default async function postEnsure({ community_id }: Params) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await getSession();
     if (!session) {
+      console.error("Unauthorized");
       throw new Error("Unauthorized");
     }
-    const { community_id, uid } = await req.json();
+    const uid = session.user.id;
     const supabase = await createSupabaseClient(session.supabaseAccessToken);
     const { data: exist } = await supabase
       .from("posts")
       .select("id")
       .eq("owner_id", uid)
-      .single();
+      .maybeSingle();
 
     /**기존 작성중인 드레프트 포스트가 없을 경우 */
     if (!exist) {
@@ -32,13 +34,14 @@ export async function POST(req: NextRequest) {
         .select("id")
         .single();
       if (error) {
+        console.error(error);
         throw error;
       }
-      return NextResponse.json({ post_id, message: "새로 생성" });
+      return post_id;
     }
-    return NextResponse.json({ post_id: exist.id, message: "이미 존재" });
+    return exist.id;
   } catch (error) {
     console.error(error);
-    return NextResponse.json("Internal server error", { status: 500 });
+    return null;
   }
 }

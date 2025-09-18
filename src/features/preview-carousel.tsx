@@ -107,6 +107,21 @@ export default function PreviewCarousel({
           />
         </label>
       )}
+      {urls && (
+        <label
+          htmlFor="upload"
+          className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
+        >
+          추가
+          <input
+            {...getInputProps()}
+            name="files"
+            id="upload"
+            type="file"
+            style={{ display: "none" }}
+          />
+        </label>
+      )}
 
       {urls.map((urls, i) => {
         return (

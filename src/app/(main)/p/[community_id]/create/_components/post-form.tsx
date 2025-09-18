@@ -7,13 +7,11 @@ import CommunitySearchBar from "@/app/(main)/create-post/_components/community-s
 import createNewPost from "../_apis/create-new-post";
 import SimpleEditor from "./editor";
 
-import { DraftPreviewFile } from "@/service/upload-draft-files";
-
 //@ts-expect-error payload any type
 function reducer(state: FormState, action: { type: string; payload }) {
   switch (action.type) {
-    case "update_draft_files":
-      state.draftFiles = [...action.payload];
+    case "update_files":
+      state.files = [...action.payload];
       return state;
     case "update_text":
       state.text = action.payload;
@@ -22,23 +20,22 @@ function reducer(state: FormState, action: { type: string; payload }) {
       state.title = action.payload;
       return state;
     case "update_community_id":
-      state.communityId = action.payload;
-      return state;
+      return { ...state, communityId: action.payload };
   }
   return state;
 }
 
-interface FormState {
-  communityId: number;
+export interface FormState {
+  communityId: number | undefined;
   title: string;
-  draftFiles: DraftPreviewFile[] | [];
+  files: File[] | [];
   text: string;
 }
 
 const initialState = {
-  communityId: 0,
+  communityId: undefined,
   title: "",
-  draftFiles: [],
+  files: [],
   text: "",
 };
 
@@ -50,6 +47,7 @@ export default function PostForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPosting(true);
+
     const res = await createNewPost({ ...formState });
 
     if (res) {
