@@ -1,6 +1,6 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 
-export default async function fetchPost(post_id: string, community_id: string) {
+export default async function fetchPost(post_id: number, community_id: number) {
   try {
     const supabase = await createSupabaseClient();
     const { data: postData, error } = await supabase
@@ -23,6 +23,7 @@ export default async function fetchPost(post_id: string, community_id: string) {
 
 export interface Post {
   id: number;
+  type: string;
   title: string;
   created_at: string;
   expires_at: string;

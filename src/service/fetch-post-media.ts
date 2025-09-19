@@ -1,5 +1,5 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { getSession } from "next-auth/react";
+import getNextAuthSession from "@/lib/next-auth/get-next-auth-session";
 
 interface Params {
   post_id?: number;
@@ -7,11 +7,13 @@ interface Params {
 
 export default async function fetchPostMedia({
   post_id,
-}: Params): Promise<null | Pick<PostMedia, "id" | "url" | "path">[]> {
+}: Params): Promise<null | PostMedia[]> {
   if (!post_id) {
     return null;
   }
-  const session = await getSession();
+
+  const session = await getNextAuthSession();
+
   if (!session) {
     return null;
   }
@@ -27,7 +29,7 @@ export default async function fetchPostMedia({
   return data;
 }
 
-interface PostMedia {
+export interface PostMedia {
   id: number;
   created_ad: string;
   owner_id: string;
