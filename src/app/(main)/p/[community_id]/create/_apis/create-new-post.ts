@@ -3,11 +3,13 @@ import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
+import { PostTabOption } from "../_components/post-form";
 
 interface Params {
   title: string;
   text?: string;
   files: File[] | [];
+  type: PostTabOption;
   communityId: number | undefined;
 }
 
@@ -15,6 +17,7 @@ export default async function createNewPost({
   title,
   text,
   files,
+  type,
   communityId,
 }: Params) {
   const session = await getSession();
@@ -22,15 +25,16 @@ export default async function createNewPost({
     return null;
   }
   const supabase = await createSupabaseClient(session.supabaseAccessToken);
-
+  const status = type === "text" ? "published" : "draft";
   //insert post
   const { data: post, error: pError } = await supabase
     .from("posts")
     .insert({
       title,
       text,
+      type,
       community_id: communityId,
-      status: "draft",
+      status,
     })
     .select()
     .single();
@@ -38,6 +42,9 @@ export default async function createNewPost({
   if (pError) {
     console.error(pError);
     return null;
+  }
+  if (type === "text") {
+    return post;
   }
 
   //upload files to bucket

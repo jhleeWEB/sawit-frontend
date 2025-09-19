@@ -43,16 +43,15 @@ export default function PostForm() {
   const route = useRouter();
   const [formState, formDispatch] = useReducer(reducer, initialState);
   const [isPosting, setIsPosting] = useState(false);
+  const [type, setType] = useState<PostTabOption>("media");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPosting(true);
-
-    const res = await createNewPost({ ...formState });
-
+    const res = await createNewPost({ ...formState, type });
+    setIsPosting(false);
     if (res) {
       route.push(`/p/${res.community_id}/${res.id}`);
-      setIsPosting(false);
     }
   };
 
@@ -92,36 +91,18 @@ export default function PostForm() {
           classNames={{
             panel: "px-0",
           }}
+          selectedKey={type}
+          onSelectionChange={(key: string | number) =>
+            setType(key as PostTabOption)
+          }
         >
-          <Tab
-            key="media"
-            title={
-              <div className="flex items-center space-x-2">
-                <span>미디어</span>
-              </div>
-            }
-          >
+          <Tab key="media" title="미디어">
             <DragNDropMediaInput formDispatch={formDispatch} />
           </Tab>
-          <Tab
-            key="text"
-            title={
-              <div className="flex items-center space-x-2">
-                <span>글</span>
-              </div>
-            }
-          >
+          <Tab key="text" title="글">
             <SimpleEditor formDispatch={formDispatch} />
           </Tab>
-          <Tab
-            key="link"
-            disabled
-            title={
-              <div className="flex items-center space-x-2">
-                <span>링크</span>
-              </div>
-            }
-          />
+          <Tab key="link" disabled title="링크" />
         </Tabs>
       </div>
 
@@ -149,3 +130,5 @@ export default function PostForm() {
     </Form>
   );
 }
+
+export type PostTabOption = "media" | "text" | "link";

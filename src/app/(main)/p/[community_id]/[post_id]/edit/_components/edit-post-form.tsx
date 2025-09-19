@@ -6,6 +6,8 @@ import { Button, Form, Input } from "@heroui/react";
 import { FormEvent, useState } from "react";
 import PreviewCarousel, { PreviewCarouselValue } from "./preview-carousel";
 import updatePost from "@/service/update-post";
+import { useRouter } from "next/navigation";
+import SimpleEditor from "./editor";
 
 interface Props {
   post: Post;
@@ -13,34 +15,27 @@ interface Props {
 }
 
 export default function EditPostForm({ post, postMedia }: Props) {
+  const router = useRouter();
   const [title, setTitle] = useState(() => post.title);
   const [text, setText] = useState(() => post.text);
   const [media, setMedia] = useState<PreviewCarouselValue[]>(() =>
     postMedia.map((n) => ({ url: n.url, status: "published", path: n.path }))
   );
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const removedFiles = [];
-    const addedFiles = [];
-    for (const m of media) {
-      switch (m.status) {
-        case "removed":
-          removedFiles.push(m);
-        case "draft":
-          addedFiles.push(m);
-        default:
-          break;
-      }
-    }
-
+    setUploading(true);
     const update = await updatePost({
       post_id: post.id,
       title,
       text: text || "",
       media,
     });
-    console.log(update);
+    setUploading(false);
+    if (update) {
+      router.push(`/p/${update.community_id}/${update.id}`);
+    }
   };
 
   return (
@@ -72,11 +67,20 @@ export default function EditPostForm({ post, postMedia }: Props) {
       />
 
       <div className="flex w-full flex-col">
-        <PreviewCarousel values={media} onValueChange={setMedia} />
+        {post.type === "media" && (
+          <PreviewCarousel values={media} onValueChange={setMedia} />
+        )}
+        {post.type === "text" && <SimpleEditor text={post.text} />}
       </div>
 
       <div className="w-full flex justify-end gap-2">
-        <Button radius="full" color="primary" type="submit">
+        <Button
+          radius="full"
+          color="primary"
+          type="submit"
+          disabled={uploading}
+          isLoading={uploading}
+        >
           수정하기
         </Button>
       </div>

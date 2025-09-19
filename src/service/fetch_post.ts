@@ -1,3 +1,4 @@
+import { PostTabOption } from "@/app/(main)/p/[community_id]/create/_components/post-form";
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 
 export default async function fetchPost(post_id: number, community_id: number) {
@@ -23,7 +24,7 @@ export default async function fetchPost(post_id: number, community_id: number) {
 
 export interface Post {
   id: number;
-  type: string;
+  type: PostTabOption;
   title: string;
   created_at: string;
   expires_at: string;
