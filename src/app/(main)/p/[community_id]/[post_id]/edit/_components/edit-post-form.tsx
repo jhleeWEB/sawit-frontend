@@ -4,9 +4,8 @@ import { PostMedia } from "@/service/fetch-post-media";
 import { Post } from "@/service/fetch_post";
 import { Button, Form, Input } from "@heroui/react";
 import { FormEvent, useState } from "react";
-
-import DragNDropMediaInput from "./d-n-d-media";
-import PreviewCarousel from "./preview-carousel";
+import PreviewCarousel, { PreviewCarouselValue } from "./preview-carousel";
+import updatePost from "@/service/update-post";
 
 interface Props {
   post: Post;
@@ -16,13 +15,32 @@ interface Props {
 export default function EditPostForm({ post, postMedia }: Props) {
   const [title, setTitle] = useState(() => post.title);
   const [text, setText] = useState(() => post.text);
-  const [media, setMedia] = useState<
-    { url: string; file?: File; status?: string }[]
-  >(() => postMedia.map((n) => ({ url: n.url, status: "published" })));
+  const [media, setMedia] = useState<PreviewCarouselValue[]>(() =>
+    postMedia.map((n) => ({ url: n.url, status: "published", path: n.path }))
+  );
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(media);
+    const removedFiles = [];
+    const addedFiles = [];
+    for (const m of media) {
+      switch (m.status) {
+        case "removed":
+          removedFiles.push(m);
+        case "draft":
+          addedFiles.push(m);
+        default:
+          break;
+      }
+    }
+
+    const update = await updatePost({
+      post_id: post.id,
+      title,
+      text: text || "",
+      media,
+    });
+    console.log(update);
   };
 
   return (
@@ -52,11 +70,10 @@ export default function EditPostForm({ post, postMedia }: Props) {
           }
         }}
       />
-      {post.type === "media" && (
-        <div className="flex w-full flex-col">
-          <PreviewCarousel values={media} onValueChange={setMedia} />
-        </div>
-      )}
+
+      <div className="flex w-full flex-col">
+        <PreviewCarousel values={media} onValueChange={setMedia} />
+      </div>
 
       <div className="w-full flex justify-end gap-2">
         <Button radius="full" color="primary" type="submit">

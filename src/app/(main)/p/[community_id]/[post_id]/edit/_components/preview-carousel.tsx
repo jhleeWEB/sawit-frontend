@@ -22,7 +22,8 @@ const TRANSITION = "transform 200ms ease-in-out";
 export interface PreviewCarouselValue {
   url: string;
   file?: File;
-  status?: string;
+  status?: "published" | "draft" | "removed";
+  path?: string;
 }
 interface Props {
   values: PreviewCarouselValue[];
@@ -54,7 +55,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
         const temp = [...prev];
         temp[index] = {
           ...temp[index],
-          status: value.file ? "draft" : "publish",
+          status: value.file ? "draft" : "published",
         };
         return temp;
       });
@@ -101,7 +102,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
       onValueChange((prev) => {
         return prev.toSpliced(currentIndex, 0, {
           url,
-          file,
+          file: file,
           status: "draft",
         });
       });
@@ -115,6 +116,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
       if (!accepted) {
         return;
       }
+      console.log(accepted);
       for (let i = 0; i < accepted.length; i++) {
         const originalFile = accepted[i];
         try {
@@ -173,6 +175,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
             name="files"
             id="upload"
             type="file"
+            multiple
             style={{ display: "none" }}
             onChange={onDrop}
           />
@@ -234,7 +237,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
           );
         })}
       </div>
-      <div className="w-full flex overflow-x-auto p-1 gap-1 bg-black/30 rounded-xl mt-4">
+      <div className="w-full flex p-1 gap-1 bg-black/30 rounded-xl mt-4">
         {values.map((value, i) => {
           return (
             <div key={`mini_preview_indicator_${i}`} className="relative">
@@ -245,6 +248,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
                   wrapper: `${
                     currentIndex === i ? "opacity-100" : "opacity-40"
                   } cursor-pointer`,
+                  img: "max-h-[100px]",
                 }}
                 alt={`mini_preview_indicator_${i}`}
                 src={value.url}
