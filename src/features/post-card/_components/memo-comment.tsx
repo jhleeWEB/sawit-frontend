@@ -1,9 +1,9 @@
 import { Button } from "@heroui/react";
-import Header from "./header";
 import { PiMinusCircle, PiPlusCircle } from "react-icons/pi";
 import CommentActionRow from "./comment-action-row";
 import { memo, useState } from "react";
 import { Comment } from "@/service/fetch_comments";
+import CommentHeader from "./comment-header";
 
 function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
   const [toggleReply, setToggleReply] = useState(true);
@@ -14,23 +14,22 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
     owner_icon,
     owner_username,
     created_at,
-    isOwner,
     children,
   } = commentNode;
   const hasChildren = children.length > 0;
   const indent = depth * 40;
 
+  const headerOptions = {
+    icon: owner_icon,
+    name: "u/" + owner_username,
+    href: `/u/${owner_id}`,
+    created_at,
+  };
   return (
     <>
       <article style={{ marginLeft: `${indent}px` }}>
         <div className="flex">
-          <Header
-            icon={owner_icon}
-            name={owner_username}
-            created_at={created_at}
-            href={`/u/${owner_id}`}
-            isOwner={isOwner}
-          />
+          <CommentHeader headerOptions={headerOptions} />
           {hasChildren && (
             <Button
               isIconOnly

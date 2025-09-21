@@ -6,9 +6,6 @@ import { ActionDispatch, useCallback, useEffect, useState } from "react";
 import PreviewCarousel from "@/features/preview-carousel";
 import { compressImageToMaxBytes } from "@/utils/image-compression/compress-image-to-max-bytes";
 import { MB } from "@/utils/image-compression/types";
-import uploadDraftFiles, {
-  DraftPreviewFile,
-} from "@/service/upload-draft-files";
 import { Spinner } from "@heroui/react";
 
 interface Props {
@@ -20,41 +17,48 @@ interface Props {
       }
     ]
   >;
-  draftFiles?: { preview: string; file: File }[];
 }
 
 export default function DragNDropMediaInput({ formDispatch }: Props) {
-  const [files, setFiles] = useState<DraftPreviewFile[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [uploadStatus, setUploadStatus] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
   const onDrop = useCallback(
     async (accepted: File[]) => {
+      let count = 0;
       setIsUploading(true);
-      setUploadStatus("이미지 업로드 시작");
-      await Promise.all(
-        accepted.map(async (f) => {
-          // 이미지만 압축; 그 외 파일은 그대로
-          if (f.type.startsWith("image/")) {
-            try {
-              setUploadStatus("이미지 최적화");
-              const file = await compressImageToMaxBytes(f, {
-                maxBytes: 10 * MB,
-              });
-              setUploadStatus("이미지 업로드");
-              const upload = await uploadDraftFiles(file);
-              if (upload) {
-                setFiles((prev) => [...prev, upload]);
-                setUploadStatus("이미지 업로드 성공");
-              }
-            } catch {
-              setUploadStatus("이미지 업로드 실패");
+      setUploadStatus(`이미지 업로드 시작...(${count}/${accepted.length})`);
+      for (const originalFile of accepted) {
+        try {
+          let file = originalFile;
+          const fileName = originalFile.name;
+          //파일 사이즈 및 타입 체크
+          const isImage = originalFile.type.startsWith("image/");
+          const isTooBig = originalFile.size >= 10 * MB;
+          if (isImage) {
+            if (isTooBig) {
+              setUploadStatus(
+                `이미지 사이즈 축소 시작...(${fileName})[${count}/${accepted.length}]`
+              );
+              file = await compressImageToMaxBytes(file, { maxBytes: 10 * MB });
             }
-          } else if (f.type.startsWith("video/")) {
-            //to-do video 나중에 추가
+            const url = URL.createObjectURL(file);
+            setPreviewUrls((prev) => [...prev, url]);
+            setFiles((prev) => [...prev, file]);
+            setIsUploading(false);
+
+            setUploadStatus(
+              `이미지 업로드 완료...(${fileName})[${count}/${accepted.length}]`
+            );
+          } else {
+            //비디오 처리
           }
-        })
-      );
+        } catch {}
+        count += 1;
+        setIsUploading(false);
+      }
       setIsUploading(false);
     },
     [setUploadStatus, setFiles]
@@ -76,7 +80,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
   useEffect(() => {
     formDispatch({
-      type: "update_draft_files",
+      type: "update_files",
       payload: [...files],
     });
   }, [files, formDispatch]);
@@ -104,9 +108,9 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
         </div>
       )}
 
-      {files.length > 0 && (
+      {previewUrls.length > 0 && (
         <PreviewCarousel
-          files={files}
+          urls={previewUrls}
           onRemove={handleRemoveFile}
           getInputProps={getInputProps}
         />

@@ -1,6 +1,7 @@
 "use client";
 
 import { age, createdAt } from "@/lib/dayjs/date-utils";
+import { Post } from "@/service/fetch_post";
 import {
   Avatar,
   Button,
@@ -9,26 +10,26 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { BsThreeDots } from "react-icons/bs";
 
 interface Props {
-  icon: string;
-  name: string;
-  href: string;
-  created_at: string;
-  isOwner?: boolean;
-  expires_at?: string;
+  post: Post;
+  headerInfo: "user" | "community";
 }
 
-export default function Header({
-  icon,
-  name,
-  href,
-  isOwner,
-  created_at,
-  expires_at,
-}: Props) {
+export default function Header({ post, headerInfo }: Props) {
+  const { data: sessionData } = useSession();
+  const isOwner = sessionData?.user.id === post.owner_id;
+  const icon = headerInfo === "user" ? post.owner_icon : post.community_icon;
+  const name =
+    headerInfo === "user"
+      ? "u/" + post.owner_username
+      : "p/" + post.community_name;
+  const href =
+    headerInfo === "user" ? `/u/${post.owner_id}` : `/p/${post.community_id}`;
+
   return (
     <section className="flex w-full gap-2">
       <Link href={href} className="flex items-center">
@@ -37,11 +38,11 @@ export default function Header({
           <div className="flex items-center gap-1">
             <small className="font-bold text-gray-700">{name}</small>
             <span>·</span>
-            <small>{createdAt(created_at)}</small>
-            {expires_at && (
+            <small>{createdAt(post.created_at)}</small>
+            {post.expires_at && (
               <>
                 <span>·</span>
-                <small>{age(expires_at)}</small>
+                <small>{age(post.expires_at)}</small>
                 <small>삭제</small>
               </>
             )}
@@ -62,7 +63,13 @@ export default function Header({
             />
           </DropdownTrigger>
           <DropdownMenu variant="flat" classNames={{ list: " text-center" }}>
-            <DropdownItem key="setting">수정</DropdownItem>
+            <DropdownItem
+              as={Link}
+              href={`/p/${post.community_id}/${post.id}/edit`}
+              key="setting"
+            >
+              수정
+            </DropdownItem>
             <DropdownItem key="delete" color="danger" className="text-danger">
               삭제
             </DropdownItem>

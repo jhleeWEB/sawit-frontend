@@ -32,7 +32,7 @@ export default function PostContentBody({ post }: Props) {
 
   return (
     <div className="flex flex-col">
-      <MediaCarousel href={postHref} urls={post.media} />
+      <MediaCarousel href={postHref} urls={post.media_urls} />
       {post.text && (
         <div>
           <p dangerouslySetInnerHTML={{ __html: post.text || "" }}></p>
