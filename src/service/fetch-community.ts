@@ -1,7 +1,7 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 
 export default async function fetchCommunity(
-  id: string
+  id: number
 ): Promise<Community | null> {
   const supabase = await createSupabaseClient();
   const { data: community, error } = await supabase
@@ -18,7 +18,7 @@ export default async function fetchCommunity(
 }
 
 export interface Community {
-  id: string;
+  id: number;
   created_at: string;
   name: string;
   description: string;

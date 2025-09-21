@@ -2,7 +2,7 @@
 import FormTitle from "@/app/(main)/create-community/_components/form-title";
 import { PostMedia } from "@/service/fetch-post-media";
 import { Post } from "@/service/fetch_post";
-import { Button, Form, Input } from "@heroui/react";
+import { Avatar, Button, Form, Input } from "@heroui/react";
 import { FormEvent, useState } from "react";
 import PreviewCarousel, { PreviewCarouselValue } from "./preview-carousel";
 import updatePost from "@/service/update-post";
@@ -48,6 +48,10 @@ export default function EditPostForm({ post, postMedia }: Props) {
         title="수정하기
       "
       />
+      <div className="flex items-center gap-2 rounded-full border-2 py-1 px-2">
+        <Avatar size="sm" src={post.community_icon} />
+        <h3>p/{post.community_name}</h3>
+      </div>
       {/** 게시물을 올릴 커뮤니티 선택 검샘 창 */}
       <Input
         isRequired
@@ -70,7 +74,7 @@ export default function EditPostForm({ post, postMedia }: Props) {
         {post.type === "media" && (
           <PreviewCarousel values={media} onValueChange={setMedia} />
         )}
-        {post.type === "text" && <SimpleEditor text={post.text} />}
+        {post.type === "text" && <SimpleEditor text={text} setText={setText} />}
       </div>
 
       <div className="w-full flex justify-end gap-2">

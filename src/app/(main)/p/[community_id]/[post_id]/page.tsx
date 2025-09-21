@@ -6,7 +6,7 @@ import PostCard from "@/features/post-card/post-card";
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ community_id: string; post_id: string }>;
+  params: Promise<{ community_id: number; post_id: number }>;
 }) {
   const { post_id, community_id } = await params;
   const post = await fetchPost(post_id, community_id);
