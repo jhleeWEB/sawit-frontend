@@ -1,6 +1,6 @@
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 
-export default async function fetchCommunityFeeds(communityId: string) {
+export default async function fetchCommunityFeeds(communityId: number) {
   const supabase = await createSupabaseClient();
   const { data: feeds, error } = await supabase
     .from("posts")

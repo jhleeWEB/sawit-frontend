@@ -11,22 +11,33 @@ import {
 } from "@heroui/react";
 import { FormEvent, useState } from "react";
 import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
-import TopicChips from "./_components/topic-chips";
-import FormTitle from "./_components/form-title";
-import { useRouter } from "next/navigation";
-import createNewCommunity from "./_services/create-new-community";
-import BannerCropperModal from "../p/[community_id]/create/_components/banner-crop-modal";
-import IconCropperModal from "../p/[community_id]/create/_components/icon-crop-modal";
 
-export default function CreateCommunity() {
+import { useRouter } from "next/navigation";
+import FormTitle from "@/app/(main)/create-community/_components/form-title";
+import IconCropperModal from "../../create/_components/icon-crop-modal";
+import TopicChips from "@/app/(main)/create-community/_components/topic-chips";
+import BannerCropperModal from "../../create/_components/banner-crop-modal";
+import { Community } from "@/service/fetch-community";
+import updateCommunity from "@/app/(main)/create-community/_services/update-community";
+
+interface Props {
+  community_info: Community;
+}
+
+export default function CommunitySettings({ community_info }: Props) {
   const route = useRouter();
 
-  const [communityName, setCommunityName] = useState("");
-  const [communityDescription, setCommunityDescription] = useState("");
+  const [communityName, setCommunityName] = useState(() => community_info.name);
+
+  const [communityDescription, setCommunityDescription] = useState(
+    () => community_info.description
+  );
   const [bannerBlob, setBannerBlob] = useState<Blob>();
-  const [bannerPreview, setBannerPreview] = useState("");
-  const [iconPreview, setIconPreview] = useState("");
   const [iconBlob, setIconBlob] = useState<Blob>();
+  const [bannerPreview, setBannerPreview] = useState(
+    () => community_info.banner_url
+  );
+  const [iconPreview, setIconPreview] = useState(() => community_info.icon_url);
   const {
     isOpen: isBannerModalOpen,
     onOpen: onBannerModalOpen,
@@ -38,7 +49,9 @@ export default function CreateCommunity() {
     onOpenChange: onIconOpenChange,
   } = useDisclosure();
 
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const [selectedTopics, setSelectedTopics] = useState<string[]>(
+    () => community_info.topics
+  );
   const [topicFilter, setTopicFilter] = useState<string>("");
 
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
@@ -61,41 +74,34 @@ export default function CreateCommunity() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitLoading(true);
-    const data = await createNewCommunity({
+    const data = await updateCommunity({
       name: communityName,
       description: communityDescription,
       banner: bannerBlob,
       icon: iconBlob,
       topics: selectedTopics,
+      community_id: community_info.id,
     });
     route.push(`/p/${data.id}`);
     setIsSubmitLoading(false);
   };
 
   return (
-    <div className="main-container">
+    <>
       <main className="w-full py-8 px-36">
-        <h1 className="text-2xl font-bold mb-8">커뮤니티 만들기</h1>
+        <h1 className="text-2xl font-bold mb-8">커뮤니티 설정</h1>
         <Form id="community-form" onSubmit={handleSubmit}>
-          <FormTitle
-            title="커뮤니티에 대해서 알려주세요"
-            description="이름과 설명은 다른분들이 당신의 커뮤니티가 어떤 곳인지 이해하는 데 도움이 됩니다."
-          />
           <Input
             fullWidth
             required
             radius="lg"
-            variant={"bordered"}
+            variant="bordered"
             name="name"
             label="커뮤니티 이름"
+            labelPlacement="outside-top"
             maxLength={50}
             value={communityName}
-            size="lg"
             onValueChange={setCommunityName}
-            classNames={{
-              inputWrapper: "border",
-              input: "text-xl",
-            }}
           />
           <small className="text-gray-400 w-full flex justify-end">
             {communityName.length}
@@ -103,27 +109,20 @@ export default function CreateCommunity() {
           <Textarea
             fullWidth
             required
-            size="lg"
             maxLength={500}
             name="description"
             label="커뮤니티 설명"
+            labelPlacement="outside-top"
             variant="bordered"
             value={communityDescription}
             onValueChange={setCommunityDescription}
-            classNames={{
-              inputWrapper: "border",
-            }}
           />
           <small className="text-gray-400 w-full flex justify-end">
             {communityDescription.length}
           </small>
 
           <div className="w-full mb-8">
-            <FormTitle
-              title="커뮤니티를 꾸며보세요"
-              description="시각적인 요소를 더하면 새로운 분들의 관심을 끌고 커뮤니티의 문화를 확립하는 데 도움이 됩니다! 언제든지 이 내용을 업데이트할 수 있습니다."
-            />
-            <div className="flex items-center justify-between mb-4 px-8">
+            <div className="flex items-center justify-between mb-4">
               <h3>배너</h3>
               <Button
                 radius="full"
@@ -149,7 +148,7 @@ export default function CreateCommunity() {
                 }}
               />
             </div>
-            <div className="flex items-center justify-between px-8">
+            <div className="flex items-center justify-between">
               <h3>아이콘</h3>
               <Button
                 variant="bordered"
@@ -366,11 +365,11 @@ export default function CreateCommunity() {
             isLoading={isSubmitLoading}
             isDisabled={isSubmitLoading}
           >
-            커뮤니티 만들기
+            업데이트 하기
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

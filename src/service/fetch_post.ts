@@ -1,14 +1,13 @@
 import { PostTabOption } from "@/app/(main)/p/[community_id]/create/_components/post-form";
 import { createSupabaseClient } from "@/lib/auth/supabase/server";
 
-export default async function fetchPost(post_id: number, community_id: number) {
+export default async function fetchPost(post_id: number) {
   try {
     const supabase = await createSupabaseClient();
     const { data: postData, error } = await supabase
       .from("posts")
       .select()
       .eq("id", post_id)
-      .eq("community_id", community_id)
       .single<Post>();
 
     if (error) {

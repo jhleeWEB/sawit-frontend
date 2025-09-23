@@ -1,3 +1,4 @@
+"use server";
 import CommunityHeader from "./_components/community-header";
 import EmptyPost from "./_components/empty-post";
 import fetchCommunityFeeds from "@/service/fetch-community-feeds";
@@ -8,25 +9,20 @@ import PostCard from "@/features/post-card/post-card";
 export default async function CommunityPage({
   params,
 }: {
-  params: Promise<{ community_id: string }>;
+  params: Promise<{ community_id: number }>;
 }) {
   const { community_id } = await params;
-  const id = decodeURIComponent(community_id);
-  const community = await fetchCommunity(id);
-  const feeds = await fetchCommunityFeeds(id);
+
+  const community = await fetchCommunity(community_id);
+  const feeds = await fetchCommunityFeeds(community_id);
+
   if (!community) {
     return;
   }
 
-  const { name, banner_url, icon_url } = community;
   return (
     <div className="main-container">
-      <CommunityHeader
-        iconUrl={icon_url}
-        bannerUrl={banner_url}
-        name={name}
-        id={id}
-      />
+      <CommunityHeader community={community} />
       <main className="w-full">
         {feeds ? (
           <div>
@@ -43,14 +39,4 @@ export default async function CommunityPage({
       </div>
     </div>
   );
-}
-
-export interface CommunityModel {
-  id: number;
-  banner_url: string;
-  icon_url: string;
-  name: string;
-  description: string;
-  topics: string;
-  created_at: Date;
 }
