@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import "../globals.css";
 import Providers from "../providers";
 import TopNavigation from "./_components/top-navigation/top-navigation";
-import SideMenu from "./_components/side-menu/side-menu";
+// import SideMenu from "./_components/side-menu/side-menu";
 
 export const metadata: Metadata = {
   title: "Sawit",
@@ -21,9 +21,9 @@ export default async function RootLayout({
         <Providers>
           <TopNavigation />
           <div className="grid-container">
-            <aside className="left-menu-container">
+            {/* <aside className="left-menu-container">
               <SideMenu />
-            </aside>
+            </aside> */}
             <div className="subgrid-container">{children}</div>
           </div>
         </Providers>
