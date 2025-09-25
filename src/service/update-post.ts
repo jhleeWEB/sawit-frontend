@@ -1,5 +1,5 @@
 import { PreviewCarouselValue } from "@/app/(main)/p/[community_id]/[post_id]/edit/_components/preview-carousel";
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
 

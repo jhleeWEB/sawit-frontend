@@ -1,6 +1,6 @@
 "use client";
 
-import { age, createdAt } from "@/lib/dayjs/date-utils";
+import { createdAt } from "@/lib/dayjs/date-utils";
 import { Post } from "@/service/fetch_post";
 import {
   Avatar,
@@ -39,13 +39,6 @@ export default function Header({ post, headerInfo }: Props) {
             <small className="font-bold text-gray-700">{name}</small>
             <span>·</span>
             <small>{createdAt(post.created_at)}</small>
-            {post.expires_at && (
-              <>
-                <span>·</span>
-                <small>{age(post.expires_at)}</small>
-                <small>삭제</small>
-              </>
-            )}
           </div>
         </div>
       </Link>

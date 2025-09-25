@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/react";
+import { Button, useDisclosure } from "@heroui/react";
 import MediaCarousel from "./media-carousel";
 import {
   PiArrowFatLineDownThin,
@@ -8,14 +8,13 @@ import {
   PiChatCircleDotsThin,
   PiShareFatThin,
 } from "react-icons/pi";
-
 import { useSession } from "next-auth/react";
-
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Post } from "@/service/fetch_post";
 import postLikes from "@/service/post_likes";
 import postDislikes from "@/service/post_dislikes";
 import Link from "next/link";
+import SocialLoginModal from "@/components/modals/social-login-modal";
 
 interface Props {
   post: Post;
@@ -24,18 +23,41 @@ interface Props {
 export default function PostContentBody({ post }: Props) {
   const pRef = useRef<HTMLParagraphElement>(null);
   const { id: post_id } = post;
-  const session = useSession();
+  const { data: session } = useSession();
   const [likes, setLikes] = useState(() => post.likes - post.dislikes);
   const postHref = `/p/${post.community_id}/${post.id}`;
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const handleLikeAndDisLikeButton = useCallback(
+    async (type: "likes" | "dislikes") => {
+      if (!session) {
+        onOpen();
+        return;
+      }
+      if (type === "likes") {
+        const result = await postLikes(post_id);
+        if (result === "cancelled") {
+          setLikes((prev) => prev + 1);
+        } else if (result === "liked") {
+          setLikes((prev) => prev - 1);
+        }
+      } else {
+        const result = await postDislikes(post_id);
+        if (result === "cancelled") {
+          setLikes((prev) => prev + 1);
+        } else if (result === "disliked") {
+          setLikes((prev) => prev - 1);
+        }
+      }
+    },
+    [onOpen, setLikes, session, post_id]
+  );
 
   useEffect(() => {
     if (pRef.current) {
       pRef.current.innerHTML = post.text || "";
     }
   }, [post]);
-  if (!session) {
-    return;
-  }
 
   return (
     <div className="flex flex-col">
@@ -43,7 +65,7 @@ export default function PostContentBody({ post }: Props) {
         <MediaCarousel href={postHref} urls={post.media_urls} />
       )}
       {post.type === "text" && (
-        <div>
+        <div className="rounded-2xl">
           <p ref={pRef}></p>
         </div>
       )}
@@ -56,14 +78,7 @@ export default function PostContentBody({ post }: Props) {
             radius="full"
             size="sm"
             className="bg-neutral-200 hover:bg-neutral-100"
-            onPress={async () => {
-              const result = await postLikes(post_id);
-              if (result === "cancelled") {
-                setLikes((prev) => prev - 1);
-              } else if (result === "liked") {
-                setLikes((prev) => prev + 1);
-              }
-            }}
+            onPress={() => handleLikeAndDisLikeButton("likes")}
           >
             <PiArrowFatLineUpThin size={20} className="hover:text-red-500" />
           </Button>
@@ -73,14 +88,7 @@ export default function PostContentBody({ post }: Props) {
             radius="full"
             size="sm"
             className="bg-neutral-200 hover:bg-neutral-100"
-            onPress={async () => {
-              const result = await postDislikes(post_id);
-              if (result === "cancelled") {
-                setLikes((prev) => prev + 1);
-              } else if (result === "disliked") {
-                setLikes((prev) => prev - 1);
-              }
-            }}
+            onPress={() => handleLikeAndDisLikeButton("dislikes")}
           >
             <PiArrowFatLineDownThin size={20} className="hover:text-blue-500" />
           </Button>
@@ -106,6 +114,7 @@ export default function PostContentBody({ post }: Props) {
           <small className="text-[13px]">공유</small>
         </Button>
       </div>
+      <SocialLoginModal isOpen={isOpen} onOpenChange={onOpenChange} />
     </div>
   );
 }
