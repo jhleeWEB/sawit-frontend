@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import "../globals.css";
-import Providers from "../providers";
+import Providers from "../(providers)/providers";
 import TopNavigation from "./_components/top-navigation/top-navigation";
 // import SideMenu from "./_components/side-menu/side-menu";
 

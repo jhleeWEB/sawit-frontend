@@ -1,4 +1,4 @@
-import RecentFeedSection from "./_components/recent=feed-section";
+import RecentFeedSection from "./_components/recent-feed-section";
 
 export default async function Home() {
   return (
