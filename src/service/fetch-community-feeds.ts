@@ -1,7 +1,8 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchCommunityFeeds(communityId: number) {
-  const supabase = await createSupabaseClient();
+  const supabase = getSupabaseClient() as SupabaseClient;
   const { data: feeds, error } = await supabase
     .from("posts")
     .select()

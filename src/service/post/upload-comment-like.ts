@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 export default async function uploadCommentLike({
   commentId,
@@ -9,7 +9,7 @@ export default async function uploadCommentLike({
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const { data: existing } = await supabase
     .from("comment_likes")
     .select("id")

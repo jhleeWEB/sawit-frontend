@@ -1,9 +1,9 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 
 export default async function fetchCommunity(
   id: number
 ): Promise<Community | null> {
-  const supabase = await createSupabaseClient();
+  const supabase = getSupabaseClient() as SupabaseClient;
   const { data: community, error } = await supabase
     .from("communities")
     .select()

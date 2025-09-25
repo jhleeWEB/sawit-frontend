@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import getNextAuthSession from "@/lib/next-auth/get-next-auth-session";
 
 interface Params {
@@ -17,7 +17,7 @@ export default async function fetchPostMedia({
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const { data, error } = await supabase
     .from("post_media")
     .select()

@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 
 export default async function postLikes(postId: number) {
@@ -8,7 +8,7 @@ export default async function postLikes(postId: number) {
       throw "no user session";
     }
 
-    const supabase = await createSupabaseClient(session.supabaseAccessToken);
+    const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
     /**좋아요를 눌렀는지 확인 */
     const { data: existing } = await supabase
       .from("post_likes")

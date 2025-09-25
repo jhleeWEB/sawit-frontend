@@ -1,4 +1,5 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 interface Params {
   username?: string;
@@ -6,7 +7,7 @@ interface Params {
 }
 
 export default async function fetchUser({ username, id }: Params) {
-  const supabase = await createSupabaseClient();
+  const supabase = getSupabaseClient() as SupabaseClient;
   if (username) {
     const { data: userInfo, error } = await supabase
       .from("users")

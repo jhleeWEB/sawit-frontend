@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 
 export default async function fetchCommunitySearchList(searchword: string) {
@@ -6,7 +6,7 @@ export default async function fetchCommunitySearchList(searchword: string) {
   if (!session) {
     return [];
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const { data: communityList, error } = await supabase
     .from("communities")
     .select("id, name, icon_url, topics")

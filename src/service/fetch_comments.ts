@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 /**
  * function: post_comment_subtree
@@ -7,7 +7,7 @@ import { getSession } from "next-auth/react";
 export default async function fetchComments(
   postId: number
 ): Promise<Comment[] | null> {
-  const supabase = await createSupabaseClient();
+  const supabase = getSupabaseClient() as SupabaseClient;
   const session = await getSession();
   const { data, error } = await supabase.rpc("post_comments_with_replies", {
     p_post_id: postId,

@@ -1,5 +1,6 @@
 import { authOptions } from "@/lib/auth/supabase/auth-options";
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,7 +12,9 @@ export async function POST(req: NextRequest) {
       throw new Error("Unauthorized");
     }
     const { community_id, uid } = await req.json();
-    const supabase = await createSupabaseClient(session.supabaseAccessToken);
+    const supabase = getSupabaseClientWithToken(
+      session.supabaseAccessToken
+    ) as SupabaseClient;
     const { data: exist } = await supabase
       .from("posts")
       .select("id")

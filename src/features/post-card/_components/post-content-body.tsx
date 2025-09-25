@@ -11,7 +11,7 @@ import {
 
 import { useSession } from "next-auth/react";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Post } from "@/service/fetch_post";
 import postLikes from "@/service/post_likes";
 import postDislikes from "@/service/post_dislikes";
@@ -22,20 +22,29 @@ interface Props {
 }
 
 export default function PostContentBody({ post }: Props) {
+  const pRef = useRef<HTMLParagraphElement>(null);
   const { id: post_id } = post;
   const session = useSession();
   const [likes, setLikes] = useState(() => post.likes - post.dislikes);
   const postHref = `/p/${post.community_id}/${post.id}`;
+
+  useEffect(() => {
+    if (pRef.current) {
+      pRef.current.innerHTML = post.text || "";
+    }
+  }, [post]);
   if (!session) {
     return;
   }
 
   return (
     <div className="flex flex-col">
-      <MediaCarousel href={postHref} urls={post.media_urls} />
-      {post.text && (
+      {post.type === "media" && (
+        <MediaCarousel href={postHref} urls={post.media_urls} />
+      )}
+      {post.type === "text" && (
         <div>
-          <p dangerouslySetInnerHTML={{ __html: post.text || "" }}></p>
+          <p ref={pRef}></p>
         </div>
       )}
       {/* 하단 버튼 그룹 */}

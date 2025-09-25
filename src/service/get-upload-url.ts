@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 
 interface Params {
@@ -18,7 +18,7 @@ export default async function getUploadUrl({
     if (!session) {
       throw new Error("Unauthorized");
     }
-    const supabase = await createSupabaseClient(session.supabaseAccessToken);
+    const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
     const key = `draft/${session.user.id}/${post_id}.${ext}`;
 
     const { data: uploadUrl, error: uError } = await supabase.storage
