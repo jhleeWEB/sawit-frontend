@@ -23,6 +23,7 @@ const oAuthProviders = ["naver", "kakao", "instagram", "google", "github"];
 interface Props {
   isOpen: boolean;
   onOpenChange: () => void;
+  redirectUrl?: string;
 }
 export default function SocialLoginModal(props: Props) {
   const pathname = usePathname();
@@ -42,7 +43,9 @@ export default function SocialLoginModal(props: Props) {
               className="relative flex items-center border-1 border-teal justify-center rounded-md text-gray-400 font-bold"
               onPress={() => {
                 setIsLoading(true);
-                signIn(provider, { callbackUrl: pathname || "/" });
+                signIn(provider, {
+                  callbackUrl: props.redirectUrl || pathname || "/",
+                });
               }}
             >
               {provider === "naver" && (
