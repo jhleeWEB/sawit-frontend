@@ -1,4 +1,5 @@
 import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
 import { getSession } from "next-auth/react";
 /**
  * function: post_comment_subtree
@@ -14,11 +15,11 @@ export default async function fetchComments(
     p_limit: 1000,
     p_offset: 0,
   });
-  if (error || !session) {
+  if (error) {
     return null;
   }
   //se isOwner property to comment object
-  const userId = session.user.id;
+  const userId = session?.user.id;
   const dataWithIsOwner = (data as Comment[]).map((n) => {
     if (n.owner_id === userId) {
       return {

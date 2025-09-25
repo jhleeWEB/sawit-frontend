@@ -15,7 +15,6 @@ export default function PostCommentSection({ postId }: Props) {
     queryFn: () => fetchComments(postId),
   });
   const tree = useMemo(() => (data ? buildTree(data) : []), [data]);
-
   return (
     <section className="w-full mt-4">
       {tree.map((comment) => (

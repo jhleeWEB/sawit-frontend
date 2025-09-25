@@ -1,7 +1,7 @@
 "use client";
 
 import { Comment } from "@/service/fetch_comments";
-import publishComment from "@/service/post/publish_comment";
+import publishComment from "@/service/post/publish-comment";
 import { Button, Form, Textarea, useDisclosure } from "@heroui/react";
 import { FormEvent, useCallback, useState } from "react";
 import { MemoComment } from "./memo-comment";

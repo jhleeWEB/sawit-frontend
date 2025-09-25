@@ -1,10 +1,10 @@
 "use client";
 
-import publishComment from "@/service/post/publish_comment";
+import publishComment from "@/service/post/publish-comment";
 import uploadCommentDislike from "@/service/post/upload-comment-dislike";
 import uploadCommentLike from "@/service/post/upload-comment-like";
-import { Button, Form, Textarea } from "@heroui/react";
-import { FormEvent, useMemo, useState } from "react";
+import { Button, Form, Textarea, useDisclosure } from "@heroui/react";
+import { FormEvent, MouseEvent, useMemo, useState } from "react";
 import {
   PiArrowFatDownThin,
   PiArrowFatUpThin,
@@ -12,6 +12,8 @@ import {
 } from "react-icons/pi";
 import { CommentNode, MemoComment } from "./memo-comment";
 import { Comment } from "@/service/fetch_comments";
+import { useSession } from "next-auth/react";
+import SocialLoginModal from "@/components/modals/social-login-modal";
 
 interface Props {
   comment: CommentNode;
@@ -23,9 +25,12 @@ export default function CommentActionRow({ comment }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [likes, setLikes] = useState(() => comment.likes - comment.dislikes);
   const [myReplies, setMyReplies] = useState<Comment[] | []>([]);
+  const { data: session } = useSession();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const { post_id, id, children } = comment;
   const childrenCount = useMemo(() => children.length, [children]);
+
   const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     if (!e.currentTarget.value || e.currentTarget.value === "") {
       setToggle(false);
@@ -56,7 +61,15 @@ export default function CommentActionRow({ comment }: Props) {
 
   return (
     <>
-      <div className="relative flex left-[-8px]">
+      <div
+        className="relative flex left-[-8px]"
+        onClickCapture={(e: MouseEvent<HTMLDivElement>) => {
+          if (!session) {
+            onOpen();
+            e.stopPropagation();
+          }
+        }}
+      >
         <div className="flex items-center">
           <Button
             variant="light"
@@ -151,6 +164,7 @@ export default function CommentActionRow({ comment }: Props) {
           </div>
         </Form>
       )}
+      <SocialLoginModal isOpen={isOpen} onOpenChange={onOpenChange} />
     </>
   );
 }
