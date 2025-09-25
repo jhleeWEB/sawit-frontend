@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSession } from "next-auth/react";
@@ -24,7 +24,7 @@ export default async function createNewPost({
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const status = type === "text" ? "published" : "draft";
   //insert post
   const { data: post, error: pError } = await supabase

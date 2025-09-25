@@ -1,5 +1,5 @@
 import { PreviewCarouselValue } from "@/app/(main)/p/[community_id]/[post_id]/edit/_components/preview-carousel";
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -20,7 +20,7 @@ export default async function updatePost({
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
 
   const removed = media.filter((n) => n.status === "removed");
   if (removed.length > 0) {
@@ -48,8 +48,9 @@ export default async function updatePost({
         console.error(uError);
         continue;
       }
-      const publicUrl = supabase.storage.from("media").getPublicUrl(uData.path)
-        .data.publicUrl;
+      const publicUrl = await supabase.storage
+        .from("media")
+        .getPublicUrl(uData.path).data.publicUrl;
       //post media에 insert
       const { data: pData, error: pError } = await supabase
         .from("post_media")
@@ -70,7 +71,7 @@ export default async function updatePost({
       newMedia.push(pData.url);
     }
     if (value.status === "removed") {
-      await supabase
+      supabase
         .from("post_media")
         .delete()
         .eq("url", value.url)

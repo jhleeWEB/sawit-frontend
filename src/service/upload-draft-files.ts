@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { sanitizeObjectKey } from "@/utils/senitize-object-key";
 import { getSession } from "next-auth/react";
 
@@ -17,7 +17,7 @@ export default async function uploadDraftFiles(
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const key = `draft/${session.user.id}/temp/${sanitizeObjectKey(file.name)}`;
   const { data, error } = await supabase.storage
     .from("media")

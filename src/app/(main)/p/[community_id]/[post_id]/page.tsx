@@ -9,7 +9,7 @@ export default async function PostPage({
   params: Promise<{ community_id: number; post_id: number }>;
 }) {
   const { post_id, community_id } = await params;
-  const post = await fetchPost(post_id, community_id);
+  const post = await fetchPost(post_id);
   const community = await fetchCommunity(community_id);
   if (!post) {
     return;

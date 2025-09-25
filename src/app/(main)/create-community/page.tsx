@@ -310,7 +310,7 @@ export default function CreateCommunity() {
           top: "20%",
         }}
       >
-        <div className="border-1 rounded-lg shadow-lg">
+        <div className="border-1 rounded-xl shadow-lg">
           {bannerPreview ? (
             <div
               style={{

@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 
 interface Params {
@@ -25,7 +25,7 @@ export default async function updateCommunity({
     return null;
   }
 
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
 
   //insert community
   const { data: community, error: communityError } = await supabase
@@ -59,7 +59,7 @@ export default async function updateCommunity({
       console.error(error);
       return null;
     }
-    const url = supabase.storage.from("media").getPublicUrl(data.path)
+    const url = await supabase.storage.from("media").getPublicUrl(data.path)
       .data.publicUrl;
     publicUrls.push(url);
   }
@@ -75,12 +75,12 @@ export default async function updateCommunity({
       console.error(error);
       return null;
     }
-    const url = supabase.storage.from("media").getPublicUrl(data.path)
+    const url = await supabase.storage.from("media").getPublicUrl(data.path)
       .data.publicUrl;
     publicUrls.push(url);
   }
 
-  await supabase
+  supabase
     .from("communities")
     .update({
       banner_url: publicUrls[0],

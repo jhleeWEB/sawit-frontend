@@ -1,9 +1,9 @@
 import { PostTabOption } from "@/app/(main)/p/[community_id]/create/_components/post-form";
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 
 export default async function fetchPost(post_id: number) {
   try {
-    const supabase = await createSupabaseClient();
+    const supabase = getSupabaseClient() as SupabaseClient;
     const { data: postData, error } = await supabase
       .from("posts")
       .select()

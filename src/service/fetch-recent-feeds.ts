@@ -1,7 +1,9 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Post } from "./fetch_post";
 
-export async function fetchRecentFeeds(pageSize = 20) {
-  const supabase = await createSupabaseClient();
+export async function fetchRecentFeeds(pageSize = 20): Promise<null | Post[]> {
+  const supabase = getSupabaseClient() as SupabaseClient;
   const { data, error } = await supabase
     .from("posts")
     .select()
@@ -20,7 +22,7 @@ export async function fetchNextFeeds(
   lastId: string,
   pageSize = 20
 ) {
-  const supabase = await createSupabaseClient();
+  const supabase = getSupabaseClient() as SupabaseClient;
   const { data, error } = await supabase
     .from("posts")
     .select()

@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSession } from "next-auth/react";
@@ -20,7 +20,7 @@ export default async function savePostDraft(
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
 
   let result;
 
@@ -73,8 +73,9 @@ export default async function savePostDraft(
   //convert to url
   const fileUrls = fileUploadRes.map((res) => {
     if (res.data) {
-      return supabase.storage.from(bucketName).getPublicUrl(res.data?.path).data
-        .publicUrl;
+      return await supabase.storage
+        .from(bucketName)
+        .getPublicUrl(res.data?.path).data.publicUrl;
     } else {
       return "";
     }

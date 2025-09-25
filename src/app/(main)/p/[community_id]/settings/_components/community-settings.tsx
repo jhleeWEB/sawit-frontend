@@ -309,7 +309,7 @@ export default function CommunitySettings({ community_info }: Props) {
           top: "20%",
         }}
       >
-        <div className="border-1 rounded-lg shadow-lg">
+        <div className="border-1 rounded-xl shadow-lg">
           {bannerPreview ? (
             <div
               style={{

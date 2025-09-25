@@ -1,5 +1,5 @@
 import { authOptions } from "@/lib/auth/supabase/auth-options";
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import http from "@/lib/axios/http";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     }
     const { community_id, ext, mime, size } = await req.json();
     const postId = await http.post("/posts/ensure", { community_id });
-    const supabase = await createSupabaseClient(session.supabaseAccessToken);
+    const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
     const key = `draft/${session.user.id}/${postId}.${ext}`;
 
     const { data: uploadUrl, error: uError } = await supabase.storage

@@ -68,7 +68,7 @@ export default function PreviewCarousel({
   return (
     <div
       ref={wrappeRef}
-      className="relative h-[400px] flex w-full overflow-hidden scrollbar-hide rounded-lg"
+      className="relative h-[400px] flex w-full overflow-hidden scrollbar-hide rounded-xl"
     >
       {hasPrev && (
         <Button

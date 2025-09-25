@@ -53,7 +53,7 @@ export default function MediaCarousel({ urls, href }: Props) {
 
   return (
     <div
-      className={`relative w-full h-auto max-h-[60vh] flex items-center overflow-x-hidden scrollbar-hide rounded-lg`}
+      className={`relative w-full h-auto max-h-[60vh] flex items-center overflow-x-hidden scrollbar-hide rounded-xl`}
     >
       {hasPrev && (
         <Button
@@ -93,7 +93,7 @@ export default function MediaCarousel({ urls, href }: Props) {
             }}
             className={`relative flex justify-center items-center rounded-xl min-w-full h-full border-2 hover:none`}
           >
-            <div className="absolute top-0 left-0 w-full h-full bg-white/50 backdrop-blur-xl rounded-lg" />
+            <div className="absolute top-0 left-0 w-full h-full bg-white/50 backdrop-blur-xl rounded-xl" />
             <Image
               alt={"event-images" + i}
               sizes="100vw"

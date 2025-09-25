@@ -1,4 +1,4 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 import { Comment } from "../fetch_comments";
 
@@ -15,7 +15,7 @@ export default async function publishComment(
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const { data, error } = await supabase
     .from("post_comments")
     .insert({

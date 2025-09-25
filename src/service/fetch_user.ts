@@ -1,9 +1,10 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchOwnerInfo(
   owner_id: string
 ): Promise<null | PostOwner> {
-  const supabase = await createSupabaseClient();
+  const supabase = getSupabaseClient() as SupabaseClient;
   const { data: userData, error } = await supabase
     .from("users")
     .select("name, image")
