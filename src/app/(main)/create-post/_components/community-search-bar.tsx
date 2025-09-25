@@ -5,7 +5,7 @@ import { Autocomplete, AutocompleteItem, Avatar } from "@heroui/react";
 import { ActionDispatch, useEffect, useState } from "react";
 import fetchCommunitySearchList, {
   CommunityAutocompleteList,
-} from "../_apis/fetch-community-search-list";
+} from "../../../../service/fetch-community-search-list";
 
 interface Props {
   formDispatch: ActionDispatch<

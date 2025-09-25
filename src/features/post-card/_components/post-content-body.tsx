@@ -65,7 +65,7 @@ export default function PostContentBody({ post }: Props) {
         <MediaCarousel href={postHref} urls={post.media_urls} />
       )}
       {post.type === "text" && (
-        <div>
+        <div className="rounded-2xl">
           <p ref={pRef}></p>
         </div>
       )}

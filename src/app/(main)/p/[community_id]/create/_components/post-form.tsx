@@ -4,7 +4,7 @@ import DragNDropMediaInput from "./d-n-d-media";
 import { FormEvent, useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
 import CommunitySearchBar from "@/app/(main)/create-post/_components/community-search-bar";
-import createNewPost from "../_apis/create-new-post";
+import createNewPost from "../../../../../../service/create-new-post";
 import SimpleEditor from "./editor";
 
 //@ts-expect-error payload any type

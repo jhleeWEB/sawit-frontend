@@ -1,4 +1,4 @@
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
 export default async function uploadCommentLike({
   commentId,

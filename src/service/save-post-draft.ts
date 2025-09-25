@@ -1,4 +1,4 @@
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSession } from "next-auth/react";
@@ -73,9 +73,8 @@ export default async function savePostDraft(
   //convert to url
   const fileUrls = fileUploadRes.map((res) => {
     if (res.data) {
-      return await supabase.storage
-        .from(bucketName)
-        .getPublicUrl(res.data?.path).data.publicUrl;
+      return supabase.storage.from(bucketName).getPublicUrl(res.data?.path).data
+        .publicUrl;
     } else {
       return "";
     }

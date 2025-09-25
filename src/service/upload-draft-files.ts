@@ -1,4 +1,4 @@
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
 import { sanitizeObjectKey } from "@/utils/senitize-object-key";
 import { getSession } from "next-auth/react";
 
