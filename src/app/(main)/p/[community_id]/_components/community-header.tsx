@@ -1,17 +1,37 @@
-import { Avatar, Button } from "@heroui/react";
+"use client";
+
+import { Avatar, Button, useDisclosure } from "@heroui/react";
 import CommunityOptionDropdown from "./community-dropdown";
 import Link from "next/link";
 import { Community } from "@/service/fetch-community";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth/supabase/auth-options";
+
+import JoinCommunityModal from "@/components/modals/join-community-modal";
+import fetchIsCommunityMember from "@/service/fetch-is-community-member";
+import { useQueries } from "@tanstack/react-query";
+import fetchIsOwner from "@/service/fetch-is-owner";
 
 interface Props {
   community: Community;
 }
 
-export default async function CommunityHeader({ community }: Props) {
-  const session = await getServerSession(authOptions);
-  const isOwner = session?.user.id === community.owner_id;
+export default function CommunityHeader({ community }: Props) {
+  const [
+    { data: isMember, isLoading: isMemberLoading },
+    { data: isOwner, isLoading: isOwnerLoading },
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ["is-member", 1],
+        queryFn: () => fetchIsCommunityMember(community.id),
+      },
+      {
+        queryKey: ["is-owner", 2],
+        queryFn: () => fetchIsOwner("community", community.id),
+      },
+    ],
+  });
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <div className="col-start-1 col-span-2 w-full mb-[60px]">
@@ -47,17 +67,30 @@ export default async function CommunityHeader({ community }: Props) {
               >
                 게시물 만들기
               </Button>
-
-              {!isOwner && (
-                <Button variant="flat" color="primary" radius="full">
-                  여기 들어가볼까?
+              {!isOwner && !isMember && !isOwnerLoading && !isMemberLoading && (
+                <Button
+                  variant="flat"
+                  color="primary"
+                  radius="full"
+                  onPress={() => {
+                    onOpen();
+                  }}
+                >
+                  가입하기
                 </Button>
               )}
-              {isOwner && <CommunityOptionDropdown id={community.id} />}
+              {isOwner && !isOwnerLoading && (
+                <CommunityOptionDropdown id={community.id} />
+              )}
             </div>
           </div>
         </div>
       </div>
+      <JoinCommunityModal
+        community={community}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      />
     </div>
   );
 }
