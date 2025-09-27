@@ -1,4 +1,5 @@
 import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchLikes(postId: string, userId: string) {
   try {

@@ -9,9 +9,9 @@ export default async function PostEditPage({
 }: {
   params: Promise<{ community_id: number; post_id: number }>;
 }) {
-  const { community_id, post_id } = await params;
+  const { post_id } = await params;
   const postMedia = await fetchPostMedia({ post_id });
-  const post = await fetchPost(post_id, community_id);
+  const post = await fetchPost(post_id);
   if (!post) {
     redirect("/");
   }
