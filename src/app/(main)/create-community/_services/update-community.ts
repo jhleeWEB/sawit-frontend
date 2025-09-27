@@ -25,7 +25,7 @@ export default async function updateCommunity({
     return null;
   }
 
-  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
+  const supabase = 
 
   //insert community
   const { data: community, error: communityError } = await supabase
