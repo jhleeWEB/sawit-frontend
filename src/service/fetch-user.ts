@@ -43,4 +43,5 @@ export interface User {
   image: string;
   post_count: number;
   comment_count: number;
+  community_count: number;
 }
