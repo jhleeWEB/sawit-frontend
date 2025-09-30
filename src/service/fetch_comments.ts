@@ -40,6 +40,7 @@ export interface Comment {
   created_at: string;
   updated_at: string;
   post_id: number;
+  post_title: string;
   owner_id: string;
   owner_username: string;
   owner_icon: string;
@@ -48,6 +49,10 @@ export interface Comment {
   dislikes: number;
   path: string;
   depth: number;
+  community_icon: string;
+  community_name: string;
+  community_id: number;
+
   //only in client
   isOwner?: boolean;
 }

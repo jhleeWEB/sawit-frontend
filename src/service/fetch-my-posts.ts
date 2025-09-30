@@ -1,29 +1,19 @@
 import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
 import { getSession } from "next-auth/react";
-import { Comment } from "../fetch_comments";
+import { Post } from "./fetch_post";
 
-interface Params {
-  post_id: number;
-  comment: string;
-  parent_id?: number;
-}
-
-export default async function publishComment(
-  params: Params
-): Promise<null | Comment> {
+export default async function fetchMyPosts(
+  owner_id: string
+): Promise<Post[] | null> {
   const session = await getSession();
   if (!session) {
     return null;
   }
   const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const { data, error } = await supabase
-    .from("comments")
-    .insert({
-      ...params,
-    })
+    .from("posts")
     .select()
-    .single();
-
+    .eq("owner_id", owner_id);
   if (error) {
     return null;
   }

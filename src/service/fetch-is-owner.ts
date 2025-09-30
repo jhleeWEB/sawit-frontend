@@ -36,7 +36,7 @@ export default async function fetchIsOwner(
       return true;
     case "comment":
       const { error: cmError } = await supabase
-        .from("post_comments")
+        .from("comments")
         .select("id")
         .eq("owner_id", session.user.id)
         .single();

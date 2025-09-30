@@ -5,7 +5,7 @@ interface Props {
   user: User;
 }
 
-export default function UserStats({ user }: Props) {
+export default async function UserStats({ user }: Props) {
   return (
     <div className="w-full bg-slate-50 p-4 rounded-2xl">
       <h2 className="text=lg font-semibold">p/{user.username}</h2>

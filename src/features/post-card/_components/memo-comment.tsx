@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@heroui/react";
 import { PiMinusCircle, PiPlusCircle } from "react-icons/pi";
 import CommentActionRow from "./comment-action-row";
