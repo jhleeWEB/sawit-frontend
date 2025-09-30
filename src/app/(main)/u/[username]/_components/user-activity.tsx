@@ -1,6 +1,7 @@
 "use client";
 import { Tab, Tabs } from "@heroui/react";
 import MyComments from "./my-comments";
+import MyPosts from "./my-posts";
 
 export default function UserActivity({ userId }: { userId: string }) {
   return (
@@ -10,7 +11,7 @@ export default function UserActivity({ userId }: { userId: string }) {
           <MyComments userId={userId} />
         </Tab>
         <Tab key="posts" title="게시물">
-          ㅇ
+          <MyPosts userId={userId} />
         </Tab>
         <Tab key="liked" title="좋아요 게시물">
           ㅇ
