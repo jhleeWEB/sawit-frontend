@@ -6,7 +6,7 @@ export default async function MyLikedContentsPage() {
   const contents = await fetchMyDislikedContents();
   return (
     <div>
-      {contents ? (
+      {contents && contents.length > 0 ? (
         contents.map((content) => {
           if (content.comment) {
             return (
@@ -17,7 +17,7 @@ export default async function MyLikedContentsPage() {
           }
         })
       ) : (
-        <div className="w-full text-center">게시한 댓글이 없습니다.</div>
+        <div className="w-full text-center">싫어요 누른 게시물이 없습니다.</div>
       )}
     </div>
   );

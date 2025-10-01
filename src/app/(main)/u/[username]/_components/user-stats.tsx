@@ -9,7 +9,7 @@ export default async function UserStats({ username }: Props) {
   const user = await fetchUser({ username });
   if (!user) return;
   return (
-    <div className="w-full bg-slate-50 p-4 rounded-2xl">
+    <div className="w-full bg-slate-50 p-4 rounded-2xl mt-8">
       <h2 className="text=lg font-semibold">p/{user.username}</h2>
       <div className="flex gap-2">
         <small>가입</small>

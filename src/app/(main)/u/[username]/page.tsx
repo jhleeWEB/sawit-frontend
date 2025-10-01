@@ -1,5 +1,7 @@
-import { Button, Link } from "@heroui/react";
 import fetchUser from "../../../../service/fetch-user";
+import fetchMyContents from "@/service/fetch-my-contents";
+import MyComment from "./_components/my-comment";
+import PostCard from "@/features/post-card/post-card";
 
 export async function generateMetadata({
   params,
@@ -20,20 +22,25 @@ export async function generateMetadata({
   };
 }
 
-export default async function UserPage({
-  params,
-}: {
-  params: Promise<{ username: string }>;
-}) {
-  const { username } = await params;
-  const userInfo = await fetchUser({ username });
+export default async function UserPage() {
+  const contents = await fetchMyContents();
+  if (!contents) return;
 
-  if (!userInfo) {
-    return;
-  }
   return (
-    <section>
-      <Button as={Link} href="" />
-    </section>
+    <div>
+      {contents && contents.length > 0 ? (
+        contents.map((content) => {
+          if (content.comment) {
+            return (
+              <MyComment key={"my_comment_" + content.id} comment={content} />
+            );
+          } else {
+            return <PostCard key={"my_post_" + content.id} post={content} />;
+          }
+        })
+      ) : (
+        <div className="w-full text-center">싫어요 누른 게시물이 없습니다.</div>
+      )}
+    </div>
   );
 }
