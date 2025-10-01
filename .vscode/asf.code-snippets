@@ -3,7 +3,7 @@
     "prefix": "asf",
     "body": [
       "import { getSupabaseClient } from '@/lib/auth/supabase/server';",
-      "import { getSession } from 'next-auth/react';",
+      "import { getUserSession } from 'next-auth/react';",
       "export default async function ${1:name}() {",
       "    const supabase = getSupabaseClientWithToken(session.supabaseAccessToken)",
       "}"

@@ -1,7 +1,5 @@
+import { Button, Link } from "@heroui/react";
 import fetchUser from "../../../../service/fetch-user";
-import UserActivity from "./_components/user-activity";
-import UserHeader from "./_components/user-header";
-import UserStats from "./_components/user-stats";
 
 export async function generateMetadata({
   params,
@@ -34,14 +32,8 @@ export default async function UserPage({
     return;
   }
   return (
-    <div className="main-container">
-      <UserHeader avatar={userInfo.image} username={userInfo.username} />
-      <main className="w-full">
-        <UserActivity userId={userInfo.id} />
-      </main>
-      <div className="right-menu-container">
-        <UserStats user={userInfo} />
-      </div>
-    </div>
+    <section>
+      <Button as={Link} href="" />
+    </section>
   );
 }

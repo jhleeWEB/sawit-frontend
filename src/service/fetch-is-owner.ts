@@ -1,10 +1,10 @@
-import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
-import { getSession } from "next-auth/react";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 export default async function fetchIsOwner(
   contentType: "community" | "post" | "comment",
   id: number
 ) {
-  const session = await getSession();
+  const session = await getUserSession();
   if (!session) {
     return null;
   }

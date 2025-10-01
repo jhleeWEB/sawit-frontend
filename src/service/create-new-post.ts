@@ -1,7 +1,7 @@
-import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-import { getSession } from "next-auth/react";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 import { v4 as uuidv4 } from "uuid";
 import { PostTabOption } from "../app/(main)/p/[community_id]/create/_components/post-form";
 
@@ -20,7 +20,7 @@ export default async function createNewPost({
   type,
   communityId,
 }: Params) {
-  const session = await getSession();
+  const session = await getUserSession();
   if (!session) {
     return null;
   }

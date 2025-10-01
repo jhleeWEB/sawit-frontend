@@ -1,5 +1,5 @@
-import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
-import { getSession } from "next-auth/react";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
 interface Params {
   community_id: number;
@@ -7,7 +7,7 @@ interface Params {
 /*post id를 반환하는 요청입니다. */
 export default async function postEnsure({ community_id }: Params) {
   try {
-    const session = await getSession();
+    const session = await getUserSession();
     if (!session) {
       console.error("Unauthorized");
       throw new Error("Unauthorized");

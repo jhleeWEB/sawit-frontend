@@ -1,11 +1,13 @@
 import { createdAt } from "@/lib/dayjs/date-utils";
-import { User } from "@/service/fetch-user";
+import fetchUser from "@/service/fetch-user";
 
 interface Props {
-  user: User;
+  username: string;
 }
 
-export default async function UserStats({ user }: Props) {
+export default async function UserStats({ username }: Props) {
+  const user = await fetchUser({ username });
+  if (!user) return;
   return (
     <div className="w-full bg-slate-50 p-4 rounded-2xl">
       <h2 className="text=lg font-semibold">p/{user.username}</h2>

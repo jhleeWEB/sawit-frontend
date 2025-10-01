@@ -1,6 +1,6 @@
-import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
 import { sanitizeObjectKey } from "@/utils/senitize-object-key";
-import { getSession } from "next-auth/react";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
 export interface DraftPreviewFile {
   path: string;
@@ -13,7 +13,7 @@ export interface DraftPreviewFile {
 export default async function uploadDraftFiles(
   file: File
 ): Promise<DraftPreviewFile | null> {
-  const session = await getSession();
+  const session = await getUserSession();
   if (!session) {
     return null;
   }

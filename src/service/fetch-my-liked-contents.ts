@@ -1,19 +1,27 @@
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
-export default async function fetchMyLikedContents(userId: string) {
+export default async function fetchMyLikedContents() {
+  const session = await getUserSession();
+  if (!session) {
+    return null;
+  }
+  const id = session.user.id;
   const supabase = getSupabaseClient();
   const { data: cData, error: cError } = await supabase
     .from("comment_likes")
     .select()
-    .eq("owner_id", userId);
+    .eq("owner_id", id);
   if (cError) {
+    console.error(cError);
     return null;
   }
   const { data: pData, error: pError } = await supabase
     .from("post_likes")
     .select()
-    .eq("owner_id", userId);
+    .eq("owner_id", id);
   if (pError) {
+    console.error(pError);
     return null;
   }
 
