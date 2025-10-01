@@ -1,5 +1,6 @@
 "use client";
 
+import AvatarEditModal from "@/components/modals/avatar-edit-modal";
 import UsernameEditModal from "@/components/modals/username-edit-modal";
 import { Button, useDisclosure } from "@heroui/react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -10,6 +11,12 @@ export default function UserProfileEditForm() {
     onOpen: onUsernameOpen,
     onOpenChange: onUsernameOpenChange,
   } = useDisclosure();
+  const {
+    isOpen: isAvatarOpen,
+    onOpen: onAvatarOpen,
+    onOpenChange: onAvatarOpenChange,
+  } = useDisclosure();
+
   return (
     <section className="w-full flex flex-col gap-2">
       <div className="w-full flex items-center justify-between">
@@ -35,11 +42,16 @@ export default function UserProfileEditForm() {
           variant="light"
           radius="full"
           startContent={<MdOutlineKeyboardArrowRight size={28} />}
+          onPress={() => onAvatarOpen()}
         />
       </div>
       <UsernameEditModal
         isOpen={isUsernameOpen}
         onOpenChange={onUsernameOpenChange}
+      />
+      <AvatarEditModal
+        isOpen={isAvatarOpen}
+        onOpenChange={onAvatarOpenChange}
       />
     </section>
   );
