@@ -2,6 +2,7 @@
 import { Tab, Tabs } from "@heroui/react";
 import MyComments from "./my-comments";
 import MyPosts from "./my-posts";
+import MyLikedContents from "./my-liked-contents";
 
 export default function UserActivity({ userId }: { userId: string }) {
   return (
@@ -14,7 +15,7 @@ export default function UserActivity({ userId }: { userId: string }) {
           <MyPosts userId={userId} />
         </Tab>
         <Tab key="liked" title="좋아요 게시물">
-          ㅇ
+          <MyLikedContents userId={userId} />
         </Tab>
         <Tab key="disliked" title="싫어요 게시물">
           ㅇ
