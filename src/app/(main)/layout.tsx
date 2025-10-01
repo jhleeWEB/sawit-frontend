@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import Providers from "../(providers)/providers";
 import TopNavigation from "./_components/top-navigation/top-navigation";
@@ -27,6 +27,7 @@ export default async function RootLayout({
             <div className="subgrid-container">{children}</div>
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
