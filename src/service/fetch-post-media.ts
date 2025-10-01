@@ -1,4 +1,4 @@
-import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
 import getNextAuthSession from "@/lib/next-auth/get-next-auth-session";
 
 interface Params {

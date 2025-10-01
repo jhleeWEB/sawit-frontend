@@ -1,5 +1,5 @@
-import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
-import { getSession } from "next-auth/react";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 import { Comment } from "../fetch_comments";
 
 interface Params {
@@ -11,13 +11,13 @@ interface Params {
 export default async function publishComment(
   params: Params
 ): Promise<null | Comment> {
-  const session = await getSession();
+  const session = await getUserSession();
   if (!session) {
     return null;
   }
   const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const { data, error } = await supabase
-    .from("post_comments")
+    .from("comments")
     .insert({
       ...params,
     })

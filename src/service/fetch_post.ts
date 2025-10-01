@@ -1,5 +1,5 @@
 import { PostTabOption } from "@/app/(main)/p/[community_id]/create/_components/post-form";
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchPost(post_id: number) {

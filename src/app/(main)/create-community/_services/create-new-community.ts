@@ -1,5 +1,5 @@
-import { getSupabaseClientWithToken } from "@/lib/auth/supabase/getSupabaseClient";
-import { getSession } from "next-auth/react";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
 interface Params {
   name: string;
@@ -16,7 +16,7 @@ export default async function createNewCommunity({
   banner,
   topics,
 }: Params) {
-  const session = await getSession();
+  const session = await getUserSession();
   if (!session) {
     console.error("now user session");
     return null;

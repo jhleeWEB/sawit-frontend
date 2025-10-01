@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getSession } from "next-auth/react";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
 const backendApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -16,7 +16,7 @@ http.interceptors.request.use(async (config) => {
     const cookieHeader = await cookies();
     if (cookieHeader) config.headers.Cookie = cookieHeader;
   } else {
-    const session = await getSession();
+    const session = await getUserSession();
     if (session) config.headers.Authorization = `bearer ${session.user.id}`;
   }
 

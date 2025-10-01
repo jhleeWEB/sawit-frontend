@@ -4,6 +4,7 @@ const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 let supabase: SupabaseClient;
+let supabaseServer: SupabaseClient;
 
 export function getSupabaseClient() {
   if (!supabase) {
@@ -19,8 +20,11 @@ export function getSupabaseClient() {
 }
 
 export function getSupabaseClientWithToken(accessToken: string) {
-  return createClient(url, key, {
-    global: { headers: { Authorization: `Bearer ${accessToken}` } },
-    auth: { persistSession: false, detectSessionInUrl: false },
-  });
+  if (!supabaseServer) {
+    supabaseServer = createClient(url, key, {
+      global: { headers: { Authorization: `Bearer ${accessToken}` } },
+      auth: { persistSession: false, detectSessionInUrl: false },
+    });
+  }
+  return supabaseServer;
 }

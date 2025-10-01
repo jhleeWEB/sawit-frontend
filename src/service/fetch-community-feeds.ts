@@ -1,4 +1,4 @@
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchCommunityFeeds(communityId: number) {

@@ -1,4 +1,5 @@
-import { getSupabaseClient } from "@/lib/auth/supabase/getSupabaseClient";
+import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 interface Params {
@@ -6,7 +7,10 @@ interface Params {
   id?: string | number;
 }
 
-export default async function fetchUser({ username, id }: Params) {
+export default async function fetchUser({
+  username,
+  id,
+}: Params): Promise<User | null> {
   const supabase = getSupabaseClient() as SupabaseClient;
   if (username) {
     const { data: userInfo, error } = await supabase
@@ -19,8 +23,7 @@ export default async function fetchUser({ username, id }: Params) {
       return null;
     }
     return userInfo;
-  }
-  if (id) {
+  } else if (id) {
     const { data: userInfo, error } = await supabase
       .from("users")
       .select()
@@ -31,8 +34,24 @@ export default async function fetchUser({ username, id }: Params) {
       return null;
     }
     return userInfo;
+  } else {
+    const session = await getUserSession();
+    if (!session) {
+      return null;
+    }
+    const supabaseServer = getSupabaseClient();
+    const { data, error } = await supabaseServer
+      .from("users")
+      .select()
+      .eq("id", session.user.id)
+      .single();
+    if (error) {
+      console.error(error);
+      return null;
+    }
+    console.log(error);
+    return data;
   }
-  return null;
 }
 
 export interface User {
@@ -43,4 +62,5 @@ export interface User {
   image: string;
   post_count: number;
   comment_count: number;
+  community_count: number;
 }

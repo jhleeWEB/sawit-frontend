@@ -37,9 +37,9 @@ export default function PostContentBody({ post }: Props) {
       if (type === "likes") {
         const result = await postLikes(post_id);
         if (result === "cancelled") {
-          setLikes((prev) => prev + 1);
-        } else if (result === "liked") {
           setLikes((prev) => prev - 1);
+        } else if (result === "liked") {
+          setLikes((prev) => prev + 1);
         }
       } else {
         const result = await postDislikes(post_id);
