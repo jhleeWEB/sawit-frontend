@@ -8,7 +8,8 @@ export default async function MyCommentsPage({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
-  const comments = await fetchMyComments(username);
+  const decodedUsername = decodeURIComponent(username);
+  const comments = await fetchMyComments(decodedUsername);
 
   return (
     <div>

@@ -9,7 +9,8 @@ export async function generateMetadata({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
-  const user = await fetchUser({ username });
+  const decodedUsername = decodeURIComponent(username);
+  const user = await fetchUser({ username: decodedUsername });
   if (!user) return { title: "사용자 없음" };
 
   return {

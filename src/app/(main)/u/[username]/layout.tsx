@@ -17,17 +17,18 @@ export default async function UserLayout({
   params: Promise<{ username: string }>;
 }>) {
   const { username } = await params;
+  const decodedUsername = decodeURIComponent(username);
 
   return (
     <div className="main-container">
       <main className="w-full">
-        <UserHeader username={username} />
+        <UserHeader username={decodedUsername} />
         <MemoMyActivityTabs />
         {children}
       </main>
       <div className="right-menu-container">
         <aside className="w-full">
-          <UserStats username={username} />
+          <UserStats username={decodedUsername} />
         </aside>
       </div>
     </div>

@@ -7,7 +7,8 @@ export default async function MyPostsPage({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
-  const posts = await fetchMyPosts(username);
+  const decodedUsername = decodeURIComponent(username);
+  const posts = await fetchMyPosts(decodedUsername);
 
   return (
     <div>
