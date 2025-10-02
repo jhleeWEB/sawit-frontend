@@ -5,8 +5,10 @@ import { SlCloudUpload } from "react-icons/sl";
 import { ActionDispatch, useCallback, useEffect, useState } from "react";
 import PreviewCarousel from "@/features/preview-carousel";
 import { compressImageToMaxBytes } from "@/utils/image-compression/compress-image-to-max-bytes";
-import { MB } from "@/utils/image-compression/types";
 import { Spinner } from "@heroui/react";
+import { MB } from "@/utils/consts";
+import { getFFmpeg } from "@/utils/video-compression/get-ffmpeg";
+import { transcodeToTarget } from "@/utils/video-compression/transcode-to-target";
 
 interface Props {
   formDispatch: ActionDispatch<
@@ -31,31 +33,46 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
       setIsUploading(true);
       setUploadStatus(`이미지 업로드 시작...(${count}/${accepted.length})`);
       for (const originalFile of accepted) {
-        try {
-          let file = originalFile;
-          const fileName = originalFile.name;
-          //파일 사이즈 및 타입 체크
-          const isImage = originalFile.type.startsWith("image/");
-          const isTooBig = originalFile.size >= 10 * MB;
-          if (isImage) {
-            if (isTooBig) {
-              setUploadStatus(
-                `이미지 사이즈 축소 시작...(${fileName})[${count}/${accepted.length}]`
-              );
-              file = await compressImageToMaxBytes(file, { maxBytes: 10 * MB });
-            }
-            const url = URL.createObjectURL(file);
-            setPreviewUrls((prev) => [...prev, url]);
-            setFiles((prev) => [...prev, file]);
-            setIsUploading(false);
-
+        let file = originalFile;
+        const fileName = originalFile.name;
+        //파일 사이즈 및 타입 체크
+        const isImage = originalFile.type.startsWith("image/");
+        if (isImage) {
+          const isTooBig = originalFile.size >= (10 * MB) / accepted.length;
+          if (isTooBig) {
             setUploadStatus(
-              `이미지 업로드 완료...(${fileName})[${count}/${accepted.length}]`
+              `이미지 사이즈 축소 시작...(${fileName})[${count}/${accepted.length}]`
             );
-          } else {
-            //비디오 처리
+            file = await compressImageToMaxBytes(file, { maxBytes: 10 * MB });
           }
-        } catch {}
+          const url = URL.createObjectURL(file);
+          setPreviewUrls((prev) => [...prev, url]);
+          setFiles((prev) => [...prev, file]);
+          setIsUploading(false);
+
+          setUploadStatus(
+            `이미지 업로드 완료...(${fileName})[${count}/${accepted.length}]`
+          );
+        }
+        const isVideo = originalFile.type.startsWith("video/");
+        if (isVideo) {
+          const targetSize = (50 * MB) / accepted.length;
+          const isTooBig = originalFile.size >= targetSize;
+          let outVideo = originalFile;
+          if (isTooBig) {
+            await getFFmpeg();
+            outVideo = await transcodeToTarget(originalFile, targetSize);
+          }
+
+          const url = URL.createObjectURL(outVideo);
+          setFiles((prev) => [...prev, outVideo]);
+          setPreviewUrls((prev) => [...prev, url]);
+          setIsUploading(false);
+          setUploadStatus(
+            `이미지 업로드 완료...(${fileName})[${count}/${accepted.length}]`
+          );
+        }
+
         count += 1;
         setIsUploading(false);
       }
@@ -110,7 +127,10 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
       {previewUrls.length > 0 && (
         <PreviewCarousel
-          urls={previewUrls}
+          previews={previewUrls.map((n, i) => ({
+            url: n,
+            type: files[i].type.startsWith("image/") ? "image" : "video",
+          }))}
           onRemove={handleRemoveFile}
           getInputProps={getInputProps}
         />

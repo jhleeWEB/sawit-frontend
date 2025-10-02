@@ -24,7 +24,7 @@ export async function generateMetadata({
       title: "커뮤니티를 찾을 수 없습니다",
       description: "요청하신 커뮤니티가 존재하지 않거나 비공개입니다.",
       robots: { index: false, follow: false },
-      alternates: { canonical: `/p/${community_id}` },
+      alternates: { canonical: `/c/${community_id}` },
     };
   }
 
@@ -34,7 +34,7 @@ export async function generateMetadata({
     clip(community.description) ||
     `${community.name} 커뮤니티의 최신 글과 정보를 확인하세요.`;
 
-  const canonical = `${process.env.NEXT_PUBLIC_SITE_URL}/p/${community_id}`;
+  const canonical = `${process.env.NEXT_PUBLIC_SITE_URL}/c/${community_id}`;
   const ogImage =
     community.banner_url || community.icon_url || "/og/community-default.png";
 

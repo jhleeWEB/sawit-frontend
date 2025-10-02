@@ -82,7 +82,7 @@ export default function CommunitySettings({ community_info }: Props) {
       topics: selectedTopics,
       community_id: community_info.id,
     });
-    route.push(`/p/${data.id}`);
+    route.push(`/c/${data.id}`);
     setIsSubmitLoading(false);
   };
 

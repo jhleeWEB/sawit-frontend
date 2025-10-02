@@ -68,7 +68,7 @@ export default function CreateCommunity() {
       icon: iconBlob,
       topics: selectedTopics,
     });
-    route.push(`/p/${data.id}`);
+    route.push(`/c/${data.id}`);
     setIsSubmitLoading(false);
   };
 

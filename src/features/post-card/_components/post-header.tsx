@@ -61,7 +61,7 @@ export default function Header({ post, headerInfo }: Props) {
           <DropdownMenu variant="flat" classNames={{ list: " text-center" }}>
             <DropdownItem
               as={Link}
-              href={`/p/${post.community_id}/${post.id}/edit`}
+              href={`/c/${post.community_id}/${post.id}/edit`}
               key="setting"
             >
               수정

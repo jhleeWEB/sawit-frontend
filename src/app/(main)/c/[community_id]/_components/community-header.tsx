@@ -64,9 +64,9 @@ export default function CommunityHeader({ community }: Props) {
                 radius="full"
                 className="border"
                 as={Link}
-                href={`/p/${community.id}/create`}
+                href={`/c/${community.id}/create`}
               >
-                게시물 만들기
+                게시물 올리기
               </Button>
               {!isOwner && (
                 <>

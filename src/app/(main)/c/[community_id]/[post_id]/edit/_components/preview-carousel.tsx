@@ -15,7 +15,7 @@ import { GrRevert } from "react-icons/gr";
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { compressImageToMaxBytes } from "@/utils/image-compression/compress-image-to-max-bytes";
-import { MB } from "@/utils/image-compression/types";
+import { MB } from "@/utils/consts";
 
 const TRANSITION = "transform 200ms ease-in-out";
 

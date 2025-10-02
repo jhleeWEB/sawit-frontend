@@ -25,7 +25,7 @@ export default function PostContentBody({ post }: Props) {
   const { id: post_id } = post;
   const { data: session } = useSession();
   const [likes, setLikes] = useState(() => post.likes - post.dislikes);
-  const postHref = `/p/${post.community_id}/${post.id}`;
+  const postHref = `/c/${post.community_id}/${post.id}`;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleLikeAndDisLikeButton = useCallback(
@@ -99,7 +99,7 @@ export default function PostContentBody({ post }: Props) {
           size="sm"
           className="bg-neutral-200 hover:bg-neutral-100"
           as={Link}
-          href={`/p/${post.community_id}/${post.id}`}
+          href={`/c/${post.community_id}/${post.id}`}
         >
           <PiChatCircleDotsThin size={20} />
           <small className="text-[13px]">{post.comments}</small>

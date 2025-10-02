@@ -11,6 +11,8 @@
   "dependencies": {
     "@auth/supabase-adapter": "^1.10.0",
     "@expo/cli": "^0.24.13",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
     "@heroui/react": "^2.7.0",
     "@next-auth/supabase-adapter": "^0.2.1",
     "@supabase/supabase-js": "^2.55.0",

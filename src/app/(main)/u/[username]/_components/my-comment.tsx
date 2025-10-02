@@ -26,7 +26,7 @@ export default function MyComment({ comment }: { comment: Comment }) {
         <Avatar src={community_icon} size="sm" />
         <Link
           className=" text-sm font-semibold"
-          href={`/p/${community_id}/${post_id}`}
+          href={`/c/${community_id}/${post_id}`}
           color="foreground"
         >
           {IDENTITY.COMMUNITY}

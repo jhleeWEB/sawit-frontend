@@ -51,7 +51,7 @@ export default function PostForm() {
     const res = await createNewPost({ ...formState, type });
     setIsPosting(false);
     if (res) {
-      route.push(`/p/${res.community_id}/${res.id}`);
+      route.push(`/c/${res.community_id}/${res.id}`);
     }
   };
 

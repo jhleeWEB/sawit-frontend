@@ -9,13 +9,13 @@ import { PiTrashSimpleThin } from "react-icons/pi";
 const TRANSITION = "transform 200ms ease-in-out";
 
 interface Props {
-  urls: string[];
+  previews: { url: string; type: "image" | "video" }[];
   onRemove: (index: number) => void;
   getInputProps: <T extends DropzoneInputProps>(any?: T) => T;
 }
 
 export default function PreviewCarousel({
-  urls,
+  previews,
   onRemove,
   getInputProps,
 }: Props) {
@@ -28,13 +28,13 @@ export default function PreviewCarousel({
   const [hasPrev, setHasPrev] = useState(false);
 
   const next = useCallback(() => {
-    const length = urls.length - 1;
+    const length = previews.length - 1;
     if (currentIndex < length) {
       const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
       setTransition(TRANSITION);
     }
-  }, [currentIndex, urls]);
+  }, [currentIndex, previews]);
 
   const prev = useCallback(() => {
     if (currentIndex > 0) {
@@ -46,7 +46,7 @@ export default function PreviewCarousel({
 
   /** handle side effects of current index */
   useEffect(() => {
-    const length = urls.length - 1;
+    const length = previews.length - 1;
 
     if (currentIndex >= length) {
       setHasNext(false);
@@ -59,11 +59,11 @@ export default function PreviewCarousel({
     } else {
       setHasPrev(true);
     }
-  }, [urls, currentIndex]);
+  }, [previews, currentIndex]);
 
   useEffect(() => {
-    setCurrentIndex(urls.length - 1);
-  }, [urls]);
+    setCurrentIndex(previews.length - 1);
+  }, [previews]);
 
   return (
     <div
@@ -92,7 +92,7 @@ export default function PreviewCarousel({
           <FaChevronRight size={18} color="white" />
         </Button>
       )}
-      {urls && (
+      {previews && (
         <label
           htmlFor="upload"
           className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
@@ -108,14 +108,14 @@ export default function PreviewCarousel({
         </label>
       )}
 
-      {urls.map((urls, i) => {
+      {previews.map((preview, i) => {
         return (
           <Link
             key={"image" + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              backgroundImage: `url("${urls}")`,
+              backgroundImage: `url("${preview.url}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -132,14 +132,23 @@ export default function PreviewCarousel({
               >
                 <PiTrashSimpleThin size={18} color="white" />
               </Button>
-              {
+              {preview.type === "image" ? (
                 <Image
                   alt={"event-images" + i}
                   height={400}
-                  src={urls}
+                  src={preview.url}
                   radius="none"
                 />
-              }
+              ) : (
+                <video
+                  src={preview.url}
+                  controls
+                  playsInline
+                  muted // iOS 인라인 자동재생용(필요 시)
+                  preload="metadata"
+                  className="max-w-[100vw] max-h-[400px] w-auto h-auto object-contain"
+                />
+              )}
             </div>
           </Link>
         );
