@@ -5,7 +5,6 @@ import fetchCommunityFeeds from "@/service/fetch-community-feeds";
 import fetchCommunity from "@/service/fetch-community";
 import CommunityInfo from "@/features/community-info";
 import PostCard from "@/features/post-card/post-card";
-
 import type { Metadata } from "next";
 
 // 길이 제한 헬퍼(선택)

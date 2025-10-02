@@ -12,9 +12,9 @@ export default async function fetchIsOwner(
   switch (contentType) {
     case "community":
       const { error: cError } = await supabase
-        .from("community_members")
+        .from("communities")
         .select("owner_id")
-        .eq("community_id", id)
+        .eq("id", id)
         .eq("owner_id", session.user.id)
         .single();
 
