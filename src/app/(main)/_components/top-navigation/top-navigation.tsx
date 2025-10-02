@@ -1,6 +1,5 @@
 import {
   Image,
-  Input,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -27,18 +26,10 @@ export default async function TopNavigation() {
             radius="none"
             alt="sawit-logo"
             src="/sawit-logo.png"
-            height={36}
+            height={56}
           />
         </Link>
       </NavbarBrand>
-      <NavbarContent justify="center">
-        <Input
-          type="search"
-          placeholder="Type to search"
-          radius="lg"
-          width={500}
-        />
-      </NavbarContent>
       <NavbarContent justify="end">
         {userInfo ? (
           <>

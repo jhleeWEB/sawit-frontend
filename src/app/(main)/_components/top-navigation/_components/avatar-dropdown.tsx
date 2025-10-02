@@ -8,12 +8,14 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 interface Props {
   image: string;
   name: string;
 }
 export default function AvatarDropdown({ image, name }: Props) {
+  const pathname = usePathname();
   return (
     <Dropdown
       placement="bottom-end"
@@ -33,7 +35,7 @@ export default function AvatarDropdown({ image, name }: Props) {
         </DropdownItem>
         <DropdownItem
           key="signout"
-          onClick={() => signOut({ callbackUrl: "/" })}
+          onClick={() => signOut({ callbackUrl: pathname || "/" })}
         >
           로그아웃
         </DropdownItem>

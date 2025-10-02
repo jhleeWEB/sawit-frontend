@@ -1,0 +1,17 @@
+{
+  "Asyncronous service function(with user session)": {
+    "prefix": "asf-with-session",
+    "body": [
+      "import { getSupabaseClient } from '@/lib/auth/supabase/server';",
+      "import { getUserSession } from 'next-auth/react';",
+      "export default async function ${1:name}() {",
+      "    const session = await getUserSession();",
+      "    if(!session){",
+      "        return null",
+      "    }",
+      "    const supabase = getSupabaseClientWithToken(session.supabaseAccessToken)",
+      "}"
+    ],
+    "description": "Asyncronous service function(with user session)"
+  }
+}

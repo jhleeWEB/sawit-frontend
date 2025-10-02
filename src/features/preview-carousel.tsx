@@ -1,17 +1,24 @@
 "use client";
+
 import { Button, Image, Link } from "@heroui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { DropzoneInputProps } from "react-dropzone";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { PiTrashSimpleThin } from "react-icons/pi";
 
 const TRANSITION = "transform 200ms ease-in-out";
 
 interface Props {
-  files: { preview: string; file: File }[];
+  urls: string[];
   onRemove: (index: number) => void;
+  getInputProps: <T extends DropzoneInputProps>(any?: T) => T;
 }
 
-export default function PreviewCarousel({ files, onRemove }: Props) {
+export default function PreviewCarousel({
+  urls,
+  onRemove,
+  getInputProps,
+}: Props) {
   const wrappeRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -21,13 +28,13 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
   const [hasPrev, setHasPrev] = useState(false);
 
   const next = useCallback(() => {
-    const length = files.length - 1;
+    const length = urls.length - 1;
     if (currentIndex < length) {
       const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
       setTransition(TRANSITION);
     }
-  }, [currentIndex, files]);
+  }, [currentIndex, urls]);
 
   const prev = useCallback(() => {
     if (currentIndex > 0) {
@@ -39,7 +46,7 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
 
   /** handle side effects of current index */
   useEffect(() => {
-    const length = files.length - 1;
+    const length = urls.length - 1;
 
     if (currentIndex >= length) {
       setHasNext(false);
@@ -52,16 +59,16 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
     } else {
       setHasPrev(true);
     }
-  }, [files, currentIndex]);
+  }, [urls, currentIndex]);
 
   useEffect(() => {
-    setCurrentIndex(files.length - 1);
-  }, [files]);
+    setCurrentIndex(urls.length - 1);
+  }, [urls]);
 
   return (
     <div
       ref={wrappeRef}
-      className="relative h-[400px] flex w-full overflow-hidden scrollbar-hide rounded-lg"
+      className="relative h-[400px] flex w-full overflow-hidden scrollbar-hide rounded-xl"
     >
       {hasPrev && (
         <Button
@@ -85,18 +92,35 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
           <FaChevronRight size={18} color="white" />
         </Button>
       )}
+      {urls && (
+        <label
+          htmlFor="upload"
+          className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
+        >
+          추가
+          <input
+            {...getInputProps()}
+            name="files"
+            id="upload"
+            type="file"
+            style={{ display: "none" }}
+          />
+        </label>
+      )}
 
-      {files.map((file, i) => {
+      {urls.map((urls, i) => {
         return (
           <Link
-            key={file.file.name + "_" + i}
+            key={"image" + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              /**@ts-expect-error custom property */
-              "--image-url": `url(${file.preview})`,
+              backgroundImage: `url("${urls}")`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
-            className={`rounded-xl min-w-full border bg-[image:var(--image-url)] bg-cover bg-center`}
+            className={`rounded-xl min-w-full border`}
           >
             <div className="absolute top-0 left-0 flex justify-center min-w-full bg-white/60 backdrop-blur-3xl">
               <Button
@@ -108,24 +132,14 @@ export default function PreviewCarousel({ files, onRemove }: Props) {
               >
                 <PiTrashSimpleThin size={18} color="white" />
               </Button>
-              {file.file.type.includes("image") && (
+              {
                 <Image
                   alt={"event-images" + i}
                   height={400}
-                  src={file.preview}
+                  src={urls}
                   radius="none"
                 />
-              )}
-              {file.file.type.includes("video") && (
-                <video
-                  src={file.preview}
-                  controls
-                  playsInline
-                  muted
-                  preload="metadata"
-                  style={{ width: "100%", height: "400px" }}
-                />
-              )}
+              }
             </div>
           </Link>
         );
