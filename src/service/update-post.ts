@@ -1,4 +1,4 @@
-import { PreviewCarouselValue } from "@/app/(main)/p/[community_id]/[post_id]/edit/_components/preview-carousel";
+import { PreviewCarouselValue } from "@/app/(main)/c/[community_id]/[post_id]/edit/_components/preview-carousel";
 import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
 import getUserSession from "@/lib/auth/supabase/get-user-session";
 import { v4 as uuidv4 } from "uuid";

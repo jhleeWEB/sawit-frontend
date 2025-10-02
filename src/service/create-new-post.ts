@@ -3,7 +3,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 
 import getUserSession from "@/lib/auth/supabase/get-user-session";
 import { v4 as uuidv4 } from "uuid";
-import { PostTabOption } from "../app/(main)/p/[community_id]/create/_components/post-form";
+import { PostTabOption } from "../app/(main)/c/[community_id]/create/_components/post-form";
 
 interface Params {
   title: string;

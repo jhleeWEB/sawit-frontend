@@ -30,8 +30,8 @@ export default function Header({ post, headerInfo }: Props) {
       : IDENTITY.COMMUNITY + post.community_name;
   const href =
     headerInfo === "user"
-      ? `${IDENTITY.USER}${post.owner_username}`
-      : `${IDENTITY.COMMUNITY}${post.community_id}`;
+      ? `/u/${post.owner_username}`
+      : `/c/${post.community_id}`;
 
   return (
     <section className="flex w-full gap-2">

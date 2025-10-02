@@ -1,4 +1,4 @@
-import PostForm from "../p/[community_id]/create/_components/post-form";
+import PostForm from "../c/[community_id]/create/_components/post-form";
 
 export default async function CreatePostPage() {
   return (
