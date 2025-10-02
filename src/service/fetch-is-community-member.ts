@@ -14,6 +14,7 @@ export default async function fetchIsCommunityMember(community_id: number) {
     .single();
 
   if (error) {
+    console.error(error);
     return false;
   }
   return true;

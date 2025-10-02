@@ -28,7 +28,9 @@ export default function Header({ post, headerInfo }: Props) {
       ? "u/" + post.owner_username
       : "p/" + post.community_name;
   const href =
-    headerInfo === "user" ? `/u/${post.owner_id}` : `/p/${post.community_id}`;
+    headerInfo === "user"
+      ? `/u/${post.owner_username}`
+      : `/p/${post.community_id}`;
 
   return (
     <section className="flex w-full gap-2">

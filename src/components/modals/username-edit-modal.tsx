@@ -48,7 +48,7 @@ export default function UsernameEditModal(props: Props) {
                 onPress={async () => {
                   setIsLoading(true);
                   const result = await updateUsername(username);
-                  console.log(result);
+
                   if (result === "success") {
                     addToast({
                       title: "프로필 별명 변경",

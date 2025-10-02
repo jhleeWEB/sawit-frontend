@@ -116,7 +116,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
       if (!accepted) {
         return;
       }
-      console.log(accepted);
+
       for (let i = 0; i < accepted.length; i++) {
         const originalFile = accepted[i];
         try {

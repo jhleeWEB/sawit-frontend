@@ -42,7 +42,7 @@ export default async function updateCommunity({
   if (communityError) {
     /** 중복 애러 */
     if (communityError.code === "23505") {
-      console.log("중복이름");
+      console.error("중복이름");
     }
     return null;
   }
