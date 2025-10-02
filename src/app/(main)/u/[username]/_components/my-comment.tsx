@@ -1,4 +1,5 @@
 "use client";
+import { IDENTITY } from "@/constants/identifiers";
 import { createdAt } from "@/lib/dayjs/date-utils";
 import { Comment } from "@/service/fetch_comments";
 import uploadCommentDislike from "@/service/post/upload-comment-dislike";
@@ -28,6 +29,7 @@ export default function MyComment({ comment }: { comment: Comment }) {
           href={`/p/${community_id}/${post_id}`}
           color="foreground"
         >
+          {IDENTITY.COMMUNITY}
           {community_name}
         </Link>
         <span>·</span>

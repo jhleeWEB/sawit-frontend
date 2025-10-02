@@ -1,5 +1,6 @@
 "use client";
 
+import { IDENTITY } from "@/constants/identifiers";
 import { createdAt } from "@/lib/dayjs/date-utils";
 import { Post } from "@/service/fetch_post";
 import {
@@ -25,12 +26,12 @@ export default function Header({ post, headerInfo }: Props) {
   const icon = headerInfo === "user" ? post.owner_icon : post.community_icon;
   const name =
     headerInfo === "user"
-      ? "u/" + post.owner_username
-      : "p/" + post.community_name;
+      ? IDENTITY.USER + post.owner_username
+      : IDENTITY.COMMUNITY + post.community_name;
   const href =
     headerInfo === "user"
-      ? `/u/${post.owner_username}`
-      : `/p/${post.community_id}`;
+      ? `${IDENTITY.USER}${post.owner_username}`
+      : `${IDENTITY.COMMUNITY}${post.community_id}`;
 
   return (
     <section className="flex w-full gap-2">

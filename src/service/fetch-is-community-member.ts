@@ -3,7 +3,7 @@ import getUserSession from "@/lib/auth/supabase/get-user-session";
 export default async function fetchIsCommunityMember(community_id: number) {
   const session = await getUserSession();
   if (!session) {
-    return null;
+    return false;
   }
   const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   const { error } = await supabase
@@ -11,7 +11,7 @@ export default async function fetchIsCommunityMember(community_id: number) {
     .select("owner_id")
     .eq("community_id", community_id)
     .eq("owner_id", session.user.id)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error(error);

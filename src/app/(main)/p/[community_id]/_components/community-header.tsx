@@ -9,6 +9,7 @@ import JoinCommunityModal from "@/components/modals/join-community-modal";
 import fetchIsCommunityMember from "@/service/fetch-is-community-member";
 import { useQueries } from "@tanstack/react-query";
 import fetchIsOwner from "@/service/fetch-is-owner";
+import CommunityHeaderSkeleton from "@/components/skeletons/community_header_skeleton";
 
 interface Props {
   community: Community;
@@ -30,9 +31,9 @@ export default function CommunityHeader({ community }: Props) {
       },
     ],
   });
-
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  if (isOwnerLoading || isMemberLoading) return <CommunityHeaderSkeleton />;
   return (
     <div className="col-start-1 col-span-2 w-full mb-[60px]">
       <div
@@ -67,21 +68,34 @@ export default function CommunityHeader({ community }: Props) {
               >
                 게시물 만들기
               </Button>
-              {!isOwner && !isMember && !isOwnerLoading && !isMemberLoading && (
-                <Button
-                  variant="flat"
-                  color="primary"
-                  radius="full"
-                  onPress={() => {
-                    onOpen();
-                  }}
-                >
-                  가입하기
-                </Button>
+              {!isOwner && (
+                <>
+                  {!isMember ? (
+                    <Button
+                      variant="flat"
+                      color="primary"
+                      radius="full"
+                      onPress={() => {
+                        onOpen();
+                      }}
+                    >
+                      들어가기
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="flat"
+                      color="danger"
+                      radius="full"
+                      onPress={() => {
+                        onOpen();
+                      }}
+                    >
+                      나가기
+                    </Button>
+                  )}
+                </>
               )}
-              {isOwner && !isOwnerLoading && (
-                <CommunityOptionDropdown id={community.id} />
-              )}
+              {isOwner && <CommunityOptionDropdown id={community.id} />}
             </div>
           </div>
         </div>

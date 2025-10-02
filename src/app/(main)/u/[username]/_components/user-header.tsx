@@ -1,3 +1,4 @@
+import { IDENTITY } from "@/constants/identifiers";
 import fetchUser from "@/service/fetch-user";
 import { Avatar } from "@heroui/react";
 
@@ -14,7 +15,10 @@ export default async function UserHeader({ username }: { username: string }) {
       />
       <div className="flex flex-col">
         <h1 className="text-3xl font-bold">{username}</h1>
-        <p className="text-left text-gray-400">p/{username}</p>
+        <p className="text-left text-gray-400">
+          {IDENTITY.USER}
+          {username}
+        </p>
       </div>
     </div>
   );
