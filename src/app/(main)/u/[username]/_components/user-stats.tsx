@@ -1,3 +1,5 @@
+import { IDENTITY } from "@/constants/identifiers";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 import { createdAt } from "@/lib/dayjs/date-utils";
 import fetchUser from "@/service/fetch-user";
 import { Avatar, Button, Divider, Link } from "@heroui/react";
@@ -7,11 +9,17 @@ interface Props {
 }
 
 export default async function UserStats({ username }: Props) {
+  const session = await getUserSession();
   const user = await fetchUser({ username });
   if (!user) return;
+  const isOwner = session?.user.id === user.id;
+
   return (
     <div className="w-full bg-slate-50 p-4 rounded-2xl mt-8">
-      <h2 className="text=lg font-semibold">p/{user.username}</h2>
+      <h2 className="text=lg font-semibold">
+        {IDENTITY.USER}
+        {user.username}
+      </h2>
       <section className="flex gap-2">
         <small>가입</small>
         <small>{createdAt(user.created_at)}</small>
@@ -30,22 +38,31 @@ export default async function UserStats({ username }: Props) {
           <small>커뮤니티 운영</small>
         </div>
       </section>
-      <Divider className="my-2" />
-      <small>설정</small>
-      <section>
-        <div className="flex justify-between">
-          <span className="flex gap-2">
-            <Avatar size="sm" src={user.image} />
-            <span className="flex flex-col">
-              <small className="font-semibold">프로필</small>
-              <small>프로필을 설정해 보세요.</small>
-            </span>
-          </span>
-          <Button radius="full" size="sm" as={Link} href={`/settings/account`}>
-            업데이트
-          </Button>
-        </div>
-      </section>
+      {isOwner && (
+        <>
+          <Divider className="my-2" />
+          <small>설정</small>
+          <section>
+            <div className="flex justify-between">
+              <span className="flex gap-2">
+                <Avatar size="sm" src={user.image} />
+                <span className="flex flex-col">
+                  <small className="font-semibold">프로필</small>
+                  <small>프로필을 설정해 보세요.</small>
+                </span>
+              </span>
+              <Button
+                radius="full"
+                size="sm"
+                as={Link}
+                href={`/settings/account`}
+              >
+                업데이트
+              </Button>
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }

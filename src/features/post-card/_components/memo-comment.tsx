@@ -22,7 +22,7 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
 
   const headerOptions = {
     icon: owner_icon,
-    name: "u/" + owner_username,
+    name: owner_username,
     href: `/u/${owner_username}`,
     created_at,
   };
