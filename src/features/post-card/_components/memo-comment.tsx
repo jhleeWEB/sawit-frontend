@@ -11,7 +11,7 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
   const {
     depth,
     comment,
-    owner_id,
+
     owner_icon,
     owner_username,
     created_at,
@@ -23,7 +23,7 @@ function CommentComponent({ commentNode }: { commentNode: CommentNode }) {
   const headerOptions = {
     icon: owner_icon,
     name: "u/" + owner_username,
-    href: `/u/${owner_id}`,
+    href: `/u/${owner_username}`,
     created_at,
   };
   return (

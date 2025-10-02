@@ -40,7 +40,7 @@ export default async function UserPage() {
           }
         })
       ) : (
-        <div className="w-full text-center">싫어요 누른 게시물이 없습니다.</div>
+        <div className="w-full text-center">사용자 활동이 없습니다.</div>
       )}
     </div>
   );

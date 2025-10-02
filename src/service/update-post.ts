@@ -36,7 +36,6 @@ export default async function updatePost({
 
   const newMedia = [];
 
-  console.log(media);
   for (const value of media) {
     if (value.status === "draft" && value.file) {
       const ext = value.file?.name.split(".").pop();

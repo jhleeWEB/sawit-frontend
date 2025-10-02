@@ -3,6 +3,7 @@ import UserHeader from "./_components/user-header";
 import MyActivityTabs from "./_components/my-activity-tabs";
 import { memo } from "react";
 import UserStats from "./_components/user-stats";
+import fetchUser from "@/service/fetch-user";
 
 export const metadata: Metadata = {
   title: "Sawit",
@@ -19,11 +20,17 @@ export default async function UserLayout({
   const { username } = await params;
   const decodedUsername = decodeURIComponent(username);
 
+  const user = await fetchUser({});
+
+  let isOwner = false;
+  if (user && user.username === decodedUsername) {
+    isOwner = true;
+  }
   return (
     <div className="main-container">
       <main className="w-full">
         <UserHeader username={decodedUsername} />
-        <MemoMyActivityTabs />
+        <MemoMyActivityTabs isOwner={isOwner} />
         {children}
       </main>
       <div className="right-menu-container">

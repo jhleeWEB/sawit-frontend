@@ -14,7 +14,6 @@ export default function MyComment({ comment }: { comment: Comment }) {
     community_id,
     community_name,
     community_icon,
-    owner_id,
     owner_username,
     created_at,
     id,
@@ -36,7 +35,7 @@ export default function MyComment({ comment }: { comment: Comment }) {
       </section>
       <section className="flex items-center gap-1">
         <Link
-          href={`/u/${owner_id}`}
+          href={`/u/${owner_username}`}
           className="text-sm font-semibold"
           color="foreground"
         >

@@ -49,7 +49,6 @@ export default async function fetchUser({
       console.error(error);
       return null;
     }
-    console.log(error);
     return data;
   }
 }
