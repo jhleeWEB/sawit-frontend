@@ -5,10 +5,12 @@ import { SlCloudUpload } from "react-icons/sl";
 import { ActionDispatch, useCallback, useEffect, useState } from "react";
 import PreviewCarousel from "@/features/preview-carousel";
 import { compressImageToMaxBytes } from "@/utils/image-compression/compress-image-to-max-bytes";
-import { Spinner } from "@heroui/react";
+import { Progress, Spinner } from "@heroui/react";
 import { MB } from "@/utils/consts";
-import { getFFmpeg } from "@/utils/video-compression/get-ffmpeg";
+import { getFFmpeg } from "@/utils/video-compression/load-ffmpeg-core";
 import { transcodeToTarget } from "@/utils/video-compression/transcode-to-target";
+import useVideoCompression from "../_hooks/use-video-compression";
+import { percent, stagger } from "framer-motion";
 
 interface Props {
   formDispatch: ActionDispatch<
@@ -26,6 +28,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [uploadStatus, setUploadStatus] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const { start, stage, percent } = useVideoCompression();
 
   const onDrop = useCallback(
     async (accepted: File[]) => {
@@ -58,11 +61,12 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
         if (isVideo) {
           const targetSize = (50 * MB) / accepted.length;
           const isTooBig = originalFile.size >= targetSize;
+          console.log("original size:", originalFile.size / MB, "MB");
           let outVideo = originalFile;
           if (isTooBig) {
-            await getFFmpeg();
-            outVideo = await transcodeToTarget(originalFile, targetSize);
+            outVideo = await start(outVideo, targetSize);
           }
+          console.log("output size: ", outVideo.size / MB, "MB");
 
           const url = URL.createObjectURL(outVideo);
           setFiles((prev) => [...prev, outVideo]);
@@ -78,7 +82,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
       }
       setIsUploading(false);
     },
-    [setUploadStatus, setFiles]
+    [setUploadStatus, setFiles, start]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -105,8 +109,17 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
   return (
     <>
       {isUploading && (
-        <div className="flex items-center text-sm text-neutral-400">
-          <Spinner /> {uploadStatus}
+        <div className="flex w-full items-center text-sm text-neutral-400 mb-4">
+          <Progress
+            aria-label="video-optimize"
+            showValueLabel={true}
+            value={percent}
+            color={percent < 100 ? "primary" : "success"}
+            label={stage}
+            maxValue={100}
+            formatOptions={{ style: "percent" }}
+            isStriped
+          />
         </div>
       )}
       {files.length === 0 && (

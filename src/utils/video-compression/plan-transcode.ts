@@ -6,6 +6,7 @@ export function planTranscode(
   width?: number,
   height?: number
 ) {
+  console.log("plan");
   const safety = 0.98; // 약간 여유
   const audioK = 128; // AAC 128kbps
   const totalKbps = (TARGET_BYTES * safety * 8) / durationSec / 1000; // kbps

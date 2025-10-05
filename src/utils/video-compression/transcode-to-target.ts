@@ -1,4 +1,4 @@
-import { getFFmpeg } from "./get-ffmpeg";
+import { getFFmpeg } from "./load-ffmpeg-core";
 import { getVideoMeta } from "./get-video-meta";
 import { planTranscode } from "./plan-transcode";
 import { fetchFile } from "@ffmpeg/util";
@@ -18,9 +18,10 @@ export async function transcodeToTarget(
   const inExt = file.name.split(".").pop()?.toLowerCase() || "mp4";
   const inFile = `${inName}.${inExt}`;
   const outFile = "out.mp4";
+  console.log("write");
 
   ffmpeg.writeFile(inFile, await fetchFile(file));
-
+  console.log("fetched");
   // 필터 구성
   const vf = plan.scale ? ["-vf", plan.scale] : [];
   // 1차 시도
@@ -68,6 +69,7 @@ export async function transcodeToTarget(
   // 만약 용량이 여전히 크면 2~3회 더 낮춰서 재시도
   let tries = 0;
   while (output.size > targetSize && tries < 2) {
+    console.log(tries);
     const ratio = targetSize / output.size; // 필요 비율
     // 비트레이트를 좀 더 과감히 낮춤
     const newVideoK = Math.max(300, Math.floor(plan.videoK * ratio * 0.85));
