@@ -9,7 +9,7 @@ import { PiTrashSimpleThin } from "react-icons/pi";
 const TRANSITION = "transform 200ms ease-in-out";
 
 interface Props {
-  previews: { url: string; type: "image" | "video" }[];
+  previews: { url: string; type: "image" | "video" | string }[];
   onRemove: (index: number) => void;
   getInputProps: <T extends DropzoneInputProps>(any?: T) => T;
 }

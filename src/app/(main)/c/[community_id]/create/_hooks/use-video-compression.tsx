@@ -36,13 +36,13 @@ export default function useVideoCompression() {
       const overall = 0.1 + pEnc * 0.85; // writing=10%, encoding=85%, reading=5%
       setPercent(Math.round(overall * 100));
 
-      const encodedSec = (Number(time) || 0) / 1_000_000;
+      const encodedSec = (((Number(time) || 0) / 1_000_000) * 3) / 60;
       if (encodedSec > lastSec) {
         lastSec = encodedSec;
         // ETA 추정 (단순): 남은 비율 * 총길이 / (진행비율 변화속도)
         setEta(
           encodedSec > 0
-            ? `~${Math.max(0, Math.round(((1 - pEnc) * encodedSec) / pEnc))}s`
+            ? `~${Math.max(0, Math.round(((1 - pEnc) * encodedSec) / pEnc))}분`
             : "-"
         );
       }
