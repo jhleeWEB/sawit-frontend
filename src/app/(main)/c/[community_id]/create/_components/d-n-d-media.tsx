@@ -2,36 +2,20 @@
 
 import { useDropzone } from "react-dropzone";
 import { SlCloudUpload } from "react-icons/sl";
-import {
-  ActionDispatch,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import PreviewCarousel from "@/features/preview-carousel";
 import { Progress } from "@heroui/react";
 import { MB } from "@/utils/consts";
 
 import useVideoCompression from "../_hooks/use-video-compression";
 import useImageCompression from "../_hooks/use-image-compression";
+import { usePostFormDispatch, usePostFormState } from "./form-provider";
 
-interface Props {
-  formDispatch: ActionDispatch<
-    [
-      action: {
-        type: string;
-        payload: unknown;
-      }
-    ]
-  >;
-}
-
-export default function DragNDropMediaInput({ formDispatch }: Props) {
+export default function DragNDropMediaInput() {
   const [files, setFiles] = useState<File[]>([]);
+  const formState = usePostFormState();
+  const formDispatch = usePostFormDispatch();
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-  const [uploadStatus, setUploadStatus] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
   const {
     start: startVideoCompression,
     stage: videoStage,
@@ -53,7 +37,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
   const onDrop = useCallback(
     async (accepted: File[]) => {
-      setIsUploading(true);
+      formDispatch({ type: "update_is_uploading", payload: true });
       for (const originalFile of accepted) {
         let file = originalFile;
         //파일 사이즈 및 타입 체크
@@ -61,7 +45,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
         if (isImage) {
           const isTooBig = originalFile.size >= (10 * MB) / accepted.length;
           if (isTooBig) {
-            setUploadStatus("image");
+            formDispatch({ type: "update_upload_type", payload: "image" });
             file = await startImageCompression(file, { maxBytes: 5 * MB });
           }
           const url = URL.createObjectURL(file);
@@ -75,7 +59,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
           // console.log("original size:", originalFile.size / MB, "MB");
           let outVideo = originalFile;
           if (isTooBig) {
-            setUploadStatus("video");
+            formDispatch({ type: "update_upload_type", payload: "video" });
             outVideo = await startVideoCompression(outVideo, targetSize);
           }
           // console.log("output size: ", outVideo.size / MB, "MB");
@@ -85,10 +69,10 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
           setPreviewUrls((prev) => [...prev, url]);
         }
       }
-      setUploadStatus("");
-      setIsUploading(false);
+      formDispatch({ type: "update_upload_type", payload: "none" });
+      formDispatch({ type: "update_is_uploading", payload: false });
     },
-    [setUploadStatus, setFiles, startVideoCompression, startImageCompression]
+    [setFiles, startVideoCompression, startImageCompression, formDispatch]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -117,16 +101,18 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
   return (
     <>
-      {isUploading && (
+      {formState.isUploading && (
         <>
           <div className="flex w-full items-center text-sm text-neutral-400 mb-4">
             <Progress
               aria-label="video-optimize"
               showValueLabel={true}
               value={
-                uploadStatus === "video" ? videoProgression : imageProgression
+                formState.uploadType === "video"
+                  ? videoProgression
+                  : imageProgression
               }
-              label={uploadStatus === "video" ? videoStage : imageStage}
+              label={formState.uploadType === "video" ? videoStage : imageStage}
               maxValue={100}
               formatOptions={{ style: "percent" }}
               isStriped
@@ -134,7 +120,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
           </div>
         </>
       )}
-      {files.length === 0 && !isUploading && (
+      {files.length === 0 && !formState.isUploading && (
         <div
           {...getRootProps({
             className:

@@ -22,6 +22,7 @@ export default async function createNewPost({
 }: Params) {
   const session = await getUserSession();
   if (!session) {
+    console.error("no session");
     return null;
   }
   const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
@@ -50,6 +51,7 @@ export default async function createNewPost({
   //upload files to bucket
   const postMediaIds = await uploadFiles(supabase, files, post.id);
   if (!postMediaIds) {
+    console.error("uploading files error");
     return null;
   }
   //update post urls
@@ -62,6 +64,7 @@ export default async function createNewPost({
     .eq("id", post.id);
 
   if (finalPostUpdateError) {
+    console.error(finalPostUpdateError);
     return null;
   }
   return post;
@@ -74,18 +77,21 @@ const uploadFiles = async (
 ) => {
   const media = [];
   for (const f of files) {
+    const isImage = f.type.startsWith("image/");
     const ext = f.name.split(".").pop();
     const key = `public/${postId}/${uuidv4()}.${ext}`;
+    const storageName = isImage ? "images" : "videos";
     //Storage에 업로드
     const { data: upload, error: uError } = await database.storage
-      .from("media")
+      .from(storageName)
       .upload(key, f, { upsert: true });
     if (uError) {
       console.error(uError);
       continue;
     }
-    const publicUrl = database.storage.from("media").getPublicUrl(upload.path)
-      .data.publicUrl;
+    const publicUrl = database.storage
+      .from(storageName)
+      .getPublicUrl(upload.path).data.publicUrl;
     //post media에 insert
     const { data: pData, error: pError } = await database
       .from("post_media")

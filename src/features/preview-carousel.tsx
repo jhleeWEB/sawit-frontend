@@ -1,6 +1,8 @@
 "use client";
 
-import { Button, Image, Link } from "@heroui/react";
+import { usePostFormState } from "@/app/(main)/c/[community_id]/create/_components/form-provider";
+import { Button, Image } from "@heroui/react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DropzoneInputProps } from "react-dropzone";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
@@ -19,6 +21,7 @@ export default function PreviewCarousel({
   onRemove,
   getInputProps,
 }: Props) {
+  const formState = usePostFormState();
   const wrappeRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -68,7 +71,7 @@ export default function PreviewCarousel({
   return (
     <div
       ref={wrappeRef}
-      className="relative h-[400px] flex w-full overflow-hidden scrollbar-hide rounded-xl"
+      className="relative w-full h-auto max-h-[60vh] flex marker:items-center overflow-x-hidden scrollbar-hide rounded-2xl"
     >
       {hasPrev && (
         <Button
@@ -76,6 +79,7 @@ export default function PreviewCarousel({
           variant="flat"
           className="absolute z-10 top-[calc(50%-24px)] left-[18px] rounded-full opacity-70 bg-black/50"
           size="sm"
+          isDisabled={formState.isUploading}
           onPress={prev}
         >
           <FaChevronLeft size={18} color="white" />
@@ -87,69 +91,72 @@ export default function PreviewCarousel({
           variant="flat"
           className="absolute z-10 top-[calc(50%-24px)] right-[18px] rounded-full bg-black/50"
           size="sm"
+          isDisabled={formState.isUploading}
           onPress={next}
         >
           <FaChevronRight size={18} color="white" />
         </Button>
       )}
-      {previews && (
-        <label
-          htmlFor="upload"
-          className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
-        >
-          추가
-          <input
-            {...getInputProps()}
-            name="files"
-            id="upload"
-            type="file"
-            style={{ display: "none" }}
-          />
-        </label>
-      )}
 
       {previews.map((preview, i) => {
         return (
           <Link
+            href=""
             key={"image" + "_" + i}
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              backgroundImage: `url("${preview.url}")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
             }}
-            className={`rounded-xl min-w-full border`}
+            className={`flex justify-center items-center rounded-2xl min-w-full border`}
           >
-            <div className="absolute top-0 left-0 flex justify-center min-w-full bg-white/60 backdrop-blur-3xl">
-              <Button
-                isIconOnly
-                variant="light"
-                className="absolute z-10 top-[18px] right-[18px] rounded-full bg-black/50"
-                size="sm"
-                onPress={() => onRemove(i)}
+            {previews && (
+              <label
+                htmlFor="upload"
+                className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
               >
-                <PiTrashSimpleThin size={18} color="white" />
-              </Button>
-              {preview.type === "image" ? (
-                <Image
-                  alt={"event-images" + i}
-                  height={400}
-                  src={preview.url}
-                  radius="none"
+                추가
+                <input
+                  {...getInputProps()}
+                  name="files"
+                  id="upload"
+                  type="file"
+                  style={{ display: "none" }}
                 />
-              ) : (
-                <video
-                  src={preview.url}
-                  controls
-                  playsInline
-                  muted // iOS 인라인 자동재생용(필요 시)
-                  preload="metadata"
-                  className="max-w-[100vw] max-h-[400px] w-auto h-auto object-contain"
-                />
-              )}
-            </div>
+              </label>
+            )}
+            <Button
+              isIconOnly
+              variant="light"
+              className="absolute z-10 top-[18px] right-[18px] rounded-full bg-black/50"
+              size="sm"
+              isDisabled={formState.isUploading}
+              onPress={() => onRemove(i)}
+            >
+              <PiTrashSimpleThin size={18} color="white" />
+            </Button>
+            {preview.type === "image" ? (
+              <Image
+                alt={"event-images" + i}
+                sizes="100vw"
+                style={{
+                  height: "auto",
+                  width: "auto",
+                  maxWidth: "100vw",
+                  maxHeight: "60vh",
+                }}
+                src={preview.url}
+                radius="none"
+              />
+            ) : (
+              <video
+                src={preview.url}
+                controls
+                playsInline
+                muted // iOS 인라인 자동재생용(필요 시)
+                preload="metadata"
+                className="max-w-[100vw] max-h-[60vh] w-auto h-auto object-contain"
+              />
+            )}
           </Link>
         );
       })}

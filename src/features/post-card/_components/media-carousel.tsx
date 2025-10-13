@@ -53,7 +53,7 @@ export default function MediaCarousel({ urls, href }: Props) {
 
   return (
     <div
-      className={`relative w-full h-auto max-h-[60vh] flex items-center overflow-x-hidden scrollbar-hide rounded-2xl`}
+      className={`relative w-full h-auto max-h-[60vh] flex marker:items-center overflow-x-hidden scrollbar-hide rounded-2xl`}
     >
       {hasPrev && (
         <Button
@@ -78,6 +78,7 @@ export default function MediaCarousel({ urls, href }: Props) {
         </Button>
       )}
       {urls.map((url, i) => {
+        const isVideo = url.includes("videos");
         return (
           <Link
             href={href}
@@ -85,26 +86,32 @@ export default function MediaCarousel({ urls, href }: Props) {
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
-              backgroundImage: `url("${url}")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "-webkit-fill-available",
             }}
-            className={`relative flex justify-center items-center rounded-2xl min-w-full h-full hover:none`}
+            className={`flex justify-center items-center rounded-2xl min-w-full border`}
           >
-            <div className="absolute top-0 left-0 w-full h-full bg-white/50 backdrop-blur-xl rounded-2xl" />
-            <Image
-              alt={"event-images" + i}
-              sizes="100vw"
-              style={{
-                width: "100%",
-                height: "auto",
-                maxHeight: "60vh",
-              }}
-              src={url}
-              radius="none"
-            />
+            {isVideo ? (
+              <video
+                src={url}
+                controls
+                playsInline
+                muted // iOS 인라인 자동재생용(필요 시)
+                preload="metadata"
+                className="max-w-[100vw] max-h-[60vh] w-auto h-auto object-contain"
+              />
+            ) : (
+              <Image
+                alt={"event-images" + i}
+                sizes="100vw"
+                style={{
+                  height: "auto",
+                  width: "auto",
+                  maxWidth: "100vw",
+                  maxHeight: "60vh",
+                }}
+                src={url}
+                radius="none"
+              />
+            )}
           </Link>
         );
       })}

@@ -1,20 +1,11 @@
 "use client";
 
-import { ActionDispatch, useState } from "react";
+import { useState } from "react";
 import Editor, { ContentEditableEvent } from "react-simple-wysiwyg";
+import { usePostFormDispatch } from "./form-provider";
 
-interface Props {
-  formDispatch: ActionDispatch<
-    [
-      action: {
-        type: string;
-        payload: unknown;
-      }
-    ]
-  >;
-}
-
-export default function SimpleEditor({ formDispatch }: Props) {
+export default function SimpleEditor() {
+  const formDispatch = usePostFormDispatch();
   const [html, setHtml] = useState("");
 
   function onChange(e: ContentEditableEvent) {
