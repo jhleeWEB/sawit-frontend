@@ -103,9 +103,13 @@ export default function useVideoCompression() {
     setPercent((p) => Math.max(p, 97));
 
     setStage("비디오 출력중!");
-    const data = await ffmpeg.readFile(outName);
+    const data = (await ffmpeg.readFile(outName)) as Uint8Array;
+    const ab = data.buffer.slice(
+      data.byteOffset,
+      data.byteOffset + data.byteLength
+    ) as ArrayBuffer;
     const out = new File(
-      [data],
+      [ab],
       file.name.replace(/\.[^.]+$/, "") + "-compressed.mp4",
       {
         type: "video/mp4",
