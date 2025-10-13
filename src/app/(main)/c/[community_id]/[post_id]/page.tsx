@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await fetchPost(post_id);
   const title = post?.title ?? "게시물";
   const desc = post?.text?.slice(0, 140) ?? ""; // 요약
-  const canonical = `${process.env.NEXT_PUBLIC_SITE_URL}/p/${community_id}/${post_id}`;
+  const canonical = `${process.env.NEXT_PUBLIC_SITE_URL}/c/${community_id}/${post_id}`;
   updateUserHistory(post_id);
 
   return {

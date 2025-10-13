@@ -34,7 +34,7 @@ export default function EditPostForm({ post, postMedia }: Props) {
     });
     setUploading(false);
     if (update) {
-      router.push(`/p/${update.community_id}/${update.id}`);
+      router.push(`/c/${update.community_id}/${update.id}`);
     }
   };
 

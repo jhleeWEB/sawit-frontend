@@ -15,7 +15,7 @@ export default function CommunityInfo({ showTitle, community }: Props) {
     <div className="rounded-xl bg-slate-100 text-neutral-800 p-4">
       {showTitle && (
         <section className="flex justify-between mb-4">
-          <Link href={`/p/${community.id}`} className="text-lg font-semibold">
+          <Link href={`/c/${community.id}`} className="text-lg font-semibold">
             p/{community.name}
           </Link>
         </section>

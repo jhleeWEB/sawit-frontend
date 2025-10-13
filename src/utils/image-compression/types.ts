@@ -1,5 +1,3 @@
-export const MB = 1024 * 1024;
-
 export type CompressOptions = {
   maxBytes: number; // 예: 10 * MB
   maxWidth?: number; // 리사이즈 상한 (선택)

@@ -1,47 +1,17 @@
 "use client";
 import { Button, Form, Input, Tab, Tabs } from "@heroui/react";
 import DragNDropMediaInput from "./d-n-d-media";
-import { FormEvent, useReducer, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import CommunitySearchBar from "@/app/(main)/create-post/_components/community-search-bar";
 import createNewPost from "../../../../../../service/create-new-post";
 import SimpleEditor from "./editor";
-
-//@ts-expect-error payload any type
-function reducer(state: FormState, action: { type: string; payload }) {
-  switch (action.type) {
-    case "update_files":
-      state.files = [...action.payload];
-      return state;
-    case "update_text":
-      state.text = action.payload;
-      return state;
-    case "update_title":
-      state.title = action.payload;
-      return state;
-    case "update_community_id":
-      return { ...state, communityId: action.payload };
-  }
-  return state;
-}
-
-export interface FormState {
-  communityId: number | undefined;
-  title: string;
-  files: File[] | [];
-  text: string;
-}
-
-const initialState = {
-  communityId: undefined,
-  title: "",
-  files: [],
-  text: "",
-};
+import { usePostFormDispatch, usePostFormState } from "./form-provider";
 
 export default function PostForm() {
   const route = useRouter();
-  const [formState, formDispatch] = useReducer(reducer, initialState);
+  const formState = usePostFormState();
+  const formDispatch = usePostFormDispatch();
   const [isPosting, setIsPosting] = useState(false);
   const [type, setType] = useState<PostTabOption>("media");
 
@@ -51,7 +21,7 @@ export default function PostForm() {
     const res = await createNewPost({ ...formState, type });
     setIsPosting(false);
     if (res) {
-      route.push(`/p/${res.community_id}/${res.id}`);
+      route.push(`/c/${res.community_id}/${res.id}`);
     }
   };
 
@@ -62,7 +32,7 @@ export default function PostForm() {
       className="flex flex-col"
     >
       {/** 게시물을 올릴 커뮤니티 선택 검샘 창 */}
-      <CommunitySearchBar formDispatch={formDispatch} />
+      <CommunitySearchBar />
 
       {/** 게시물을 올릴 커뮤니티 선택 검샘 창 */}
       <Input
@@ -84,6 +54,7 @@ export default function PostForm() {
       />
       <div className="flex w-full flex-col">
         <Tabs
+          isDisabled={formState.isUploading}
           aria-label="Options"
           fullWidth
           color="primary"
@@ -97,10 +68,10 @@ export default function PostForm() {
           }
         >
           <Tab key="media" title="미디어">
-            <DragNDropMediaInput formDispatch={formDispatch} />
+            <DragNDropMediaInput />
           </Tab>
           <Tab key="text" title="글">
-            <SimpleEditor formDispatch={formDispatch} />
+            <SimpleEditor />
           </Tab>
           <Tab key="link" disabled title="링크" />
         </Tabs>
@@ -121,8 +92,8 @@ export default function PostForm() {
           radius="full"
           color="primary"
           type="submit"
-          isLoading={isPosting}
-          isDisabled={isPosting}
+          isLoading={isPosting || formState.isUploading}
+          isDisabled={isPosting || formState.isUploading}
         >
           게시하기
         </Button>

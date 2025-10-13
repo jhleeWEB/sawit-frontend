@@ -19,7 +19,7 @@ export default function CommunityOptionDropdown({ id }: { id: number }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu variant="flat" classNames={{ list: " text-center" }}>
-        <DropdownItem key="setting" as={Link} href={`/p/${id}/settings`}>
+        <DropdownItem key="setting" as={Link} href={`/c/${id}/settings`}>
           설정
         </DropdownItem>
         <DropdownItem key="delete" color="danger" className="text-danger">

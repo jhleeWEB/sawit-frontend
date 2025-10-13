@@ -12,9 +12,9 @@ import {
 } from "@heroui/react";
 import Cropper, { Area } from "react-easy-crop";
 import { compressImageToMaxBytes } from "@/utils/image-compression/compress-image-to-max-bytes";
-import { MB } from "@/utils/image-compression/types";
 import updateUserIcon from "@/service/update-user-icon";
 import { cropToBlob } from "@/utils/image-compression/crop-to-blob";
+import { MB } from "@/utils/consts";
 
 interface Props {
   isOpen: boolean;

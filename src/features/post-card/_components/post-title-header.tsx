@@ -14,7 +14,7 @@ export default function PostTitleHeader({ post, headerInfo = "user" }: Props) {
     <div>
       <PostHeader headerInfo={headerInfo} post={post} />
       <Link
-        href={`/p/${post.community_id}/${post.id}`}
+        href={`/c/${post.community_id}/${post.id}`}
         className="text-2xl font-bold"
       >
         {post.title}

@@ -2,66 +2,77 @@
 
 import { useDropzone } from "react-dropzone";
 import { SlCloudUpload } from "react-icons/sl";
-import { ActionDispatch, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import PreviewCarousel from "@/features/preview-carousel";
-import { compressImageToMaxBytes } from "@/utils/image-compression/compress-image-to-max-bytes";
-import { MB } from "@/utils/image-compression/types";
-import { Spinner } from "@heroui/react";
+import { Progress } from "@heroui/react";
+import { MB } from "@/utils/consts";
 
-interface Props {
-  formDispatch: ActionDispatch<
-    [
-      action: {
-        type: string;
-        payload: unknown;
-      }
-    ]
-  >;
-}
+import useVideoCompression from "../_hooks/use-video-compression";
+import useImageCompression from "../_hooks/use-image-compression";
+import { usePostFormDispatch, usePostFormState } from "./form-provider";
 
-export default function DragNDropMediaInput({ formDispatch }: Props) {
+export default function DragNDropMediaInput() {
   const [files, setFiles] = useState<File[]>([]);
+  const formState = usePostFormState();
+  const formDispatch = usePostFormDispatch();
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-  const [uploadStatus, setUploadStatus] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
+  const {
+    start: startVideoCompression,
+    stage: videoStage,
+    percent: videoProgression,
+  } = useVideoCompression();
+  const {
+    start: startImageCompression,
+    stage: imageStage,
+    percent: imageProgression,
+  } = useImageCompression();
+
+  const previews = useMemo(() => {
+    if (files.length < 1) return [];
+    return previewUrls.map((url, i) => ({
+      url: url,
+      type: files[i].type.startsWith("image/") ? "image" : "video",
+    }));
+  }, [files, previewUrls]);
 
   const onDrop = useCallback(
     async (accepted: File[]) => {
-      let count = 0;
-      setIsUploading(true);
-      setUploadStatus(`이미지 업로드 시작...(${count}/${accepted.length})`);
+      formDispatch({ type: "update_is_uploading", payload: true });
       for (const originalFile of accepted) {
-        try {
-          let file = originalFile;
-          const fileName = originalFile.name;
-          //파일 사이즈 및 타입 체크
-          const isImage = originalFile.type.startsWith("image/");
-          const isTooBig = originalFile.size >= 10 * MB;
-          if (isImage) {
-            if (isTooBig) {
-              setUploadStatus(
-                `이미지 사이즈 축소 시작...(${fileName})[${count}/${accepted.length}]`
-              );
-              file = await compressImageToMaxBytes(file, { maxBytes: 10 * MB });
-            }
-            const url = URL.createObjectURL(file);
-            setPreviewUrls((prev) => [...prev, url]);
-            setFiles((prev) => [...prev, file]);
-            setIsUploading(false);
-
-            setUploadStatus(
-              `이미지 업로드 완료...(${fileName})[${count}/${accepted.length}]`
-            );
-          } else {
-            //비디오 처리
+        let file = originalFile;
+        //파일 사이즈 및 타입 체크
+        const isImage = originalFile.type.startsWith("image/");
+        if (isImage) {
+          const isTooBig = originalFile.size >= (10 * MB) / accepted.length;
+          if (isTooBig) {
+            formDispatch({ type: "update_upload_type", payload: "image" });
+            file = await startImageCompression(file, { maxBytes: 5 * MB });
           }
-        } catch {}
-        count += 1;
-        setIsUploading(false);
+          const url = URL.createObjectURL(file);
+          setPreviewUrls((prev) => [...prev, url]);
+          setFiles((prev) => [...prev, file]);
+        }
+        const isVideo = originalFile.type.startsWith("video/");
+        if (isVideo) {
+          const targetSize = (50 * MB) / accepted.length;
+          const isTooBig = originalFile.size >= targetSize;
+          // console.log("original size:", originalFile.size / MB, "MB");
+          let outVideo = originalFile;
+          if (isTooBig) {
+            formDispatch({ type: "update_upload_type", payload: "video" });
+            outVideo = await startVideoCompression(outVideo, targetSize);
+          }
+          // console.log("output size: ", outVideo.size / MB, "MB");
+
+          const url = URL.createObjectURL(outVideo);
+          setFiles((prev) => [...prev, outVideo]);
+          setPreviewUrls((prev) => [...prev, url]);
+        }
       }
-      setIsUploading(false);
+      formDispatch({ type: "update_upload_type", payload: "none" });
+      formDispatch({ type: "update_is_uploading", payload: false });
     },
-    [setUploadStatus, setFiles]
+    [setFiles, startVideoCompression, startImageCompression, formDispatch]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -73,9 +84,12 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
   });
 
   const handleRemoveFile = (index: number) => {
-    const removed = [...files];
-    removed.splice(index, 1);
-    setFiles(removed);
+    const removedFiles = [...files];
+    removedFiles.splice(index, 1);
+    const removedUrls = [...previewUrls];
+    removedUrls.splice(index, 1);
+    setFiles(removedFiles);
+    setPreviewUrls(removedUrls);
   };
 
   useEffect(() => {
@@ -87,12 +101,26 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
   return (
     <>
-      {isUploading && (
-        <div className="flex items-center text-sm text-neutral-400">
-          <Spinner /> {uploadStatus}
-        </div>
+      {formState.isUploading && (
+        <>
+          <div className="flex w-full items-center text-sm text-neutral-400 mb-4">
+            <Progress
+              aria-label="video-optimize"
+              showValueLabel={true}
+              value={
+                formState.uploadType === "video"
+                  ? videoProgression
+                  : imageProgression
+              }
+              label={formState.uploadType === "video" ? videoStage : imageStage}
+              maxValue={100}
+              formatOptions={{ style: "percent" }}
+              isStriped
+            />
+          </div>
+        </>
       )}
-      {files.length === 0 && (
+      {files.length === 0 && !formState.isUploading && (
         <div
           {...getRootProps({
             className:
@@ -100,7 +128,6 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
           })}
         >
           <input {...getInputProps()} name="files" />
-
           <>
             <p>여기에 콘텐츠를 넣거나, 클릭하여 올려보세요.</p>
             <SlCloudUpload size={24} />
@@ -110,7 +137,7 @@ export default function DragNDropMediaInput({ formDispatch }: Props) {
 
       {previewUrls.length > 0 && (
         <PreviewCarousel
-          urls={previewUrls}
+          previews={previews}
           onRemove={handleRemoveFile}
           getInputProps={getInputProps}
         />
