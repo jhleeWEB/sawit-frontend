@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import Providers from "../(providers)/providers";
@@ -8,6 +8,11 @@ import TopNavigation from "./_components/top-navigation/top-navigation";
 export const metadata: Metadata = {
   title: "Sawit",
   description: "Have You seen it? Yes I Sawit!",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default async function RootLayout({

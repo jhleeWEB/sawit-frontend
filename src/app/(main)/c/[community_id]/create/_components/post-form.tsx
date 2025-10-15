@@ -77,7 +77,7 @@ export default function PostForm() {
         </Tabs>
       </div>
 
-      <div className="w-full flex justify-end gap-2">
+      <div className="flex w-full justify-end gap-2">
         {/* 임시저장 기능 임시보류 */}
         {/* <Button
           radius="full"

@@ -55,7 +55,7 @@ export default async function PostPage({
 
   return (
     <div className="main-container">
-      <main className="w-full py-8">
+      <main className="w-full px-2 py-8">
         <PostCard post={post} showComments />
       </main>
       <div className="right-menu-container py-8">

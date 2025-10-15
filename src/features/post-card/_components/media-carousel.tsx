@@ -53,13 +53,13 @@ export default function MediaCarousel({ urls, href }: Props) {
 
   return (
     <div
-      className={`relative w-full h-auto max-h-[60vh] flex marker:items-center overflow-x-hidden scrollbar-hide rounded-2xl`}
+      className={`relative flex h-full w-full overflow-x-hidden rounded-2xl scrollbar-hide marker:items-center md:max-h-[60vh]`}
     >
       {hasPrev && (
         <Button
           isIconOnly
           variant="flat"
-          className="absolute z-10 top-[calc(50%-24px)] left-[18px] rounded-full opacity-70 bg-black/50"
+          className="absolute left-[18px] top-[calc(50%-24px)] z-10 rounded-full bg-black/50 opacity-70"
           size="sm"
           onPress={prev}
         >
@@ -70,7 +70,7 @@ export default function MediaCarousel({ urls, href }: Props) {
         <Button
           isIconOnly
           variant="flat"
-          className="absolute z-10 top-[calc(50%-24px)] right-[18px] rounded-full bg-black/50"
+          className="absolute right-[18px] top-[calc(50%-24px)] z-10 rounded-full bg-black/50"
           size="sm"
           onPress={next}
         >
@@ -87,16 +87,16 @@ export default function MediaCarousel({ urls, href }: Props) {
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
             }}
-            className={`flex justify-center items-center rounded-2xl min-w-full border`}
+            className={`flex min-w-full items-center justify-center rounded-2xl border`}
           >
             {isVideo ? (
               <video
                 src={url}
                 controls
                 playsInline
-                muted // iOS 인라인 자동재생용(필요 시)
+                muted
                 preload="metadata"
-                className="max-w-[100vw] max-h-[60vh] w-auto h-auto object-contain"
+                className="h-auto max-h-[60dvh] w-auto max-w-full object-contain"
               />
             ) : (
               <Image
@@ -105,8 +105,8 @@ export default function MediaCarousel({ urls, href }: Props) {
                 style={{
                   height: "auto",
                   width: "100%",
-                  maxWidth: "100vw",
-                  maxHeight: "60vh",
+                  maxWidth: "100dvw",
+                  maxHeight: "60dvh",
                 }}
                 src={url}
                 radius="none"
