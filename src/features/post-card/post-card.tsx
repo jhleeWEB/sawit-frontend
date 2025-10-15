@@ -16,7 +16,7 @@ export default function PostCard(props: Props) {
   const { post, showComments = false } = props;
 
   return (
-    <article>
+    <article className="post_container ">
       <PostTitleHeader {...props} />
       <PostContentBody post={post} />
       <Divider className="my-4" />

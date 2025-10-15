@@ -50,7 +50,7 @@ export default function PostContentBody({ post }: Props) {
         }
       }
     },
-    [onOpen, setLikes, session, post_id]
+    [onOpen, setLikes, session, post_id],
   );
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function PostContentBody({ post }: Props) {
   }, [post]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex h-[calc(100%-64px)] flex-col">
       {post.type === "media" && (
         <MediaCarousel href={postHref} urls={post.media_urls} />
       )}
@@ -70,9 +70,9 @@ export default function PostContentBody({ post }: Props) {
         </div>
       )}
       {/* 하단 버튼 그룹 */}
-      <div className="flex gap-2 mt-4">
+      <div className="mt-4 flex gap-2">
         {/* 올려/내려 버튼 그룹 */}
-        <div className="flex items-center bg-neutral-200 rounded-full">
+        <div className="flex items-center rounded-full bg-neutral-200">
           <Button
             isIconOnly
             radius="full"
