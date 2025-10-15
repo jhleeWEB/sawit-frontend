@@ -46,7 +46,8 @@ html {
 @layer components {
   /* Mobile */
   .grid-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
   }
   .left-menu-container {
     display: none;

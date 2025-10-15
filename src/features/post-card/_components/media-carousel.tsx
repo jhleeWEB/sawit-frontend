@@ -94,9 +94,9 @@ export default function MediaCarousel({ urls, href }: Props) {
                 src={url}
                 controls
                 playsInline
-                muted // iOS 인라인 자동재생용(필요 시)
+                muted
                 preload="metadata"
-                className="h-auto max-h-[60vh] w-auto max-w-[100vw] object-contain"
+                className="h-auto max-h-[60dvh] w-auto max-w-full object-contain"
               />
             ) : (
               <Image
@@ -105,8 +105,8 @@ export default function MediaCarousel({ urls, href }: Props) {
                 style={{
                   height: "auto",
                   width: "100%",
-                  maxWidth: "100vw",
-                  maxHeight: "60vh",
+                  maxWidth: "100dvw",
+                  maxHeight: "60dvh",
                 }}
                 src={url}
                 radius="none"
