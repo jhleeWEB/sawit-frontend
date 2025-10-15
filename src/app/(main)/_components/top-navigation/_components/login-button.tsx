@@ -7,8 +7,8 @@ export default function LoginButton() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
-      <Button variant="light" radius="full" onPress={() => onOpen()}>
-        <small className="cursor-pointer hover:text-primary-400">로그인</small>
+      <Button variant="light" radius="full" size="sm" onPress={() => onOpen()}>
+        로그인
       </Button>
       <SocialLoginModal isOpen={isOpen} onOpenChange={onOpenChange} />
     </>
