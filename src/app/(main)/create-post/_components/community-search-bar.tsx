@@ -2,23 +2,18 @@
 
 import useDebounce from "@/app/hooks/use-debounce";
 import { Autocomplete, AutocompleteItem, Avatar } from "@heroui/react";
-import { ActionDispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import fetchCommunitySearchList, {
   CommunityAutocompleteList,
-} from "../_apis/fetch-community-search-list";
+} from "../../../../service/fetch-community-search-list";
+import {
+  usePostFormDispatch,
+  usePostFormState,
+} from "../../c/[community_id]/create/_components/form-provider";
 
-interface Props {
-  formDispatch: ActionDispatch<
-    [
-      action: {
-        type: string;
-        payload: unknown;
-      }
-    ]
-  >;
-}
-
-export default function CommunitySearchBar({ formDispatch }: Props) {
+export default function CommunitySearchBar() {
+  const formState = usePostFormState();
+  const formDispatch = usePostFormDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const debounceValue = useDebounce(searchTerm, 800);
   const [autocompleteItems, setAutocompleteItems] = useState<
@@ -37,6 +32,7 @@ export default function CommunitySearchBar({ formDispatch }: Props) {
   return (
     <div className="flex">
       <Autocomplete
+        isDisabled={formState.isUploading}
         isRequired
         aria-label="커뮤니티 선택"
         value={searchTerm}

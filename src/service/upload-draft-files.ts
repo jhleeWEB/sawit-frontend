@@ -1,5 +1,6 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { getSession } from "next-auth/react";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
+import { sanitizeObjectKey } from "@/utils/senitize-object-key";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
 export interface DraftPreviewFile {
   path: string;
@@ -12,12 +13,12 @@ export interface DraftPreviewFile {
 export default async function uploadDraftFiles(
   file: File
 ): Promise<DraftPreviewFile | null> {
-  const session = await getSession();
+  const session = await getUserSession();
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
-  const key = `draft/${session.user.id}/temp/${file.name.replaceAll(" ", "_")}`;
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
+  const key = `draft/${session.user.id}/temp/${sanitizeObjectKey(file.name)}`;
   const { data, error } = await supabase.storage
     .from("media")
     .upload(key, file, {

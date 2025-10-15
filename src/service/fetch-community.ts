@@ -1,9 +1,10 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchCommunity(
-  id: string
+  id: number
 ): Promise<Community | null> {
-  const supabase = await createSupabaseClient();
+  const supabase = getSupabaseClient() as SupabaseClient;
   const { data: community, error } = await supabase
     .from("communities")
     .select()
@@ -18,7 +19,7 @@ export default async function fetchCommunity(
 }
 
 export interface Community {
-  id: string;
+  id: number;
   created_at: string;
   name: string;
   description: string;

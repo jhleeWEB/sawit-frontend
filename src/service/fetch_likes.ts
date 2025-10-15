@@ -1,8 +1,9 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
+import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchLikes(postId: string, userId: string) {
   try {
-    const supabase = await createSupabaseClient();
+    const supabase = getSupabaseClient() as SupabaseClient;
 
     const { data: likes, error: likesError } = await supabase
       .from("post_likes")

@@ -1,12 +1,12 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { getSession } from "next-auth/react";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
 export default async function checkDraft() {
-  const session = await getSession();
+  const session = await getUserSession();
   if (!session) {
     return null;
   }
-  const supabase = await createSupabaseClient(session.supabaseAccessToken);
+  const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
   //check draft
   const { data, error } = await supabase
     .from("posts")

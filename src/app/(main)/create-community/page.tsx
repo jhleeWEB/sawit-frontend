@@ -14,9 +14,9 @@ import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
 import TopicChips from "./_components/topic-chips";
 import FormTitle from "./_components/form-title";
 import { useRouter } from "next/navigation";
-import createNewCommunity from "./_apis/create-new-community";
-import BannerCropperModal from "../p/[community_id]/create/_components/banner-crop-modal";
-import IconCropperModal from "../p/[community_id]/create/_components/icon-crop-modal";
+import createNewCommunity from "./_services/create-new-community";
+import BannerCropperModal from "../c/[community_id]/create/_components/banner-crop-modal";
+import IconCropperModal from "../c/[community_id]/create/_components/icon-crop-modal";
 
 export default function CreateCommunity() {
   const route = useRouter();
@@ -68,7 +68,7 @@ export default function CreateCommunity() {
       icon: iconBlob,
       topics: selectedTopics,
     });
-    route.push(`/p/${data.id}`);
+    route.push(`/c/${data.id}`);
     setIsSubmitLoading(false);
   };
 
@@ -310,7 +310,7 @@ export default function CreateCommunity() {
           top: "20%",
         }}
       >
-        <div className="border-1 rounded-lg shadow-lg">
+        <div className="border-1 rounded-xl shadow-lg">
           {bannerPreview ? (
             <div
               style={{

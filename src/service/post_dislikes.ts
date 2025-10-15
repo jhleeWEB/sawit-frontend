@@ -1,13 +1,13 @@
-import { createSupabaseClient } from "@/lib/auth/supabase/server";
-import { getSession } from "next-auth/react";
+import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
+import getUserSession from "@/lib/auth/supabase/get-user-session";
 
-export default async function postLikes(postId: string) {
+export default async function postLikes(postId: number) {
   try {
-    const session = await getSession();
+    const session = await getUserSession();
     if (!session) {
       throw "no user session";
     }
-    const supabase = await createSupabaseClient(session.supabaseAccessToken);
+    const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
     const { data: existing } = await supabase
       .from("post_dislikes")
       .select("id")
