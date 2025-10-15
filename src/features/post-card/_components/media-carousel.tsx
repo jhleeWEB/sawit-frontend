@@ -104,7 +104,7 @@ export default function MediaCarousel({ urls, href }: Props) {
                 sizes="100vw"
                 style={{
                   height: "auto",
-                  width: "auto",
+                  width: "100%",
                   maxWidth: "100vw",
                   maxHeight: "60vh",
                 }}
