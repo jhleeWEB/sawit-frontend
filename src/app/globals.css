@@ -63,7 +63,6 @@ html {
   }
   .main-container {
     width: 100%;
-    display: flex;
     gap: 1.5rem;
   }
   .post-container {
@@ -121,6 +120,7 @@ html {
     .post-container {
       padding: 0;
     }
+
     /* 커뮤니티 생성할때 미리보기 컴포넌트 */
     .community-info-preview {
       display: none;

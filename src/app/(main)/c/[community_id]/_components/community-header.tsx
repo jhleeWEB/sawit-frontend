@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Button, useDisclosure } from "@heroui/react";
+import { Avatar, Button, Image, useDisclosure } from "@heroui/react";
 import CommunityOptionDropdown from "./community-dropdown";
 import Link from "next/link";
 import { Community } from "@/service/fetch-community";
@@ -35,68 +35,63 @@ export default function CommunityHeader({ community }: Props) {
 
   if (isOwnerLoading || isMemberLoading) return <CommunityHeaderSkeleton />;
   return (
-    <div className="col-start-1 col-span-2 w-full mb-[60px]">
-      <div
-        style={{
-          backgroundImage: `url("${community.banner_url}")`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        className={"relative min-h-[128px] rounded-xl w-full"}
-      >
-        <div className="absolute w-full px-8 pr-0 bottom-[-50px] flex items-end">
+    <div className="w-dvw sm:col-span-2 sm:col-start-1 sm:w-full">
+      <Image
+        alt="community-banner-image"
+        className="rounded-none sm:rounded-2xl"
+        src={community.banner_url}
+      />
+      <div className="z-10 flex w-full items-end px-4 sm:relative sm:top-[-3.25rem] sm:px-8 sm:pr-0">
+        <Avatar
+          alt="icon"
+          radius="full"
+          src={community.icon_url}
+          className="h-[3.25rem] w-[3.25rem] shrink-0 border-[4px] border-white sm:h-[6.25rem] sm:w-[6.25rem]"
+        />
+        <div className="flex w-full items-center justify-between">
           <div>
-            <Avatar
-              alt="icon"
-              radius="full"
-              src={community.icon_url}
-              className="w-[100px] h-[100px] border-white border-[4px]"
-            />
+            <h1 className="text-lg font-bold sm:text-3xl">
+              p/{community.name}
+            </h1>
           </div>
-          <div className="w-full flex justify-between">
-            <div>
-              <h1 className="text-3xl font-bold">p/{community.name}</h1>
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="light"
-                radius="full"
-                className="border"
-                as={Link}
-                href={`/c/${community.id}/create`}
-              >
-                게시물 올리기
-              </Button>
-              {!isOwner && (
-                <>
-                  {!isMember ? (
-                    <Button
-                      variant="flat"
-                      color="primary"
-                      radius="full"
-                      onPress={() => {
-                        onOpen();
-                      }}
-                    >
-                      들어가기
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="flat"
-                      color="danger"
-                      radius="full"
-                      onPress={() => {
-                        onOpen();
-                      }}
-                    >
-                      나가기
-                    </Button>
-                  )}
-                </>
-              )}
-              {isOwner && <CommunityOptionDropdown id={community.id} />}
-            </div>
+          <div className="flex gap-2">
+            <Button
+              variant="light"
+              radius="full"
+              className="hidden border sm:visible"
+              as={Link}
+              href={`/c/${community.id}/create`}
+            >
+              게시물 올리기
+            </Button>
+            {!isOwner && (
+              <>
+                {!isMember ? (
+                  <Button
+                    variant="flat"
+                    color="primary"
+                    radius="full"
+                    onPress={() => {
+                      onOpen();
+                    }}
+                  >
+                    들어가기
+                  </Button>
+                ) : (
+                  <Button
+                    variant="flat"
+                    color="danger"
+                    radius="full"
+                    onPress={() => {
+                      onOpen();
+                    }}
+                  >
+                    나가기
+                  </Button>
+                )}
+              </>
+            )}
+            {isOwner && <CommunityOptionDropdown id={community.id} />}
           </div>
         </div>
       </div>
