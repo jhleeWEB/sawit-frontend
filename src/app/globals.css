@@ -65,9 +65,6 @@ html {
     width: 100%;
     gap: 1.5rem;
   }
-  .post-container {
-    padding: 0.5rem;
-  }
 
   /* Desktop */
   @media (min-width: 48rem) {
@@ -115,10 +112,6 @@ html {
       max-width: var(--right-menu-w);
       min-height: calc(100vh - var(--header-nav-h));
       max-height: calc(100vh - var(--header-nav-h));
-    }
-    /* PostCard 컴포넌트를 wrapping하고 있는 article */
-    .post-container {
-      padding: 0;
     }
 
     /* 커뮤니티 생성할때 미리보기 컴포넌트 */
