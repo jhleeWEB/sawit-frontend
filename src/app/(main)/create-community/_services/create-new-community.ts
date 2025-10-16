@@ -32,7 +32,7 @@ export default async function createNewCommunity({
       description,
       topics,
     })
-    .select()
+    .select("id")
     .single();
 
   if (communityError) {
@@ -46,43 +46,53 @@ export default async function createNewCommunity({
   const publicUrls = [];
   if (banner) {
     const { data, error } = await supabase.storage
-      .from("media")
-      .upload(`public/community/banners/${11}`, banner, {
+      .from("images")
+      .upload(`public/community/banners/${community.id}`, banner, {
         contentType: banner.type,
         upsert: true,
       });
     if (error) {
       console.error(error);
+      await supabase.from("communities").delete().eq("id", community.id);
       return null;
     }
-    const url = await supabase.storage.from("media").getPublicUrl(data.path)
+    const url = await supabase.storage.from("images").getPublicUrl(data.path)
       .data.publicUrl;
     publicUrls.push(url);
   }
 
   if (icon) {
     const { data, error } = await supabase.storage
-      .from("media")
-      .upload(`public/community/icons/${11}`, icon, {
+      .from("images")
+      .upload(`public/community/icons/${community.id}`, icon, {
         contentType: icon.type,
         upsert: true,
       });
     if (error) {
       console.error(error);
+      await supabase.from("communities").delete().eq("id", community.id);
       return null;
     }
-    const url = await supabase.storage.from("media").getPublicUrl(data.path)
+    const url = await supabase.storage.from("images").getPublicUrl(data.path)
       .data.publicUrl;
     publicUrls.push(url);
   }
 
-  supabase
+  const { data: uData, error: uError } = await supabase
     .from("communities")
     .update({
       banner_url: publicUrls[0],
       icon_url: publicUrls[1],
     })
-    .eq("id", community.id);
+    .eq("id", community.id)
+    .select("id")
+    .single();
 
-  return community;
+  if (uError) {
+    console.error(uError);
+    await supabase.from("communities").delete().eq("id", community.id);
+    return null;
+  }
+
+  return uData;
 }

@@ -56,6 +56,7 @@ export default function CommunityForm() {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch({ type: "buzy" });
+      console.log({ name, description, banner, icon, topics });
       const data = await createNewCommunity({
         name,
         description,
@@ -66,14 +67,14 @@ export default function CommunityForm() {
       if (data) {
         addToast({
           title: "커뮤니티 생성",
-          description: "아바타 변경 성공했습니다",
+          description: "커뮤니티 생성 성공했습니다",
           color: "success",
         });
         router.push(`/c/${data.id}`);
       } else {
         addToast({
           title: "커뮤니티 생성",
-          description: "아바타 변경 실패했습니다",
+          description: "커뮤니티 생성 실패했습니다",
           color: "danger",
         });
       }
