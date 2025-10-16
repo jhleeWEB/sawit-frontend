@@ -28,7 +28,7 @@ export default async function UserLayout({
   }
   return (
     <div className="main-container">
-      <main className="w-full">
+      <main className="w-full px-2 sm:px-0">
         <UserHeader username={decodedUsername} />
         <MemoMyActivityTabs isOwner={isOwner} />
         {children}
