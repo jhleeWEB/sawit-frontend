@@ -1,7 +1,6 @@
 import { IDENTITY } from "@/constants/identifiers";
 import fetchUser from "@/service/fetch-user";
-import { Avatar, Button } from "@heroui/react";
-import Link from "next/link";
+import { Avatar } from "@heroui/react";
 
 export default async function UserHeader({ username }: { username: string }) {
   const userInfo = await fetchUser({ username });
@@ -21,15 +20,6 @@ export default async function UserHeader({ username }: { username: string }) {
           {username}
         </p>
       </div>
-      <Button
-        radius="full"
-        size="sm"
-        as={Link}
-        href={`/settings/account`}
-        className="ml-auto sm:hidden"
-      >
-        업데이트
-      </Button>
     </div>
   );
 }

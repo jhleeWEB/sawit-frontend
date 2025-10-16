@@ -4,6 +4,7 @@ import MyActivityTabs from "./_components/my-activity-tabs";
 import { memo } from "react";
 import UserStats from "./_components/user-stats";
 import fetchUser from "@/service/fetch-user";
+import MobileUserStats from "./_components/mobile-user-stats";
 
 export const metadata: Metadata = {
   title: "Sawit",
@@ -30,6 +31,7 @@ export default async function UserLayout({
     <div className="main-container">
       <main className="w-full px-2 sm:px-0">
         <UserHeader username={decodedUsername} />
+        <MobileUserStats username={decodedUsername} />
         <MemoMyActivityTabs isOwner={isOwner} />
         {children}
       </main>
