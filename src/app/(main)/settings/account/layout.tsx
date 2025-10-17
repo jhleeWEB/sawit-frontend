@@ -7,7 +7,7 @@ export default async function AccountSettingsLayout({
 }>) {
   return (
     <div className="main-container">
-      <main className="w-full">
+      <main className="w-full p-4">
         <AccountSettingsTabs />
         {children}
       </main>

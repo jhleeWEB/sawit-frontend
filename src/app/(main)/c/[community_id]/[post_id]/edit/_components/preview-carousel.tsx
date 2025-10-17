@@ -22,6 +22,7 @@ const TRANSITION = "transform 200ms ease-in-out";
 export interface PreviewCarouselValue {
   url: string;
   file?: File;
+  isVideo?: boolean;
   status?: "published" | "draft" | "removed";
   path?: string;
 }
@@ -47,7 +48,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
         return temp;
       });
     },
-    [onValueChange]
+    [onValueChange],
   );
   const revert = useCallback(
     (value: PreviewCarouselValue, index: number) => {
@@ -60,7 +61,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
         return temp;
       });
     },
-    [onValueChange]
+    [onValueChange],
   );
   const next = useCallback(() => {
     const length = values.length - 1;
@@ -107,7 +108,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
         });
       });
     },
-    [onValueChange, currentIndex]
+    [onValueChange, currentIndex],
   );
 
   const onDrop = useCallback(
@@ -135,20 +136,20 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
         } catch {}
       }
     },
-    [add]
+    [add],
   );
 
   return (
     <>
       <div
         ref={wrappeRef}
-        className="relative h-[400px] flex w-full overflow-hidden scrollbar-hide rounded-xl"
+        className="relative flex h-auto max-h-[60vh] w-full overflow-x-hidden rounded-2xl scrollbar-hide marker:items-center"
       >
         {hasPrev && (
           <Button
             isIconOnly
             variant="flat"
-            className="absolute z-10 top-[calc(50%-24px)] left-[18px] rounded-full opacity-70 bg-black/50"
+            className="absolute left-[18px] top-[calc(50%-24px)] z-10 rounded-full bg-black/50 opacity-70"
             size="sm"
             onPress={prev}
           >
@@ -159,7 +160,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
           <Button
             isIconOnly
             variant="flat"
-            className="absolute z-10 top-[calc(50%-24px)] right-[18px] rounded-full bg-black/50"
+            className="absolute right-[18px] top-[calc(50%-24px)] z-10 rounded-full bg-black/50"
             size="sm"
             onPress={next}
           >
@@ -168,7 +169,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
         )}
         <label
           htmlFor="upload"
-          className="absolute z-10 top-[18px] left-[18px] rounded-full bg-black/50 cursor-pointer text-neutral-100 text-[14px] p-1 px-4 hover:bg-black/10 transition-colors duration-300 ease-in-out"
+          className="absolute left-[18px] top-[18px] z-10 cursor-pointer rounded-full bg-black/50 p-1 px-4 text-[14px] text-neutral-100 transition-colors duration-300 ease-in-out hover:bg-black/10"
         >
           추가
           <input
@@ -188,77 +189,96 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
               style={{
                 transform: `translateX(-${currentIndex * 100}%)`,
                 transition: `${transition}`,
-                backgroundImage: `url("${value.url}")`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
               }}
-              className={`rounded-xl min-w-full border`}
+              className={`flex min-w-full items-center justify-center rounded-2xl border`}
             >
-              <div className="absolute top-0 left-0 flex justify-center min-w-full bg-white/60 backdrop-blur-3xl">
-                {value.status !== "removed" ? (
-                  <Button
-                    isIconOnly
-                    variant="light"
-                    className="absolute z-10 top-[18px] right-[18px] rounded-full bg-black/50"
-                    size="sm"
-                    onPress={() => remove(i)}
-                  >
-                    <PiTrashSimple size={18} color="white" />
-                  </Button>
-                ) : (
-                  <Button
-                    isIconOnly
-                    variant="light"
-                    className="absolute z-20 top-[18px] right-[18px] rounded-full bg-black/50"
-                    size="sm"
-                    onPress={() => revert(value, i)}
-                  >
-                    <GrRevert size={18} color="white" />
-                  </Button>
-                )}
+              {value.status !== "removed" ? (
+                <Button
+                  isIconOnly
+                  variant="light"
+                  className="absolute right-[18px] top-[18px] z-10 rounded-full bg-black/50"
+                  size="sm"
+                  onPress={() => remove(i)}
+                >
+                  <PiTrashSimple size={18} color="white" />
+                </Button>
+              ) : (
+                <Button
+                  isIconOnly
+                  variant="light"
+                  className="absolute right-[18px] top-[18px] z-20 rounded-full bg-black/50"
+                  size="sm"
+                  onPress={() => revert(value, i)}
+                >
+                  <GrRevert size={18} color="white" />
+                </Button>
+              )}
 
-                {
-                  <Image
-                    alt={"event-images" + i}
-                    height={400}
-                    src={value.url}
-                    radius="none"
-                  />
-                }
-                {value.status === "removed" && (
-                  <PiXCircleBold
-                    size={100}
-                    className="z-10 absolute w-full h-full text-center text-danger-400"
-                  />
-                )}
-              </div>
+              {value.isVideo ? (
+                <video
+                  src={value.url}
+                  controls
+                  playsInline
+                  muted // iOS 인라인 자동재생용(필요 시)
+                  preload="metadata"
+                  className="h-auto max-h-[60vh] w-auto object-contain"
+                />
+              ) : (
+                <Image
+                  alt={"event-images" + i}
+                  sizes="100vw"
+                  style={{
+                    height: "auto",
+                    width: "auto",
+                    maxWidth: "100vw",
+                    maxHeight: "60vh",
+                  }}
+                  src={value.url}
+                  radius="none"
+                />
+              )}
+              {value.status === "removed" && (
+                <PiXCircleBold
+                  size={100}
+                  className="absolute z-10 h-full w-full text-center text-danger-400"
+                />
+              )}
             </div>
           );
         })}
       </div>
-      <div className="w-full flex p-1 gap-1 bg-black/30 rounded-xl mt-4">
+      <div className="mt-4 flex w-full gap-1 rounded-xl bg-black/30 p-1">
         {values.map((value, i) => {
           return (
             <div key={`mini_preview_indicator_${i}`} className="relative">
-              <Image
-                radius="sm"
-                isZoomed
-                classNames={{
-                  wrapper: `${
-                    currentIndex === i ? "opacity-100" : "opacity-40"
-                  } cursor-pointer`,
-                  img: "max-h-[100px]",
-                }}
-                alt={`mini_preview_indicator_${i}`}
-                src={value.url}
-                onClick={() => setCurrentIndex(i)}
-              />
+              {value.isVideo ? (
+                <video
+                  src={`${value.url}`}
+                  playsInline
+                  muted
+                  preload="metadata"
+                  className="h-auto max-h-[100px] w-auto max-w-[100px] rounded-md object-contain"
+                />
+              ) : (
+                <Image
+                  radius="sm"
+                  isZoomed
+                  classNames={{
+                    wrapper: `${
+                      currentIndex === i ? "opacity-100" : "opacity-40"
+                    } cursor-pointer`,
+                    img: "max-h-[100px]",
+                  }}
+                  alt={`mini_preview_indicator_${i}`}
+                  src={value.url}
+                  onClick={() => setCurrentIndex(i)}
+                />
+              )}
 
               {value.status === "removed" && (
                 <PiXCircleBold
                   size={100}
-                  className="z-20 absolute top-0 left-0 w-full h-full text-center text-danger-500 rounded-md"
+                  className="absolute left-0 top-0 z-20 h-full w-full rounded-md text-center text-danger-500"
                 />
               )}
             </div>

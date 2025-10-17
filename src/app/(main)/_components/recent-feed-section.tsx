@@ -4,7 +4,7 @@ import { fetchRecentFeeds } from "@/service/fetch-recent-feeds";
 export default async function RecentFeedSection() {
   const feeds = await fetchRecentFeeds(20);
   return (
-    <section>
+    <section className="px-2 sm:px-0">
       {feeds &&
         feeds.map((post) => (
           <PostCard

@@ -12,7 +12,12 @@ export default function MyActivityTabs({ isOwner }: { isOwner: boolean }) {
   const selectedKey = isValid ? lastPath : "/";
 
   return (
-    <Tabs radius="full" fullWidth selectedKey={selectedKey} className="mb-4">
+    <Tabs
+      radius="full"
+      fullWidth
+      selectedKey={selectedKey}
+      className="mb-4 px-2 sm:px-0"
+    >
       <Tab title="개요" key="/" href={`/u/${username}`} />
       <Tab title="댓글" key="comments" href={`/u/${username}/comments`} />
       <Tab title="게시물" key="posts" href={`/u/${username}/posts`} />
