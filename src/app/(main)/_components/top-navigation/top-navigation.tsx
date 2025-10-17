@@ -13,6 +13,7 @@ import AvatarDropdown from "./_components/avatar-dropdown";
 
 import fetchUser from "@/service/fetch-user";
 import { authOptions } from "@/lib/auth/supabase/auth-options";
+import LoginButton from "./_components/login-button";
 
 export default async function TopNavigation() {
   const session = await getServerSession(authOptions);
@@ -36,7 +37,7 @@ export default async function TopNavigation() {
             <NavbarItem>
               <Link
                 href={`/create-post`}
-                className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
+                className="flex cursor-pointer items-center rounded-md p-2 pl-0 text-[24px] hover:text-teal-400"
               >
                 <IoAddOutline />
                 <small className="text-[12px]">나도 올려볼까?</small>
@@ -51,18 +52,14 @@ export default async function TopNavigation() {
             <NavbarItem>
               <Link
                 href={"/login"}
-                className="flex items-center p-2 pl-0 text-[24px] rounded-md cursor-pointer hover:text-teal-400"
+                className="flex cursor-pointer items-center rounded-md p-2 pl-0 text-[24px] hover:text-teal-400"
               >
                 <IoAddOutline />
                 <small className="text-[12px]">나도 올려볼까?</small>
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link href="/login">
-                <small className="cursor-pointer hover:text-primary-400">
-                  로그인
-                </small>
-              </Link>
+              <LoginButton />
             </NavbarItem>
           </>
         )}

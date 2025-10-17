@@ -19,7 +19,12 @@ export default function EditPostForm({ post, postMedia }: Props) {
   const [title, setTitle] = useState(() => post.title);
   const [text, setText] = useState(() => post.text);
   const [media, setMedia] = useState<PreviewCarouselValue[]>(() =>
-    postMedia.map((n) => ({ url: n.url, status: "published", path: n.path }))
+    postMedia.map((n) => ({
+      url: n.url,
+      isVideo: n.mime.startsWith("video/"),
+      status: "published",
+      path: n.path,
+    })),
   );
   const [uploading, setUploading] = useState(false);
 
@@ -41,14 +46,11 @@ export default function EditPostForm({ post, postMedia }: Props) {
   return (
     <Form
       id="community-post-form"
-      className="flex flex-col"
+      className="flex flex-col px-4"
       onSubmit={handleSubmit}
     >
-      <FormTitle
-        title="수정하기
-      "
-      />
-      <div className="flex items-center gap-2 rounded-full border-2 py-1 px-2">
+      <FormTitle title="수정하기" />
+      <div className="flex items-center gap-2 rounded-full border-2 px-2 py-1">
         <Avatar size="sm" src={post.community_icon} />
         <h3>p/{post.community_name}</h3>
       </div>
@@ -77,7 +79,7 @@ export default function EditPostForm({ post, postMedia }: Props) {
         {post.type === "text" && <SimpleEditor text={text} setText={setText} />}
       </div>
 
-      <div className="w-full flex justify-end gap-2">
+      <div className="flex w-full justify-end gap-2">
         <Button
           radius="full"
           color="primary"

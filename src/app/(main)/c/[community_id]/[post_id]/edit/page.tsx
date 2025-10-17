@@ -19,7 +19,7 @@ export default async function PostEditPage({
 
   return (
     <div className="main-container">
-      <main className="w-full px-16">
+      <main className="w-full">
         <EditPostForm post={post} postMedia={postMedia} />
       </main>
       <div className="right-menu-container"></div>

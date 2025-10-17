@@ -17,9 +17,9 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <main className="h-dvh mx-auto max-w-screen-md ">
-            <div className="h-full w-full flex justify-center">{children}</div>
-          </main>
+          <div className="grid-container">
+            <div className="subgrid-container">{children}</div>
+          </div>
         </Providers>
       </body>
     </html>
