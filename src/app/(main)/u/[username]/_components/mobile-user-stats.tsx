@@ -29,14 +29,14 @@ export default function MobileUserStats({ username }: { username: string }) {
           variant="splitted"
           classNames={{
             trigger: "p-2",
-            base: "border-none",
+            base: "shadow-none bg-neutral-100",
           }}
           key="user-about"
           title="소개"
           subtitle={`게시물 ${user.post_count} · 댓글 ${user.comment_count} · 운영 ${user.community_count}`}
         >
           <div className="w-full rounded-2xl bg-slate-50 p-4">
-            <h2 className="text=lg font-semibold">
+            <h2 className="text-lg font-semibold">
               {IDENTITY.USER}
               {user.username}
             </h2>

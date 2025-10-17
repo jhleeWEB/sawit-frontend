@@ -6,7 +6,7 @@ export default async function UserHeader({ username }: { username: string }) {
   const userInfo = await fetchUser({ username });
   if (!userInfo) return;
   return (
-    <div className="col-span-2 col-start-1 flex w-full py-4">
+    <div className="col-span-2 col-start-1 flex w-full px-2 py-4 sm:px-0">
       <Avatar
         alt="icon"
         radius="full"

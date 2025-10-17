@@ -29,7 +29,7 @@ export default async function UserLayout({
   }
   return (
     <div className="main-container">
-      <main className="w-full px-2 sm:px-0">
+      <main className="w-full">
         <UserHeader username={decodedUsername} />
         <MobileUserStats username={decodedUsername} />
         <MemoMyActivityTabs isOwner={isOwner} />
