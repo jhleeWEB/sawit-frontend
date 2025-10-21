@@ -44,7 +44,7 @@ export default function CommunityHeader({ community }: Props) {
           src={community.banner_url}
         />
       </Skeleton>
-      <div className="z-10 flex w-full items-end px-4 sm:relative sm:top-[-3.25rem] sm:mb-[-3.25rem] sm:px-8 sm:pr-0">
+      <div className="z-10 flex w-full items-end px-4 sm:relative sm:top-[-3.25rem] sm:px-8 sm:pr-0">
         <Skeleton
           isLoaded={!isOwnerLoading || !isMemberLoading}
           className="shrink-0 rounded-full border-white"
