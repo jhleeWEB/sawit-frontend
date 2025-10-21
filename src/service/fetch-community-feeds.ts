@@ -7,7 +7,9 @@ export default async function fetchCommunityFeeds(communityId: number) {
     .from("posts")
     .select()
     .eq("community_id", communityId)
-    .order("created_at", { ascending: true });
+    .order("created_at", { ascending: true })
+    .limit(10);
+
   if (error) {
     console.error(error);
     return null;

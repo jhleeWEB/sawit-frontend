@@ -4,8 +4,8 @@ import EmptyPost from "./_components/empty-post";
 import fetchCommunityFeeds from "@/service/fetch-community-feeds";
 import fetchCommunity from "@/service/fetch-community";
 import CommunityInfo from "@/features/community-info";
-import PostCard from "@/features/post-card/post-card";
 import type { Metadata } from "next";
+import FeedSection from "@/components/feed-section";
 
 // 길이 제한 헬퍼(선택)
 const clip = (s?: string, n = 160) =>
@@ -97,9 +97,7 @@ export default async function CommunityPage({
       <main className="w-full">
         {feeds ? (
           <div>
-            {feeds.map((post) => (
-              <PostCard key={`${post.username}_${post.id}`} post={post} />
-            ))}
+            <FeedSection initialFeeds={feeds} feedType="community" />
           </div>
         ) : (
           <EmptyPost />

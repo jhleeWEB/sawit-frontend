@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     creator: "@jhlee89898989",
   },
   icons: {
-    icon: [{ url: "/icon.png", sizes: "32x32", type: "image/ico" }],
+    icon: [{ url: "./icon.ico", sizes: "32x32", type: "image/ico" }],
   },
   robots: {
     index: true,
