@@ -10,14 +10,17 @@ export type FeedType = "community" | "user" | "recent" | "popular";
 export default function FeedSection({
   initialFeeds,
   feedType = "recent",
+  communityId,
 }: {
   initialFeeds: Post[];
-  feedType: FeedType;
+  feedType?: FeedType;
+  communityId?: number;
 }) {
   const { pages, hasMore, isLoading, error, loadMore } = useInfinitePosts({
     initialPage: initialFeeds,
     pageSize: 10,
     feedType,
+    communityId,
   });
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
@@ -44,7 +47,7 @@ export default function FeedSection({
           <PostCard
             key={"post_" + post.id}
             post={post}
-            headerInfo="community"
+            headerInfo={feedType == "recent" ? "community" : "user"}
           />
         ))}
       {hasMore && <div ref={anchorRef} className="h-10" />}

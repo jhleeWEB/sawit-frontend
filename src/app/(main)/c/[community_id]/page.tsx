@@ -1,11 +1,11 @@
 "use server";
 import CommunityHeader from "./_components/community-header";
 import EmptyPost from "./_components/empty-post";
-import fetchCommunityFeeds from "@/service/fetch-community-feeds";
 import fetchCommunity from "@/service/fetch-community";
 import CommunityInfo from "@/features/community-info";
 import type { Metadata } from "next";
 import FeedSection from "@/components/feed-section";
+import { fetchRecentFeeds } from "@/service/fetch-recent-feeds";
 
 // 길이 제한 헬퍼(선택)
 const clip = (s?: string, n = 160) =>
@@ -85,7 +85,11 @@ export default async function CommunityPage({
   const { community_id } = await params;
 
   const community = await fetchCommunity(community_id);
-  const feeds = await fetchCommunityFeeds(community_id);
+  const feeds = await fetchRecentFeeds({
+    pageSize: 15,
+    feedType: "community",
+    communityId: community_id,
+  });
 
   if (!community) {
     return;
@@ -97,7 +101,11 @@ export default async function CommunityPage({
       <main className="w-full">
         {feeds ? (
           <div>
-            <FeedSection initialFeeds={feeds} feedType="community" />
+            <FeedSection
+              initialFeeds={feeds}
+              feedType="community"
+              communityId={community_id}
+            />
           </div>
         ) : (
           <EmptyPost />

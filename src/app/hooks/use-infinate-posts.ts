@@ -7,12 +7,14 @@ interface Params {
   initialPage: Post[];
   pageSize?: number;
   feedType?: FeedType;
+  communityId?: number;
 }
 
 export function useInfinitePosts({
   initialPage,
   pageSize = 20,
   feedType = "recent",
+  communityId,
 }: Params) {
   const [pages, setPages] = useState<Post[] | []>(initialPage);
   const [nextCursor, setNextCursor] = useState(
@@ -33,6 +35,7 @@ export function useInfinitePosts({
       lastCreatedAt: nextCursor,
       pageSize,
       feedType,
+      communityId,
     });
 
     if (!posts || posts.length === 0) {
@@ -46,7 +49,7 @@ export function useInfinitePosts({
     setPages((prev) => [...prev, ...posts]);
     setHasMore(true);
     setIsLoading(false);
-  }, [nextCursor, isLoading, pageSize]);
+  }, [nextCursor, isLoading, pageSize, feedType, communityId]);
 
   useEffect(() => {
     setNextCursor(pages[pages.length - 1].created_at);
