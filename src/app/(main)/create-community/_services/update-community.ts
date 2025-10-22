@@ -47,7 +47,7 @@ export default async function updateCommunity({
     return null;
   }
 
-  const publicUrls = [];
+  const publicUrls: string[] = [];
   if (banner) {
     const { data, error } = await supabase.storage
       .from("media")
