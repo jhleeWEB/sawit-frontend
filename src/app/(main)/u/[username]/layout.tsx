@@ -7,7 +7,7 @@ import fetchUser from "@/service/fetch-user";
 import MobileUserStats from "./_components/mobile-user-stats";
 
 export const metadata: Metadata = {
-  title: "Sawit",
+  title: "SawIt",
   description: "Have You seen it? Yes I Sawit!",
 };
 

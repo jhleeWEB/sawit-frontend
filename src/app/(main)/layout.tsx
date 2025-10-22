@@ -10,6 +10,7 @@ const SITE_DESCRIPTION =
   "우리들만의 공간, 눈치 안 보고 취향을 마음껏 펼치는 커뮤니티.";
 const SITE_NAME = "SawIt";
 const SITE_URL = "https://sawit-frontend.vercel.app";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
