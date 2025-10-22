@@ -21,11 +21,11 @@ export default function MyComment({ comment }: { comment: Comment }) {
   } = comment;
   const [likes, setLikes] = useState(() => comment.likes - comment.dislikes);
   return (
-    <article key={"my_comment_" + id} className="border-b-1 pb-2 mb-2">
-      <section className="flex items-center gap-2">
+    <article key={"my_comment_" + id} className="mb-2 border-b-1 pb-2">
+      <section className="flex flex-wrap items-center gap-2">
         <Avatar src={community_icon} size="sm" />
         <Link
-          className=" text-sm font-semibold"
+          className="text-sm font-semibold"
           href={`/c/${community_id}/${post_id}`}
           color="foreground"
         >
@@ -48,7 +48,7 @@ export default function MyComment({ comment }: { comment: Comment }) {
         <small>댓글 남김</small>
       </section>
       <p>{comment.comment}</p>
-      <section className="relative flex left-[-8px]">
+      <section className="relative left-[-8px] flex">
         <div className="flex items-center">
           <Button
             variant="light"

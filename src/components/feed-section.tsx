@@ -1,5 +1,5 @@
 "use client";
-import { useInfinitePosts } from "@/app/hooks/use-infinate-posts";
+import { useInfinitePosts } from "@/app/hooks/use-infinite-posts";
 import PostCard from "@/features/post-card/post-card";
 import { Post } from "@/service/fetch_post";
 import { Spinner } from "@heroui/react";

@@ -1,6 +1,7 @@
 {
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"editor.formatOnSave": true,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.formatOnPaste": false
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false,
+  "eslint.codeActionsOnSave.rules": null
 }
