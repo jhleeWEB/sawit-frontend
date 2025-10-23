@@ -15,8 +15,6 @@ export default async function fetchPost(post_id: number) {
       .eq("id", post_id)
       .single<Post>();
 
-    console.log("postData:", postData);
-
     if (error) {
       return null;
     }

@@ -1,20 +1,18 @@
-import { fetchNextFeeds } from "@/service/fetch-recent-feeds";
 import { Post } from "@/service/fetch_post";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FeedType } from "../../components/feed-section";
 
 interface Params {
   initialPage: Post[];
+  queryAction: (arg: any) => Promise<any[]>;
   pageSize?: number;
-  feedType?: FeedType;
   communityId?: number;
 }
 
 export function useInfinitePosts({
   initialPage,
   pageSize = 20,
-  feedType = "recent",
   communityId,
+  queryAction,
 }: Params) {
   const [pages, setPages] = useState<Post[] | []>(initialPage);
   const [nextCursor, setNextCursor] = useState(
@@ -31,10 +29,9 @@ export function useInfinitePosts({
     setError("");
     abortRef.current.abort();
 
-    const posts = await fetchNextFeeds({
+    const posts = await queryAction({
       lastCreatedAt: nextCursor,
       pageSize,
-      feedType,
       communityId,
     });
 
@@ -49,7 +46,7 @@ export function useInfinitePosts({
     setPages((prev) => [...prev, ...posts]);
     setHasMore(true);
     setIsLoading(false);
-  }, [nextCursor, isLoading, pageSize, feedType, communityId]);
+  }, [nextCursor, isLoading, pageSize, communityId, queryAction]);
 
   useEffect(() => {
     setNextCursor(pages[pages.length - 1].created_at);
