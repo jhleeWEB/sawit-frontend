@@ -107,12 +107,12 @@ export default function PreviewCarousel({
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
             }}
-            className={`flex min-w-full items-center justify-center rounded-2xl border`}
+            className={`flex min-w-full items-center justify-center overflow-hidden rounded-2xl border`}
           >
             {previews && (
               <label
                 htmlFor="upload"
-                className="absolute left-[18px] top-[18px] z-10 cursor-pointer rounded-full bg-black/50 p-1 px-4 text-[14px] text-neutral-100 transition-colors duration-300 ease-in-out hover:bg-black/10"
+                className="absolute left-[18px] top-[18px] z-20 cursor-pointer rounded-full bg-black/50 p-1 px-4 text-[14px] text-neutral-100 transition-colors duration-300 ease-in-out hover:bg-black/10"
               >
                 추가
                 <input
@@ -127,7 +127,7 @@ export default function PreviewCarousel({
             <Button
               isIconOnly
               variant="light"
-              className="absolute right-[18px] top-[18px] z-10 rounded-full bg-black/50"
+              className="absolute right-[18px] top-[18px] z-20 rounded-full bg-black/50"
               size="sm"
               isDisabled={formState.isUploading}
               onPress={() => onRemove(i)}
@@ -140,7 +140,7 @@ export default function PreviewCarousel({
                 sizes="100vw"
                 style={{
                   height: "auto",
-                  width: "auto",
+                  width: "100%",
                   maxWidth: "100vw",
                   maxHeight: "60vh",
                 }}
