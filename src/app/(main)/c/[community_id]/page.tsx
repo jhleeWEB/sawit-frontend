@@ -4,8 +4,12 @@ import EmptyPost from "./_components/empty-post";
 import fetchCommunity from "@/service/fetch-community";
 import CommunityInfo from "@/features/community-info";
 import type { Metadata } from "next";
+
 import FeedSection from "@/components/feed-section";
-import { fetchRecentFeeds } from "@/service/fetch-recent-feeds";
+import {
+  fetchCommunityFeeds,
+  fetchNextCommunityFeeds,
+} from "@/service/fetch-community-feeds";
 
 // 길이 제한 헬퍼(선택)
 const clip = (s?: string, n = 160) =>
@@ -85,9 +89,8 @@ export default async function CommunityPage({
   const { community_id } = await params;
 
   const community = await fetchCommunity(community_id);
-  const feeds = await fetchRecentFeeds({
+  const feeds = await fetchCommunityFeeds({
     pageSize: 15,
-    feedType: "community",
     communityId: community_id,
   });
 
@@ -103,8 +106,8 @@ export default async function CommunityPage({
           <div>
             <FeedSection
               initialFeeds={feeds}
-              feedType="community"
               communityId={community_id}
+              queryAction={fetchNextCommunityFeeds}
             />
           </div>
         ) : (

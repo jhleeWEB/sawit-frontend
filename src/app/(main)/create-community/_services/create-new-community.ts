@@ -43,7 +43,7 @@ export default async function createNewCommunity({
     return null;
   }
 
-  const publicUrls = [];
+  const publicUrls: string[] = [];
   if (banner) {
     const { data, error } = await supabase.storage
       .from("images")

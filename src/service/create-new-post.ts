@@ -73,7 +73,7 @@ export default async function createNewPost({
 const uploadFiles = async (
   database: SupabaseClient,
   files: File[],
-  postId: number
+  postId: number,
 ) => {
   const media = [];
   for (const f of files) {
@@ -105,6 +105,7 @@ const uploadFiles = async (
       })
       .select("id, url")
       .single();
+
     if (pError) {
       console.error(pError);
       continue;

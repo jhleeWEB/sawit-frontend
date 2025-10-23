@@ -7,7 +7,11 @@ export default async function fetchPost(post_id: number) {
     const supabase = getSupabaseClient() as SupabaseClient;
     const { data: postData, error } = await supabase
       .from("posts")
-      .select()
+      .select(
+        `*,
+        community:communities!posts_community_id_fkey(icon_url, name, id)
+        `,
+      )
       .eq("id", post_id)
       .single<Post>();
 
@@ -21,6 +25,29 @@ export default async function fetchPost(post_id: number) {
     return null;
   }
 }
+
+// export interface PostModel {
+//   id: number;
+//   type: PostTabOption;
+//   title: string;
+//   created_at: string;
+//   expires_at: string;
+//   text?: string;
+//   media_urls: string[];
+//   community: {
+//     id: number;
+//     icon_url: string;
+//     name: string;
+//   };
+//   owner: {
+//     id: string;
+//     username: string;
+//     icon: string;
+//   };
+//   likes: number;
+//   dislikes: number;
+//   comments: number;
+// }
 
 export interface Post {
   id: number;
