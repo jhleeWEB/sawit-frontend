@@ -87,7 +87,7 @@ export default function MediaCarousel({ urls, href }: Props) {
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
             }}
-            className={`flex min-w-full items-center justify-center rounded-2xl border`}
+            className={`flex min-w-full items-center justify-center overflow-hidden rounded-3xl border`}
           >
             {isVideo ? (
               <video

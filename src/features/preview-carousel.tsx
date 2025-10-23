@@ -107,7 +107,7 @@ export default function PreviewCarousel({
               transform: `translateX(-${currentIndex * 100}%)`,
               transition: `${transition}`,
             }}
-            className={`flex min-w-full items-center justify-center rounded-2xl border`}
+            className={`flex min-w-full items-center justify-center overflow-hidden rounded-2xl border`}
           >
             {previews && (
               <label
