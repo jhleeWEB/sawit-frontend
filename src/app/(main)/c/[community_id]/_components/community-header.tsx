@@ -40,7 +40,7 @@ export default function CommunityHeader({ community }: Props) {
       >
         <Image
           alt="community-banner-image"
-          className="rounded-none sm:rounded-2xl"
+          className="rounded-none sm:w-full sm:rounded-2xl"
           src={community.banner_url}
         />
       </Skeleton>

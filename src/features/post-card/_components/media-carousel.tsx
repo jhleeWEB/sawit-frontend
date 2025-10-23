@@ -59,7 +59,7 @@ export default function MediaCarousel({ urls, href }: Props) {
         <Button
           isIconOnly
           variant="flat"
-          className="absolute left-[18px] top-[calc(50%-24px)] z-10 rounded-full bg-black/50 opacity-70"
+          className="absolute left-[18px] top-[calc(50%-24px)] z-20 rounded-full bg-black/50 opacity-70"
           size="sm"
           onPress={prev}
         >
@@ -70,7 +70,7 @@ export default function MediaCarousel({ urls, href }: Props) {
         <Button
           isIconOnly
           variant="flat"
-          className="absolute right-[18px] top-[calc(50%-24px)] z-10 rounded-full bg-black/50"
+          className="absolute right-[18px] top-[calc(50%-24px)] z-20 rounded-full bg-black/50"
           size="sm"
           onPress={next}
         >
