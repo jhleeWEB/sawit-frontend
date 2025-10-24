@@ -31,7 +31,11 @@ export default async function Page({
   };
 
   return (
-    <div className="main-container">
+    <div
+      id="community-main-container"
+      className="main-container"
+      style={{ backgroundColor: community_info.background_color }}
+    >
       <CommunityFormProvider initialState={initialState}>
         <main className="w-full px-2 py-8">
           <CommunityEditForm id={community_id} />

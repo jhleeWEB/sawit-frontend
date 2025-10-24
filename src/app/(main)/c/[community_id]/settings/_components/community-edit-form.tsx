@@ -10,7 +10,11 @@ import {
   useDisclosure,
 } from "@heroui/react";
 
-import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
+import {
+  PiImageSquareThin,
+  PiMagnifyingGlassLight,
+  PiPaintBrushHouseholdLight,
+} from "react-icons/pi";
 
 import { FormEvent, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -23,9 +27,12 @@ import FormTitle from "@/app/(main)/create-community/_components/form-title";
 import BannerCropperModal from "../../create/_components/banner-crop-modal";
 import IconCropperModal from "../../create/_components/icon-crop-modal";
 import TopicChips from "@/app/(main)/create-community/_components/topic-chips";
+import ColorPickerModal from "@/components/modals/color-picker-modal";
+import { ColorResult } from "react-color";
 
 export default function CommunityEditForm({ id }: { id: number }) {
-  const { name, banner, icon, description, topics } = useCommunityFormState();
+  const { name, banner, icon, description, topics, backgroundColor } =
+    useCommunityFormState();
   const dispatch = useCommunityFormDispatch();
   const router = useRouter();
   const [topicFilter, setTopicFilter] = useState<string>("");
@@ -39,6 +46,12 @@ export default function CommunityEditForm({ id }: { id: number }) {
     isOpen: isIconModalOpen,
     onOpen: onIconModalOpen,
     onOpenChange: onIconOpenChange,
+  } = useDisclosure();
+  const {
+    isOpen: isBgColorModalOpen,
+    onOpen: onBgColorModalOpen,
+    onOpenChange: onBgColorOpenChange,
+    onClose: onBgColorClose,
   } = useDisclosure();
 
   const handleOnClose = (topicToRemove: string) => {
@@ -65,6 +78,7 @@ export default function CommunityEditForm({ id }: { id: number }) {
         icon,
         topics,
         community_id: id,
+        backgroundColor,
       });
       if (data) {
         addToast({
@@ -83,7 +97,7 @@ export default function CommunityEditForm({ id }: { id: number }) {
       dispatch({ type: "idle" });
     },
 
-    [name, description, banner, icon, topics, dispatch, router, id],
+    [name, description, banner, icon, topics, router, id, dispatch],
   );
 
   return (
@@ -161,7 +175,7 @@ export default function CommunityEditForm({ id }: { id: number }) {
             }}
           />
         </div>
-        <div className="flex items-center justify-between px-8">
+        <div className="mb-4 flex items-center justify-between px-8">
           <h3>아이콘</h3>
           <Button
             variant="bordered"
@@ -182,6 +196,33 @@ export default function CommunityEditForm({ id }: { id: number }) {
             onConfirm={(blob, url) => {
               dispatch({ type: "update_icon", payload: blob });
               dispatch({ type: "update_icon_preview", payload: url });
+            }}
+          />
+        </div>
+        <div className="flex items-center justify-between px-8">
+          <h3>배경색상</h3>
+          <Button
+            variant="bordered"
+            radius="full"
+            size="sm"
+            name="icon"
+            className="w-[140px] cursor-pointer border"
+            startContent={
+              <PiPaintBrushHouseholdLight
+                className="cursor-pointer"
+                size={22}
+              />
+            }
+            onPress={onBgColorModalOpen}
+          >
+            색상 선택하기
+          </Button>
+          <ColorPickerModal
+            isOpen={isBgColorModalOpen}
+            onOpenChange={onBgColorOpenChange}
+            onChangeComplete={(color: ColorResult) => {
+              dispatch({ type: "update_background_color", payload: color.hex });
+              onBgColorClose();
             }}
           />
         </div>

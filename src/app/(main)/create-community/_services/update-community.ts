@@ -8,6 +8,8 @@ interface Params {
   banner?: Blob;
   topics?: string[];
   community_id: number;
+  backgroundColor?: string;
+  fontColor?: string;
 }
 
 export default async function updateCommunity({
@@ -17,6 +19,8 @@ export default async function updateCommunity({
   banner,
   topics,
   community_id,
+  backgroundColor,
+  fontColor,
 }: Params) {
   const session = await getUserSession();
 
@@ -34,6 +38,8 @@ export default async function updateCommunity({
       name,
       description,
       topics,
+      backgroundColor,
+      fontColor,
     })
     .eq("id", community_id)
     .select()
