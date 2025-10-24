@@ -74,7 +74,7 @@ export function useCommunityFormDispatch() {
   return context;
 }
 
-const initialState = {
+const defaultState = {
   name: "",
   description: "",
   topics: [],
@@ -85,10 +85,18 @@ const initialState = {
   isLoading: false,
 };
 
-export default function CommunityFormProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
-  });
+interface CommunityFormProviderProps extends PropsWithChildren {
+  initialState?: CommunityFormState;
+}
+
+export default function CommunityFormProvider({
+  initialState,
+  children,
+}: CommunityFormProviderProps) {
+  const [state, dispatch] = useReducer(
+    reducer,
+    initialState ? initialState : defaultState,
+  );
   return (
     <StateCtx.Provider value={state}>
       <DispatchCtx.Provider value={dispatch}>{children}</DispatchCtx.Provider>

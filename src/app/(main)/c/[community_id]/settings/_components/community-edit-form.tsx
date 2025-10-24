@@ -9,20 +9,22 @@ import {
   Textarea,
   useDisclosure,
 } from "@heroui/react";
-import FormTitle from "./form-title";
+
 import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
-import BannerCropperModal from "../../c/[community_id]/create/_components/banner-crop-modal";
-import IconCropperModal from "../../c/[community_id]/create/_components/icon-crop-modal";
-import TopicChips from "./topic-chips";
-import createNewCommunity from "../_services/create-new-community";
+
+import { FormEvent, useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import updateCommunity from "@/app/(main)/create-community/_services/update-community";
 import {
   useCommunityFormDispatch,
   useCommunityFormState,
-} from "./community-form-provider";
-import { FormEvent, useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
+} from "@/app/(main)/create-community/_components/community-form-provider";
+import FormTitle from "@/app/(main)/create-community/_components/form-title";
+import BannerCropperModal from "../../create/_components/banner-crop-modal";
+import IconCropperModal from "../../create/_components/icon-crop-modal";
+import TopicChips from "@/app/(main)/create-community/_components/topic-chips";
 
-export default function CommunityForm() {
+export default function CommunityEditForm({ id }: { id: number }) {
   const { name, banner, icon, description, topics } = useCommunityFormState();
   const dispatch = useCommunityFormDispatch();
   const router = useRouter();
@@ -56,12 +58,13 @@ export default function CommunityForm() {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch({ type: "buzy" });
-      const data = await createNewCommunity({
+      const data = await updateCommunity({
         name,
         description,
         banner,
         icon,
         topics,
+        community_id: id,
       });
       if (data) {
         addToast({
@@ -80,15 +83,12 @@ export default function CommunityForm() {
       dispatch({ type: "idle" });
     },
 
-    [name, description, banner, icon, topics, dispatch, router],
+    [name, description, banner, icon, topics, dispatch, router, id],
   );
 
   return (
     <Form id="community-form" onSubmit={handleSubmit}>
-      <FormTitle
-        title="커뮤니티에 대해서 알려주세요"
-        description="이름과 설명은 다른분들이 당신의 커뮤니티가 어떤 곳인지 이해하는 데 도움이 됩니다."
-      />
+      <FormTitle title="커뮤니티 설정하기" />
       <Input
         fullWidth
         required
