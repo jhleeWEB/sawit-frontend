@@ -10,6 +10,7 @@ import {
 export interface CommunityFormState {
   name: string;
   description: string;
+  backgroundColor?: string;
   topics: string[] | [];
   banner: Blob | undefined;
   icon: Blob | undefined;
@@ -34,6 +35,8 @@ function reducer(state: CommunityFormState, action: Action) {
       return { ...state, description: action.payload };
     case "update_topics":
       return { ...state, topics: [...action.payload] };
+    case "update_background_color":
+      return { ...state, backgroundColor: action.payload };
     case "buzy":
       return { ...state, isLoading: true };
     case "idle":
@@ -46,6 +49,7 @@ export type Action =
   | { type: "update_icon"; payload: Blob }
   | { type: "update_banner_preview"; payload: string }
   | { type: "update_icon_preview"; payload: string }
+  | { type: "update_background_color"; payload: string }
   | { type: "update_name"; payload: string }
   | { type: "update_description"; payload: string }
   | { type: "update_topics"; payload: string[] }
@@ -74,7 +78,7 @@ export function useCommunityFormDispatch() {
   return context;
 }
 
-const initialState = {
+const defaultState = {
   name: "",
   description: "",
   topics: [],
@@ -85,10 +89,18 @@ const initialState = {
   isLoading: false,
 };
 
-export default function CommunityFormProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
-  });
+interface CommunityFormProviderProps extends PropsWithChildren {
+  initialState?: CommunityFormState;
+}
+
+export default function CommunityFormProvider({
+  initialState,
+  children,
+}: CommunityFormProviderProps) {
+  const [state, dispatch] = useReducer(
+    reducer,
+    initialState ? initialState : defaultState,
+  );
   return (
     <StateCtx.Provider value={state}>
       <DispatchCtx.Provider value={dispatch}>{children}</DispatchCtx.Provider>
