@@ -8,15 +8,21 @@ import {
 } from "react";
 
 export interface CommunityFormState {
+  backgroundColor?: string;
+  guidelines?: Guideline[] | undefined;
   name: string;
   description: string;
-  backgroundColor?: string;
   topics: string[] | [];
   banner: Blob | undefined;
   icon: Blob | undefined;
   bannerPreview: string;
   iconPreview: string;
   isLoading: boolean;
+}
+
+export interface Guideline {
+  name: string;
+  description?: string;
 }
 
 function reducer(state: CommunityFormState, action: Action) {
@@ -33,6 +39,8 @@ function reducer(state: CommunityFormState, action: Action) {
       return { ...state, name: action.payload };
     case "update_description":
       return { ...state, description: action.payload };
+    case "update_guidelines":
+      return { ...state, guidelines: [...action.payload] };
     case "update_topics":
       return { ...state, topics: [...action.payload] };
     case "update_background_color":
@@ -53,6 +61,7 @@ export type Action =
   | { type: "update_name"; payload: string }
   | { type: "update_description"; payload: string }
   | { type: "update_topics"; payload: string[] }
+  | { type: "update_guidelines"; payload: Guideline[] }
   | { type: "buzy" }
   | { type: "idle" };
 
