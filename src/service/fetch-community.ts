@@ -1,3 +1,4 @@
+import { Guideline } from "@/app/(main)/create-community/_components/community-form-provider";
 import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
 import { SupabaseClient } from "@supabase/supabase-js";
 
@@ -32,4 +33,5 @@ export interface Community {
   owner_username: string;
   post_count: number;
   background_color?: string;
+  guidelines?: Guideline[];
 }

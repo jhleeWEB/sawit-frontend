@@ -22,6 +22,7 @@ export default async function Page({
   const initialState: CommunityFormState = {
     name: community_info.name,
     description: community_info.description,
+    guidelines: community_info.guidelines,
     topics: community_info.topics,
     bannerPreview: community_info.banner_url,
     iconPreview: community_info.icon_url,
