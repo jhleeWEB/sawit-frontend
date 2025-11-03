@@ -1,0 +1,84 @@
+"use client";
+
+import {
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalProps,
+  Textarea,
+} from "@heroui/react";
+import { useState } from "react";
+
+export function CommunityEditGuidelineModal({
+  index,
+  isOpen,
+  initialState,
+  onOpenChange,
+  onSave,
+}: Omit<ModalProps, "children"> & {
+  index: number;
+  initialState?: { name: string; description?: string };
+  onSave: ({
+    name,
+    description,
+    index,
+  }: {
+    name: string;
+    description?: string;
+    index: number;
+  }) => void;
+}) {
+  const [name, setName] = useState(() =>
+    initialState ? initialState.name : "",
+  );
+  const [description, setDescription] = useState(() =>
+    initialState ? initialState.description : "",
+  );
+
+  return (
+    <Modal onOpenChange={onOpenChange} isOpen={isOpen}>
+      <ModalContent>
+        <ModalHeader>규칙명과 설명</ModalHeader>
+        <ModalBody>
+          <div className="flex flex-col gap-4">
+            <div>
+              <Input
+                size="sm"
+                label="이용 수칙 이름"
+                maxLength={100}
+                value={name}
+                onValueChange={setName}
+              />
+              <small className="flex justify-end">최대 100자</small>
+            </div>
+            <div>
+              <Textarea
+                size="sm"
+                label="설명"
+                maxLength={500}
+                value={description}
+                onValueChange={setDescription}
+              />
+              <small className="flex justify-end">최대 500자</small>
+            </div>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            radius="full"
+            onPress={() => {
+              onSave({ name, description, index });
+            }}
+          >
+            수정
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+}

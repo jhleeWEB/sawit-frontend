@@ -37,6 +37,7 @@ export default function ColorPickerModal({
               <small>모두에게 보여줄 나만의 아바타를 업로드하세요</small>
               <div className="flex justify-center">
                 <CirclePicker
+                  width="100%"
                   colors={[
                     "#f44336",
                     "#e91e63",

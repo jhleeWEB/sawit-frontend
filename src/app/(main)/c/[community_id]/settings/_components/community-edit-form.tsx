@@ -16,7 +16,7 @@ import {
   PiPaintBrushHouseholdLight,
 } from "react-icons/pi";
 
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import updateCommunity from "@/app/(main)/create-community/_services/update-community";
 import {
@@ -29,10 +29,18 @@ import IconCropperModal from "../../create/_components/icon-crop-modal";
 import TopicChips from "@/app/(main)/create-community/_components/topic-chips";
 import ColorPickerModal from "@/components/modals/color-picker-modal";
 import { ColorResult } from "react-color";
+import { CommunityGuidelineEditor } from "./community-guidelines-editor";
 
 export default function CommunityEditForm({ id }: { id: number }) {
-  const { name, banner, icon, description, topics, backgroundColor } =
-    useCommunityFormState();
+  const {
+    name,
+    banner,
+    icon,
+    description,
+    topics,
+    backgroundColor,
+    guidelines,
+  } = useCommunityFormState();
   const dispatch = useCommunityFormDispatch();
   const router = useRouter();
   const [topicFilter, setTopicFilter] = useState<string>("");
@@ -79,6 +87,7 @@ export default function CommunityEditForm({ id }: { id: number }) {
         topics,
         community_id: id,
         backgroundColor,
+        guidelines,
       });
       if (data) {
         addToast({
@@ -97,8 +106,26 @@ export default function CommunityEditForm({ id }: { id: number }) {
       dispatch({ type: "idle" });
     },
 
-    [name, description, banner, icon, topics, router, id, dispatch],
+    [
+      name,
+      description,
+      banner,
+      icon,
+      topics,
+      router,
+      id,
+      backgroundColor,
+      guidelines,
+      dispatch,
+    ],
   );
+
+  useEffect(() => {
+    const parentEl = document.getElementById("community-main-container");
+    if (parentEl) {
+      parentEl.style.backgroundColor = backgroundColor || "";
+    }
+  }, [backgroundColor]);
 
   return (
     <Form id="community-form" onSubmit={handleSubmit}>
@@ -227,6 +254,7 @@ export default function CommunityEditForm({ id }: { id: number }) {
           />
         </div>
       </div>
+      <CommunityGuidelineEditor guidelines={guidelines} />
       <div className="mb-8 w-full">
         <FormTitle
           title="주제 추가"
