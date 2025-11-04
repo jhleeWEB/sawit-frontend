@@ -1,11 +1,10 @@
 "use client";
 import { Switch } from "@heroui/react";
-import { useState } from "react";
+import { usePostFormDispatch, usePostFormState } from "./form-provider";
 
 export function PostSettings() {
-  const [isPrivate, setIsPrivate] = useState(false);
-  const [isSpoiler, setIsSpoiler] = useState(false);
-  const [isNFSW, setIsNFSW] = useState(false);
+  const dispatch = usePostFormDispatch();
+  const state = usePostFormState();
   return (
     <section className="flex flex-col gap-2 rounded-xl bg-slate-50 p-4">
       <h1 className="text-lg font-bold">설정</h1>
@@ -14,10 +13,12 @@ export function PostSettings() {
         <Switch
           className="flex-inline flex-row-reverse gap-2"
           size="sm"
-          isSelected={isPrivate}
-          onValueChange={setIsPrivate}
+          isSelected={state.isPrivate}
+          onValueChange={(isSelected: boolean) =>
+            dispatch({ type: "update_is_private", payload: isSelected })
+          }
         >
-          {isPrivate ? "비공개" : "공개"}
+          {state.isPrivate ? "비공개" : "공개"}
         </Switch>
       </div>
       <div className="flex w-full justify-between">
@@ -25,10 +26,12 @@ export function PostSettings() {
         <Switch
           className="flex-inline flex-row-reverse gap-2"
           size="sm"
-          isSelected={isSpoiler}
-          onValueChange={setIsSpoiler}
+          isSelected={state.isSpoiler}
+          onValueChange={(isSelected: boolean) =>
+            dispatch({ type: "update_is_spoiler", payload: isSelected })
+          }
         >
-          {isSpoiler ? "스포" : "일반"}
+          {state.isSpoiler ? "스포" : "일반"}
         </Switch>
       </div>
       <div className="flex w-full justify-between">
@@ -36,10 +39,12 @@ export function PostSettings() {
         <Switch
           className="flex-inline flex-row-reverse gap-2"
           size="sm"
-          isSelected={isNFSW}
-          onValueChange={setIsNFSW}
+          isSelected={state.isNSFW}
+          onValueChange={(isSelected: boolean) =>
+            dispatch({ type: "update_is_nsfw", payload: isSelected })
+          }
         >
-          {isNFSW ? "주의" : "비주의"}
+          {state.isNSFW ? "주의" : "비주의"}
         </Switch>
       </div>
     </section>

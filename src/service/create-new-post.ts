@@ -10,6 +10,9 @@ interface Params {
   text?: string;
   files: File[] | [];
   type: PostTabOption;
+  isPrivate: boolean;
+  isSpoiler: boolean;
+  isNSFW: boolean;
   communityId: number | undefined;
 }
 
@@ -18,6 +21,9 @@ export default async function createNewPost({
   text,
   files,
   type,
+  isPrivate,
+  isSpoiler,
+  isNSFW,
   communityId,
 }: Params) {
   const session = await getUserSession();
@@ -36,6 +42,9 @@ export default async function createNewPost({
       type,
       community_id: communityId,
       status,
+      is_private: isPrivate,
+      is_spoiler: isSpoiler,
+      is_nsfw: isNSFW,
     })
     .select()
     .single();

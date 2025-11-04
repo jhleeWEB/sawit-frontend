@@ -60,6 +60,9 @@ export interface Post {
   community_id: number;
   community_name: string;
   community_icon: string;
+  is_private: boolean;
+  is_spoiler: boolean;
+  is_nsfw: boolean;
   owner_id: string;
   owner_username: string;
   owner_icon: string;

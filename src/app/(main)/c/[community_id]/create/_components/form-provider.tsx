@@ -13,6 +13,9 @@ export interface FormState {
   files: File[] | [];
   text: string;
   isUploading: boolean;
+  isPrivate: boolean;
+  isSpoiler: boolean;
+  isNSFW: boolean;
   uploadType: "none" | "video" | "image" | string;
 }
 
@@ -30,6 +33,12 @@ function reducer(state: FormState, action: Action) {
       return { ...state, isUploading: action.payload };
     case "update_upload_type":
       return { ...state, uploadType: action.payload };
+    case "update_is_private":
+      return { ...state, isPrivate: action.payload };
+    case "update_is_spoiler":
+      return { ...state, isSpoiler: action.payload };
+    case "update_is_nsfw":
+      return { ...state, isNSFW: action.payload };
   }
   return state;
 }
@@ -39,11 +48,14 @@ export type Action =
   | { type: "update_title"; payload: string }
   | { type: "update_community_id"; payload: number }
   | { type: "update_is_uploading"; payload: boolean }
-  | { type: "update_upload_type"; payload: string };
+  | { type: "update_upload_type"; payload: string }
+  | { type: "update_is_private"; payload: boolean }
+  | { type: "update_is_spoiler"; payload: boolean }
+  | { type: "update_is_nsfw"; payload: boolean };
 
 const StateCtx = createContext<FormState | undefined>(undefined);
 const DispatchCtx = createContext<ActionDispatch<[Action]> | undefined>(
-  undefined
+  undefined,
 );
 
 export function usePostFormState() {
@@ -65,6 +77,9 @@ const initialState = {
   files: [],
   text: "",
   isUploading: false,
+  isPrivate: false,
+  isSpoiler: false,
+  isNSFW: false,
   uploadType: "none",
 };
 export default function PostFormProvider({ children }: PropsWithChildren) {
