@@ -1,5 +1,5 @@
 "use client";
-import { Divider, Switch } from "@heroui/react";
+import { Switch } from "@heroui/react";
 import { useState } from "react";
 
 export function PostSettings() {
@@ -8,7 +8,7 @@ export function PostSettings() {
   const [isNFSW, setIsNFSW] = useState(false);
   return (
     <section className="flex flex-col gap-2 rounded-xl bg-slate-50 p-4">
-      <h1 className="text-lg font-bold">노출 설정</h1>
+      <h1 className="text-lg font-bold">설정</h1>
       <div className="flex w-full justify-between">
         <h1>노출</h1>
         <Switch
@@ -42,8 +42,6 @@ export function PostSettings() {
           {isNFSW ? "주의" : "비주의"}
         </Switch>
       </div>
-      <Divider />
-      <div></div>
     </section>
   );
 }
