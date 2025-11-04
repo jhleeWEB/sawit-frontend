@@ -82,9 +82,13 @@ const initialState = {
   isNSFW: false,
   uploadType: "none",
 };
-export default function PostFormProvider({ children }: PropsWithChildren) {
+export default function PostFormProvider({
+  children,
+  initialData,
+}: PropsWithChildren & { initialData?: FormState }) {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
+    ...initialData,
   });
   return (
     <StateCtx.Provider value={state}>

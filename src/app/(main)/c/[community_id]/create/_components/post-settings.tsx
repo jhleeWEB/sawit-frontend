@@ -13,7 +13,7 @@ export function PostSettings() {
         <Switch
           className="flex-inline flex-row-reverse gap-2"
           size="sm"
-          isSelected={state.isPrivate}
+          isSelected={state.isPrivate || false}
           onValueChange={(isSelected: boolean) =>
             dispatch({ type: "update_is_private", payload: isSelected })
           }
@@ -26,7 +26,7 @@ export function PostSettings() {
         <Switch
           className="flex-inline flex-row-reverse gap-2"
           size="sm"
-          isSelected={state.isSpoiler}
+          isSelected={state.isSpoiler || false}
           onValueChange={(isSelected: boolean) =>
             dispatch({ type: "update_is_spoiler", payload: isSelected })
           }
@@ -39,7 +39,7 @@ export function PostSettings() {
         <Switch
           className="flex-inline flex-row-reverse gap-2"
           size="sm"
-          isSelected={state.isNSFW}
+          isSelected={state.isNSFW || false}
           onValueChange={(isSelected: boolean) =>
             dispatch({ type: "update_is_nsfw", payload: isSelected })
           }

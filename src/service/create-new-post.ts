@@ -10,9 +10,9 @@ interface Params {
   text?: string;
   files: File[] | [];
   type: PostTabOption;
-  isPrivate: boolean;
-  isSpoiler: boolean;
-  isNSFW: boolean;
+  isPrivate?: boolean;
+  isSpoiler?: boolean;
+  isNSFW?: boolean;
   communityId: number | undefined;
 }
 

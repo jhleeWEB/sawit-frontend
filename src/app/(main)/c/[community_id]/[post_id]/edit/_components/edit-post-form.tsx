@@ -8,6 +8,7 @@ import PreviewCarousel, { PreviewCarouselValue } from "./preview-carousel";
 import updatePost from "@/service/update-post";
 import { useRouter } from "next/navigation";
 import SimpleEditor from "./editor";
+import { usePostFormState } from "../../../create/_components/form-provider";
 
 interface Props {
   post: Post;
@@ -16,6 +17,8 @@ interface Props {
 
 export default function EditPostForm({ post, postMedia }: Props) {
   const router = useRouter();
+  const state = usePostFormState();
+  // 임시적으로 Context와 useState 동시 사용
   const [title, setTitle] = useState(() => post.title);
   const [text, setText] = useState(() => post.text);
   const [media, setMedia] = useState<PreviewCarouselValue[]>(() =>
@@ -36,6 +39,9 @@ export default function EditPostForm({ post, postMedia }: Props) {
       title,
       text: text || "",
       media,
+      isPrivate: state.isPrivate || false,
+      isSpoiler: state.isSpoiler || false,
+      isNSFW: state.isNSFW || false,
     });
     setUploading(false);
     if (update) {

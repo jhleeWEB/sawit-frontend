@@ -3,6 +3,8 @@ import fetchPostMedia from "@/service/fetch-post-media";
 import EditPostForm from "./_components/edit-post-form";
 import fetchPost from "@/service/fetch_post";
 import { redirect } from "next/navigation";
+import PostFormProvider from "../../create/_components/form-provider";
+import { PostSettings } from "../../create/_components/post-settings";
 
 export default async function PostEditPage({
   params,
@@ -19,10 +21,26 @@ export default async function PostEditPage({
 
   return (
     <div className="main-container">
-      <main className="w-full">
-        <EditPostForm post={post} postMedia={postMedia} />
-      </main>
-      <div className="right-menu-container"></div>
+      <PostFormProvider
+        initialData={{
+          title: post.title,
+          isPrivate: post.is_spoiler,
+          communityId: post.community_id,
+          text: post.text || "",
+          isSpoiler: post.is_spoiler,
+          isNSFW: post.is_nsfw,
+          isUploading: false,
+          uploadType: "none",
+          files: [],
+        }}
+      >
+        <main className="w-full">
+          <EditPostForm post={post} postMedia={postMedia} />
+        </main>
+        <div className="right-menu-container">
+          <PostSettings />
+        </div>
+      </PostFormProvider>
     </div>
   );
 }
