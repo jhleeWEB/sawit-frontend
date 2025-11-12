@@ -190,13 +190,13 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
                 transform: `translateX(-${currentIndex * 100}%)`,
                 transition: `${transition}`,
               }}
-              className={`flex min-w-full items-center justify-center rounded-2xl border`}
+              className={`flex min-w-full items-center justify-center overflow-hidden rounded-3xl border`}
             >
               {value.status !== "removed" ? (
                 <Button
                   isIconOnly
                   variant="light"
-                  className="absolute right-[18px] top-[18px] z-10 rounded-full bg-black/50"
+                  className="absolute right-[18px] top-[18px] z-20 rounded-full bg-black/50"
                   size="sm"
                   onPress={() => remove(i)}
                 >
@@ -221,7 +221,7 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
                   playsInline
                   muted // iOS 인라인 자동재생용(필요 시)
                   preload="metadata"
-                  className="h-auto max-h-[60vh] w-auto object-contain"
+                  className="h-auto max-h-[60dvh] w-auto object-contain"
                 />
               ) : (
                 <Image
@@ -229,9 +229,9 @@ export default function PreviewCarousel({ values, onValueChange }: Props) {
                   sizes="100vw"
                   style={{
                     height: "auto",
-                    width: "auto",
-                    maxWidth: "100vw",
-                    maxHeight: "60vh",
+                    width: "100%",
+                    maxWidth: "100dvw",
+                    maxHeight: "60dvh",
                   }}
                   src={value.url}
                   radius="none"

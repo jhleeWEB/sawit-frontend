@@ -60,7 +60,7 @@ export default function EditPostForm({ post, postMedia }: Props) {
         <Avatar size="sm" src={post.community_icon} />
         <h3>p/{post.community_name}</h3>
       </div>
-      {/** 게시물을 올릴 커뮤니티 선택 검샘 창 */}
+      {/** 게시물을 올릴 커뮤니티 선택 검색 창 */}
       <Input
         isRequired
         name="title"
@@ -77,7 +77,6 @@ export default function EditPostForm({ post, postMedia }: Props) {
           }
         }}
       />
-
       <div className="flex w-full flex-col">
         {post.type === "media" && (
           <PreviewCarousel values={media} onValueChange={setMedia} />
