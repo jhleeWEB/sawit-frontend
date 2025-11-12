@@ -108,6 +108,7 @@ export default async function CommunityPage({
               initialFeeds={feeds}
               communityId={community_id}
               queryAction={fetchNextCommunityFeeds}
+              headerAsUser
             />
           </div>
         ) : (

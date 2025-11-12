@@ -9,21 +9,38 @@ import {
   Textarea,
   useDisclosure,
 } from "@heroui/react";
-import FormTitle from "./form-title";
-import { PiImageSquareThin, PiMagnifyingGlassLight } from "react-icons/pi";
-import BannerCropperModal from "../../c/[community_id]/create/_components/banner-crop-modal";
-import IconCropperModal from "../../c/[community_id]/create/_components/icon-crop-modal";
-import TopicChips from "./topic-chips";
-import createNewCommunity from "../_services/create-new-community";
+
+import {
+  PiImageSquareThin,
+  PiMagnifyingGlassLight,
+  PiPaintBrushHouseholdLight,
+} from "react-icons/pi";
+
+import { FormEvent, useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import updateCommunity from "@/app/(main)/create-community/_services/update-community";
 import {
   useCommunityFormDispatch,
   useCommunityFormState,
-} from "./community-form-provider";
-import { FormEvent, useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
+} from "@/app/(main)/create-community/_components/community-form-provider";
+import FormTitle from "@/app/(main)/create-community/_components/form-title";
+import BannerCropperModal from "../../create/_components/banner-crop-modal";
+import IconCropperModal from "../../create/_components/icon-crop-modal";
+import TopicChips from "@/app/(main)/create-community/_components/topic-chips";
+import ColorPickerModal from "@/components/modals/color-picker-modal";
+import { ColorResult } from "react-color";
+import { CommunityGuidelineEditor } from "./community-guidelines-editor";
 
-export default function CommunityForm() {
-  const { name, banner, icon, description, topics } = useCommunityFormState();
+export default function CommunityEditForm({ id }: { id: number }) {
+  const {
+    name,
+    banner,
+    icon,
+    description,
+    topics,
+    backgroundColor,
+    guidelines,
+  } = useCommunityFormState();
   const dispatch = useCommunityFormDispatch();
   const router = useRouter();
   const [topicFilter, setTopicFilter] = useState<string>("");
@@ -37,6 +54,12 @@ export default function CommunityForm() {
     isOpen: isIconModalOpen,
     onOpen: onIconModalOpen,
     onOpenChange: onIconOpenChange,
+  } = useDisclosure();
+  const {
+    isOpen: isBgColorModalOpen,
+    onOpen: onBgColorModalOpen,
+    onOpenChange: onBgColorOpenChange,
+    onClose: onBgColorClose,
   } = useDisclosure();
 
   const handleOnClose = (topicToRemove: string) => {
@@ -56,12 +79,15 @@ export default function CommunityForm() {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch({ type: "buzy" });
-      const data = await createNewCommunity({
+      const data = await updateCommunity({
         name,
         description,
         banner,
         icon,
         topics,
+        community_id: id,
+        backgroundColor,
+        guidelines,
       });
       if (data) {
         addToast({
@@ -80,15 +106,30 @@ export default function CommunityForm() {
       dispatch({ type: "idle" });
     },
 
-    [name, description, banner, icon, topics, dispatch, router],
+    [
+      name,
+      description,
+      banner,
+      icon,
+      topics,
+      router,
+      id,
+      backgroundColor,
+      guidelines,
+      dispatch,
+    ],
   );
+
+  useEffect(() => {
+    const parentEl = document.getElementById("community-main-container");
+    if (parentEl) {
+      parentEl.style.backgroundColor = backgroundColor || "";
+    }
+  }, [backgroundColor]);
 
   return (
     <Form id="community-form" onSubmit={handleSubmit}>
-      <FormTitle
-        title="커뮤니티에 대해서 알려주세요"
-        description="이름과 설명은 다른분들이 당신의 커뮤니티가 어떤 곳인지 이해하는 데 도움이 됩니다."
-      />
+      <FormTitle title="커뮤니티 설정하기" />
       <Input
         fullWidth
         required
@@ -161,7 +202,7 @@ export default function CommunityForm() {
             }}
           />
         </div>
-        <div className="flex items-center justify-between px-8">
+        <div className="mb-4 flex items-center justify-between px-8">
           <h3>아이콘</h3>
           <Button
             variant="bordered"
@@ -185,7 +226,35 @@ export default function CommunityForm() {
             }}
           />
         </div>
+        <div className="flex items-center justify-between px-8">
+          <h3>배경색상</h3>
+          <Button
+            variant="bordered"
+            radius="full"
+            size="sm"
+            name="icon"
+            className="w-[140px] cursor-pointer border"
+            startContent={
+              <PiPaintBrushHouseholdLight
+                className="cursor-pointer"
+                size={22}
+              />
+            }
+            onPress={onBgColorModalOpen}
+          >
+            색상 선택하기
+          </Button>
+          <ColorPickerModal
+            isOpen={isBgColorModalOpen}
+            onOpenChange={onBgColorOpenChange}
+            onChangeComplete={(color: ColorResult) => {
+              dispatch({ type: "update_background_color", payload: color.hex });
+              onBgColorClose();
+            }}
+          />
+        </div>
       </div>
+      <CommunityGuidelineEditor guidelines={guidelines} />
       <div className="mb-8 w-full">
         <FormTitle
           title="주제 추가"
