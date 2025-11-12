@@ -7,6 +7,9 @@ interface Params {
   title: string;
   text: string;
   post_id: number;
+  isPrivate: boolean;
+  isSpoiler: boolean;
+  isNSFW: boolean;
   media: PreviewCarouselValue[];
 }
 
@@ -14,6 +17,9 @@ export default async function updatePost({
   post_id,
   title,
   text,
+  isPrivate,
+  isSpoiler,
+  isNSFW,
   media,
 }: Params) {
   const session = await getUserSession();
@@ -88,6 +94,9 @@ export default async function updatePost({
       title,
       text,
       media_urls: newMedia,
+      is_private: isPrivate,
+      is_spoiler: isSpoiler,
+      is_nsfw: isNSFW,
     })
     .eq("id", post_id)
     .select("id, community_id")

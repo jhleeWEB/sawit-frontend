@@ -1,5 +1,6 @@
 import { getSupabaseClientWithToken } from "@/lib/auth/supabase/get-supabase-client";
 import getUserSession from "@/lib/auth/supabase/get-user-session";
+import { Guideline } from "../_components/community-form-provider";
 
 interface Params {
   name: string;
@@ -8,6 +9,8 @@ interface Params {
   banner?: Blob;
   topics?: string[];
   community_id: number;
+  backgroundColor?: string;
+  guidelines?: Guideline[];
 }
 
 export default async function updateCommunity({
@@ -17,6 +20,8 @@ export default async function updateCommunity({
   banner,
   topics,
   community_id,
+  backgroundColor,
+  guidelines,
 }: Params) {
   const session = await getUserSession();
 
@@ -27,13 +32,15 @@ export default async function updateCommunity({
 
   const supabase = getSupabaseClientWithToken(session.supabaseAccessToken);
 
-  //insert community
+  //update community
   const { data: community, error: communityError } = await supabase
     .from("communities")
     .update({
       name,
       description,
       topics,
+      backgroundColor,
+      guidelines,
     })
     .eq("id", community_id)
     .select()

@@ -30,12 +30,12 @@ export default function CommunitySettings({ community_info }: Props) {
   const [communityName, setCommunityName] = useState(() => community_info.name);
 
   const [communityDescription, setCommunityDescription] = useState(
-    () => community_info.description
+    () => community_info.description,
   );
   const [bannerBlob, setBannerBlob] = useState<Blob>();
   const [iconBlob, setIconBlob] = useState<Blob>();
   const [bannerPreview, setBannerPreview] = useState(
-    () => community_info.banner_url
+    () => community_info.banner_url,
   );
   const [iconPreview, setIconPreview] = useState(() => community_info.icon_url);
   const {
@@ -50,7 +50,7 @@ export default function CommunitySettings({ community_info }: Props) {
   } = useDisclosure();
 
   const [selectedTopics, setSelectedTopics] = useState<string[]>(
-    () => community_info.topics
+    () => community_info.topics,
   );
   const [topicFilter, setTopicFilter] = useState<string>("");
 
@@ -58,7 +58,7 @@ export default function CommunitySettings({ community_info }: Props) {
 
   const handleOnClose = (topicToRemove: string) => {
     setSelectedTopics(
-      selectedTopics.filter((topic) => topic !== topicToRemove)
+      selectedTopics.filter((topic) => topic !== topicToRemove),
     );
   };
 
@@ -88,8 +88,8 @@ export default function CommunitySettings({ community_info }: Props) {
 
   return (
     <>
-      <main className="w-full py-8 px-36">
-        <h1 className="text-2xl font-bold mb-8">커뮤니티 설정</h1>
+      <main className="w-full px-4 py-8 sm:px-0">
+        <h1 className="mb-8 text-2xl font-bold">커뮤니티 설정</h1>
         <Form id="community-form" onSubmit={handleSubmit}>
           <Input
             fullWidth
@@ -103,7 +103,7 @@ export default function CommunitySettings({ community_info }: Props) {
             value={communityName}
             onValueChange={setCommunityName}
           />
-          <small className="text-gray-400 w-full flex justify-end">
+          <small className="flex w-full justify-end text-gray-400">
             {communityName.length}
           </small>
           <Textarea
@@ -117,12 +117,12 @@ export default function CommunitySettings({ community_info }: Props) {
             value={communityDescription}
             onValueChange={setCommunityDescription}
           />
-          <small className="text-gray-400 w-full flex justify-end">
+          <small className="flex w-full justify-end text-gray-400">
             {communityDescription.length}
           </small>
 
-          <div className="w-full mb-8">
-            <div className="flex items-center justify-between mb-4">
+          <div className="mb-8 w-full">
+            <div className="mb-4 flex items-center justify-between">
               <h3>배너</h3>
               <Button
                 radius="full"
@@ -173,7 +173,7 @@ export default function CommunitySettings({ community_info }: Props) {
               />
             </div>
           </div>
-          <div className="w-full mb-8">
+          <div className="mb-8 w-full">
             <FormTitle
               title="주제 추가"
               description="관심 있는분들이 당신의 커뮤니티를 찾을 수 있도록 최대 3개의 주제를 추가하세요."
@@ -186,7 +186,7 @@ export default function CommunitySettings({ community_info }: Props) {
               startContent={<PiMagnifyingGlassLight size={18} />}
             />
             <div>
-              <h2 className="text-sm font-bold mt-2">{`주제 ${selectedTopics.length}/3`}</h2>
+              <h2 className="mt-2 text-sm font-bold">{`주제 ${selectedTopics.length}/3`}</h2>
               <div className="flex min-h-[32px] gap-2">
                 {selectedTopics.map((topic) => (
                   <Chip
@@ -309,20 +309,20 @@ export default function CommunitySettings({ community_info }: Props) {
           top: "20%",
         }}
       >
-        <div className="border-1 rounded-xl shadow-lg">
+        <div className="rounded-xl border-1 shadow-lg">
           {bannerPreview ? (
             <div
               style={{
                 /* @ts-expect-error custom style property added*/
                 "--image-url": `url(${bannerPreview})`,
               }}
-              className={`h-[32px] rounded-t-lg bg-no-repeat bg-cover bg-center bg-[image:var(--image-url)]`}
+              className={`h-[32px] rounded-t-lg bg-[image:var(--image-url)] bg-cover bg-center bg-no-repeat`}
             />
           ) : (
-            <div className={`h-[32px] bg-red-300 rounded-t-lg`} />
+            <div className={`h-[32px] rounded-t-lg bg-red-300`} />
           )}
           <Divider />
-          <div className="max-w-full flex items-center gap-4 p-4 pb-0">
+          <div className="flex max-w-full items-center gap-4 p-4 pb-0">
             <Avatar
               isBordered
               size="md"
@@ -331,7 +331,7 @@ export default function CommunitySettings({ community_info }: Props) {
             />
 
             <div className="max-w-[calc(100%-64px)]">
-              <h1 className="text-2xl font-bold break-words">
+              <h1 className="break-words text-2xl font-bold">
                 p/{communityName}
               </h1>
               <div>
@@ -341,7 +341,7 @@ export default function CommunitySettings({ community_info }: Props) {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap px-4 pt-2 gap-2">
+          <div className="flex flex-wrap gap-2 px-4 pt-2">
             {selectedTopics.map((topic) => (
               <Chip
                 size="sm"
@@ -353,7 +353,7 @@ export default function CommunitySettings({ community_info }: Props) {
               </Chip>
             ))}
           </div>
-          <p className="p-4 break-words">{communityDescription}</p>
+          <p className="break-words p-4">{communityDescription}</p>
         </div>
         <div className="mt-4">
           <Button

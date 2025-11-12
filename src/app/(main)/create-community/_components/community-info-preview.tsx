@@ -3,15 +3,13 @@
 import { Avatar, Button, Chip, Divider } from "@heroui/react";
 import { useCommunityFormState } from "./community-form-provider";
 
-export default function CommunityInfoPreview() {
-  const {
-    bannerPreview,
-    iconPreview,
-    name,
-    topics,
-
-    description,
-  } = useCommunityFormState();
+export default function CommunityInfoPreview({
+  buttonTitle = "커뮤니티 만들기",
+}: {
+  buttonTitle?: string;
+}) {
+  const { bannerPreview, iconPreview, name, topics, description } =
+    useCommunityFormState();
 
   return (
     <>
@@ -63,7 +61,7 @@ export default function CommunityInfoPreview() {
           form="community-form"
           type="submit"
         >
-          커뮤니티 만들기
+          {buttonTitle}
         </Button>
       </div>
     </>

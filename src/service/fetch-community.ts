@@ -1,8 +1,9 @@
+import { Guideline } from "@/app/(main)/create-community/_components/community-form-provider";
 import { getSupabaseClient } from "@/lib/auth/supabase/get-supabase-client";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function fetchCommunity(
-  id: number
+  id: number,
 ): Promise<Community | null> {
   const supabase = getSupabaseClient() as SupabaseClient;
   const { data: community, error } = await supabase
@@ -31,4 +32,6 @@ export interface Community {
   owner_icon: string;
   owner_username: string;
   post_count: number;
+  background_color?: string;
+  guidelines?: Guideline[];
 }

@@ -8,6 +8,7 @@ import PreviewCarousel, { PreviewCarouselValue } from "./preview-carousel";
 import updatePost from "@/service/update-post";
 import { useRouter } from "next/navigation";
 import SimpleEditor from "./editor";
+import { usePostFormState } from "../../../create/_components/form-provider";
 
 interface Props {
   post: Post;
@@ -16,6 +17,8 @@ interface Props {
 
 export default function EditPostForm({ post, postMedia }: Props) {
   const router = useRouter();
+  const state = usePostFormState();
+  // 임시적으로 Context와 useState 동시 사용
   const [title, setTitle] = useState(() => post.title);
   const [text, setText] = useState(() => post.text);
   const [media, setMedia] = useState<PreviewCarouselValue[]>(() =>
@@ -36,6 +39,9 @@ export default function EditPostForm({ post, postMedia }: Props) {
       title,
       text: text || "",
       media,
+      isPrivate: state.isPrivate || false,
+      isSpoiler: state.isSpoiler || false,
+      isNSFW: state.isNSFW || false,
     });
     setUploading(false);
     if (update) {
@@ -54,7 +60,7 @@ export default function EditPostForm({ post, postMedia }: Props) {
         <Avatar size="sm" src={post.community_icon} />
         <h3>p/{post.community_name}</h3>
       </div>
-      {/** 게시물을 올릴 커뮤니티 선택 검샘 창 */}
+      {/** 게시물을 올릴 커뮤니티 선택 검색 창 */}
       <Input
         isRequired
         name="title"
@@ -71,7 +77,6 @@ export default function EditPostForm({ post, postMedia }: Props) {
           }
         }}
       />
-
       <div className="flex w-full flex-col">
         {post.type === "media" && (
           <PreviewCarousel values={media} onValueChange={setMedia} />

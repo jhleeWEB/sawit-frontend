@@ -10,11 +10,12 @@ export default function FeedSection({
   initialFeeds,
   communityId,
   queryAction,
+  headerAsUser,
 }: {
   initialFeeds: Post[];
   queryAction: (arg: any) => Promise<any>;
-
   communityId?: number;
+  headerAsUser?: boolean;
 }) {
   const { pages, hasMore, isLoading, error, loadMore } = useInfinitePosts({
     initialPage: initialFeeds,
@@ -44,7 +45,11 @@ export default function FeedSection({
     <section className="px-2 sm:px-0">
       {pages &&
         pages.map((post) => (
-          <PostCard key={"post_" + post.id} post={post} headerInfo={"user"} />
+          <PostCard
+            key={"post_" + post.id}
+            post={post}
+            headerInfo={headerAsUser ? "user" : "community"}
+          />
         ))}
       {hasMore && <div ref={anchorRef} className="h-10" />}
       <div className="flex justify-center">
