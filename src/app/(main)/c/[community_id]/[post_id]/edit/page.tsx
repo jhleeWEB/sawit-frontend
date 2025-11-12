@@ -24,9 +24,9 @@ export default async function PostEditPage({
       <PostFormProvider
         initialData={{
           title: post.title,
-          isPrivate: post.is_spoiler,
           communityId: post.community_id,
           text: post.text || "",
+          isPrivate: post.is_private,
           isSpoiler: post.is_spoiler,
           isNSFW: post.is_nsfw,
           isUploading: false,
